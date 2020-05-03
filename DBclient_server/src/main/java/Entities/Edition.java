@@ -1,6 +1,7 @@
 package Entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -9,7 +10,7 @@ public class Edition {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_edition")
-    private int id_edition;         //номер книги в библиотеке (в сети библиотек)
+    private Long id_edition;         //номер книги в библиотеке (в сети библиотек)
 
     @Column(name = "id_library")
     private int id_library;         //номер библиотеки
@@ -29,23 +30,27 @@ public class Edition {
     @Column(name = "date_removing")
     private Date date_removing;     //дата удаления
 
-    public Edition(int id_edition, int id_library, int hall_num, int rack_num, int shelf_num, Date date_adding) {
-        this.id_edition = id_edition;
-        this.id_library = id_library;
-        this.hall_num = hall_num;
-        this.rack_num = rack_num;
-        this.shelf_num = shelf_num;
-        this.date_adding = date_adding;
-        this.date_removing = null;
-    }
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_library", referencedColumnName = "id_library")
+    private Library book_library;
+
+    @OneToMany(mappedBy = "edition", fetch = FetchType.EAGER)
+    private Collection<IssuedBook> records;
+
+    @OneToMany(mappedBy = "edition", fetch = FetchType.EAGER)
+    private Collection<Rule> rules;
+
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_library", referencedColumnName = "id_library")
+    private Characteristic characteristic;
 
     public Edition(){}
     
-    public int getId_edition() {
+    public Long getId_edition() {
         return id_edition;
     }
 
-    public void setId_edition(int id_edition) {
+    public void setId_edition(Long id_edition) {
         this.id_edition = id_edition;
     }
 

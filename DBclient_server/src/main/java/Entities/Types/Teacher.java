@@ -8,19 +8,15 @@ import javax.persistence.Table;
 @Table(name = "pensioners")
 public class Teacher extends AbstractReader {
     @Column
-    private int id_university;                  //id университета/школы
+    private Long id_university;                  //id университета/школы
     @Column
     private String faculty;                     //название факультета
 
     public Teacher(){super("teacher");}
-    public Teacher(int id_university, String faculty){
-        this.id_university = id_university;
-        this.faculty = faculty;
-    }
 
-    public int getId_university() { return id_university; }
+    public Long getId_university() { return id_university; }
 
-    public void setId_university(int id_university) { this.id_university = id_university; }
+    public void setId_university(Long id_university) { this.id_university = id_university; }
 
     public String getFaculty() { return faculty; }
 
@@ -28,7 +24,8 @@ public class Teacher extends AbstractReader {
 
     @Override
     public String toString() {
-        return "Teacher{" +
+        return  super.toString() +
+                "Teacher{" +
                 "id_university=" + id_university +
                 ", faculty='" + faculty + '\'' +
                 '}';

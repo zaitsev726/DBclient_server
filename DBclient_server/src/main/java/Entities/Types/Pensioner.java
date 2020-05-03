@@ -8,18 +8,18 @@ import javax.persistence.Table;
 @Table(name = "pensioners")
 public class Pensioner extends AbstractReader {
     @Column
-    private int id_pensioners;                     //номер пенсионного удостоверения
+    private Long id_pensioners;                     //номер пенсионного удостоверения
 
     public Pensioner(){super("pensioner");}
-    public Pensioner(int id_pensioners){this.id_pensioners = id_pensioners;}
 
-    public int getId_pensioners() { return id_pensioners; }
+    public Long getId_pensioners() { return id_pensioners; }
 
-    public void setId_pensioners(int id_pensioners) { this.id_pensioners = id_pensioners; }
+    public void setId_pensioners(Long id_pensioners) { this.id_pensioners = id_pensioners; }
 
     @Override
     public String toString() {
-        return "Pensioner{" +
+        return  super.toString() +
+                "Pensioner{" +
                 "id_pensioners=" + id_pensioners +
                 '}';
     }

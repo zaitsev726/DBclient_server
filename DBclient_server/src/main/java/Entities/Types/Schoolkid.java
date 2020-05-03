@@ -8,27 +8,24 @@ import javax.persistence.Table;
 @Table(name = "schoolkids")
 public class Schoolkid extends AbstractReader {
     @Column
-    private int id_school;                      //номер школы
+    private Long id_school;                      //номер школы
     @Column
-    private int grade;                          //номер класса
+    private Long grade;                          //номер класса
 
     public Schoolkid(){super("schoolkid");}
-    public Schoolkid(int id_school, int grade){
-        this.id_school = id_school;
-        this.grade = grade;
-    }
 
-    public int getId_school() { return id_school; }
+    public Long getId_school() { return id_school; }
 
-    public void setId_school(int id_school) { this.id_school = id_school; }
+    public void setId_school(Long id_school) { this.id_school = id_school; }
 
-    public int getGrade() { return grade; }
+    public Long getGrade() { return grade; }
 
-    public void setGrade(int grade) { this.grade = grade; }
+    public void setGrade(Long grade) { this.grade = grade; }
 
     @Override
     public String toString() {
-        return "Schoolkid{" +
+        return  super.toString() +
+                "Schoolkid{" +
                 "id_school=" + id_school +
                 ", grade=" + grade +
                 '}';

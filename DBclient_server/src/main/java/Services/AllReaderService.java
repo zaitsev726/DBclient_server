@@ -6,9 +6,7 @@ import java.util.List;
 
 public interface AllReaderService {
     List<AllReader> findAll();
-    List<AllReader> findWithType();
-    AllReader findById(int id);
+    AllReader findById(Long id);
     AllReader save(AllReader reader);
     void delete(AllReader reader);
-    
 }

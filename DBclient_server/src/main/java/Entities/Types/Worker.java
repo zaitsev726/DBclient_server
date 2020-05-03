@@ -18,9 +18,26 @@ public class Worker extends AbstractReader {
         this.firm = firm;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getFirm() {
+        return firm;
+    }
+
+    public void setFirm(String firm) {
+        this.firm = firm;
+    }
+
     @Override
     public String toString() {
-        return "Worker{" +
+        return  super.toString() +
+                "Worker{" +
                 "address='" + address + '\'' +
                 ", firm='" + firm + '\'' +
                 '}';

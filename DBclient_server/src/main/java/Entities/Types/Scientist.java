@@ -10,25 +10,22 @@ public class Scientist extends AbstractReader {
     @Column
     private String address;                         //адрес места работы
     @Column
-    private int id_university;                      //id университета
+    private Long id_university;                      //id университета
 
     public Scientist(){super("scientist");}
-    public Scientist(String address, int id_university){
-        this.address = address;
-        this.id_university = id_university;
-    }
 
     public String getAddress() { return address; }
 
     public void setAddress(String address) { this.address = address; }
 
-    public int getId_university() { return id_university; }
+    public Long getId_university() { return id_university; }
 
-    public void setId_university(int id_university) { this.id_university = id_university; }
+    public void setId_university(Long id_university) { this.id_university = id_university; }
 
     @Override
     public String toString() {
-        return "Scientist{" +
+        return  super.toString() +
+                "Scientist{" +
                 "address='" + address + '\'' +
                 ", id_university=" + id_university +
                 '}';
