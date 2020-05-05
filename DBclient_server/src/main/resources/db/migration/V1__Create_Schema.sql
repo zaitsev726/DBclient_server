@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS IssuedBooks CASCADE;
 DROP TABLE IF EXISTS Rules;
 DROP TABLE IF EXISTS Characteristic CASCADE;
 DROP TABLE IF EXISTS Information CASCADE;
-
+DROP SEQUENCE IF EXISTS AllReaders_generator CASCADE;
 
 
 CREATE TABLE Libraries
@@ -62,9 +62,14 @@ CREATE TABLE Editions
     FOREIGN KEY (id_edition) REFERENCES Characteristic (id_edition) ON DELETE CASCADE
 );
 
+create sequence AllReaders_generator
+    as integer
+    minvalue 1
+    maxvalue 2147483647;
+
 CREATE TABLE AllReaders
 (
-    id_reader  integer PRIMARY KEY,
+    id_reader  integer not null PRIMARY KEY DEFAULT nextval('AllReaders_generator'),
     type       VARCHAR(50),
     surname    VARCHAR(50)  NOT NULL,
     name       VARCHAR(50)  NOT NULL,
@@ -72,6 +77,8 @@ CREATE TABLE AllReaders
     id_library integer NOT NULL,
     FOREIGN KEY (id_library) REFERENCES Libraries (id_library) ON DELETE CASCADE
 );
+
+
 
 CREATE TABLE Workers
 (
@@ -149,12 +156,13 @@ CREATE TABLE Rules
     FOREIGN KEY (id_edition) REFERENCES Editions (id_edition) ON DELETE CASCADE
 );
 
+
 insert into Libraries values (1, 3);
 insert into Libraries values (2, 4);
 insert into Libraries values (3, 2);
 insert into Libraries values (4, 5);
 insert into Libraries values (5, 3);
-
+/*
 insert into allreaders values (1, 'worker', 'Агафонов', 'Константин', 'Федосеевич', 1);
 insert into allreaders values (2, 'worker', 'Белоусова', 'Виктория', 'Рудольфовна', 4);
 insert into allreaders values (3, 'worker', 'Кудряшов', 'Роберт', 'Лукьевич', 4);
@@ -215,8 +223,14 @@ insert into allreaders values (57, 'scientist', 'Беляев', 'Лазарь', 
 insert into allreaders values (58, 'scientist', 'Хохлова', 'Маргарита', 'Григорьевна', 1);
 insert into allreaders values (59, 'scientist', 'Самойлова', 'Милда', 'Кимовна', 4);
 insert into allreaders values (60, 'scientist', 'Мухин', 'Кондрат', 'Русланович', 3);
+*/
 
+insert into allreaders( type, surname, name, patronymic, id_library) values ('worker', 'Агафонов', 'Константин', 'Федосеевич', 1),
+                    ('worker', 'Белоусова', 'Виктория', 'Рудольфовна', 4),
+( 'worker', 'Кудряшов', 'Роберт', 'Лукьевич', 4),
+ ( 'worker', 'Королёв', 'Дональд', 'Дмитриевич', 4);
 
+/*
 
 insert into workers values (1, 'worker', 'г. Малая Пурга, ул. Чудновского', 'Бастион');
 insert into workers values (2, 'worker', 'г. Урай, ул. Ипатьевский пер', 'Декор');
@@ -239,3 +253,47 @@ insert into pensioners values (17, 'pensioners',62135);
 insert into pensioners values (18, 'pensioners',25230);
 insert into pensioners values (19, 'pensioners',85017);
 insert into pensioners values (20, 'pensioners',85329);
+
+insert into schoolkids values (21, 'schoolkid',17642, 1);
+insert into schoolkids values (22, 'schoolkid',82431, 5);
+insert into schoolkids values (23, 'schoolkid',23542, 3);
+insert into schoolkids values (24, 'schoolkid',59859, 9);
+insert into schoolkids values (25, 'schoolkid',67998, 7);
+insert into schoolkids values (26, 'schoolkid',42343, 4);
+insert into schoolkids values (27, 'schoolkid',56753, 10);
+insert into schoolkids values (28, 'schoolkid',19527, 11);
+insert into schoolkids values (29, 'schoolkid',38683, 4);
+insert into schoolkids values (30, 'schoolkid',56756, 3);
+
+insert into teachers values (31, 'teacher',14256, 'FIT');
+insert into teachers values (32, 'teacher',12434, 'FF');
+insert into teachers values (33, 'teacher',14124, 'MMF');
+insert into teachers values (34, 'teacher',12434, 'MMF');
+insert into teachers values (35, 'teacher',14256, 'ECO');
+insert into teachers values (36, 'teacher',14256, 'BIO');
+insert into teachers values (37, 'teacher',14124, 'FIT');
+insert into teachers values (38, 'teacher',12434, 'FIT');
+insert into teachers values (39, 'teacher',12434, 'HIMBIO');
+insert into teachers values (40, 'teacher',18543, 'BIO');
+
+insert into students values (41, 'student',14256, 'FIT', 18204);
+insert into students values (42, 'student',12434, 'FF', 19104);
+insert into students values (43, 'student',14124, 'MMF', 15203);
+insert into students values (44, 'student',12434, 'MMF', 16302);
+insert into students values (45, 'student',14256, 'ECO', 17203);
+insert into students values (46, 'student',14256, 'BIO', 15890);
+insert into students values (47, 'student',14124, 'FIT', 14765);
+insert into students values (48, 'student',12434, 'FIT', 18234);
+insert into students values (49, 'student',12434, 'HIMBIO', 20123);
+insert into students values (50, 'student',18543, 'BIO', 19324);
+
+insert into scientists values (51, 'scientists','г. Усть-Омчуг, ул. Куйбышева 2-я, дом 19',14256);
+insert into scientists values (52, 'scientists', 'г. Усть-Омчуг, ул. Куйбышева 2-я, дом 19',14256);
+insert into scientists values (53, 'scientists','г. Усть-Омчуг, ул. Куйбышева 2-я, дом 19',14256);
+insert into scientists values (54, 'scientists','г. Колпна, ул. Загребский пр-кт, дом 88',12434);
+insert into scientists values (55, 'scientists','г. Колпна, ул. Загребский пр-кт, дом 88',12434);
+insert into scientists values (56, 'scientists','г. Колпна, ул. Загребский пр-кт, дом 88',12434);
+insert into scientists values (57, 'scientists','г. Омутинский, ул. Шлиссельбургский пр-кт, дом 21',18543);
+insert into scientists values (58, 'scientists','г. Омутинский, ул. Шлиссельбургский пр-кт, дом 21',18543);
+insert into scientists values (59, 'scientists','г. Омутинский, ул. Шлиссельбургский пр-кт, дом 21',18543);
+insert into scientists values (60, 'scientists','г. Омутинский, ул. Шлиссельбургский пр-кт, дом 21',18543);
