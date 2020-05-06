@@ -4,6 +4,7 @@ import Appli.Entities.AllReader;
 
 import Appli.Entities.Library;
 import Appli.Entities.Types.AbstractReader;
+import Appli.Entities.Types.Pensioner;
 import Appli.Services.AllReaderService;
 import Appli.Services.Impl.AllReaderServiceImpl;
 import Appli.Services.Impl.LibraryServiceImpl;
@@ -12,7 +13,10 @@ import Appli.UserInterface.Frames.ProfessionForm;
 import Appli.UserInterface.Pages.ReadersPage.ReadersForm;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,6 +37,7 @@ public class ReadersPageController {
     private LibraryService libraryService;
 
     public ReadersPageController(ReadersForm form){
+        cur_type = "pensioner";
         this.form = form;
         this.profissionForm = new ProfessionForm(this);
 
@@ -46,7 +51,7 @@ public class ReadersPageController {
         cur_name = "";
         cur_surname = "";
         cur_patronymic = "";
-        cur_type = "";
+       // cur_type = "pensioner";
         cur_lib_id = 0;
         cur_Library = null;
     }
@@ -144,7 +149,7 @@ public class ReadersPageController {
                     profissionForm.changePanel(cur_type);
                     profissionForm.setVisible(true);
                     System.out.println("saved");
-                    setStartValues();
+                 //   setStartValues();
                 //}
             }
         });
@@ -186,7 +191,51 @@ public class ReadersPageController {
     }
 
     public void setParam(ArrayList<String> param, String readerType){
+        System.out.println(param);
+        System.out.println(readerType);
+        System.out.println("***** SAVING *****");
 
+        AllReader reader = new AllReader();
+        reader.setName(cur_name);
+        reader.setSurname(cur_surname);
+        reader.setPatronymic(cur_patronymic);
+        reader.setId_library(cur_lib_id);
+        reader.setType(cur_type);
+        reader.setLibrary(cur_Library);
+        System.out.println(reader);
+
+        reader = readerService.save(reader);
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("model");
+        EntityManager manager = emf.createEntityManager();
+
+
+        switch (readerType) {
+            case ("pensioner"):
+                Pensioner pensioner = new Pensioner();
+                pensioner.setId_reader(reader.getId_reader());
+                pensioner.setType("pensioner");
+                pensioner.setId_pensioners(Long.valueOf(param.get(0)));
+                manager.getTransaction().begin();
+                manager.merge(pensioner);
+                manager.getTransaction().commit();
+                break;
+            case ("schoolkid"):
+                break;
+            case ("scientist"):
+                break;
+            case ("student"):
+                break;
+            case ("teacher"):
+                break;
+            case ("worker"):
+                break;
+            default:
+                JOptionPane.showMessageDialog(profissionForm, "Ошибка");
+                break;
+
+        }
+        System.out.println("***** END OF SAVING *****");
 
     }
 }

@@ -1,6 +1,7 @@
 package Appli.Services.Impl;
 
 import Appli.Entities.AllReader;
+import Appli.Entities.Types.Pensioner;
 import Appli.Services.AllReaderService;
 
 import javax.persistence.EntityManager;
@@ -39,6 +40,12 @@ public class AllReaderServiceImpl implements AllReaderService {
     public AllReader save(AllReader reader) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
+
+
+        Pensioner pensioner = em.find(Pensioner.class, (long)0);
+        reader.setReaderType(pensioner);
+
+
         //em.persist(reader);
         reader = em.merge(reader);
         em.getTransaction().commit();

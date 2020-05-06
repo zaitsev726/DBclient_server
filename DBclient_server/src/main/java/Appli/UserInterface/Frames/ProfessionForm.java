@@ -67,7 +67,7 @@ public class ProfessionForm extends JFrame {
 
     public ProfessionForm(ReadersPageController controller) {
         this.controller = controller;
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+       // this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Информация о профессии");
         setSize(400, 400);
         //  setVisible(true);
@@ -140,9 +140,10 @@ public class ProfessionForm extends JFrame {
         });
 
         pContinueButton.addActionListener(e -> {
-            if(currentParam.size() == 1){
+            if(currentParam.size() == 1)
                 controller.setParam( currentParam, "pensioner");
-            }
+            else
+                JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
         });
 
@@ -179,9 +180,10 @@ public class ProfessionForm extends JFrame {
         });
 
         scContinueutton.addActionListener(e -> {
-            if(currentParam.size() == 2){
+            if(currentParam.size() == 2)
                 controller.setParam( currentParam, "schoolkid");
-            }
+            else
+                JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
         });
 
@@ -215,9 +217,10 @@ public class ProfessionForm extends JFrame {
         });
 
         sciContinueButton.addActionListener(e -> {
-            if(currentParam.size() == 2){
+            if(currentParam.size() == 2)
                 controller.setParam( currentParam, "scientist");
-            }
+            else
+                JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
         });
 
@@ -260,9 +263,10 @@ public class ProfessionForm extends JFrame {
         });
 
         sContinueButton.addActionListener(e -> {
-            if(currentParam.size() == 3){
+            if(currentParam.size() == 3)
                 controller.setParam( currentParam, "student");
-            }
+            else
+                JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
         });
 
@@ -295,9 +299,10 @@ public class ProfessionForm extends JFrame {
         });
 
         tContinueButton.addActionListener(e -> {
-            if(currentParam.size() == 2){
+            if(currentParam.size() == 2)
                 controller.setParam( currentParam, "teacher");
-            }
+            else
+                JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
         });
 
@@ -324,9 +329,10 @@ public class ProfessionForm extends JFrame {
         });
 
         wContinueButton.addActionListener(e -> {
-            if(currentParam.size() == 2){
+            if(currentParam.size() == 2)
                 controller.setParam( currentParam, "worker");
-            }
+            else
+                JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
         });
 
