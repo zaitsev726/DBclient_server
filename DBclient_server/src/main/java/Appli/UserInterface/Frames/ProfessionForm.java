@@ -1,6 +1,20 @@
 package Appli.UserInterface.Frames;
 
+import Appli.Controllers.Checker;
+import Appli.Controllers.ReadersPageController;
+import Appli.Entities.Types.Pensioner;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
+
+import javax.persistence.NoResultException;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfessionForm extends JFrame {
     private JPanel professionPanel;
@@ -34,19 +48,46 @@ public class ProfessionForm extends JFrame {
     private JLabel sGroupLabel;
     private JLabel scitAddressLabel;
     private JLabel sciUniversityLabel;
+    private JTextField tUniversityTextField;
+    private JTextField tFacultyTextField;
+    private JButton tContinueButton;
+    private JButton tBackButton;
+    private JLabel tUniversityLabel;
+    private JLabel tFacultyLabel;
+    private JTextField wAddresTextField;
+    private JTextField wFirmTextField;
+    private JButton wContinueButton;
+    private JButton wBackButton;
+    private JLabel wAddresLabel;
+    private JLabel wFirmLabel;
     private JPanel currentPanel;
-    public ProfessionForm(){
+
+    private ArrayList<String> currentParam;
+    private ReadersPageController controller;
+
+    public ProfessionForm(ReadersPageController controller) {
+        this.controller = controller;
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Информация о профессии");
         setSize(400, 400);
-      //  setVisible(true);
+        //  setVisible(true);
+        currentParam = new ArrayList<>();
+        initializationListeners();
         this.add(professionPanel);
         currentPanel = pensionerPanel;
+
+        pContinueButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
-    public void changePanel(String type){
-
+    public void changePanel(String type) {
+        currentParam = new ArrayList<>();
         this.remove(currentPanel);
-        switch (type){
+        switch (type) {
             case ("pensioner"):
                 this.add(pensionerPanel);
                 currentPanel = pensionerPanel;
@@ -82,4 +123,219 @@ public class ProfessionForm extends JFrame {
         this.repaint();
 
     }
+
+    private void initializationListeners() {
+        /**пенсионер*/
+        pensionerTextField.addActionListener(e -> {
+            try {
+                long id_library = Long.parseLong(pensionerTextField.getText());
+                if(id_library > 0)
+                    currentParam.add(String.valueOf(id_library));
+                else
+                    JOptionPane.showMessageDialog(pensionerPanel, "Введите положительный номер");
+
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(pensionerPanel, "Введите корректный номер");
+            }
+        });
+
+        pContinueButton.addActionListener(e -> {
+            if(currentParam.size() == 1){
+                controller.setParam( currentParam, "pensioner");
+            }
+            currentParam = new ArrayList<>();
+        });
+
+        pBackButton.addActionListener(e -> {
+            this.dispose();
+            currentParam = new ArrayList<>();
+        });
+
+        /**школьник*/
+        schoolTextField.addActionListener(e -> {
+            try {
+                long id_school = Long.parseLong(schoolTextField.getText());
+                if(id_school > 0)
+                    currentParam.add(String.valueOf(id_school));
+                else
+                    JOptionPane.showMessageDialog(schoolkidPanel, "Введите положительный номер школы");
+
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(schoolkidPanel, "Введите корректный номер школы");
+            }
+        });
+
+        gradeTextField.addActionListener(e -> {
+            try {
+                long grade = Long.parseLong(gradeTextField.getText());
+                if(grade > 0 && grade < 12)
+                    currentParam.add(String.valueOf(grade));
+                else
+                    JOptionPane.showMessageDialog(schoolkidPanel, "Введите правильный номер класса");
+
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(schoolkidPanel, "Введите корректный номер класса");
+            }
+        });
+
+        scContinueutton.addActionListener(e -> {
+            if(currentParam.size() == 2){
+                controller.setParam( currentParam, "schoolkid");
+            }
+            currentParam = new ArrayList<>();
+        });
+
+        scBackButton.addActionListener(e -> {
+            this.dispose();
+            currentParam = new ArrayList<>();
+        });
+
+        /**ученый*/
+
+        sciAddresTextField.addActionListener(e -> {
+                String address = sciAddresTextField.getText();
+                if(Checker.getInstance().checkString(address))
+                    currentParam.add(address);
+                else
+                    JOptionPane.showMessageDialog(scientistPanel, "Введите корректный адрес работы");
+        });
+
+
+        sciUniversityTextField.addActionListener(e -> {
+            try {
+                long university = Long.parseLong(sciUniversityTextField.getText());
+                if(university > 0)
+                    currentParam.add(String.valueOf(university));
+                else
+                    JOptionPane.showMessageDialog(scientistPanel, "Введите положительный номер университета");
+
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(scientistPanel, "Введите корректный номер университета");
+            }
+        });
+
+        sciContinueButton.addActionListener(e -> {
+            if(currentParam.size() == 2){
+                controller.setParam( currentParam, "scientist");
+            }
+            currentParam = new ArrayList<>();
+        });
+
+        sciBackButton.addActionListener(e -> {
+            this.dispose();
+            currentParam = new ArrayList<>();
+        });
+
+        /**студент*/
+        sUniversityTextField.addActionListener(e -> {
+            try {
+                long university = Long.parseLong(sUniversityTextField.getText());
+                if(university > 0)
+                    currentParam.add(String.valueOf(university));
+                else
+                    JOptionPane.showMessageDialog(studentPanel, "Введите положительный номер университета");
+
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(studentPanel, "Введите корректный номер университета");
+            }
+        });
+        sFacultyTextField.addActionListener(e -> {
+            String faculty = sFacultyTextField.getText();
+            if(Checker.getInstance().checkString(faculty))
+                currentParam.add(faculty);
+            else
+                JOptionPane.showMessageDialog(studentPanel, "Введите корректный факультет");
+        });
+        sGroupTextField.addActionListener(e -> {
+            try {
+                long university = Long.parseLong(sGroupTextField.getText());
+                if(university > 0)
+                    currentParam.add(String.valueOf(university));
+                else
+                    JOptionPane.showMessageDialog(studentPanel, "Введите положительный номер группы");
+
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(studentPanel, "Введите корректный номер группы");
+            }
+        });
+
+        sContinueButton.addActionListener(e -> {
+            if(currentParam.size() == 3){
+                controller.setParam( currentParam, "student");
+            }
+            currentParam = new ArrayList<>();
+        });
+
+        sBackButton.addActionListener(e -> {
+            this.dispose();
+            currentParam = new ArrayList<>();
+        });
+
+        /**учитель*/
+
+        tUniversityTextField.addActionListener(e -> {
+            try {
+                long university = Long.parseLong(tUniversityTextField.getText());
+                if(university > 0)
+                    currentParam.add(String.valueOf(university));
+                else
+                    JOptionPane.showMessageDialog(teacherPanel, "Введите положительный номер университета");
+
+            } catch (NumberFormatException exception) {
+                JOptionPane.showMessageDialog(teacherPanel, "Введите корректный номер университета");
+            }
+        });
+
+        tFacultyTextField.addActionListener(e -> {
+            String faculty = tFacultyTextField.getText();
+            if(Checker.getInstance().checkString(faculty))
+                currentParam.add(faculty);
+            else
+                JOptionPane.showMessageDialog(studentPanel, "Введите корректный факультет");
+        });
+
+        tContinueButton.addActionListener(e -> {
+            if(currentParam.size() == 2){
+                controller.setParam( currentParam, "teacher");
+            }
+            currentParam = new ArrayList<>();
+        });
+
+        tBackButton.addActionListener(e -> {
+            this.dispose();
+            currentParam = new ArrayList<>();
+        });
+        /**рабочий*/
+        wAddresTextField.addActionListener(e -> {
+            String address = wAddresTextField.getText();
+            if(Checker.getInstance().checkString(address))
+                currentParam.add(address);
+            else
+                JOptionPane.showMessageDialog(workerPanel, "Введите корректный адрес работы");
+        });
+
+
+        wFirmTextField.addActionListener(e -> {
+            String firm = wFirmTextField.getText();
+            if(Checker.getInstance().checkString(firm))
+                currentParam.add(firm);
+            else
+                JOptionPane.showMessageDialog(workerPanel, "Введите корректное название фирмы");
+        });
+
+        wContinueButton.addActionListener(e -> {
+            if(currentParam.size() == 2){
+                controller.setParam( currentParam, "worker");
+            }
+            currentParam = new ArrayList<>();
+        });
+
+        wBackButton.addActionListener(e -> {
+            this.dispose();
+            currentParam = new ArrayList<>();
+        });
+
+
+    }
+
 }

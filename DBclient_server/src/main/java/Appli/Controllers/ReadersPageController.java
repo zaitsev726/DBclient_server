@@ -3,6 +3,7 @@ package Appli.Controllers;
 import Appli.Entities.AllReader;
 
 import Appli.Entities.Library;
+import Appli.Entities.Types.AbstractReader;
 import Appli.Services.AllReaderService;
 import Appli.Services.Impl.AllReaderServiceImpl;
 import Appli.Services.Impl.LibraryServiceImpl;
@@ -33,7 +34,7 @@ public class ReadersPageController {
 
     public ReadersPageController(ReadersForm form){
         this.form = form;
-        this.profissionForm = new ProfessionForm();
+        this.profissionForm = new ProfessionForm(this);
 
         readerService = new AllReaderServiceImpl();
         libraryService = new LibraryServiceImpl();
@@ -182,5 +183,10 @@ public class ReadersPageController {
                 setStartValues();
             }
         });
+    }
+
+    public void setParam(ArrayList<String> param, String readerType){
+
+
     }
 }

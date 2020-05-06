@@ -1,6 +1,11 @@
 package Appli.UserInterface.Pages.ReadersPage;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
+
 import javax.swing.*;
+import java.awt.*;
 
 public class ReadersForm extends JPanel {
     private JPanel readersPanel;
@@ -19,7 +24,7 @@ public class ReadersForm extends JPanel {
     private JLabel idLabel;
     private JLabel typeLabel;
 
-    public ReadersForm(){
+    public ReadersForm() {
         this.add(readersPanel);
         setVisible(true);
     }
