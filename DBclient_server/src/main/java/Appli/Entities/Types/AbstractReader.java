@@ -11,7 +11,8 @@ public abstract class AbstractReader{
 
     @Id
     @Column
-    //@OneToOne(mappedBy = "readerType")
+    //@OneToOne(mappedBy = "readerType", fetch = FetchType.EAGER)
+ //   @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_reader;                  //id читателя
     @Column
     private String type;                    //тип читателя

@@ -13,7 +13,7 @@ public class AllReader {
     @Column(name = "id_reader")
     private Long id_reader;                      //Id читателя
 
-    @Column(name = "type")
+    @Column(name = "type", nullable = true)
     private String type;                        //Тип читателя
 
     @Column(name = "surname")
@@ -32,10 +32,10 @@ public class AllReader {
     @JoinColumn(name = "id_library", referencedColumnName = "id_library", updatable = false, insertable = false)
     private Library library;                     //Id библиотеки в которой зарегистрирован
 
-  /*  @OneToOne(optional = false, cascade = CascadeType.ALL)      //??????
-    @JoinColumn(name = "id_reader")
+    @OneToOne(optional = false, cascade = CascadeType.ALL)      //??????
+    @JoinColumn(name = "id_reader", nullable = true)
     private AbstractReader readerType;
-*/
+
     /*  @OneToMany(mappedBy = "reader")
       private Collection<IssuedBook> ourBooks;
   */
@@ -97,14 +97,14 @@ public class AllReader {
     public void setType(String type) {
         this.type = type;
     }
-/*
+
     public AbstractReader getReaderType() {
         return readerType;
     }
 
     public void setReaderType(AbstractReader readerType) {
         this.readerType = readerType;
-    }*/
+    }
 
     // public Collection<IssuedBook> getOurBooks() { return ourBooks; }
 //
@@ -124,4 +124,6 @@ public class AllReader {
                 '}';
         // return "@asda"
     }
+
+
 }

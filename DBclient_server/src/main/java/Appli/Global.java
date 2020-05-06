@@ -18,33 +18,62 @@ public class Global {
     private InterfaceController interfaceController;
 
     public Global(){
-       // interfaceController = new InterfaceController();
+        interfaceController = new InterfaceController();
         AllReaderServiceImpl a = new AllReaderServiceImpl();
         LibraryServiceImpl b = new LibraryServiceImpl();
        // List<AllReader> readers = a.findAll();
         AllReader reader = new AllReader();
         reader.setId_library((long) 1);
-        reader.setName("Иван");
-        reader.setSurname("Иванов");
-        reader.setPatronymic("Иванович");
-        reader.setType("none");
-        reader.setLibrary(b.getById((long) 1));
+       // reader.setId_library((long) 0);
+
+     /*   reader.setName("Константин");
+        reader.setSurname("Агафонцауцуов");
+        reader.setPatronymic("Федосеевич");
+        reader.setType("pensioner");
+      //  reader.setId_reader((long) 0);
+       // reader.setLibrary(b.getById((long) 1));
+        //reader.setLibrary(null);
         Pensioner pensioner = new Pensioner();
         pensioner.setId_pensioners((long) 123213);
         pensioner.setType("pensioner");
-        //reader.setReaderType(pensioner);
+        pensioner.setId_reader((long) 0);
+
+
+         reader.setReaderType(pensioner);
+
 
         Library library = b.getById((long) 1);
+
+
+        reader = a.save(reader);
+        System.out.println(reader);
+        //reader.getReaderType().setId_reader(reader.getId_reader());
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("model");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        System.out.println(library.getReaders());
-        em.getTransaction().commit();
+        EntityManager manager = emf.createEntityManager();
+        Pensioner pensioner1 = new Pensioner();
+        pensioner1.setId_pensioners((long) 343523421);
+        pensioner1.setType("pensioner");
+        pensioner1.setId_reader( reader.getId_reader());
+        System.out.println(pensioner1);
+        manager.getTransaction().begin();
+        manager.merge(pensioner1);
+        reader.setReaderType(pensioner1);
+        manager.merge(reader);
 
-        System.out.println(a.save(reader));
+        manager.getTransaction().commit();
+        System.out.println(pensioner1);
+        System.out.println(reader);
 
-     //   library = b.getById((long) 1);
-     //   System.out.println(library.getReaders());
+        System.out.println(reader.getReaderType());
+
+
+
+       // a.delete(reader);
+       // library = b.getById((long) 1);
+       // System.out.println(a.findById((long) 1).getLibrary());
+        //library = b.getById((long) 1);
+      //  System.out.println(library.getReaders());
 
         /* AllReader reader1 = a.findById((long) 1);
         AllReader reader2 = a.findById((long) 11);

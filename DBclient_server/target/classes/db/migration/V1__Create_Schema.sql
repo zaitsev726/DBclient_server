@@ -64,13 +64,13 @@ CREATE TABLE Editions
 
 create sequence AllReaders_generator
     as integer
-    minvalue 1
+    minvalue 0
     maxvalue 2147483647;
 
 CREATE TABLE AllReaders
 (
     id_reader  integer not null PRIMARY KEY DEFAULT nextval('AllReaders_generator'),
-    type       VARCHAR(50),
+    type       VARCHAR(50) NULL ,
     surname    VARCHAR(50)  NOT NULL,
     name       VARCHAR(50)  NOT NULL,
     patronymic VARCHAR(50),
@@ -162,75 +162,68 @@ insert into Libraries values (2, 4);
 insert into Libraries values (3, 2);
 insert into Libraries values (4, 5);
 insert into Libraries values (5, 3);
-/*
-insert into allreaders values (1, 'worker', 'Агафонов', 'Константин', 'Федосеевич', 1);
-insert into allreaders values (2, 'worker', 'Белоусова', 'Виктория', 'Рудольфовна', 4);
-insert into allreaders values (3, 'worker', 'Кудряшов', 'Роберт', 'Лукьевич', 4);
-insert into allreaders values (4, 'worker', 'Королёв', 'Дональд', 'Дмитриевич', 4);
-insert into allreaders values (5, 'worker', 'Блинов', 'Роман', 'Всеволодович', 2);
-insert into allreaders values (6, 'worker', 'Логинова', 'Амира', 'Евгеньевна', 3);
-insert into allreaders values (7, 'worker', 'Лобанова', 'Эжени', 'Куприяновна', 5);
-insert into allreaders values (8, 'worker', 'Шашкова', 'Триана', 'Дамировна', 3);
-insert into allreaders values (9, 'worker', 'Ковалёв', 'Архип', 'Альвианович', 2);
-insert into allreaders values (10, 'worker', 'Носков', 'Любомир', 'Олегович', 1);
-insert into allreaders values (11, 'pensioners', 'Одинцов', 'Альфред', 'Русланович', 4);
-insert into allreaders values (12, 'pensioners', 'Козлова', 'Юфеза', 'Феликсовна', 2);
-insert into allreaders values (13, 'pensioners', 'Молчанова', 'Ляля', 'Созоновна', 4);
-insert into allreaders values (14, 'pensioners', 'Никонов', 'Терентий', 'Семёнович', 3);
-insert into allreaders values (15, 'pensioners', 'Николаева', 'Дарина', 'Онисимовна', 1);
-insert into allreaders values (16, 'pensioners', 'Устинов', 'Аскольд', 'Оскарович', 5);
-insert into allreaders values (17, 'pensioners', 'Щукин', 'Эрнест', 'Кириллович', 5);
-insert into allreaders values (18, 'pensioners', 'Титова', 'Наоми', 'Петровна', 4);
-insert into allreaders values (19, 'pensioners', 'Филиппов', 'Игорь', 'Лукьянович', 3);
-insert into allreaders values (20, 'pensioners', 'Исакова', 'Уля', 'Валерьевна', 4);
-insert into allreaders values (21, 'schoolkid', 'Борисов', 'Гурий', 'Пантелеймонович', 5);
-insert into allreaders values (22, 'schoolkid', 'Зиновьев', 'Лука', 'Михайлович', 2);
-insert into allreaders values (23, 'schoolkid', 'Петрова', 'Агата', 'Тимофеевна', 4);
-insert into allreaders values (24, 'schoolkid', 'Горшков', 'Тимур', 'Петрович', 5);
-insert into allreaders values (25, 'schoolkid', 'Казакова', 'Элла', 'Валентиновна', 1);
-insert into allreaders values (26, 'schoolkid', 'Логинов', 'Велор', 'Романович', 2);
-insert into allreaders values (27, 'schoolkid', 'Лихачёв', 'Тимур', 'Дмитрьевич', 1);
-insert into allreaders values (28, 'schoolkid', 'Крылов', 'Григорий', 'Данилович', 3);
-insert into allreaders values (29, 'schoolkid', 'Баранов', 'Аверьян', 'Германович', 4);
-insert into allreaders values (30, 'schoolkid', 'Пестов', 'Денис', 'Иванович', 5);
-insert into allreaders values (31, 'teacher', 'Федосеева', 'Крис', 'Рубеновна', 2);
-insert into allreaders values (32, 'teacher', 'Якушев', 'Рудольф', 'Георгьевич', 1);
-insert into allreaders values (33, 'teacher', 'Вишняков', 'Ефим', 'Павлович', 4);
-insert into allreaders values (34, 'teacher', 'Кононова', 'Габи', 'Глебовна', 4);
-insert into allreaders values (35, 'teacher', 'Архипова', 'Лейла', 'Павловна', 3);
-insert into allreaders values (36, 'teacher', 'Егорова', 'Мирра', 'Юрьевна', 5);
-insert into allreaders values (37, 'teacher', 'Беспалова', 'Ангелина', 'Авдеевна', 4);
-insert into allreaders values (38, 'teacher', 'Лихачёва', 'Аксинья', 'Аркадьевна', 1);
-insert into allreaders values (39, 'teacher', 'Марков', 'Никифор', 'Михайлович', 3);
-insert into allreaders values (40, 'teacher', 'Гаврилов', 'Самуил', 'Адольфович', 2);
-insert into allreaders values (41, 'student', 'Мельникова', 'Анита', 'Эльдаровна', 2);
-insert into allreaders values (42, 'student', 'Воронов', 'Аркадий', 'Юлианович', 2);
-insert into allreaders values (43, 'student', 'Елисеева', 'Лина', 'Владиславовна', 5);
-insert into allreaders values (44, 'student', 'Власов', 'Вольдемар', 'Витальевич', 4);
-insert into allreaders values (45, 'student', 'Евдокимова', 'Аэлита', 'Улебовна', 5);
-insert into allreaders values (46, 'student', 'Власова', 'Аюна', 'Евгеньевна', 4);
-insert into allreaders values (47, 'student', 'Филиппова', 'Нева', 'Данииловна', 3);
-insert into allreaders values (48, 'student', 'Меркушева', 'Сабрина', 'Федосеевна', 4);
-insert into allreaders values (49, 'student', 'Зуева', 'Патрисия', 'Алексеевна', 3);
-insert into allreaders values (50, 'student', 'Овчинников', 'Кондрат', 'Филиппович', 5);
-insert into allreaders values (51, 'scientist', 'Смирнова', 'Элина', 'Валерьевна', 1);
-insert into allreaders values (52, 'scientist', 'Мухин', 'Тихон', 'Валентинович', 4);
-insert into allreaders values (53, 'scientist', 'Панова', 'Сара', 'Станиславовна', 2);
-insert into allreaders values (54, 'scientist', 'Кошелева', 'Андриана', 'Валерьевна', 1);
-insert into allreaders values (55, 'scientist', 'Бобров', 'Илья', 'Лаврентьевич', 4);
-insert into allreaders values (56, 'scientist', 'Филатова', 'Тала', 'Вадимовна', 1);
-insert into allreaders values (57, 'scientist', 'Беляев', 'Лазарь', 'Степанович', 2);
-insert into allreaders values (58, 'scientist', 'Хохлова', 'Маргарита', 'Григорьевна', 1);
-insert into allreaders values (59, 'scientist', 'Самойлова', 'Милда', 'Кимовна', 4);
-insert into allreaders values (60, 'scientist', 'Мухин', 'Кондрат', 'Русланович', 3);
-*/
 
-insert into allreaders( type, surname, name, patronymic, id_library) values ('worker', 'Агафонов', 'Константин', 'Федосеевич', 1),
-                    ('worker', 'Белоусова', 'Виктория', 'Рудольфовна', 4),
-( 'worker', 'Кудряшов', 'Роберт', 'Лукьевич', 4),
- ( 'worker', 'Королёв', 'Дональд', 'Дмитриевич', 4);
-
-/*
+insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Иванов', 'Иван', 'Иванович', 3);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Агафонов', 'Константин', 'Федосеевич', 1);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Белоусова', 'Виктория', 'Рудольфовна', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Кудряшов', 'Роберт', 'Лукьевич', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Королёв', 'Дональд', 'Дмитриевич', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Блинов', 'Роман', 'Всеволодович', 2);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Логинова', 'Амира', 'Евгеньевна', 3);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Лобанова', 'Эжени', 'Куприяновна', 5);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Шашкова', 'Триана', 'Дамировна', 3);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Ковалёв', 'Архип', 'Альвианович', 2);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Носков', 'Любомир', 'Олегович', 1);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioners', 'Одинцов', 'Альфред', 'Русланович', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioners', 'Козлова', 'Юфеза', 'Феликсовна', 2);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioners', 'Молчанова', 'Ляля', 'Созоновна', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioners', 'Никонов', 'Терентий', 'Семёнович', 3);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioners', 'Николаева', 'Дарина', 'Онисимовна', 1);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioners', 'Устинов', 'Аскольд', 'Оскарович', 5);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioners', 'Щукин', 'Эрнест', 'Кириллович', 5);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioners', 'Титова', 'Наоми', 'Петровна', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioners', 'Филиппов', 'Игорь', 'Лукьянович', 3);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioners', 'Исакова', 'Уля', 'Валерьевна', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('schoolkid', 'Борисов', 'Гурий', 'Пантелеймонович', 5);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('schoolkid', 'Зиновьев', 'Лука', 'Михайлович', 2);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('schoolkid', 'Петрова', 'Агата', 'Тимофеевна', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('schoolkid', 'Горшков', 'Тимур', 'Петрович', 5);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('schoolkid', 'Казакова', 'Элла', 'Валентиновна', 1);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('schoolkid', 'Логинов', 'Велор', 'Романович', 2);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('schoolkid', 'Лихачёв', 'Тимур', 'Дмитрьевич', 1);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('schoolkid', 'Крылов', 'Григорий', 'Данилович', 3);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('schoolkid', 'Баранов', 'Аверьян', 'Германович', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('schoolkid', 'Пестов', 'Денис', 'Иванович', 5);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('teacher', 'Федосеева', 'Крис', 'Рубеновна', 2);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('teacher', 'Якушев', 'Рудольф', 'Георгьевич', 1);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('teacher', 'Вишняков', 'Ефим', 'Павлович', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('teacher', 'Кононова', 'Габи', 'Глебовна', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('teacher', 'Архипова', 'Лейла', 'Павловна', 3);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('teacher', 'Егорова', 'Мирра', 'Юрьевна', 5);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('teacher', 'Беспалова', 'Ангелина', 'Авдеевна', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('teacher', 'Лихачёва', 'Аксинья', 'Аркадьевна', 1);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('teacher', 'Марков', 'Никифор', 'Михайлович', 3);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('teacher', 'Гаврилов', 'Самуил', 'Адольфович', 2);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Мельникова', 'Анита', 'Эльдаровна', 2);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Воронов', 'Аркадий', 'Юлианович', 2);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Елисеева', 'Лина', 'Владиславовна', 5);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Власов', 'Вольдемар', 'Витальевич', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Евдокимова', 'Аэлита', 'Улебовна', 5);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Власова', 'Аюна', 'Евгеньевна', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Филиппова', 'Нева', 'Данииловна', 3);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Меркушева', 'Сабрина', 'Федосеевна', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Зуева', 'Патрисия', 'Алексеевна', 3);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Овчинников', 'Кондрат', 'Филиппович', 5);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('scientist', 'Смирнова', 'Элина', 'Валерьевна', 1);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('scientist', 'Мухин', 'Тихон', 'Валентинович', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('scientist', 'Панова', 'Сара', 'Станиславовна', 2);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('scientist', 'Кошелева', 'Андриана', 'Валерьевна', 1);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('scientist', 'Бобров', 'Илья', 'Лаврентьевич', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('scientist', 'Филатова', 'Тала', 'Вадимовна', 1);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('scientist', 'Беляев', 'Лазарь', 'Степанович', 2);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('scientist', 'Хохлова', 'Маргарита', 'Григорьевна', 1);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('scientist', 'Самойлова', 'Милда', 'Кимовна', 4);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('scientist', 'Мухин', 'Кондрат', 'Русланович', 3);
 
 insert into workers values (1, 'worker', 'г. Малая Пурга, ул. Чудновского', 'Бастион');
 insert into workers values (2, 'worker', 'г. Урай, ул. Ипатьевский пер', 'Декор');
