@@ -283,7 +283,7 @@ public class ReadersPageController {
         JOptionPane.showMessageDialog(profissionForm, reader.getName() + " " + reader.getSurname() + " сохранен");
     }
 
-    public boolean queryForUpdate(long id_reader, String type, String name, String surname, String patronymic, long id_library, String changed_param){
+    public void queryForUpdate(long id_reader, String type, String name, String surname, String patronymic, long id_library, String changed_param){
 
         update = new AllReader();
         update.setName(name);
@@ -292,7 +292,7 @@ public class ReadersPageController {
         update.setId_library(id_library);
         update.setType(type);
         update.setId_reader(id_reader);
-
+        System.out.println(type);
         if(changed_param.equals("type") ) {
             if(!readerService.findById(id_reader).getType().equals(type)) {
                 updateProffesionForm.changePanel(type);
@@ -301,6 +301,21 @@ public class ReadersPageController {
         }else{
             readerService.update(update);
         }
-        return false;
+    }
+
+    public void showCurrentLibrary(long id_library){
+        Library library = libraryService.getById(id_library);
+        JOptionPane.showMessageDialog(updateProffesionForm,
+                new String[]{"Информация о библиотеке",
+                            " ID библиотеки: " +library.getId_library(),
+                            " Количество залов: " + library.getHalls_num(),
+                            " Количество зарегистрированных читателей: " + library.getReaders().size()}, "Библиотека", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void showCurrentProfession(long id_reader){
+        AbstractReader reader = readerService.findById(id_reader).getReaderType();
+        JOptionPane.showMessageDialog(updateProffesionForm,
+                new String[]{"Информация о профессии",
+                            reader.toString()}, "Профессия", JOptionPane.INFORMATION_MESSAGE);
     }
 }

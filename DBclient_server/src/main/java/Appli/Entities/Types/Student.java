@@ -31,10 +31,9 @@ public class Student extends AbstractReader {
     @Override
     public String toString() {
         return  super.toString() +
-                "Student{" +
-                "id_university=" + id_university +
-                ", faculty='" + faculty + '\'' +
-                ", id_group=" + id_group +
-                '}';
+                "Подробные сведения о профессии студент \n" +
+                "ID университета" + id_university + '\n' +
+                "Название факультета: " + faculty + '\n' +
+                "Номер группы: " + id_group;
     }
 }

@@ -19,6 +19,8 @@ public class SearchReadersForm extends JFrame {
     private ReadersPageController controller;
     private JButton removeRowButton;
     private JButton backButton;
+    private JButton libraryButton;
+    private JButton proffesionButton;
 
     // Заголовки столбцов
     private final Object[] columnsHeader = new String[]{"ID читателя", "Тип читателя", "Имя", "Фамилия", "Отчество", "ID библиотеки"};
@@ -28,9 +30,11 @@ public class SearchReadersForm extends JFrame {
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
         backButton = new JButton("Очистить и выйти");
+        libraryButton = new JButton("Библиотека");
+        proffesionButton = new JButton("Инфо о профессии");
 
         setTitle("Результаты поиска");
-        setSize(400, 400);
+        setSize(800, 400);
 
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(columnsHeader);
@@ -54,6 +58,8 @@ public class SearchReadersForm extends JFrame {
         JPanel buttons = new JPanel();
         buttons.add(removeRowButton);
         buttons.add(backButton);
+        buttons.add(libraryButton);
+        buttons.add(proffesionButton);
         getContentPane().add(buttons, "South");
 
         initializationListeners();
@@ -106,6 +112,18 @@ public class SearchReadersForm extends JFrame {
             tableModel.setRowCount(0);
             currentReaders = new ArrayList<>();
             this.dispose();
+        });
+
+        libraryButton.addActionListener(e -> {
+            int row = resultTable.getSelectedRow();
+            if (row >= 0)
+                controller.showCurrentLibrary(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 5))));
+        });
+
+        proffesionButton.addActionListener(e -> {
+            int row = resultTable.getSelectedRow();
+            if (row >= 0)
+                controller.showCurrentProfession(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))));
         });
     }
 

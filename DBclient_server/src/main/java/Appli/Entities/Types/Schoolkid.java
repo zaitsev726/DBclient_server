@@ -25,9 +25,8 @@ public class Schoolkid extends AbstractReader {
     @Override
     public String toString() {
         return  super.toString() +
-                "Schoolkid{" +
-                "id_school=" + id_school +
-                ", grade=" + grade +
-                '}';
+                "Подробные сведения о профессии школьник \n" +
+                "Номер школы: " + id_school + '\n' +
+                "Номер класса: " + grade;
     }
 }

@@ -18,8 +18,7 @@ public class Pensioner extends AbstractReader {
     @Override
     public String toString() {
         return  super.toString() +
-                "Pensioner{" +
-                "id_pensioners=" + id_pensioners +
-                '}';
+                "Подробные сведения о профессии пенсионер \n" +
+                "Номер пенсионного удостоверения: " + id_pensioners;
     }
 }

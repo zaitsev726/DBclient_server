@@ -25,9 +25,8 @@ public class Teacher extends AbstractReader {
     @Override
     public String toString() {
         return  super.toString() +
-                "Teacher{" +
-                "id_university=" + id_university +
-                ", faculty='" + faculty + '\'' +
-                '}';
+                "Подробные сведения о профессии учитель \n" +
+                "ID университета: " + id_university + '\n' +
+                "Название факлуьтета: " + faculty;
     }
 }

@@ -37,9 +37,8 @@ public class Worker extends AbstractReader {
     @Override
     public String toString() {
         return  super.toString() +
-                "Worker{" +
-                "address='" + address + '\'' +
-                ", firm='" + firm + '\'' +
-                '}';
+                "Подробные сведения о профессии рабочий \n" +
+                "Адрес работы: " + address + '\n' +
+                "Фирма: " + firm ;
     }
 }

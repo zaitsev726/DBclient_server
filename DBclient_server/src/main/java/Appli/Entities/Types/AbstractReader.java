@@ -30,9 +30,8 @@ public abstract class AbstractReader{
 
     @Override
     public String toString() {
-        return "AbstractReader{" +
-                "id_reader=" + id_reader +
-                ", type='" + type + '\'' +
-                '}';
+        return "Общие сведения \n" +
+                "ID читателя: " + id_reader + '\n' +
+                "Тип профессии " + type + '\n';
     }
 }
