@@ -6,11 +6,13 @@ import Appli.Entities.Library;
 import Appli.Entities.Types.Pensioner;
 import Appli.Services.Impl.AllReaderServiceImpl;
 import Appli.Services.Impl.LibraryServiceImpl;
+import Appli.UserInterface.Frames.SearchReadersForm;
 import Appli.UserInterface.InterfaceController;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,29 +32,39 @@ public class Global {
         reader.setPatronymic("Федосеевич");
         reader.setType("pensioner");
         reader.setId_library((long) 1);
+
+
+       // SearchReadersForm form = new SearchReadersForm();
+        ArrayList<String[]> list = new ArrayList<>();
+       // reader = a.findById((long) 1);
+       //form.updateTable(list);
+       // System.out.println(reader.getReaderType());
+
         //  reader.setId_reader((long) 0);
        // reader.setLibrary(b.getById((long) 1));
         //reader.setLibrary(null);
-    /*    Pensioner pensioner = new Pensioner();
+        Pensioner pensioner = new Pensioner();
         pensioner.setId_pensioners((long) 123213);
         pensioner.setType("pensioner");
 
-        Library library = b.getById((long) 1);
+        //Library library = b.getById((long) 1);
 
 
-        reader = a.save(reader);
+      //  reader = a.save(reader);
+     //   System.out.println(reader);
+      //  reader.getReaderType().setId_reader(reader.getId_reader());
+
+   /*     reader = a.findById((long) 13);
         System.out.println(reader);
-        reader.getReaderType().setId_reader(reader.getId_reader());
-*//*
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("model");
         EntityManager manager = emf.createEntityManager();
 
-        Pensioner pensioner1 = new Pensioner();
-        pensioner1.setId_pensioners((long) 343523421);
-        pensioner1.setType("pensioner");
+        Query query = manager.createQuery("delete from Pensioner p where p.id_reader = :r_id_reader");
+        query.setParameter("r_id_reader", reader.getId_reader());
 
-        Pensioner pensioner = manager.find(Pensioner.class,(long) 0);
-        reader.setReaderType(pensioner);
+      //  Pensioner pensioner = manager.find(Pensioner.class,(long) 0);
+       // reader.setReaderType(pensioner);
 
 
       //  pensioner1.setId_reader( reader.getId_reader());

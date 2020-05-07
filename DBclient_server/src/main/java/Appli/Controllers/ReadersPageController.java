@@ -10,14 +10,10 @@ import Appli.Services.Impl.AllReaderServiceImpl;
 import Appli.Services.Impl.LibraryServiceImpl;
 import Appli.Services.LibraryService;
 import Appli.UserInterface.Frames.ProfessionForm;
-import Appli.UserInterface.Frames.Window;
+import Appli.UserInterface.Frames.SearchReadersForm;
 import Appli.UserInterface.Pages.ReadersPage.ReadersForm;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +24,9 @@ import java.util.List;
 public class ReadersPageController {
     private ReadersForm form;
     private ProfessionForm profissionForm;
+    private SearchReadersForm searchReadersForm;
+    private ProfessionForm updateProffesionForm;
+    private AbstractReaderServiceImpl abstractReaderService;
     private String cur_name;
     private String cur_surname;
     private String cur_patronymic;
@@ -37,10 +36,16 @@ public class ReadersPageController {
     private AllReaderService readerService;
     private LibraryService libraryService;
 
+    private AllReader saved;
+    private AllReader update;
+
     public ReadersPageController(ReadersForm form){
         cur_type = "pensioner";
         this.form = form;
-        this.profissionForm = new ProfessionForm(this);
+        this.profissionForm = new ProfessionForm(this, "save");
+        this.searchReadersForm = new SearchReadersForm(this);
+        this.updateProffesionForm = new ProfessionForm(this, "update");
+        this.abstractReaderService = new AbstractReaderServiceImpl();
 
         readerService = new AllReaderServiceImpl();
         libraryService = new LibraryServiceImpl();
@@ -138,20 +143,18 @@ public class ReadersPageController {
                         cur_patronymic.equals("") ||
                         cur_lib_id == 0 ||
                         cur_type.equals(""))){
-*/
-                    AllReader reader = new AllReader();
-                    reader.setName(cur_name);
-                    reader.setSurname(cur_surname);
-                    reader.setPatronymic(cur_patronymic);
-                    reader.setId_library(cur_lib_id);
-                    reader.setType(cur_type);
-                    reader.setLibrary(cur_Library);
-                   // readerService.save(reader);
+*/              saved = new AllReader();
+                saved.setName(cur_name);
+                saved.setSurname(cur_surname);
+                saved.setPatronymic(cur_patronymic);
+                saved.setId_library(cur_lib_id);
+                saved.setType(cur_type);
+                saved.setLibrary(cur_Library);
+
                     profissionForm.changePanel(cur_type);
                     profissionForm.setVisible(true);
                     System.out.println("saved");
-                 //   setStartValues();
-                //}
+
             }
         });
 
@@ -185,32 +188,38 @@ public class ReadersPageController {
                 if(!cur_type.equals("")){
 
                 }
+                ArrayList<String[]> resultList = new ArrayList<>();
+                if (readers != null) {
+                    for(AllReader reader: readers) {
+                        resultList.add(new String[]{String.valueOf(reader.getId_reader()), reader.getType(), reader.getName(), reader.getSurname(), reader.getPatronymic(), String.valueOf(reader.getId_library())});
+                    }
+                }
+                searchReadersForm.updateTable(resultList);
+                searchReadersForm.setVisible(true);
 
-                setStartValues();
+               // setStartValues();
             }
         });
     }
 
-    public void setParam(ArrayList<String> param, String readerType){
+    public synchronized void setParam(ArrayList<String> param, String readerType, String typeOfSetting){
         System.out.println(param);
         System.out.println(readerType);
         System.out.println("***** SAVING *****");
 
-        AllReader reader = new AllReader();
-        reader.setName(cur_name);
-        reader.setSurname(cur_surname);
-        reader.setPatronymic(cur_patronymic);
-        reader.setId_library(cur_lib_id);
-        reader.setType(cur_type);
-        reader.setLibrary(cur_Library);
+        AbstractReader type = null;
+        AllReader reader = saved;
+
+
+        if(typeOfSetting.equals("update")){
+            reader = update;
+           // as.delete(reader.getReaderType());
+            System.out.println("******************************************************" + reader.getReaderType());
+            type = readerService.findById(update.getId_reader()).getReaderType();
+        }
         System.out.println(reader);
-        AbstractReaderServiceImpl as = new AbstractReaderServiceImpl();
 
         reader = readerService.save(reader);
-
-    //    EntityManagerFactory emf = Persistence.createEntityManagerFactory("model");
-     //   EntityManager manager = emf.createEntityManager();
-
 
         switch (readerType) {
             case ("pensioner"):
@@ -218,10 +227,7 @@ public class ReadersPageController {
                 pensioner.setId_reader(reader.getId_reader());
                 pensioner.setType("pensioner");
                 pensioner.setId_pensioners(Long.valueOf(param.get(0)));
-                as.save(pensioner);
-               // manager.getTransaction().begin();
-               // manager.merge(pensioner);
-               // manager.getTransaction().commit();
+                abstractReaderService.save(pensioner);
                 break;
             case ("schoolkid"):
                 Schoolkid schoolkid = new Schoolkid();
@@ -229,7 +235,7 @@ public class ReadersPageController {
                 schoolkid.setType("schoolkid");
                 schoolkid.setId_school(Long.valueOf(param.get(0)));
                 schoolkid.setGrade(Long.valueOf(param.get(1)));
-                as.save(schoolkid);
+                abstractReaderService.save(schoolkid);
                 break;
             case ("scientist"):
                 Scientist scientist = new Scientist();
@@ -237,7 +243,7 @@ public class ReadersPageController {
                 scientist.setType("scientist");
                 scientist.setAddress(param.get(0));
                 scientist.setId_university(Long.valueOf(param.get(1)));
-                as.save(scientist);
+                abstractReaderService.save(scientist);
                 break;
             case ("student"):
                 Student student = new Student();
@@ -246,7 +252,7 @@ public class ReadersPageController {
                 student.setId_university(Long.valueOf(param.get(0)));
                 student.setFaculty(param.get(1));
                 student.setId_group(Long.valueOf(param.get(2)));
-                as.save(student);
+                abstractReaderService.save(student);
                 break;
             case ("teacher"):
                 Teacher teacher = new Teacher();
@@ -254,7 +260,7 @@ public class ReadersPageController {
                 teacher.setType("teacher");
                 teacher.setId_university(Long.valueOf(param.get(0)));
                 teacher.setFaculty(param.get(1));
-                as.save(teacher);
+                abstractReaderService.save(teacher);
                 break;
             case ("worker"):
                 Worker worker = new Worker();
@@ -262,15 +268,39 @@ public class ReadersPageController {
                 worker.setType("worker");
                 worker.setAddress(param.get(0));
                 worker.setFirm(param.get(1));
-                as.save(worker);
+                abstractReaderService.save(worker);
                 break;
             default:
                 JOptionPane.showMessageDialog(profissionForm, "Ошибка");
                 break;
 
         }
+
+        if(typeOfSetting.equals("update")){
+            abstractReaderService.delete(type);
+        }
         System.out.println("***** END OF SAVING *****");
         JOptionPane.showMessageDialog(profissionForm, reader.getName() + " " + reader.getSurname() + " сохранен");
+    }
 
+    public boolean queryForUpdate(long id_reader, String type, String name, String surname, String patronymic, long id_library, String changed_param){
+
+        update = new AllReader();
+        update.setName(name);
+        update.setSurname(surname);
+        update.setPatronymic(patronymic);
+        update.setId_library(id_library);
+        update.setType(type);
+        update.setId_reader(id_reader);
+
+        if(changed_param.equals("type") ) {
+            if(!readerService.findById(id_reader).getType().equals(type)) {
+                updateProffesionForm.changePanel(type);
+                updateProffesionForm.setVisible(true);
+            }
+        }else{
+            readerService.update(update);
+        }
+        return false;
     }
 }

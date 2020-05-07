@@ -55,6 +55,16 @@ public class AllReaderServiceImpl implements AllReaderService {
     }
 
     @Override
+    public void update(AllReader reader) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        reader = em.merge(reader);
+        em.getTransaction().commit();
+        em.close();
+        System.out.println(reader);
+    }
+
+    @Override
     public void delete(AllReader reader) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

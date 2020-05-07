@@ -163,7 +163,7 @@ insert into Libraries values (3, 2);
 insert into Libraries values (4, 5);
 insert into Libraries values (5, 3);
 
-insert into allreaders(type, surname, name, patronymic, id_library) values ('student', 'Иванов', 'Иван', 'Иванович', 3);
+insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioner', 'Иванов', 'Иван', 'Иванович', 3);
 insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Агафонов', 'Константин', 'Федосеевич', 1);
 insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Белоусова', 'Виктория', 'Рудольфовна', 4);
 insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Кудряшов', 'Роберт', 'Лукьевич', 4);
@@ -236,6 +236,7 @@ insert into workers values (8, 'worker', 'г. Вишневый, ул. Осенн
 insert into workers values (9, 'worker', 'г. Лунино, ул. Бурлинский Переезд пер', 'Стандарт');
 insert into workers values (10, 'worker', 'г. Ключи, ул. Текстильщиков 8-я', 'Прогресс');
 
+insert into pensioners values (0, 'pensioner',123456);
 insert into pensioners values (11, 'pensioner',61752);
 insert into pensioners values (12, 'pensioner',70169);
 insert into pensioners values (13, 'pensioner',52297);

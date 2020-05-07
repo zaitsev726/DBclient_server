@@ -4,8 +4,6 @@ import Appli.Controllers.Checker;
 import Appli.Controllers.ReadersPageController;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ProfessionForm extends JFrame {
@@ -56,8 +54,11 @@ public class ProfessionForm extends JFrame {
 
     private ArrayList<String> currentParam;
     private ReadersPageController controller;
+    private String typeOfForm;
 
-    public ProfessionForm(ReadersPageController controller) {
+
+    public ProfessionForm(ReadersPageController controller, String typeOfForm) {
+        this.typeOfForm = typeOfForm;
         this.controller = controller;
        // this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Информация о профессии");
@@ -67,13 +68,6 @@ public class ProfessionForm extends JFrame {
         initializationListeners();
         this.add(professionPanel);
         currentPanel = pensionerPanel;
-
-        pContinueButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
     }
 
     public void changePanel(String type) {
@@ -133,7 +127,7 @@ public class ProfessionForm extends JFrame {
 
         pContinueButton.addActionListener(e -> {
             if(currentParam.size() == 1)
-                controller.setParam( currentParam, "pensioner");
+                controller.setParam( currentParam, "pensioner", typeOfForm);
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
@@ -174,7 +168,7 @@ public class ProfessionForm extends JFrame {
 
         scContinueutton.addActionListener(e -> {
             if(currentParam.size() == 2)
-                controller.setParam( currentParam, "schoolkid");
+                controller.setParam( currentParam, "schoolkid", typeOfForm);
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
@@ -212,7 +206,7 @@ public class ProfessionForm extends JFrame {
 
         sciContinueButton.addActionListener(e -> {
             if(currentParam.size() == 2)
-                controller.setParam( currentParam, "scientist");
+                controller.setParam( currentParam, "scientist", typeOfForm);
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
@@ -259,7 +253,7 @@ public class ProfessionForm extends JFrame {
 
         sContinueButton.addActionListener(e -> {
             if(currentParam.size() == 3)
-                controller.setParam( currentParam, "student");
+                controller.setParam( currentParam, "student",typeOfForm );
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
@@ -296,7 +290,7 @@ public class ProfessionForm extends JFrame {
 
         tContinueButton.addActionListener(e -> {
             if(currentParam.size() == 2)
-                controller.setParam( currentParam, "teacher");
+                controller.setParam( currentParam, "teacher", typeOfForm);
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
@@ -327,7 +321,7 @@ public class ProfessionForm extends JFrame {
 
         wContinueButton.addActionListener(e -> {
             if(currentParam.size() == 2)
-                controller.setParam( currentParam, "worker");
+                controller.setParam( currentParam, "worker", typeOfForm);
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
