@@ -2,19 +2,11 @@ package Appli.UserInterface.Frames;
 
 import Appli.Controllers.Checker;
 import Appli.Controllers.ReadersPageController;
-import Appli.Entities.Types.Pensioner;
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
 
-import javax.persistence.NoResultException;
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProfessionForm extends JFrame {
     private JPanel professionPanel;
@@ -35,8 +27,8 @@ public class ProfessionForm extends JFrame {
     private JButton scContinueutton;
     private JButton scBackButton;
     private JTextField sUniversityTextField;
-    private JTextField sGroupTextField;
     private JTextField sFacultyTextField;
+    private JTextField sGroupTextField;
     private JButton sContinueButton;
     private JButton sBackButton;
     private JTextField sciAddresTextField;
@@ -145,6 +137,7 @@ public class ProfessionForm extends JFrame {
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
+            this.dispose();
         });
 
         pBackButton.addActionListener(e -> {
@@ -185,6 +178,7 @@ public class ProfessionForm extends JFrame {
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
+            this.dispose();
         });
 
         scBackButton.addActionListener(e -> {
@@ -222,6 +216,7 @@ public class ProfessionForm extends JFrame {
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
+            this.dispose();
         });
 
         sciBackButton.addActionListener(e -> {
@@ -268,6 +263,7 @@ public class ProfessionForm extends JFrame {
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
+            this.dispose();
         });
 
         sBackButton.addActionListener(e -> {
@@ -304,6 +300,7 @@ public class ProfessionForm extends JFrame {
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
+            this.dispose();
         });
 
         tBackButton.addActionListener(e -> {
@@ -334,6 +331,7 @@ public class ProfessionForm extends JFrame {
             else
                 JOptionPane.showMessageDialog(pensionerPanel, "Вы ввели не все параметры");
             currentParam = new ArrayList<>();
+            this.dispose();
         });
 
         wBackButton.addActionListener(e -> {

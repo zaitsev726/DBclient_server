@@ -3,13 +3,14 @@ package Appli.Controllers;
 import Appli.Entities.AllReader;
 
 import Appli.Entities.Library;
-import Appli.Entities.Types.AbstractReader;
-import Appli.Entities.Types.Pensioner;
+import Appli.Entities.Types.*;
 import Appli.Services.AllReaderService;
+import Appli.Services.Impl.AbstractReaderServiceImpl;
 import Appli.Services.Impl.AllReaderServiceImpl;
 import Appli.Services.Impl.LibraryServiceImpl;
 import Appli.Services.LibraryService;
 import Appli.UserInterface.Frames.ProfessionForm;
+import Appli.UserInterface.Frames.Window;
 import Appli.UserInterface.Pages.ReadersPage.ReadersForm;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -203,11 +204,12 @@ public class ReadersPageController {
         reader.setType(cur_type);
         reader.setLibrary(cur_Library);
         System.out.println(reader);
+        AbstractReaderServiceImpl as = new AbstractReaderServiceImpl();
 
         reader = readerService.save(reader);
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("model");
-        EntityManager manager = emf.createEntityManager();
+    //    EntityManagerFactory emf = Persistence.createEntityManagerFactory("model");
+     //   EntityManager manager = emf.createEntityManager();
 
 
         switch (readerType) {
@@ -216,19 +218,51 @@ public class ReadersPageController {
                 pensioner.setId_reader(reader.getId_reader());
                 pensioner.setType("pensioner");
                 pensioner.setId_pensioners(Long.valueOf(param.get(0)));
-                manager.getTransaction().begin();
-                manager.merge(pensioner);
-                manager.getTransaction().commit();
+                as.save(pensioner);
+               // manager.getTransaction().begin();
+               // manager.merge(pensioner);
+               // manager.getTransaction().commit();
                 break;
             case ("schoolkid"):
+                Schoolkid schoolkid = new Schoolkid();
+                schoolkid.setId_reader(reader.getId_reader());
+                schoolkid.setType("schoolkid");
+                schoolkid.setId_school(Long.valueOf(param.get(0)));
+                schoolkid.setGrade(Long.valueOf(param.get(1)));
+                as.save(schoolkid);
                 break;
             case ("scientist"):
+                Scientist scientist = new Scientist();
+                scientist.setId_reader(reader.getId_reader());
+                scientist.setType("scientist");
+                scientist.setAddress(param.get(0));
+                scientist.setId_university(Long.valueOf(param.get(1)));
+                as.save(scientist);
                 break;
             case ("student"):
+                Student student = new Student();
+                student.setId_reader(reader.getId_reader());
+                student.setType("student");
+                student.setId_university(Long.valueOf(param.get(0)));
+                student.setFaculty(param.get(1));
+                student.setId_group(Long.valueOf(param.get(2)));
+                as.save(student);
                 break;
             case ("teacher"):
+                Teacher teacher = new Teacher();
+                teacher.setId_reader(reader.getId_reader());
+                teacher.setType("teacher");
+                teacher.setId_university(Long.valueOf(param.get(0)));
+                teacher.setFaculty(param.get(1));
+                as.save(teacher);
                 break;
             case ("worker"):
+                Worker worker = new Worker();
+                worker.setId_reader(reader.getId_reader());
+                worker.setType("worker");
+                worker.setAddress(param.get(0));
+                worker.setFirm(param.get(1));
+                as.save(worker);
                 break;
             default:
                 JOptionPane.showMessageDialog(profissionForm, "Ошибка");
@@ -236,6 +270,7 @@ public class ReadersPageController {
 
         }
         System.out.println("***** END OF SAVING *****");
+        JOptionPane.showMessageDialog(profissionForm, reader.getName() + " " + reader.getSurname() + " сохранен");
 
     }
 }

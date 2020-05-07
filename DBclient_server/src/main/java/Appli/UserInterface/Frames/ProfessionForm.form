@@ -283,7 +283,7 @@
               <text value="Номер группы:"/>
             </properties>
           </component>
-          <component id="90140" class="javax.swing.JTextField" binding="sGroupTextField">
+          <component id="90140" class="javax.swing.JTextField" binding="sFacultyTextField">
             <constraints>
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="200" height="30"/>
@@ -295,7 +295,7 @@
               <font name="Fira Code Medium" size="20"/>
             </properties>
           </component>
-          <component id="3e6ae" class="javax.swing.JTextField" binding="sFacultyTextField">
+          <component id="3e6ae" class="javax.swing.JTextField" binding="sGroupTextField">
             <constraints>
               <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <minimum-size width="200" height="30"/>
@@ -305,6 +305,7 @@
             </constraints>
             <properties>
               <font name="Fira Code Medium" size="20"/>
+              <text value=""/>
             </properties>
           </component>
           <hspacer id="73c86">
