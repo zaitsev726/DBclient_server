@@ -276,7 +276,7 @@ public class ReadersPageController {
 
         }
 
-        if(typeOfSetting.equals("update")){
+        if(typeOfSetting.equals("update") && !(type.getType().equals(reader.getType()))){
             abstractReaderService.delete(type);
         }
         System.out.println("***** END OF SAVING *****");
@@ -294,10 +294,10 @@ public class ReadersPageController {
         update.setId_reader(id_reader);
         System.out.println(type);
         if(changed_param.equals("type") ) {
-            if(!readerService.findById(id_reader).getType().equals(type)) {
+           // if(!readerService.findById(id_reader).getType().equals(type)) {
                 updateProffesionForm.changePanel(type);
                 updateProffesionForm.setVisible(true);
-            }
+           // }
         }else{
             readerService.update(update);
         }
