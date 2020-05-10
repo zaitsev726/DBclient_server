@@ -226,6 +226,7 @@
         <properties>
           <font name="Fira Code Medium" size="20"/>
           <model>
+            <item value="&lt;none&gt;"/>
             <item value="pensioner"/>
             <item value="schoolkid"/>
             <item value="scientist"/>

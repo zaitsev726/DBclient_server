@@ -18,6 +18,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -40,7 +41,8 @@ public class ReadersPageController {
     private AllReader update;
 
     public ReadersPageController(ReadersForm form){
-        cur_type = "pensioner";
+        //cur_type = "pensioner";
+        cur_type = "<none>";
         this.form = form;
         this.profissionForm = new ProfessionForm(this, "save");
         this.searchReadersForm = new SearchReadersForm(this);
@@ -57,7 +59,7 @@ public class ReadersPageController {
         cur_name = "";
         cur_surname = "";
         cur_patronymic = "";
-       // cur_type = "pensioner";
+      //  cur_type = "pensioner";
         cur_lib_id = 0;
         cur_Library = null;
     }
@@ -138,23 +140,28 @@ public class ReadersPageController {
 
         form.addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (cur_type.equals("<none>")) {
+                    JOptionPane.showMessageDialog(form, "Невозможно добавить читателя без профессии");
+                } else {
               /*  if(!(cur_name.equals("") ||
                         cur_surname.equals("") ||
                         cur_patronymic.equals("") ||
                         cur_lib_id == 0 ||
                         cur_type.equals(""))){
-*/              saved = new AllReader();
-                saved.setName(cur_name);
-                saved.setSurname(cur_surname);
-                saved.setPatronymic(cur_patronymic);
-                saved.setId_library(cur_lib_id);
-                saved.setType(cur_type);
-                saved.setLibrary(cur_Library);
+*/
+                    saved = new AllReader();
+                    saved.setName(cur_name);
+                    saved.setSurname(cur_surname);
+                    saved.setPatronymic(cur_patronymic);
+                    saved.setId_library(cur_lib_id);
+                    saved.setType(cur_type);
+                    saved.setLibrary(cur_Library);
 
                     profissionForm.changePanel(cur_type);
                     profissionForm.setVisible(true);
                     System.out.println("saved");
 
+                }
             }
         });
 
@@ -162,7 +169,9 @@ public class ReadersPageController {
             public void actionPerformed(ActionEvent e) {
                 List<AllReader> readers = null;
                 System.out.println("нажат поиск");
-                if(!cur_name.equals("") && !cur_surname.equals("") && !cur_patronymic.equals("")){
+                if(cur_name.equals("") && cur_surname.equals("") && cur_patronymic.equals(""))
+                    readers = readerService.findAll();
+                else if(!cur_name.equals("") && !cur_surname.equals("") && !cur_patronymic.equals("")){
                     readers = readerService.findByNameAndSurnameAndPatronymic(cur_name,cur_surname,cur_patronymic);
                     System.out.println(cur_name);
                     System.out.println(cur_surname);
@@ -182,13 +191,18 @@ public class ReadersPageController {
                 }
                 System.out.println(readers);
                 if(cur_lib_id != 0){
-
+                    if (readers != null) {
+                        readers.removeIf(reader -> reader.getId_library() != cur_lib_id);
+                    }
                 }
-
-                if(!cur_type.equals("")){
-
+                System.out.println(readers);
+                if(!cur_type.equals("<none>")){
+                    if (readers != null) {
+                        readers.removeIf(reader -> !reader.getType().equals(cur_type) );
+                    }
                 }
                 ArrayList<String[]> resultList = new ArrayList<>();
+                System.out.println(readers);
                 if (readers != null) {
                     for(AllReader reader: readers) {
                         resultList.add(new String[]{String.valueOf(reader.getId_reader()), reader.getType(), reader.getName(), reader.getSurname(), reader.getPatronymic(), String.valueOf(reader.getId_library())});
@@ -197,7 +211,7 @@ public class ReadersPageController {
                 searchReadersForm.updateTable(resultList);
                 searchReadersForm.setVisible(true);
 
-               // setStartValues();
+                setStartValues();
             }
         });
     }
@@ -220,6 +234,10 @@ public class ReadersPageController {
         System.out.println(reader);
 
         reader = readerService.save(reader);
+
+
+
+
 
         switch (readerType) {
             case ("pensioner"):

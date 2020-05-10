@@ -68,6 +68,7 @@ public class ProfessionForm extends JFrame {
         initializationListeners();
         this.add(professionPanel);
         currentPanel = pensionerPanel;
+        this.add(currentPanel);
     }
 
     public void changePanel(String type) {
