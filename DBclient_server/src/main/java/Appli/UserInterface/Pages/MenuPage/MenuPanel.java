@@ -11,23 +11,23 @@ public class MenuPanel extends JPanel {
     private final int buttonHeight = 150;
 
     public JButton readersButton;
-    public JButton newGameButton;
+    public JButton librariesButton;
     public JButton netInfoButton;
     private JButton exitButton;
 
     public MenuPanel(int sizeWidth, int sizeHeight) {
         this.setLayout(null);
 
-        readersButton = new JButton("READERS");
-        newGameButton = new JButton("N");
+        readersButton = new JButton("Читатели");
+        librariesButton = new JButton("Библиотеки");
         netInfoButton = new JButton("N");
         exitButton = new JButton("EXIT");
 
         readersButton.setVerticalTextPosition(AbstractButton.CENTER);
         readersButton.setHorizontalTextPosition(AbstractButton.CENTER);
 
-        newGameButton.setVerticalTextPosition(AbstractButton.CENTER);
-        newGameButton.setHorizontalTextPosition(AbstractButton.CENTER);
+        librariesButton.setVerticalTextPosition(AbstractButton.CENTER);
+        librariesButton.setHorizontalTextPosition(AbstractButton.CENTER);
 
         netInfoButton.setVerticalTextPosition(AbstractButton.CENTER);
         netInfoButton.setHorizontalTextPosition(AbstractButton.CENTER);
@@ -44,11 +44,11 @@ public class MenuPanel extends JPanel {
         netInfoButton.setBounds(10,10,100,20);
 
         readersButton.setBounds((sizeWidth - buttonWidth) / 2, (sizeHeight - buttonHeight) / 2 - buttonHeight - 5, buttonWidth, buttonHeight);
-        newGameButton.setBounds((sizeWidth - buttonWidth) / 2, (sizeHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
+        librariesButton.setBounds((sizeWidth - buttonWidth) / 2, (sizeHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
         exitButton.setBounds((sizeWidth - buttonWidth) / 2, (sizeHeight - buttonHeight) / 2 + buttonHeight + 5, buttonWidth, buttonHeight);
 
         this.add(readersButton);
-        this.add(newGameButton);
+        this.add(librariesButton);
         this.add(exitButton);
         this.add(netInfoButton);
 

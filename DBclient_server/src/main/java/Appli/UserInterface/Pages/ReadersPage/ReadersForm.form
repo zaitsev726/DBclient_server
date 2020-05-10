@@ -182,7 +182,7 @@
           <text value="Поиск"/>
         </properties>
       </component>
-      <component id="a59cb" class="javax.swing.JButton" binding="BackButton">
+      <component id="a59cb" class="javax.swing.JButton" binding="backButton">
         <constraints>
           <grid row="8" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
