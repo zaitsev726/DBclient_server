@@ -63,7 +63,7 @@ public class SearchReadersForm extends JFrame {
         getContentPane().add(buttons, "South");
 
         initializationListeners();
-        setVisible(true);
+        //setVisible(true);
     }
 
     private void initializationListeners() {

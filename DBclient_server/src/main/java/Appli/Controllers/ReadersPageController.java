@@ -63,6 +63,9 @@ public class ReadersPageController {
         cur_lib_id = 0;
         cur_Library = null;
     }
+    /**
+     * Функия иницилизирующая листенеры Readers Form
+     */
     private void initializationListeners(){
 
         form.nameTextField.addActionListener(new ActionListener() {
@@ -160,7 +163,7 @@ public class ReadersPageController {
                     profissionForm.changePanel(cur_type);
                     profissionForm.setVisible(true);
                     System.out.println("saved");
-
+                    setStartValues();
                 }
             }
         });
@@ -216,6 +219,13 @@ public class ReadersPageController {
         });
     }
 
+
+    /**
+     * Функция, получающая на вход параметры, введеные из формы профессиий.
+     * @param param Массив параметров, для каждой профессии свой.
+     * @param readerType тип читателя, который необходимо сохранить
+     * @param typeOfSetting тип функции, сохранение или обновление читатетял
+     */
     public synchronized void setParam(ArrayList<String> param, String readerType, String typeOfSetting){
         System.out.println(param);
         System.out.println(readerType);
@@ -234,10 +244,6 @@ public class ReadersPageController {
         System.out.println(reader);
 
         reader = readerService.save(reader);
-
-
-
-
 
         switch (readerType) {
             case ("pensioner"):
@@ -301,6 +307,12 @@ public class ReadersPageController {
         JOptionPane.showMessageDialog(profissionForm, reader.getName() + " " + reader.getSurname() + " сохранен");
     }
 
+    /**
+     * Выполняет роль посредника между сохранением в базу данных и интерфейсом поиска
+     * На вход получает данные, которые изменились в таблице поиска
+     * @param id_reader данные читателя, которые необходимо поменть
+     * @param changed_param параметр, который изменился в интерфейсе поиска.
+     */
     public void queryForUpdate(long id_reader, String type, String name, String surname, String patronymic, long id_library, String changed_param){
 
         update = new AllReader();
@@ -312,6 +324,7 @@ public class ReadersPageController {
         update.setId_reader(id_reader);
         System.out.println(type);
         if(changed_param.equals("type") ) {
+            //убрано для редактирования типа читатетля
            // if(!readerService.findById(id_reader).getType().equals(type)) {
                 updateProffesionForm.changePanel(type);
                 updateProffesionForm.setVisible(true);
