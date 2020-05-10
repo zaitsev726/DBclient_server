@@ -342,7 +342,16 @@ public class ReadersPageController {
             readerService.update(update);
         }
     }
-
+    public void queryForDelete(long id_reader, String type, String name, String surname, String patronymic, long id_library){
+        AllReader reader = new AllReader();
+        reader.setName(name);
+        reader.setSurname(surname);
+        reader.setPatronymic(patronymic);
+        reader.setId_library(id_library);
+        reader.setType(type);
+        reader.setId_reader(id_reader);
+        readerService.delete(reader);
+    }
     public void showCurrentLibrary(long id_library){
         Library library = libraryService.getById(id_library);
         JOptionPane.showMessageDialog(updateProffesionForm,

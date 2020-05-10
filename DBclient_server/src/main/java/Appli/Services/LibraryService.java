@@ -7,6 +7,7 @@ import java.util.List;
 public interface LibraryService {
     void save(Library library);
     void delete(Long id);
+    void update(Library library);
     Library getById(Long id);
     Library editLibrary(Library library);
     List<Library> findAll();

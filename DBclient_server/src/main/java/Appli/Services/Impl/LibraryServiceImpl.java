@@ -45,6 +45,20 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
+    public void update(Library library) {
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.merge(library);
+            em.getTransaction().commit();
+            em.close();
+        }catch (RollbackException e){
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+    }
+
+    @Override
     public Library getById(Long id) {
         EntityManager em = emf.createEntityManager();
         Library library = em.createQuery("select libraries from Library libraries where libraries.id_library = :id", Library.class)

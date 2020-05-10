@@ -1,26 +1,28 @@
 package Appli.Controllers;
 
-import Appli.Entities.AllReader;
 import Appli.Entities.Library;
 import Appli.Services.Impl.LibraryServiceImpl;
 import Appli.Services.LibraryService;
+import Appli.UserInterface.Frames.SearchLibrariesForm;
 import Appli.UserInterface.Pages.Library.LibraryForm;
 
 import javax.persistence.NoResultException;
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryPageController {
 
     private LibraryForm libraryForm;
     private LibraryService libraryService;
-
+    private SearchLibrariesForm searchLibrariesForm;
     private long cur_libID;
     private long cur_hallNum;
 
     public LibraryPageController(LibraryForm form){
         libraryForm = form;
         libraryService = new LibraryServiceImpl();
+        searchLibrariesForm = new SearchLibrariesForm(this);
         initializationListeners();
         setStartValues();
     }
@@ -73,7 +75,7 @@ public class LibraryPageController {
 
         libraryForm.searchButton.addActionListener(e -> {
             List<Library> libraries = null;
-
+            ArrayList<String[]> resultList = new ArrayList<>();
             if(cur_libID == 0 && cur_hallNum == 0){
                 libraries = libraryService.findAll();
             }else if (cur_libID != 0 && cur_hallNum == 0){
@@ -83,13 +85,29 @@ public class LibraryPageController {
             }else{
                 libraries = libraryService.findByIdAndHallNum(cur_libID, cur_hallNum);
             }
-            System.out.println(cur_libID + " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + cur_hallNum);
             System.out.println(libraries);
+            if (libraries.size() > 0) {
+                for(Library library: libraries) {
+                    resultList.add(new String[]{String.valueOf(library.getId_library()),String.valueOf(library.getHalls_num())});
+                }
+                searchLibrariesForm.updateTable(resultList);
+                searchLibrariesForm.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(libraryForm, "Таких библиотек не существует");
+            }
             setStartValues();
         });
 
     }
 
-
+    public void queryForUpdate(long libID, long hallNum){
+        Library library = new Library();
+        library.setId_library(libID);
+        library.setHalls_num(hallNum);
+        libraryService.update(library);
+    }
+    public void queryForDelete(long libID){
+        libraryService.delete(libID);
+    }
 
 }
