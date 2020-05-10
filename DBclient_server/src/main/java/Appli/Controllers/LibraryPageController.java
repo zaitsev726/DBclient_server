@@ -1,9 +1,11 @@
 package Appli.Controllers;
 
+import Appli.Entities.AllReader;
 import Appli.Entities.Library;
 import Appli.Services.Impl.LibraryServiceImpl;
 import Appli.Services.LibraryService;
-import Appli.UserInterface.Frames.SearchLibrariesForm;
+import Appli.UserInterface.Frames.Library.SearchLibrariesForm;
+import Appli.UserInterface.Frames.Library.SearchReadersInLibraryForm;
 import Appli.UserInterface.Pages.Library.LibraryForm;
 
 import javax.persistence.NoResultException;
@@ -63,7 +65,6 @@ public class LibraryPageController {
                     library.setId_library(cur_libID);
                     library.setHalls_num(cur_hallNum);
                     libraryService.save(library);
-                    setStartValues();
                 } else {
                     JOptionPane.showMessageDialog(libraryForm, "Такая библиотека уже существует");
                 }
@@ -71,31 +72,50 @@ public class LibraryPageController {
             else{
                 JOptionPane.showMessageDialog(libraryForm, "Вы ввели не все параметры");
             }
+            setStartValues();
         });
 
         libraryForm.searchButton.addActionListener(e -> {
-            List<Library> libraries = null;
+            List<Library> libraries = new ArrayList<>();
             ArrayList<String[]> resultList = new ArrayList<>();
-            if(cur_libID == 0 && cur_hallNum == 0){
-                libraries = libraryService.findAll();
-            }else if (cur_libID != 0 && cur_hallNum == 0){
-                libraries = libraryService.findById(cur_libID);
-            }else if (cur_libID == 0 && cur_hallNum != 0){
-                libraries = libraryService.findByHallNum(cur_hallNum);
-            }else{
-                libraries = libraryService.findByIdAndHallNum(cur_libID, cur_hallNum);
-            }
-            System.out.println(libraries);
-            if (libraries.size() > 0) {
-                for(Library library: libraries) {
-                    resultList.add(new String[]{String.valueOf(library.getId_library()),String.valueOf(library.getHalls_num())});
+            try {
+                if (cur_libID == 0 && cur_hallNum == 0) {
+                    libraries = libraryService.findAll();
+                } else if (cur_libID != 0 && cur_hallNum == 0) {
+                    libraries.add(libraryService.getById(cur_libID));
+                } else if (cur_libID == 0 && cur_hallNum != 0) {
+                    libraries = libraryService.findByHallNum(cur_hallNum);
+                } else {
+                    libraries = libraryService.findByIdAndHallNum(cur_libID, cur_hallNum);
                 }
-                searchLibrariesForm.updateTable(resultList);
-                searchLibrariesForm.setVisible(true);
-            }else{
-                JOptionPane.showMessageDialog(libraryForm, "Таких библиотек не существует");
+                System.out.println(libraries);
+                if (libraries.size() > 0) {
+                    for (Library library : libraries) {
+                        resultList.add(new String[]{String.valueOf(library.getId_library()), String.valueOf(library.getHalls_num())});
+                    }
+                    searchLibrariesForm.updateTable(resultList);
+                    searchLibrariesForm.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(libraryForm, "Таких библиотек не существует");
+                }
+            }catch (NoResultException ignored){
+                JOptionPane.showMessageDialog(libraryForm, "Библиотек с таким ID не существует");
             }
             setStartValues();
+        });
+
+        libraryForm.readerSearchButton.addActionListener(e -> {
+           if(cur_libID != 0){
+               try {
+                   Library library = libraryService.getById(cur_libID);
+                   System.out.println(library.getReaders());
+                   SearchReadersInLibraryForm searchReadersInLibraryForm = new SearchReadersInLibraryForm((List<AllReader>) library.getReaders());
+               }catch (NoResultException ignored){
+                   JOptionPane.showMessageDialog(libraryForm, "Библиотек с таким ID не существует");
+               }
+           }else {
+               JOptionPane.showMessageDialog(libraryForm, "Введите ID библиотеки");
+           }
         });
 
     }

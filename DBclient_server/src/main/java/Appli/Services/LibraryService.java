@@ -9,9 +9,7 @@ public interface LibraryService {
     void delete(Long id);
     void update(Library library);
     Library getById(Long id);
-    Library editLibrary(Library library);
     List<Library> findAll();
-    List<Library> findById(long id);
     List<Library> findByHallNum(long hallNum);
     List<Library> findByIdAndHallNum(long id, long hallNum);
 }

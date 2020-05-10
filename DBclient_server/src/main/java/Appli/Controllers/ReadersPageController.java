@@ -15,10 +15,7 @@ import Appli.UserInterface.Pages.ReadersPage.ReadersForm;
 
 import javax.persistence.NoResultException;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 

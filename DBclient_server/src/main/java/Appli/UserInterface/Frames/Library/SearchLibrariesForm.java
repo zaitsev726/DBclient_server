@@ -1,4 +1,4 @@
-package Appli.UserInterface.Frames;
+package Appli.UserInterface.Frames.Library;
 
 import Appli.Controllers.LibraryPageController;
 import Appli.Controllers.ReadersPageController;
@@ -28,7 +28,7 @@ public class SearchLibrariesForm extends JFrame {
         backButton = new JButton("Очистить и выйти");
 
         setTitle("Результаты поиска");
-        setSize(300, 300);
+        setSize(400, 300);
 
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(columnsHeader);

@@ -68,10 +68,6 @@ public class LibraryServiceImpl implements LibraryService {
         return library;
     }
 
-    @Override
-    public Library editLibrary(Library library) {
-        return null;
-    }
 
 
     @Override
@@ -82,15 +78,6 @@ public class LibraryServiceImpl implements LibraryService {
         return libraries;
     }
 
-    @Override
-    public List<Library> findById(long id) {
-        EntityManager em = emf.createEntityManager();
-        List<Library> libraries = em.createQuery("select libraries from Library libraries where  libraries.id_library = :id_lib", Library.class)
-                .setParameter("id_lib",id)
-                .getResultList();
-        em.close();
-        return libraries;
-    }
 
     @Override
     public List<Library> findByHallNum(long hallNum) {
