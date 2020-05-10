@@ -10,7 +10,7 @@ import java.util.Collection;
 @Table( name = "libraries")
 public class Library {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+  //  @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_library;
 
     @Column(name = "quantity")

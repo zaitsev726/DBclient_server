@@ -131,30 +131,28 @@ public class ReadersPageController {
             cur_type = str;
         });
 
-        form.addButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (cur_type.equals("<none>")) {
-                    JOptionPane.showMessageDialog(form, "Невозможно добавить читателя без профессии");
-                } else {
-              /*  if(!(cur_name.equals("") ||
-                        cur_surname.equals("") ||
-                        cur_patronymic.equals("") ||
-                        cur_lib_id == 0 ||
-                        cur_type.equals(""))){
+        form.addButton.addActionListener(e -> {
+            if (cur_type.equals("<none>")) {
+                JOptionPane.showMessageDialog(form, "Невозможно добавить читателя без профессии");
+            } else {
+          /*  if(!(cur_name.equals("") ||
+                    cur_surname.equals("") ||
+                    cur_patronymic.equals("") ||
+                    cur_lib_id == 0 ||
+                    cur_type.equals(""))){
 */
-                    saved = new AllReader();
-                    saved.setName(cur_name);
-                    saved.setSurname(cur_surname);
-                    saved.setPatronymic(cur_patronymic);
-                    saved.setId_library(cur_lib_id);
-                    saved.setType(cur_type);
-                    saved.setLibrary(cur_Library);
+                saved = new AllReader();
+                saved.setName(cur_name);
+                saved.setSurname(cur_surname);
+                saved.setPatronymic(cur_patronymic);
+                saved.setId_library(cur_lib_id);
+                saved.setType(cur_type);
+                saved.setLibrary(cur_Library);
 
-                    profissionForm.changePanel(cur_type);
-                    profissionForm.setVisible(true);
-                    System.out.println("saved");
-                    setStartValues();
-                }
+                profissionForm.changePanel(cur_type);
+                profissionForm.setVisible(true);
+                System.out.println("saved");
+                setStartValues();
             }
         });
 

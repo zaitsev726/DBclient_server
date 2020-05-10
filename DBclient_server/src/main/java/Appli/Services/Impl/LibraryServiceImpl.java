@@ -3,12 +3,11 @@ package Appli.Services.Impl;
 import Appli.Entities.AllReader;
 import Appli.Entities.Librarian;
 import Appli.Entities.Library;
+import Appli.Entities.Types.Pensioner;
 import Appli.Services.LibrarianService;
 import Appli.Services.LibraryService;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
 
 public class LibraryServiceImpl implements LibraryService {
@@ -20,13 +19,29 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public Library addLibrary(Library library) {
-        return null;
+    public void save(Library library) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(library);
+        em.getTransaction().commit();
+        em.close();
+        System.out.println(library);
     }
 
     @Override
     public void delete(Long id) {
-
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            Query query = em.createQuery("delete from Library l where l.id_library= :id_lib");
+            query.setParameter("id_lib", id);
+            query.executeUpdate();
+            em.getTransaction().commit();
+            em.close();
+        }catch (RollbackException e){
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
     }
 
     @Override
@@ -44,10 +59,42 @@ public class LibraryServiceImpl implements LibraryService {
         return null;
     }
 
+
     @Override
-    public List<Library> getAll() {
+    public List<Library> findAll() {
         EntityManager em = emf.createEntityManager();
         List<Library> libraries = em.createQuery("select libraries from Library libraries", Library.class).getResultList();
+        em.close();
+        return libraries;
+    }
+
+    @Override
+    public List<Library> findById(long id) {
+        EntityManager em = emf.createEntityManager();
+        List<Library> libraries = em.createQuery("select libraries from Library libraries where  libraries.id_library = :id_lib", Library.class)
+                .setParameter("id_lib",id)
+                .getResultList();
+        em.close();
+        return libraries;
+    }
+
+    @Override
+    public List<Library> findByHallNum(long hallNum) {
+        EntityManager em = emf.createEntityManager();
+        List<Library> libraries = em.createQuery("select libraries from Library libraries where  libraries.halls_num = :hallNum", Library.class)
+                .setParameter("hallNum",hallNum)
+                .getResultList();
+        em.close();
+        return libraries;
+    }
+
+    @Override
+    public List<Library> findByIdAndHallNum(long id, long hallNum) {
+        EntityManager em = emf.createEntityManager();
+        List<Library> libraries = em.createQuery("select libraries from Library libraries where  libraries.id_library = :id_lib and libraries.halls_num = :hall_num", Library.class)
+                .setParameter("id_lib",id)
+                .setParameter("hall_num",hallNum)
+                .getResultList();
         em.close();
         return libraries;
     }

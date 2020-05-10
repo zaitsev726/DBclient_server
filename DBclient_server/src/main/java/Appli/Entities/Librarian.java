@@ -3,10 +3,10 @@ package Appli.Entities;
 import javax.persistence.*;
 import java.util.Collection;
 
-//@Entity
-//@Table(name = "Librarians")
+@Entity
+@Table(name = "Librarians")
 public class Librarian {
-  /*  @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_librarian;
 
@@ -20,9 +20,9 @@ public class Librarian {
     @JoinColumn(name = "id_library", referencedColumnName = "id_library", updatable = false, insertable = false)
     private Library work_library;
 
-    @OneToMany(mappedBy = "librarian", fetch = FetchType.LAZY)
+    /*@OneToMany(mappedBy = "librarian", fetch = FetchType.LAZY)
     private Collection<IssuedBook> issuedBooks;
-
+*/
     public Librarian() { }
 
     public Long getId_librarian() { return id_librarian; }
@@ -39,5 +39,5 @@ public class Librarian {
 
     public Library getWork_library() { return work_library; }
 
-    public void setWork_library(Library work_library) { this.work_library = work_library; }*/
+    public void setWork_library(Library work_library) { this.work_library = work_library; }
 }

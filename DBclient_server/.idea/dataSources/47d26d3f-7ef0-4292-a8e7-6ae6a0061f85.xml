@@ -789,7 +789,7 @@ true posixrules
     <database id="2" parent="1" name="Library_DB">
       <ObjectId>16542</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>2971</IntrospectionStateNumber>
+      <IntrospectionStateNumber>3084</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -846,7 +846,7 @@ true posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>276</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>2972</IntrospectionStateNumber>
+      <IntrospectionStateNumber>3085</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="16" parent="2" name="heap">
@@ -917,9 +917,9 @@ true posixrules
     <language id="26" parent="2" name="plpgsql"/>
     <language id="27" parent="2" name="sql"/>
     <sequence id="28" parent="15" name="allreaders_generator">
-      <ObjectId>25750</ObjectId>
+      <ObjectId>26057</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2958</StateNumber>
+      <StateNumber>3071</StateNumber>
       <SequenceIdentity>0</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>integer|0s</DataType>
@@ -932,190 +932,198 @@ true posixrules
       <CacheSize>1</CacheSize>
       <DataType>bigint|0s</DataType>
     </sequence>
-    <table id="30" parent="15" name="allreaders">
-      <ObjectId>25752</ObjectId>
+    <sequence id="30" parent="15" name="librarians_generator">
+      <ObjectId>25877</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2959</StateNumber>
-    </table>
-    <table id="31" parent="15" name="characteristic">
-      <ObjectId>25715</ObjectId>
+      <StateNumber>3037</StateNumber>
+      <SequenceIdentity>0</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <table id="31" parent="15" name="allreaders">
+      <ObjectId>26059</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2955</StateNumber>
+      <StateNumber>3072</StateNumber>
     </table>
-    <table id="32" parent="15" name="editions">
-      <ObjectId>25735</ObjectId>
+    <table id="32" parent="15" name="characteristic">
+      <ObjectId>26021</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2957</StateNumber>
+      <StateNumber>3068</StateNumber>
     </table>
-    <table id="33" parent="15" name="information">
-      <ObjectId>25710</ObjectId>
+    <table id="33" parent="15" name="editions">
+      <ObjectId>26042</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2955</StateNumber>
+      <StateNumber>3070</StateNumber>
     </table>
-    <table id="34" parent="15" name="issuedbooks">
-      <ObjectId>25823</ObjectId>
+    <table id="34" parent="15" name="information">
+      <ObjectId>26016</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2966</StateNumber>
+      <StateNumber>3068</StateNumber>
     </table>
-    <table id="35" parent="15" name="librarians">
-      <ObjectId>25725</ObjectId>
+    <table id="35" parent="15" name="issuedbooks">
+      <ObjectId>26130</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2956</StateNumber>
+      <StateNumber>3079</StateNumber>
     </table>
-    <table id="36" parent="15" name="libraries">
-      <ObjectId>25705</ObjectId>
+    <table id="36" parent="15" name="librarians">
+      <ObjectId>26031</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2956</StateNumber>
+      <StateNumber>3069</StateNumber>
     </table>
-    <table id="37" parent="15" name="pensioners">
-      <ObjectId>25773</ObjectId>
+    <table id="37" parent="15" name="libraries">
+      <ObjectId>26011</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2961</StateNumber>
+      <StateNumber>3069</StateNumber>
     </table>
-    <table id="38" parent="15" name="rules">
-      <ObjectId>25843</ObjectId>
+    <table id="38" parent="15" name="pensioners">
+      <ObjectId>26080</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2967</StateNumber>
+      <StateNumber>3074</StateNumber>
     </table>
-    <table id="39" parent="15" name="schoolkids">
-      <ObjectId>25783</ObjectId>
+    <table id="39" parent="15" name="rules">
+      <ObjectId>26150</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2962</StateNumber>
+      <StateNumber>3080</StateNumber>
     </table>
-    <table id="40" parent="15" name="scientists">
-      <ObjectId>25813</ObjectId>
+    <table id="40" parent="15" name="schoolkids">
+      <ObjectId>26090</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2965</StateNumber>
+      <StateNumber>3075</StateNumber>
     </table>
-    <table id="41" parent="15" name="students">
-      <ObjectId>25803</ObjectId>
+    <table id="41" parent="15" name="scientists">
+      <ObjectId>26120</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2964</StateNumber>
+      <StateNumber>3078</StateNumber>
     </table>
-    <table id="42" parent="15" name="teachers">
-      <ObjectId>25793</ObjectId>
+    <table id="42" parent="15" name="students">
+      <ObjectId>26110</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2963</StateNumber>
+      <StateNumber>3077</StateNumber>
     </table>
-    <table id="43" parent="15" name="workers">
-      <ObjectId>25763</ObjectId>
+    <table id="43" parent="15" name="teachers">
+      <ObjectId>26100</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>2960</StateNumber>
+      <StateNumber>3076</StateNumber>
     </table>
-    <column id="44" parent="30" name="id_reader">
+    <table id="44" parent="15" name="workers">
+      <ObjectId>26070</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>3073</StateNumber>
+    </table>
+    <column id="45" parent="31" name="id_reader">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2959</StateNumber>
+      <StateNumber>3072</StateNumber>
       <DefaultExpression>nextval(&apos;allreaders_generator&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="45" parent="30" name="type">
+    <column id="46" parent="31" name="type">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
-      <StateNumber>2959</StateNumber>
+      <StateNumber>3072</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="46" parent="30" name="surname">
+    <column id="47" parent="31" name="surname">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2959</StateNumber>
+      <StateNumber>3072</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="47" parent="30" name="name">
+    <column id="48" parent="31" name="name">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2959</StateNumber>
+      <StateNumber>3072</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="48" parent="30" name="patronymic">
+    <column id="49" parent="31" name="patronymic">
       <Position>5</Position>
       <DataType>varchar(50)|0s</DataType>
-      <StateNumber>2959</StateNumber>
+      <StateNumber>3072</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="49" parent="30" name="id_library">
+    <column id="50" parent="31" name="id_library">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2959</StateNumber>
+      <StateNumber>3072</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="50" parent="30" name="allreaders_pkey">
-      <ObjectId>25756</ObjectId>
-      <StateNumber>2959</StateNumber>
+    <index id="51" parent="31" name="allreaders_pkey">
+      <ObjectId>26063</ObjectId>
+      <StateNumber>3072</StateNumber>
       <ColNames>id_reader</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="51" parent="30" name="allreaders_pkey">
-      <ObjectId>25757</ObjectId>
-      <StateNumber>2959</StateNumber>
+    <key id="52" parent="31" name="allreaders_pkey">
+      <ObjectId>26064</ObjectId>
+      <StateNumber>3072</StateNumber>
       <ColNames>id_reader</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>allreaders_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="52" parent="30" name="allreaders_id_library_fkey">
-      <ObjectId>25758</ObjectId>
-      <StateNumber>2959</StateNumber>
+    <foreign-key id="53" parent="31" name="allreaders_id_library_fkey">
+      <ObjectId>26065</ObjectId>
+      <StateNumber>3072</StateNumber>
       <ColNames>id_library</ColNames>
-      <RefTableId>25705</RefTableId>
+      <RefTableId>26011</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>libraries</RefTableName>
       <RefKeyName>libraries_pkey</RefKeyName>
       <RefColNames>id_library</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="53" parent="31" name="id_edition">
+    <column id="54" parent="32" name="id_edition">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2955</StateNumber>
+      <StateNumber>3068</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="54" parent="31" name="type_edition">
+    <column id="55" parent="32" name="type_edition">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2955</StateNumber>
+      <StateNumber>3068</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="55" parent="31" name="author">
+    <column id="56" parent="32" name="author">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2955</StateNumber>
+      <StateNumber>3068</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="56" parent="31" name="title">
+    <column id="57" parent="32" name="title">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2955</StateNumber>
+      <StateNumber>3068</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="57" parent="31" name="characteristic_pkey">
-      <ObjectId>25718</ObjectId>
-      <StateNumber>2955</StateNumber>
+    <index id="58" parent="32" name="characteristic_pkey">
+      <ObjectId>26024</ObjectId>
+      <StateNumber>3068</StateNumber>
       <ColNames>id_edition</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="58" parent="31" name="characteristic_pkey">
-      <ObjectId>25719</ObjectId>
-      <StateNumber>2955</StateNumber>
+    <key id="59" parent="32" name="characteristic_pkey">
+      <ObjectId>26025</ObjectId>
+      <StateNumber>3068</StateNumber>
       <ColNames>id_edition</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>characteristic_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="59" parent="31" name="characteristic_author_title_fkey">
-      <ObjectId>25720</ObjectId>
-      <StateNumber>2955</StateNumber>
+    <foreign-key id="60" parent="32" name="characteristic_author_title_fkey">
+      <ObjectId>26026</ObjectId>
+      <StateNumber>3068</StateNumber>
       <ColNames>author
 title</ColNames>
-      <RefTableId>25710</RefTableId>
+      <RefTableId>26016</RefTableId>
       <RefColPositions>1,2</RefColPositions>
       <RefTableName>information</RefTableName>
       <RefKeyName>information_pkey</RefKeyName>
@@ -1123,660 +1131,661 @@ title</ColNames>
 title</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="60" parent="32" name="id_edition">
+    <column id="61" parent="33" name="id_edition">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2957</StateNumber>
+      <StateNumber>3070</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="61" parent="32" name="id_library">
+    <column id="62" parent="33" name="id_library">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2957</StateNumber>
+      <StateNumber>3070</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="62" parent="32" name="hall_num">
+    <column id="63" parent="33" name="hall_num">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2957</StateNumber>
+      <StateNumber>3070</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="63" parent="32" name="rack_num">
+    <column id="64" parent="33" name="rack_num">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2957</StateNumber>
+      <StateNumber>3070</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="64" parent="32" name="shelf_num">
+    <column id="65" parent="33" name="shelf_num">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2957</StateNumber>
+      <StateNumber>3070</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="65" parent="32" name="date_adding">
+    <column id="66" parent="33" name="date_adding">
       <Position>6</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2957</StateNumber>
+      <StateNumber>3070</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="66" parent="32" name="date_removing">
+    <column id="67" parent="33" name="date_removing">
       <Position>7</Position>
       <DataType>date|0s</DataType>
-      <StateNumber>2957</StateNumber>
+      <StateNumber>3070</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <index id="67" parent="32" name="editions_pkey">
-      <ObjectId>25738</ObjectId>
-      <StateNumber>2957</StateNumber>
+    <index id="68" parent="33" name="editions_pkey">
+      <ObjectId>26045</ObjectId>
+      <StateNumber>3070</StateNumber>
       <ColNames>id_edition</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="68" parent="32" name="editions_pkey">
-      <ObjectId>25739</ObjectId>
-      <StateNumber>2957</StateNumber>
+    <key id="69" parent="33" name="editions_pkey">
+      <ObjectId>26046</ObjectId>
+      <StateNumber>3070</StateNumber>
       <ColNames>id_edition</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>editions_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="69" parent="32" name="editions_id_edition_fkey">
-      <ObjectId>25745</ObjectId>
-      <StateNumber>2957</StateNumber>
+    <foreign-key id="70" parent="33" name="editions_id_edition_fkey">
+      <ObjectId>26052</ObjectId>
+      <StateNumber>3070</StateNumber>
       <ColNames>id_edition</ColNames>
-      <RefTableId>25715</RefTableId>
+      <RefTableId>26021</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>characteristic</RefTableName>
       <RefKeyName>characteristic_pkey</RefKeyName>
       <RefColNames>id_edition</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="70" parent="32" name="editions_id_library_fkey">
-      <ObjectId>25740</ObjectId>
-      <StateNumber>2957</StateNumber>
+    <foreign-key id="71" parent="33" name="editions_id_library_fkey">
+      <ObjectId>26047</ObjectId>
+      <StateNumber>3070</StateNumber>
       <ColNames>id_library</ColNames>
-      <RefTableId>25705</RefTableId>
+      <RefTableId>26011</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>libraries</RefTableName>
       <RefKeyName>libraries_pkey</RefKeyName>
       <RefColNames>id_library</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="71" parent="33" name="author">
+    <column id="72" parent="34" name="author">
       <Position>1</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2954</StateNumber>
+      <StateNumber>3067</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="72" parent="33" name="title">
+    <column id="73" parent="34" name="title">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2954</StateNumber>
+      <StateNumber>3067</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="73" parent="33" name="composition">
+    <column id="74" parent="34" name="composition">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2954</StateNumber>
+      <StateNumber>3067</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="74" parent="33" name="popularity">
+    <column id="75" parent="34" name="popularity">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>2954</StateNumber>
+      <StateNumber>3067</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="75" parent="33" name="information_pkey">
-      <ObjectId>25713</ObjectId>
-      <StateNumber>2954</StateNumber>
+    <index id="76" parent="34" name="information_pkey">
+      <ObjectId>26019</ObjectId>
+      <StateNumber>3067</StateNumber>
       <ColNames>author
 title</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="76" parent="33" name="information_pkey">
-      <ObjectId>25714</ObjectId>
-      <StateNumber>2954</StateNumber>
+    <key id="77" parent="34" name="information_pkey">
+      <ObjectId>26020</ObjectId>
+      <StateNumber>3067</StateNumber>
       <ColNames>author
 title</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>information_pkey</UnderlyingIndexName>
     </key>
-    <column id="77" parent="34" name="id_record">
+    <column id="78" parent="35" name="id_record">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2966</StateNumber>
+      <StateNumber>3079</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="78" parent="34" name="id_reader">
+    <column id="79" parent="35" name="id_reader">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2966</StateNumber>
+      <StateNumber>3079</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="79" parent="34" name="id_edition">
+    <column id="80" parent="35" name="id_edition">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2966</StateNumber>
+      <StateNumber>3079</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="80" parent="34" name="date_extradition">
+    <column id="81" parent="35" name="date_extradition">
       <Position>4</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2966</StateNumber>
+      <StateNumber>3079</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="81" parent="34" name="date_return">
+    <column id="82" parent="35" name="date_return">
       <Position>5</Position>
       <DataType>date|0s</DataType>
-      <StateNumber>2966</StateNumber>
+      <StateNumber>3079</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="82" parent="34" name="is_returned">
+    <column id="83" parent="35" name="is_returned">
       <Position>6</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2966</StateNumber>
+      <StateNumber>3079</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="83" parent="34" name="id_librarian">
+    <column id="84" parent="35" name="id_librarian">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2966</StateNumber>
+      <StateNumber>3079</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="84" parent="34" name="issuedbooks_pkey">
-      <ObjectId>25826</ObjectId>
-      <StateNumber>2966</StateNumber>
+    <index id="85" parent="35" name="issuedbooks_pkey">
+      <ObjectId>26133</ObjectId>
+      <StateNumber>3079</StateNumber>
       <ColNames>id_record</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="85" parent="34" name="issuedbooks_pkey">
-      <ObjectId>25827</ObjectId>
-      <StateNumber>2966</StateNumber>
+    <key id="86" parent="35" name="issuedbooks_pkey">
+      <ObjectId>26134</ObjectId>
+      <StateNumber>3079</StateNumber>
       <ColNames>id_record</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>issuedbooks_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="86" parent="34" name="issuedbooks_id_reader_fkey">
-      <ObjectId>25838</ObjectId>
-      <StateNumber>2966</StateNumber>
+    <foreign-key id="87" parent="35" name="issuedbooks_id_reader_fkey">
+      <ObjectId>26145</ObjectId>
+      <StateNumber>3079</StateNumber>
       <ColNames>id_reader</ColNames>
-      <RefTableId>25752</RefTableId>
+      <RefTableId>26059</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>allreaders</RefTableName>
       <RefKeyName>allreaders_pkey</RefKeyName>
       <RefColNames>id_reader</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="87" parent="34" name="issuedbooks_id_edition_fkey">
-      <ObjectId>25833</ObjectId>
-      <StateNumber>2966</StateNumber>
+    <foreign-key id="88" parent="35" name="issuedbooks_id_edition_fkey">
+      <ObjectId>26140</ObjectId>
+      <StateNumber>3079</StateNumber>
       <ColNames>id_edition</ColNames>
-      <RefTableId>25735</RefTableId>
+      <RefTableId>26042</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>editions</RefTableName>
       <RefKeyName>editions_pkey</RefKeyName>
       <RefColNames>id_edition</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="88" parent="34" name="issuedbooks_id_librarian_fkey">
-      <ObjectId>25828</ObjectId>
-      <StateNumber>2966</StateNumber>
+    <foreign-key id="89" parent="35" name="issuedbooks_id_librarian_fkey">
+      <ObjectId>26135</ObjectId>
+      <StateNumber>3079</StateNumber>
       <ColNames>id_librarian</ColNames>
-      <RefTableId>25725</RefTableId>
+      <RefTableId>26031</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>librarians</RefTableName>
       <RefKeyName>librarians_pkey</RefKeyName>
       <RefColNames>id_librarian</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="89" parent="35" name="id_librarian">
+    <column id="90" parent="36" name="id_librarian">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2956</StateNumber>
+      <StateNumber>3069</StateNumber>
+      <DefaultExpression>nextval(&apos;librarians_generator&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="90" parent="35" name="id_library">
+    <column id="91" parent="36" name="id_library">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2956</StateNumber>
+      <StateNumber>3069</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="91" parent="35" name="hall_num">
+    <column id="92" parent="36" name="hall_num">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2956</StateNumber>
+      <StateNumber>3069</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="92" parent="35" name="librarians_pkey">
-      <ObjectId>25728</ObjectId>
-      <StateNumber>2956</StateNumber>
+    <index id="93" parent="36" name="librarians_pkey">
+      <ObjectId>26035</ObjectId>
+      <StateNumber>3069</StateNumber>
       <ColNames>id_librarian</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="93" parent="35" name="librarians_pkey">
-      <ObjectId>25729</ObjectId>
-      <StateNumber>2956</StateNumber>
+    <key id="94" parent="36" name="librarians_pkey">
+      <ObjectId>26036</ObjectId>
+      <StateNumber>3069</StateNumber>
       <ColNames>id_librarian</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>librarians_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="94" parent="35" name="librarians_id_library_fkey">
-      <ObjectId>25730</ObjectId>
-      <StateNumber>2956</StateNumber>
+    <foreign-key id="95" parent="36" name="librarians_id_library_fkey">
+      <ObjectId>26037</ObjectId>
+      <StateNumber>3069</StateNumber>
       <ColNames>id_library</ColNames>
-      <RefTableId>25705</RefTableId>
+      <RefTableId>26011</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>libraries</RefTableName>
       <RefKeyName>libraries_pkey</RefKeyName>
       <RefColNames>id_library</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="95" parent="36" name="id_library">
+    <column id="96" parent="37" name="id_library">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2953</StateNumber>
+      <StateNumber>3066</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="96" parent="36" name="quantity">
+    <column id="97" parent="37" name="quantity">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2953</StateNumber>
+      <StateNumber>3066</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="97" parent="36" name="libraries_pkey">
-      <ObjectId>25708</ObjectId>
-      <StateNumber>2953</StateNumber>
+    <index id="98" parent="37" name="libraries_pkey">
+      <ObjectId>26014</ObjectId>
+      <StateNumber>3066</StateNumber>
       <ColNames>id_library</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="98" parent="36" name="libraries_pkey">
-      <ObjectId>25709</ObjectId>
-      <StateNumber>2953</StateNumber>
+    <key id="99" parent="37" name="libraries_pkey">
+      <ObjectId>26015</ObjectId>
+      <StateNumber>3066</StateNumber>
       <ColNames>id_library</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>libraries_pkey</UnderlyingIndexName>
     </key>
-    <column id="99" parent="37" name="id_reader">
+    <column id="100" parent="38" name="id_reader">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2961</StateNumber>
+      <StateNumber>3074</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="100" parent="37" name="type">
+    <column id="101" parent="38" name="type">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2961</StateNumber>
+      <StateNumber>3074</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="101" parent="37" name="id_pensioners">
+    <column id="102" parent="38" name="id_pensioners">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2961</StateNumber>
+      <StateNumber>3074</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="102" parent="37" name="pensioners_pkey">
-      <ObjectId>25776</ObjectId>
-      <StateNumber>2961</StateNumber>
+    <index id="103" parent="38" name="pensioners_pkey">
+      <ObjectId>26083</ObjectId>
+      <StateNumber>3074</StateNumber>
       <ColNames>id_reader</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="103" parent="37" name="pensioners_pkey">
-      <ObjectId>25777</ObjectId>
-      <StateNumber>2961</StateNumber>
+    <key id="104" parent="38" name="pensioners_pkey">
+      <ObjectId>26084</ObjectId>
+      <StateNumber>3074</StateNumber>
       <ColNames>id_reader</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>pensioners_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="104" parent="37" name="pensioners_id_reader_fkey">
-      <ObjectId>25778</ObjectId>
-      <StateNumber>2961</StateNumber>
+    <foreign-key id="105" parent="38" name="pensioners_id_reader_fkey">
+      <ObjectId>26085</ObjectId>
+      <StateNumber>3074</StateNumber>
       <ColNames>id_reader</ColNames>
-      <RefTableId>25752</RefTableId>
+      <RefTableId>26059</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>allreaders</RefTableName>
       <RefKeyName>allreaders_pkey</RefKeyName>
       <RefColNames>id_reader</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="105" parent="38" name="id_rule">
+    <column id="106" parent="39" name="id_rule">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2967</StateNumber>
+      <StateNumber>3080</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="106" parent="38" name="id_edition">
+    <column id="107" parent="39" name="id_edition">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2967</StateNumber>
+      <StateNumber>3080</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="107" parent="38" name="rule">
+    <column id="108" parent="39" name="rule">
       <Position>3</Position>
       <DataType>varchar(1000)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2967</StateNumber>
+      <StateNumber>3080</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="108" parent="38" name="rules_pkey">
-      <ObjectId>25849</ObjectId>
-      <StateNumber>2967</StateNumber>
+    <index id="109" parent="39" name="rules_pkey">
+      <ObjectId>26156</ObjectId>
+      <StateNumber>3080</StateNumber>
       <ColNames>id_rule</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="109" parent="38" name="rules_pkey">
-      <ObjectId>25850</ObjectId>
-      <StateNumber>2967</StateNumber>
+    <key id="110" parent="39" name="rules_pkey">
+      <ObjectId>26157</ObjectId>
+      <StateNumber>3080</StateNumber>
       <ColNames>id_rule</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>rules_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="110" parent="38" name="rules_id_edition_fkey">
-      <ObjectId>25851</ObjectId>
-      <StateNumber>2967</StateNumber>
+    <foreign-key id="111" parent="39" name="rules_id_edition_fkey">
+      <ObjectId>26158</ObjectId>
+      <StateNumber>3080</StateNumber>
       <ColNames>id_edition</ColNames>
-      <RefTableId>25735</RefTableId>
+      <RefTableId>26042</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>editions</RefTableName>
       <RefKeyName>editions_pkey</RefKeyName>
       <RefColNames>id_edition</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="111" parent="39" name="id_reader">
+    <column id="112" parent="40" name="id_reader">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2962</StateNumber>
+      <StateNumber>3075</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="112" parent="39" name="type">
+    <column id="113" parent="40" name="type">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2962</StateNumber>
+      <StateNumber>3075</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="113" parent="39" name="id_school">
+    <column id="114" parent="40" name="id_school">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2962</StateNumber>
+      <StateNumber>3075</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="114" parent="39" name="grade">
+    <column id="115" parent="40" name="grade">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2962</StateNumber>
+      <StateNumber>3075</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="115" parent="39" name="schoolkids_pkey">
-      <ObjectId>25786</ObjectId>
-      <StateNumber>2962</StateNumber>
+    <index id="116" parent="40" name="schoolkids_pkey">
+      <ObjectId>26093</ObjectId>
+      <StateNumber>3075</StateNumber>
       <ColNames>id_reader</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="116" parent="39" name="schoolkids_pkey">
-      <ObjectId>25787</ObjectId>
-      <StateNumber>2962</StateNumber>
+    <key id="117" parent="40" name="schoolkids_pkey">
+      <ObjectId>26094</ObjectId>
+      <StateNumber>3075</StateNumber>
       <ColNames>id_reader</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>schoolkids_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="117" parent="39" name="schoolkids_id_reader_fkey">
-      <ObjectId>25788</ObjectId>
-      <StateNumber>2962</StateNumber>
+    <foreign-key id="118" parent="40" name="schoolkids_id_reader_fkey">
+      <ObjectId>26095</ObjectId>
+      <StateNumber>3075</StateNumber>
       <ColNames>id_reader</ColNames>
-      <RefTableId>25752</RefTableId>
+      <RefTableId>26059</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>allreaders</RefTableName>
       <RefKeyName>allreaders_pkey</RefKeyName>
       <RefColNames>id_reader</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="118" parent="40" name="id_reader">
+    <column id="119" parent="41" name="id_reader">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2965</StateNumber>
+      <StateNumber>3078</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="119" parent="40" name="type">
+    <column id="120" parent="41" name="type">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2965</StateNumber>
+      <StateNumber>3078</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="120" parent="40" name="address">
+    <column id="121" parent="41" name="address">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2965</StateNumber>
+      <StateNumber>3078</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="121" parent="40" name="id_university">
+    <column id="122" parent="41" name="id_university">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2965</StateNumber>
+      <StateNumber>3078</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="122" parent="40" name="scientists_pkey">
-      <ObjectId>25816</ObjectId>
-      <StateNumber>2965</StateNumber>
+    <index id="123" parent="41" name="scientists_pkey">
+      <ObjectId>26123</ObjectId>
+      <StateNumber>3078</StateNumber>
       <ColNames>id_reader</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="123" parent="40" name="scientists_pkey">
-      <ObjectId>25817</ObjectId>
-      <StateNumber>2965</StateNumber>
+    <key id="124" parent="41" name="scientists_pkey">
+      <ObjectId>26124</ObjectId>
+      <StateNumber>3078</StateNumber>
       <ColNames>id_reader</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>scientists_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="124" parent="40" name="scientists_id_reader_fkey">
-      <ObjectId>25818</ObjectId>
-      <StateNumber>2965</StateNumber>
+    <foreign-key id="125" parent="41" name="scientists_id_reader_fkey">
+      <ObjectId>26125</ObjectId>
+      <StateNumber>3078</StateNumber>
       <ColNames>id_reader</ColNames>
-      <RefTableId>25752</RefTableId>
+      <RefTableId>26059</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>allreaders</RefTableName>
       <RefKeyName>allreaders_pkey</RefKeyName>
       <RefColNames>id_reader</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="125" parent="41" name="id_reader">
+    <column id="126" parent="42" name="id_reader">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2964</StateNumber>
+      <StateNumber>3077</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="126" parent="41" name="type">
+    <column id="127" parent="42" name="type">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2964</StateNumber>
+      <StateNumber>3077</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="127" parent="41" name="id_university">
+    <column id="128" parent="42" name="id_university">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2964</StateNumber>
+      <StateNumber>3077</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="128" parent="41" name="faculty">
+    <column id="129" parent="42" name="faculty">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2964</StateNumber>
+      <StateNumber>3077</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="129" parent="41" name="id_group">
+    <column id="130" parent="42" name="id_group">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2964</StateNumber>
+      <StateNumber>3077</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="130" parent="41" name="students_pkey">
-      <ObjectId>25806</ObjectId>
-      <StateNumber>2964</StateNumber>
+    <index id="131" parent="42" name="students_pkey">
+      <ObjectId>26113</ObjectId>
+      <StateNumber>3077</StateNumber>
       <ColNames>id_reader</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="131" parent="41" name="students_pkey">
-      <ObjectId>25807</ObjectId>
-      <StateNumber>2964</StateNumber>
+    <key id="132" parent="42" name="students_pkey">
+      <ObjectId>26114</ObjectId>
+      <StateNumber>3077</StateNumber>
       <ColNames>id_reader</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>students_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="132" parent="41" name="students_id_reader_fkey">
-      <ObjectId>25808</ObjectId>
-      <StateNumber>2964</StateNumber>
+    <foreign-key id="133" parent="42" name="students_id_reader_fkey">
+      <ObjectId>26115</ObjectId>
+      <StateNumber>3077</StateNumber>
       <ColNames>id_reader</ColNames>
-      <RefTableId>25752</RefTableId>
+      <RefTableId>26059</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>allreaders</RefTableName>
       <RefKeyName>allreaders_pkey</RefKeyName>
       <RefColNames>id_reader</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="133" parent="42" name="id_reader">
+    <column id="134" parent="43" name="id_reader">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2963</StateNumber>
+      <StateNumber>3076</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="134" parent="42" name="type">
+    <column id="135" parent="43" name="type">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2963</StateNumber>
+      <StateNumber>3076</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="135" parent="42" name="id_university">
+    <column id="136" parent="43" name="id_university">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2963</StateNumber>
+      <StateNumber>3076</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="136" parent="42" name="faculty">
+    <column id="137" parent="43" name="faculty">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2963</StateNumber>
+      <StateNumber>3076</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="137" parent="42" name="teachers_pkey">
-      <ObjectId>25796</ObjectId>
-      <StateNumber>2963</StateNumber>
+    <index id="138" parent="43" name="teachers_pkey">
+      <ObjectId>26103</ObjectId>
+      <StateNumber>3076</StateNumber>
       <ColNames>id_reader</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="138" parent="42" name="teachers_pkey">
-      <ObjectId>25797</ObjectId>
-      <StateNumber>2963</StateNumber>
+    <key id="139" parent="43" name="teachers_pkey">
+      <ObjectId>26104</ObjectId>
+      <StateNumber>3076</StateNumber>
       <ColNames>id_reader</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>teachers_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="139" parent="42" name="teachers_id_reader_fkey">
-      <ObjectId>25798</ObjectId>
-      <StateNumber>2963</StateNumber>
+    <foreign-key id="140" parent="43" name="teachers_id_reader_fkey">
+      <ObjectId>26105</ObjectId>
+      <StateNumber>3076</StateNumber>
       <ColNames>id_reader</ColNames>
-      <RefTableId>25752</RefTableId>
+      <RefTableId>26059</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>allreaders</RefTableName>
       <RefKeyName>allreaders_pkey</RefKeyName>
       <RefColNames>id_reader</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="140" parent="43" name="id_reader">
+    <column id="141" parent="44" name="id_reader">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2960</StateNumber>
+      <StateNumber>3073</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="141" parent="43" name="type">
+    <column id="142" parent="44" name="type">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2960</StateNumber>
+      <StateNumber>3073</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="142" parent="43" name="address">
+    <column id="143" parent="44" name="address">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2960</StateNumber>
+      <StateNumber>3073</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="143" parent="43" name="firm">
+    <column id="144" parent="44" name="firm">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>2960</StateNumber>
+      <StateNumber>3073</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="144" parent="43" name="workers_pkey">
-      <ObjectId>25766</ObjectId>
-      <StateNumber>2960</StateNumber>
+    <index id="145" parent="44" name="workers_pkey">
+      <ObjectId>26073</ObjectId>
+      <StateNumber>3073</StateNumber>
       <ColNames>id_reader</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="145" parent="43" name="workers_pkey">
-      <ObjectId>25767</ObjectId>
-      <StateNumber>2960</StateNumber>
+    <key id="146" parent="44" name="workers_pkey">
+      <ObjectId>26074</ObjectId>
+      <StateNumber>3073</StateNumber>
       <ColNames>id_reader</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>workers_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="146" parent="43" name="workers_id_reader_fkey">
-      <ObjectId>25768</ObjectId>
-      <StateNumber>2960</StateNumber>
+    <foreign-key id="147" parent="44" name="workers_id_reader_fkey">
+      <ObjectId>26075</ObjectId>
+      <StateNumber>3073</StateNumber>
       <ColNames>id_reader</ColNames>
-      <RefTableId>25752</RefTableId>
+      <RefTableId>26059</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>allreaders</RefTableName>
       <RefKeyName>allreaders_pkey</RefKeyName>

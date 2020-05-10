@@ -1,5 +1,6 @@
 package Appli.UserInterface;
 
+import Appli.Controllers.LibraryPageController;
 import Appli.Controllers.ReadersPageController;
 import Appli.UserInterface.Pages.Library.LibraryForm;
 import Appli.UserInterface.Pages.MenuPage.MenuPanel;
@@ -23,6 +24,7 @@ public class InterfaceController {
     private ReadersForm readersForm;
 
     private LibraryForm libraryForm;
+    private LibraryPageController libraryPageController;
 
     public InterfaceController(){
         window = new Appli.UserInterface.Frames.Window(sizeWidth,sizeHeight,locationX,locationY);
@@ -31,7 +33,9 @@ public class InterfaceController {
 
         readersForm = new ReadersForm();
         libraryForm = new LibraryForm();
+
         readersPageController = new ReadersPageController(readersForm);
+        libraryPageController = new LibraryPageController(libraryForm);
 
 
         initializationListeners();

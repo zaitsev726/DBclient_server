@@ -16,14 +16,9 @@ DROP TABLE IF EXISTS Information CASCADE;
 DROP SEQUENCE IF EXISTS AllReaders_generator CASCADE;
 
 
-create sequence Libraries_generator
-    as integer
-    minvalue 0
-    maxvalue 2147483647;
-
 CREATE TABLE Libraries
 (
-    id_library integer not null PRIMARY KEY DEFAULT nextval('Libraries_generator'),
+    id_library integer PRIMARY KEY,
     quantity   integer NOT NULL
 );
 
@@ -172,6 +167,22 @@ insert into Libraries values (2, 4);
 insert into Libraries values (3, 2);
 insert into Libraries values (4, 5);
 insert into Libraries values (5, 3);
+
+insert into Librarians(id_library,hall_num) values (1,1);
+insert into Librarians(id_library,hall_num) values (1,2);
+insert into Librarians(id_library,hall_num) values (1,3);
+insert into Librarians(id_library,hall_num) values (2,1);
+insert into Librarians(id_library,hall_num) values (2,2);
+insert into Librarians(id_library,hall_num) values (2,3);
+insert into Librarians(id_library,hall_num) values (2,4);
+insert into Librarians(id_library,hall_num) values (3,1);
+insert into Librarians(id_library,hall_num) values (3,2);
+insert into Librarians(id_library,hall_num) values (4,1);
+insert into Librarians(id_library,hall_num) values (4,2);
+insert into Librarians(id_library,hall_num) values (4,3);
+insert into Librarians(id_library,hall_num) values (4,4);
+insert into Librarians(id_library,hall_num) values (5,1);
+insert into Librarians(id_library,hall_num) values (5,2);
 
 insert into allreaders(type, surname, name, patronymic, id_library) values ('pensioner', 'Иванов', 'Иван', 'Иванович', 3);
 insert into allreaders(type, surname, name, patronymic, id_library) values ('worker', 'Агафонов', 'Константин', 'Федосеевич', 1);

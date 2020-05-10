@@ -4,18 +4,20 @@ import javax.swing.*;
 
 public class LibraryForm extends JPanel {
     private JLabel libraryJLabel;
-    private JTextField IDTextField;
-    private JButton addButton;
-    private JButton searchButton;
-    private JButton readerSearchButton;
-    private JTextField hallNumTextField;
+    public JTextField IDTextField;
+    public JTextField hallNumTextField;
     private JButton backButton;
     private JLabel idLabel;
     private JLabel hallLabel;
-    private JButton editionButton;
-    private JButton librarianButton;
-    private JPanel libraryPanel;
+
+    public JButton addButton;
+    public JButton searchButton;
+    public JButton editionButton;
+    public JButton librarianButton;
+    public JButton readerSearchButton;
+
     private JButton addNewLibrarianButton;
+    private JPanel libraryPanel;
 
     public LibraryForm(){
         this.add(libraryPanel);
