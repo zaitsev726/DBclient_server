@@ -15,6 +15,7 @@ public class LibraryForm extends JPanel {
     private JButton editionButton;
     private JButton librarianButton;
     private JPanel libraryPanel;
+    private JButton addNewLibrarianButton;
 
     public LibraryForm(){
         this.add(libraryPanel);

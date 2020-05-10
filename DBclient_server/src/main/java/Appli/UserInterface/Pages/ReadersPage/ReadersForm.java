@@ -17,6 +17,7 @@ public class ReadersForm extends JPanel {
     public JButton addButton;
     public JButton searchButton;
     public JButton backButton;
+    public JButton removeButton;
     public JComboBox typeComboBox;
     private JLabel nameLabel;
     private JLabel surnameLabel;

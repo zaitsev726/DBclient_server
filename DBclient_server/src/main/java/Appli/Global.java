@@ -32,7 +32,7 @@ public class Global {
         reader.setPatronymic("Федосеевич");
         reader.setType("pensioner");
         reader.setId_library((long) 1);
-
+       // a.delete(reader);
 
        // SearchReadersForm form = new SearchReadersForm();
         ArrayList<String[]> list = new ArrayList<>();
@@ -82,7 +82,7 @@ public class Global {
 
 
 
-       // a.delete(reader);
+        a.delete(reader);
        // library = b.getById((long) 1);
        // System.out.println(a.findById((long) 1).getLibrary());
         //library = b.getById((long) 1);

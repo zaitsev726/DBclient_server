@@ -68,77 +68,67 @@ public class ReadersPageController {
      */
     private void initializationListeners(){
 
-        form.nameTextField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Отображение введенного текста
-                String name = form.nameTextField.getText();
-                if(!name.equals(cur_name)){
-                    if(Checker.getInstance().checkString(name)){
-                        cur_name = name;
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(form, "Введите корректное имя");
-                    }
+        form.nameTextField.addActionListener(e -> {
+            // Отображение введенного текста
+            String name = form.nameTextField.getText();
+            if(!name.equals(cur_name)){
+                if(Checker.getInstance().checkString(name)){
+                    cur_name = name;
+                }
+                else{
+                    JOptionPane.showMessageDialog(form, "Введите корректное имя");
                 }
             }
         });
 
-        form.surnameTextField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Отображение введенного текста
-                String surname = form.surnameTextField.getText();
-                if(!surname.equals(cur_surname)){
-                    if(Checker.getInstance().checkString(surname)){
-                        cur_surname = surname;
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(form, "Введите корректную фамилию");
-                    }
+        form.surnameTextField.addActionListener(e -> {
+            // Отображение введенного текста
+            String surname = form.surnameTextField.getText();
+            if(!surname.equals(cur_surname)){
+                if(Checker.getInstance().checkString(surname)){
+                    cur_surname = surname;
+                }
+                else{
+                    JOptionPane.showMessageDialog(form, "Введите корректную фамилию");
                 }
             }
         });
 
-        form.patronymicTextField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String patronymic = form.patronymicTextField.getText();
-                if(!patronymic.equals(cur_patronymic)){
-                    if(Checker.getInstance().checkString(patronymic)){
-                        cur_patronymic = patronymic;
+        form.patronymicTextField.addActionListener(e -> {
+            String patronymic = form.patronymicTextField.getText();
+            if(!patronymic.equals(cur_patronymic)){
+                if(Checker.getInstance().checkString(patronymic)){
+                    cur_patronymic = patronymic;
 
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(form, "Введите корректное отчество");
-                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(form, "Введите корректное отчество");
                 }
             }
         });
 
-        form.idTextField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    long id_library = Long.parseLong(form.idTextField.getText());
-                    try{
-                        cur_Library = libraryService.getById(id_library);
-                    }catch (NoResultException exp){
-                        JOptionPane.showMessageDialog(form, "Такой библиотеки не существует");
-                        id_library = 0;
-                    }
-                    cur_lib_id = id_library;
-                }catch (NumberFormatException exception){
-                    JOptionPane.showMessageDialog(form, "Введите корректный номер библиотеки");
-                    cur_Library = null;
-                    cur_lib_id = 0;
+        form.idTextField.addActionListener(e -> {
+            try {
+                long id_library = Long.parseLong(form.idTextField.getText());
+                try{
+                    cur_Library = libraryService.getById(id_library);
+                }catch (NoResultException exp){
+                    JOptionPane.showMessageDialog(form, "Такой библиотеки не существует");
+                    id_library = 0;
                 }
+                cur_lib_id = id_library;
+            }catch (NumberFormatException exception){
+                JOptionPane.showMessageDialog(form, "Введите корректный номер библиотеки");
+                cur_Library = null;
+                cur_lib_id = 0;
             }
         });
 
-        form.typeComboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JComboBox box = (JComboBox) e.getSource();
-                String str = (String) box.getSelectedItem();
-                System.out.println(str);
-                cur_type = str;
-            }
+        form.typeComboBox.addActionListener(e -> {
+            JComboBox box = (JComboBox) e.getSource();
+            String str = (String) box.getSelectedItem();
+            System.out.println(str);
+            cur_type = str;
         });
 
         form.addButton.addActionListener(new ActionListener() {
@@ -168,55 +158,76 @@ public class ReadersPageController {
             }
         });
 
-        form.searchButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                List<AllReader> readers = null;
-                System.out.println("нажат поиск");
-                if(cur_name.equals("") && cur_surname.equals("") && cur_patronymic.equals(""))
-                    readers = readerService.findAll();
-                else if(!cur_name.equals("") && !cur_surname.equals("") && !cur_patronymic.equals("")){
-                    readers = readerService.findByNameAndSurnameAndPatronymic(cur_name,cur_surname,cur_patronymic);
-                    System.out.println(cur_name);
-                    System.out.println(cur_surname);
-                    System.out.println(cur_patronymic);
-                }else if(!cur_name.equals("") && !cur_surname.equals("")){
-                    readers = readerService.findByNameAndSurname(cur_name,cur_surname);
-                }else if(!cur_name.equals("") && !cur_patronymic.equals("")){
-                    readers = readerService.findByNameAndPatronymic(cur_name,cur_patronymic);
-                }else if(!cur_surname.equals("") && !cur_patronymic.equals("")){
-                    readers = readerService.findBySurnameAndPatronymic(cur_surname,cur_patronymic);
-                }else if(!cur_name.equals("")){
-                    readers = readerService.findByName(cur_name);
-                }else if(!cur_surname.equals("")){
-                    readers = readerService.findBySurname(cur_surname);
-                }else if(!cur_patronymic.equals("")){
-                    readers = readerService.findByPatronymic(cur_patronymic);
+        form.removeButton.addActionListener(e -> {
+            // Отображение введенного текста
+            List<AllReader> readers = null;
+            System.out.println("нажато удаление");
+            readers = searchReaders();
+            if (readers.size() > 0) {
+                for(AllReader reader: readers) {
+                    readerService.delete(reader);
                 }
-                System.out.println(readers);
-                if(cur_lib_id != 0){
-                    if (readers != null) {
-                        readers.removeIf(reader -> reader.getId_library() != cur_lib_id);
-                    }
-                }
-                System.out.println(readers);
-                if(!cur_type.equals("<none>")){
-                    if (readers != null) {
-                        readers.removeIf(reader -> !reader.getType().equals(cur_type) );
-                    }
-                }
-                ArrayList<String[]> resultList = new ArrayList<>();
-                System.out.println(readers);
-                if (readers != null) {
-                    for(AllReader reader: readers) {
-                        resultList.add(new String[]{String.valueOf(reader.getId_reader()), reader.getType(), reader.getName(), reader.getSurname(), reader.getPatronymic(), String.valueOf(reader.getId_library())});
-                    }
+            }else{
+                JOptionPane.showMessageDialog(form, "Таких читателей не существует");
+            }
+        });
+
+        form.searchButton.addActionListener(e -> {
+            List<AllReader> readers = null;
+            System.out.println("нажат поиск");
+            readers = searchReaders();
+            ArrayList<String[]> resultList = new ArrayList<>();
+            System.out.println(readers);
+            if (readers.size() > 0) {
+                for(AllReader reader: readers) {
+                    resultList.add(new String[]{String.valueOf(reader.getId_reader()), reader.getType(), reader.getName(), reader.getSurname(), reader.getPatronymic(), String.valueOf(reader.getId_library())});
                 }
                 searchReadersForm.updateTable(resultList);
                 searchReadersForm.setVisible(true);
-
-                setStartValues();
+            }else{
+                JOptionPane.showMessageDialog(form, "Таких читателей не существует");
             }
+
+
+            setStartValues();
         });
+    }
+
+    private List<AllReader> searchReaders(){
+        List<AllReader> readers = null;
+        if(cur_name.equals("") && cur_surname.equals("") && cur_patronymic.equals(""))
+            readers = readerService.findAll();
+        else if(!cur_name.equals("") && !cur_surname.equals("") && !cur_patronymic.equals("")){
+            readers = readerService.findByNameAndSurnameAndPatronymic(cur_name,cur_surname,cur_patronymic);
+            System.out.println(cur_name);
+            System.out.println(cur_surname);
+            System.out.println(cur_patronymic);
+        }else if(!cur_name.equals("") && !cur_surname.equals("")){
+            readers = readerService.findByNameAndSurname(cur_name,cur_surname);
+        }else if(!cur_name.equals("") && !cur_patronymic.equals("")){
+            readers = readerService.findByNameAndPatronymic(cur_name,cur_patronymic);
+        }else if(!cur_surname.equals("") && !cur_patronymic.equals("")){
+            readers = readerService.findBySurnameAndPatronymic(cur_surname,cur_patronymic);
+        }else if(!cur_name.equals("")){
+            readers = readerService.findByName(cur_name);
+        }else if(!cur_surname.equals("")){
+            readers = readerService.findBySurname(cur_surname);
+        }else if(!cur_patronymic.equals("")){
+            readers = readerService.findByPatronymic(cur_patronymic);
+        }
+        System.out.println(readers);
+        if(cur_lib_id != 0){
+            if (readers != null) {
+                readers.removeIf(reader -> reader.getId_library() != cur_lib_id);
+            }
+        }
+        System.out.println(readers);
+        if(!cur_type.equals("<none>")){
+            if (readers != null) {
+                readers.removeIf(reader -> !reader.getType().equals(cur_type) );
+            }
+        }
+        return readers;
     }
 
 

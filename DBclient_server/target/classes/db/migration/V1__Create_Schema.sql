@@ -16,9 +16,14 @@ DROP TABLE IF EXISTS Information CASCADE;
 DROP SEQUENCE IF EXISTS AllReaders_generator CASCADE;
 
 
+create sequence Libraries_generator
+    as integer
+    minvalue 0
+    maxvalue 2147483647;
+
 CREATE TABLE Libraries
 (
-    id_library integer PRIMARY KEY,
+    id_library integer not null PRIMARY KEY DEFAULT nextval('Libraries_generator'),
     quantity   integer NOT NULL
 );
 
@@ -41,9 +46,14 @@ CREATE TABLE Characteristic
     FOREIGN KEY (author, title) REFERENCES Information (author, title) ON DELETE CASCADE
 );
 
+create sequence Librarians_generator
+    as integer
+    minvalue 0
+    maxvalue 2147483647;
+
 CREATE TABLE Librarians
 (
-    id_librarian integer PRIMARY KEY,
+    id_librarian integer not null PRIMARY KEY DEFAULT nextval('Librarians_generator'),
     id_library   integer NOT NULL,
     hall_num     integer NOT NULL,
     FOREIGN KEY (id_library) REFERENCES Libraries (id_library) ON DELETE CASCADE
