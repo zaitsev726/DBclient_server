@@ -1,6 +1,7 @@
 package Appli.UserInterface.Frames.Library;
 
 import Appli.Controllers.LibraryPageController;
+import Appli.Entities.Librarian;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class SearchLibrariansForm extends JFrame {
     private JTable resultTable;
     private DefaultTableModel tableModel;
-    private ArrayList<String[]> currentLibraries;
+    private ArrayList<String[]> currentLibrarians;
 
     private LibraryPageController controller;
     private JButton removeRowButton;
@@ -22,7 +23,7 @@ public class SearchLibrariansForm extends JFrame {
     private final Object[] columnsHeader = new String[]{"ID работника", "ID библиотеки", "Норер зала"};
 
     public SearchLibrariansForm(LibraryPageController controller) {
-        currentLibraries = new ArrayList<>();
+        currentLibrarians = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
         addRowButton = new JButton("Добавить работника");
@@ -64,7 +65,7 @@ public class SearchLibrariansForm extends JFrame {
                     JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
                 } else if (row >= 0) {
                     try {
-                        controller.queryForUpdateLibrary(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 1))));
+                        controller.queryForUpdateLibrarian(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 1))),Long.parseLong(String.valueOf(tableModel.getValueAt(row, 2))));
                     } catch (ArrayIndexOutOfBoundsException ignored) {
                     }
                 }
@@ -75,13 +76,27 @@ public class SearchLibrariansForm extends JFrame {
             // Номер выделенной строки
             int row = resultTable.getSelectedRow();
             // Удаление выделенной строки
-            controller.queryForDeleteLibrary(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))));
+            controller.queryForDeleteLibrarian(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))));
             tableModel.removeRow(row);
+        });
+
+        addRowButton.addActionListener(e -> {
+            // Номер выделенной строки
+            int idx = resultTable.getSelectedRow();
+            // Вставка новой строки после выделенной
+            if(idx < 0)
+                idx = 0;
+
+            int library = Integer.parseInt(String.valueOf(resultTable.getValueAt(idx, 1)));
+            Librarian librarian = controller.queryForInsertLibrarian(library,1);
+            tableModel.insertRow(idx + 1, new String[] {
+                    String.valueOf(librarian.getId_librarian()),
+                    String.valueOf(library), "1"});
         });
 
         backButton.addActionListener(e -> {
             tableModel.setRowCount(0);
-            currentLibraries = new ArrayList<>();
+            currentLibrarians = new ArrayList<>();
             this.dispose();
         });
     }
@@ -89,7 +104,7 @@ public class SearchLibrariansForm extends JFrame {
     public void updateTable(ArrayList<String[]> array) {
         for (String[] row : array) {
             boolean adding = true;
-            for (String[] cur : currentLibraries) {
+            for (String[] cur : currentLibrarians) {
                 if (cur[0].equals(row[0])) {
                     adding = false;
                     break;
@@ -97,7 +112,7 @@ public class SearchLibrariansForm extends JFrame {
             }
             if (adding) {
                 tableModel.addRow(row);
-                currentLibraries.add(row);
+                currentLibrarians.add(row);
             }
         }
     }

@@ -14,12 +14,13 @@ public class LibrarianServiceImpl implements LibrarianService {
     }
 
     @Override
-    public void save(Librarian librarian) {
+    public Librarian save(Librarian librarian) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(librarian);
+        librarian = em.merge(librarian);
         em.getTransaction().commit();
         em.close();
+        return librarian;
     }
 
     @Override

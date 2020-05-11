@@ -1,8 +1,11 @@
 package Appli.Controllers;
 
 import Appli.Entities.AllReader;
+import Appli.Entities.Librarian;
 import Appli.Entities.Library;
+import Appli.Services.Impl.LibrarianServiceImpl;
 import Appli.Services.Impl.LibraryServiceImpl;
+import Appli.Services.LibrarianService;
 import Appli.Services.LibraryService;
 import Appli.UserInterface.Frames.Library.SearchLibrariansForm;
 import Appli.UserInterface.Frames.Library.SearchLibrariesForm;
@@ -18,14 +21,17 @@ public class LibraryPageController {
 
     private LibraryForm libraryForm;
     private LibraryService libraryService;
+    private LibrarianService librarianService;
     private SearchLibrariesForm searchLibrariesForm;
     private SearchLibrariansForm searchLibrariansForm;
+
     private long cur_libID;
     private long cur_hallNum;
 
     public LibraryPageController(LibraryForm form){
         libraryForm = form;
         libraryService = new LibraryServiceImpl();
+        librarianService = new LibrarianServiceImpl();
         searchLibrariesForm = new SearchLibrariesForm(this);
         searchLibrariansForm = new SearchLibrariansForm(this);
         initializationListeners();
@@ -126,14 +132,15 @@ public class LibraryPageController {
                 try {
                     Library library = libraryService.getLibrarians(cur_libID);
                     System.out.println(library.getReaders());
-                    if (libraries.size() > 0) {
-                        for (Library library : libraries) {
-                            resultList.add(new String[]{String.valueOf(library.getId_library()), String.valueOf(library.getHalls_num())});
+                    ArrayList<String[]> resultList = new ArrayList<>();
+                    if (library.getLibrarians().size() > 0) {
+                        for (Librarian librarian : library.getLibrarians()) {
+                            resultList.add(new String[]{String.valueOf(librarian.getId_librarian()), String.valueOf(librarian.getId_library()), String.valueOf(librarian.getHall_num())});
                         }
                         searchLibrariansForm.updateTable(resultList);
                         searchLibrariansForm.setVisible(true);
                     } else {
-                        JOptionPane.showMessageDialog(libraryForm, "Таких библиотек не существует");
+                        JOptionPane.showMessageDialog(libraryForm, "В такой библиотеке нет работников");
                     }
                 }catch (NoResultException ignored){
                     JOptionPane.showMessageDialog(libraryForm, "Библиотек с таким ID не существует");
@@ -155,5 +162,23 @@ public class LibraryPageController {
         libraryService.delete(libID);
     }
 
+    public void queryForUpdateLibrarian(long librarianID,long libID, long hallNum){
+        Librarian librarian = new Librarian();
+        librarian.setId_librarian(librarianID);
+        librarian.setId_library(libID);
+        librarian.setHall_num(hallNum);
+        librarianService.update(librarian);
+    }
+    public void queryForDeleteLibrarian(long librarianID){
+        librarianService.delete(librarianID);
+    }
+
+    public Librarian queryForInsertLibrarian(long libID, long hallNum){
+        Librarian librarian = new Librarian();
+        librarian.setId_library(libID);
+        librarian.setHall_num(hallNum);
+        librarian = librarianService.save(librarian);
+        return librarian;
+    }
 
 }

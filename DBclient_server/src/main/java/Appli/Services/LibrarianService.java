@@ -5,7 +5,7 @@ import Appli.Entities.Librarian;
 import java.util.List;
 
 public interface LibrarianService {
-    void save(Librarian librarian);
+    Librarian save(Librarian librarian);
     void update(Librarian librarian);
     void delete(long id);
     List<Librarian> findAll();

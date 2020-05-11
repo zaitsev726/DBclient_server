@@ -44,7 +44,7 @@ CREATE TABLE Characteristic
 
 create sequence Librarians_generator
     as integer
-    minvalue 0
+    minvalue 1
     maxvalue 2147483647;
 
 CREATE TABLE Librarians
