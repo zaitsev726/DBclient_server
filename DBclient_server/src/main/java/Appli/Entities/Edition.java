@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 
-//@Entity
-//@Table (name = "editions")
+@Entity
+@Table (name = "editions")
 public class Edition {
-    /*@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_edition")
     private Long id_edition;         //номер книги в библиотеке (в сети библиотек)
@@ -34,7 +34,7 @@ public class Edition {
     @JoinColumn(name = "id_library", referencedColumnName = "id_library")
     private Library book_library;
 
-    @OneToMany(mappedBy = "edition", fetch = FetchType.LAZY)
+ /*   @OneToMany(mappedBy = "edition", fetch = FetchType.LAZY)
     private Collection<IssuedBook> records;
 
     @OneToMany(mappedBy = "edition", fetch = FetchType.LAZY)
@@ -43,7 +43,7 @@ public class Edition {
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_edition", referencedColumnName = "id_edition")
     private Characteristic characteristic;
-
+*/
     public Edition(){}
 
     public Long getId_edition() {
@@ -115,5 +115,5 @@ public class Edition {
 
              re += date_removing == null?"такой даты нет" + ' ' + '}':date_removing.toString() + ' ' + '}';
              return  re;
-    }*/
+    }
 }
