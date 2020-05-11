@@ -7,12 +7,13 @@ import java.awt.event.ActionListener;
 import static java.lang.System.exit;
 
 public class MenuPanel extends JPanel {
-    private final int buttonWidth = 1000;
-    private final int buttonHeight = 150;
+    private final int buttonWidth = 300;
+    private final int buttonHeight = 100;
 
     public JButton readersButton;
     public JButton librariesButton;
     public JButton netInfoButton;
+    public JButton editionsButton;
     private JButton exitButton;
 
     public MenuPanel(int sizeWidth, int sizeHeight) {
@@ -20,7 +21,8 @@ public class MenuPanel extends JPanel {
 
         readersButton = new JButton("Читатели");
         librariesButton = new JButton("Библиотеки");
-        netInfoButton = new JButton("N");
+        editionsButton = new JButton("Издания");
+        netInfoButton = new JButton("12312312312321123");
         exitButton = new JButton("EXIT");
 
         readersButton.setVerticalTextPosition(AbstractButton.CENTER);
@@ -28,6 +30,9 @@ public class MenuPanel extends JPanel {
 
         librariesButton.setVerticalTextPosition(AbstractButton.CENTER);
         librariesButton.setHorizontalTextPosition(AbstractButton.CENTER);
+
+        editionsButton.setVerticalTextPosition(AbstractButton.CENTER);
+        editionsButton.setHorizontalTextPosition(AbstractButton.CENTER);
 
         netInfoButton.setVerticalTextPosition(AbstractButton.CENTER);
         netInfoButton.setHorizontalTextPosition(AbstractButton.CENTER);
@@ -43,12 +48,14 @@ public class MenuPanel extends JPanel {
 
         netInfoButton.setBounds(10,10,100,20);
 
-        readersButton.setBounds((sizeWidth - buttonWidth) / 2, (sizeHeight - buttonHeight) / 2 - buttonHeight - 5, buttonWidth, buttonHeight);
-        librariesButton.setBounds((sizeWidth - buttonWidth) / 2, (sizeHeight - buttonHeight) / 2, buttonWidth, buttonHeight);
-        exitButton.setBounds((sizeWidth - buttonWidth) / 2, (sizeHeight - buttonHeight) / 2 + buttonHeight + 5, buttonWidth, buttonHeight);
+        readersButton.setBounds((sizeWidth - buttonWidth) / 2, (sizeHeight-buttonWidth)/2 - 5 - 2*buttonHeight - 5, buttonWidth, buttonHeight);
+        librariesButton.setBounds((sizeWidth - buttonWidth) / 2, (sizeHeight/2) - 5 - buttonWidth, buttonWidth, buttonHeight);
+        editionsButton.setBounds((sizeWidth - buttonWidth) / 2, (sizeHeight/2) + 5 + buttonWidth, buttonWidth,buttonHeight);
+        exitButton.setBounds((sizeWidth - buttonWidth) / 2, (sizeHeight-buttonWidth)/2 + 5 + 2*buttonHeight + 5, buttonWidth, buttonHeight);
 
         this.add(readersButton);
         this.add(librariesButton);
+        this.add(editionsButton);
         this.add(exitButton);
         this.add(netInfoButton);
 

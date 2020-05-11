@@ -10,7 +10,7 @@ import Appli.Services.LibraryService;
 import Appli.UserInterface.Frames.Library.SearchLibrariansForm;
 import Appli.UserInterface.Frames.Library.SearchLibrariesForm;
 import Appli.UserInterface.Frames.Library.SearchReadersInLibraryForm;
-import Appli.UserInterface.Pages.Library.LibraryForm;
+import Appli.UserInterface.Pages.LibraryPage.LibraryForm;
 
 import javax.persistence.NoResultException;
 import javax.swing.*;

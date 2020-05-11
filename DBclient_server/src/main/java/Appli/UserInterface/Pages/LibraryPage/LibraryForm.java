@@ -1,4 +1,4 @@
-package Appli.UserInterface.Pages.Library;
+package Appli.UserInterface.Pages.LibraryPage;
 
 import javax.swing.*;
 
@@ -6,7 +6,6 @@ public class LibraryForm extends JPanel {
     private JLabel libraryJLabel;
     public JTextField IDTextField;
     public JTextField hallNumTextField;
-    private JButton backButton;
     private JLabel idLabel;
     private JLabel hallLabel;
 
@@ -15,6 +14,7 @@ public class LibraryForm extends JPanel {
     public JButton editionButton;
     public JButton librariansButton;
     public JButton readerSearchButton;
+    public JButton backButton;
 
     private JPanel libraryPanel;
 
