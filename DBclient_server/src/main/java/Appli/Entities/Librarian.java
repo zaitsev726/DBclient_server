@@ -7,7 +7,8 @@ import java.util.Collection;
 @Table(name = "Librarians")
 public class Librarian {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "librarian_generator", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "librarian_generator", sequenceName = "Librarians_generator", allocationSize = 1)
     private Long id_librarian;
 
     @Column
@@ -40,4 +41,14 @@ public class Librarian {
     public Library getWork_library() { return work_library; }
 
     public void setWork_library(Library work_library) { this.work_library = work_library; }
+
+    @Override
+    public String toString() {
+        return "Librarian{" +
+                "id_librarian=" + id_librarian +
+                ", id_library=" + id_library +
+                ", hall_num=" + hall_num +
+                ", work_library=" + work_library +
+                '}';
+    }
 }

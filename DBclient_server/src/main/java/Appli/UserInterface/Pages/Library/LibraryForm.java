@@ -13,10 +13,9 @@ public class LibraryForm extends JPanel {
     public JButton addButton;
     public JButton searchButton;
     public JButton editionButton;
-    public JButton librarianButton;
+    public JButton librariansButton;
     public JButton readerSearchButton;
 
-    private JButton addNewLibrarianButton;
     private JPanel libraryPanel;
 
     public LibraryForm(){

@@ -8,7 +8,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-public class SearchLibrariesForm extends JFrame {
+public class SearchLibrariansForm extends JFrame {
     private JTable resultTable;
     private DefaultTableModel tableModel;
     private ArrayList<String[]> currentLibraries;
@@ -16,14 +16,16 @@ public class SearchLibrariesForm extends JFrame {
     private LibraryPageController controller;
     private JButton removeRowButton;
     private JButton backButton;
+    private JButton addRowButton;
 
     // Заголовки столбцов
-    private final Object[] columnsHeader = new String[]{"ID библиотеки", "Кол-во залов"};
+    private final Object[] columnsHeader = new String[]{"ID работника", "ID библиотеки", "Норер зала"};
 
-    public SearchLibrariesForm(LibraryPageController controller) {
+    public SearchLibrariansForm(LibraryPageController controller) {
         currentLibraries = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
+        addRowButton = new JButton("Добавить работника");
         backButton = new JButton("Очистить и выйти");
 
         setTitle("Результаты поиска");
@@ -42,6 +44,7 @@ public class SearchLibrariesForm extends JFrame {
 
         JPanel buttons = new JPanel();
         buttons.add(removeRowButton);
+        buttons.add(addRowButton);
         buttons.add(backButton);
         getContentPane().add(buttons, "South");
 
@@ -67,7 +70,6 @@ public class SearchLibrariesForm extends JFrame {
                 }
             }
         });
-
 
         removeRowButton.addActionListener(e -> {
             // Номер выделенной строки

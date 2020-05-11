@@ -64,11 +64,21 @@ public class LibraryServiceImpl implements LibraryService {
         Library library = em.createQuery("select libraries from Library libraries where libraries.id_library = :id", Library.class)
                 .setParameter("id", id)
                 .getSingleResult();
+       // System.out.println(library.getLibrarians());
         em.close();
         return library;
     }
 
-
+    @Override
+    public Library getLibrarians(Long id) {
+        EntityManager em = emf.createEntityManager();
+        Library library = em.createQuery("select libraries from Library libraries where libraries.id_library = :id", Library.class)
+                .setParameter("id", id)
+                .getSingleResult();
+        System.out.println(library.getLibrarians());
+        em.close();
+        return library;
+    }
 
     @Override
     public List<Library> findAll() {

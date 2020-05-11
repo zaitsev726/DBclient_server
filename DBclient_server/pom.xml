@@ -66,6 +66,11 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>forms_rt</artifactId>
+            <version>6.0.5</version>
+        </dependency>
 
     </dependencies>
 

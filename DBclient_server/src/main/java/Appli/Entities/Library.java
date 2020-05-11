@@ -19,10 +19,10 @@ public class Library {
 
     @OneToMany(mappedBy = "library", fetch = FetchType.EAGER)
     private Collection<AllReader> readers;
-/*
+
     @OneToMany(mappedBy = "work_library", fetch = FetchType.LAZY)
     private Collection<Librarian> librarians;
-
+/*
     @OneToMany(mappedBy = "book_library", fetch = FetchType.LAZY)
     private Collection<Edition> editions;
 */
@@ -41,7 +41,15 @@ public class Library {
     public Collection<AllReader> getReaders() {
         return readers; }
 
-   public void setReaders(Collection<AllReader> readers) { this.readers = readers; }
+    public Collection<Librarian> getLibrarians() {
+        return librarians;
+    }
+
+    public void setLibrarians(Collection<Librarian> librarians) {
+        this.librarians = librarians;
+    }
+
+    public void setReaders(Collection<AllReader> readers) { this.readers = readers; }
 
     @Override
     public String toString() {
