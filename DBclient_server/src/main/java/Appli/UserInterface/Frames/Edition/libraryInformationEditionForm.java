@@ -23,7 +23,7 @@ public class libraryInformationEditionForm extends JFrame {
     public libraryInformationEditionForm(EditionsPageController controller){
         this.controller = controller;
         setSize(400, 400);
-        this.add(informationPanel)
+        this.add(informationPanel);
         setVisible(true);
         setTitle("Информация о издании");
     }
