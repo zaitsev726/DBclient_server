@@ -1,7 +1,9 @@
 package Appli.UserInterface;
 
+import Appli.Controllers.EditionsPageController;
 import Appli.Controllers.LibraryPageController;
 import Appli.Controllers.ReadersPageController;
+import Appli.UserInterface.Pages.EditionPage.EditionForm;
 import Appli.UserInterface.Pages.LibraryPage.LibraryForm;
 import Appli.UserInterface.Pages.MenuPage.MenuForm;
 import Appli.UserInterface.Pages.MenuPage.MenuPanel;
@@ -25,6 +27,9 @@ public class InterfaceController {
     private LibraryForm libraryForm;
     private LibraryPageController libraryPageController;
 
+    private EditionsPageController editionsPageController;
+    private EditionForm editionForm;
+
     public InterfaceController(){
         window = new Appli.UserInterface.Frames.Window(sizeWidth,sizeHeight,locationX,locationY);
 
@@ -33,10 +38,11 @@ public class InterfaceController {
 
         readersForm = new ReadersForm();
         libraryForm = new LibraryForm();
+        editionForm = new EditionForm();
 
         readersPageController = new ReadersPageController(readersForm);
         libraryPageController = new LibraryPageController(libraryForm);
-
+        editionsPageController = new EditionsPageController(editionForm);
 
         initializationListeners();
 
@@ -63,6 +69,13 @@ public class InterfaceController {
             window.repaint();
         });
 
+        menuForm.editionsButton.addActionListener(e -> {
+            window.remove(menuForm);
+            window.add(editionForm);
+            window.revalidate();
+            window.repaint();
+        });
+
         readersForm.backButton.addActionListener(e -> {
             window.remove(readersForm);
             window.add(menuForm);
@@ -76,7 +89,6 @@ public class InterfaceController {
             window.revalidate();
             window.repaint();
         });
-
     }
 
 
