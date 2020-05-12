@@ -2,13 +2,15 @@ package Appli.Entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "characteristic")
 public class Characteristic {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "characteristic_generator", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "characteristic_generator", sequenceName = "Characteristics_generator", allocationSize = 1)
     private Long id_edition;
 
     @Column
@@ -22,14 +24,11 @@ public class Characteristic {
 
   /*  @OneToOne(optional = false, mappedBy = "characteristic")
     private Edition edition;
+    */
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    private List<Information> information = new ArrayList<>();
-*/
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "edition")
+    private Collection<Information> information;
+
 
     public Long getId_edition() {
         return id_edition;
@@ -67,7 +66,7 @@ public class Characteristic {
 
    // public void setEdition(Edition edition) { this.edition = edition; }
 
-    //public List<Information> getInformation() { return information; }
+    public Collection<Information> getInformation() { return information; }
 
-    //public void setInformation(List<Information> information) { this.information = information; }
+    public void setInformation(Collection<Information> information) { this.information = information; }
 }

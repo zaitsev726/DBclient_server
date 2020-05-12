@@ -47,12 +47,12 @@ CREATE TABLE Characteristic
 
 CREATE TABLE Information
 (
-    id_information integer not null DEFAULT nextval('Information_generator'),
+    id_record integer not null DEFAULT nextval('Information_generator'),
     id_edition  integer not null,
     author      VARCHAR(150),
     composition VARCHAR(150) NOT NULL,
     popularity  integer,
-    PRIMARY KEY (id_edition, id_information),
+    PRIMARY KEY (id_edition, id_record),
     FOREIGN KEY (id_edition) REFERENCES Characteristic(id_edition) ON DELETE CASCADE
 );
 
