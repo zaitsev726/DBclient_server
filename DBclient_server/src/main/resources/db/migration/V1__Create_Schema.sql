@@ -15,6 +15,8 @@ DROP TABLE IF EXISTS Characteristic CASCADE;
 DROP TABLE IF EXISTS Information CASCADE;
 DROP SEQUENCE IF EXISTS AllReaders_generator CASCADE;
 DROP SEQUENCE IF EXISTS Librarians_generator CASCADE;
+DROP SEQUENCE IF EXISTS Characteristics_generator CASCADE;
+DROP SEQUENCE IF EXISTS Information_generator CASCADE;
 
 
 CREATE TABLE Libraries
@@ -23,23 +25,35 @@ CREATE TABLE Libraries
     quantity   integer NOT NULL
 );
 
+create sequence Information_generator
+    as integer
+    minvalue 1
+    maxvalue 2147483647;
 
-CREATE TABLE Information
-(
-    author      VARCHAR(50),
-    title       VARCHAR(50),
-    composition VARCHAR(50) NOT NULL,
-    popularity  integer,
-    PRIMARY KEY (author, title)
-);
+
+create sequence Characteristics_generator
+    as integer
+    minvalue 1
+    maxvalue 2147483647;
 
 CREATE TABLE Characteristic
 (
-    id_edition   integer PRIMARY KEY,
+    id_edition   integer not null PRIMARY KEY DEFAULT nextval('Characteristics_generator'),
     type_edition VARCHAR(50) NOT NULL,
-    author       VARCHAR(50) NOT NULL,
-    title        VARCHAR(50) NOT NULL,
-    FOREIGN KEY (author, title) REFERENCES Information (author, title) ON DELETE CASCADE
+    author       VARCHAR(150) NOT NULL,
+    title        VARCHAR(150) NOT NULL
+    --FOREIGN KEY (author, title) REFERENCES Information (id_information)  ON DELETE CASCADE
+);
+
+CREATE TABLE Information
+(
+    id_information integer not null DEFAULT nextval('Information_generator'),
+    id_edition  integer not null,
+    author      VARCHAR(150),
+    composition VARCHAR(150) NOT NULL,
+    popularity  integer,
+    PRIMARY KEY (id_edition, id_information),
+    FOREIGN KEY (id_edition) REFERENCES Characteristic(id_edition) ON DELETE CASCADE
 );
 
 create sequence Librarians_generator
@@ -313,3 +327,79 @@ insert into scientists values (57, 'scientist','г. Омутинский, ул. 
 insert into scientists values (58, 'scientist','г. Омутинский, ул. Шлиссельбургский пр-кт, дом 21',18543);
 insert into scientists values (59, 'scientist','г. Омутинский, ул. Шлиссельбургский пр-кт, дом 21',18543);
 insert into scientists values (60, 'scientist','г. Омутинский, ул. Шлиссельбургский пр-кт, дом 21',18543);
+
+insert into Characteristic(type_edition,author,title) values ('Сборник','Чуковский','Сборник стихотворений А.С.Пушкина');
+insert into Characteristic(type_edition,author,title) values ('Сборник','Гудзий','Сборник сочинений А.С.Пушкина');
+insert into Characteristic(type_edition,author,title) values ('Сборник','Псков','Сборник стихотворений А.С.Пушкина');
+insert into Characteristic(type_edition,author,title) values ('Сборник','Неизвестно','Сборник поэм и стихотворений М.Ю.Лермонтова');
+insert into Characteristic(type_edition,author,title) values ('Сборник','Михельсон','Сборник стихотворений М.Ю.Лермонтова');
+
+insert into Characteristic(type_edition,author,title) values ('Альбом','Ковальских','Параллелошар мира');
+insert into Characteristic(type_edition,author,title) values ('Альбом','Ковальских','Ленинградский андеграунд');
+insert into Characteristic(type_edition,author,title) values ('Альбом','Воинов','Фабула предмета');
+
+insert into Characteristic(type_edition,author,title) values ('Научное издание','Бабошина','Образовательные подходы и технологии в высшей школе');
+insert into Characteristic(type_edition,author,title) values ('Научное издание','Воронин','Актуальные проблемы аграрно-правовой науки в Российской Федерации');
+insert into Characteristic(type_edition,author,title) values ('Научное издание','Горожанин','Российская полиция на страже имперской государственности');
+insert into Characteristic(type_edition,author,title) values ('Научное издание','Ульянова','Межвузовский сборник научных статей докторантов и аспирантов');
+insert into Characteristic(type_edition,author,title) values ('Научное издание','Корнилов','Актуальные вопросы филологии');
+insert into Characteristic(type_edition,author,title) values ('Научное издание','Волкова','Гуманитарные аспекты профессионального образования');
+insert into Characteristic(type_edition,author,title) values ('Научное издание','Быков','Всероссийский конкурс на лучшие работы студентов по техническим наукам');
+
+insert into Characteristic(type_edition,author,title) values ('Справочник ','Прохоров','Большая советская энциклопедия');
+insert into Characteristic(type_edition,author,title) values ('Справочник ','Мильчин','Издательский словарь-справочник');
+insert into Characteristic(type_edition,author,title) values ('Справочник ','Интент','Справочник технического переводчика');
+insert into Characteristic(type_edition,author,title) values ('Справочник ','Клубков','Словарь по информации, библиотечному и издательскому делу');
+insert into Characteristic(type_edition,author,title) values ('Справочник ','Богданов','Российский гуманитарный энциклопедический словарь');
+
+insert into Characteristic(type_edition,author,title) values ('Роман','Кинг','Лавка дурных снов');
+insert into Characteristic(type_edition,author,title) values ('Роман','Кинг','Оно');
+insert into Characteristic(type_edition,author,title) values ('Роман','Булгаков','Мастер и Маргарита');
+insert into Characteristic(type_edition,author,title) values ('Роман','Булгаков','Белая гвардия');
+insert into Characteristic(type_edition,author,title) values ('Роман','Достоевский','Преступление и наказание');
+insert into Characteristic(type_edition,author,title) values ('Роман','Достоевский','Братья Карамзовы');
+insert into Characteristic(type_edition,author,title) values ('Роман','Достоевский','Подросток');
+insert into Characteristic(type_edition,author,title) values ('Роман','Достоевский','Идиот');
+insert into Characteristic(type_edition,author,title) values ('Роман','Толстой','Война и мир');
+insert into Characteristic(type_edition,author,title) values ('Роман','Толстой','Анна Каренина');
+insert into Characteristic(type_edition,author,title) values ('Роман','Толстой','Воскресенье');
+insert into Characteristic(type_edition,author,title) values ('Роман','Твен','Приключения Тома Сойера');
+insert into Characteristic(type_edition,author,title) values ('Роман','Твен','Приключения Гекльберри Финна');
+
+insert into Information(id_edition, author, composition, popularity) values (1,'Пушкин', 'Евгений Онегин', 0);
+insert into Information(id_edition, author, composition, popularity) values (1,'Пушкин', 'Руслан и Людмила', 0);
+insert into Information(id_edition, author, composition, popularity) values (1,'Пушкин', 'Сказка о рыбаке и рыбке', 0);
+
+insert into Information(id_edition, author, composition, popularity) values (2,'Пушкин', 'Сказка о царе Салтане', 0);
+insert into Information(id_edition, author, composition, popularity) values (2,'Пушкин', 'Медный всадник', 0);
+insert into Information(id_edition, author, composition, popularity) values (2,'Пушкин', 'Полтава', 0);
+
+insert into Information(id_edition, author, composition, popularity) values (3,'Пушкин', 'Сказка о золтом петушке', 0);
+insert into Information(id_edition, author, composition, popularity) values (3,'Пушкин', 'Анчар', 0);
+insert into Information(id_edition, author, composition, popularity) values (3,'Пушкин', 'Кавказский пленник', 0);
+
+insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Мцыри', 0);
+insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Бородино', 0);
+insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Демон', 0);
+
+insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Валерик', 0);
+insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Беглец', 0);
+insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Сашка', 0);
+
+insert into Information(id_edition, author, composition, popularity) values (5,'Ковальских','Параллелошар мира',0);
+insert into Information(id_edition, author, composition, popularity) values (6,'Ковальских','Ленинградский андеграунд',0);
+insert into Information(id_edition, author, composition, popularity) values (7,'Воинов','Фабула предмета',0);
+
+insert into Information(id_edition, author, composition, popularity) values (8,'Бабошина','Образовательные подходы и технологии в высшей школе',0);
+insert into Information(id_edition, author, composition, popularity) values (9,'Воронин','Актуальные проблемы аграрно-правовой науки в Российской Федерации',0);
+insert into Information(id_edition, author, composition, popularity) values (10,'Горожанин','Российская полиция на страже имперской государственности',0);
+insert into Information(id_edition, author, composition, popularity) values (11,'Ульянова','Межвузовский сборник научных статей докторантов и аспирантов',0);
+insert into Information(id_edition, author, composition, popularity) values (12,'Корнилов','Актуальные вопросы филологии',0);
+insert into Information(id_edition, author, composition, popularity) values (13,'Волкова','Гуманитарные аспекты профессионального образования',0);
+insert into Information(id_edition, author, composition, popularity) values (14,'Быков','Всероссийский конкурс на лучшие работы студентов по техническим наукам',0);
+
+insert into Information(id_edition, author, composition, popularity) values (15,'Прохоров','Большая советская энциклопедия',0);
+insert into Information(id_edition, author, composition, popularity) values (16,'Мильчин','Издательский словарь-справочник',0);
+insert into Information(id_edition, author, composition, popularity) values (17,'Интент','Справочник технического переводчика',0);
+insert into Information(id_edition, author, composition, popularity) values (18,'Клубков','Словарь по информации, библиотечному и издательскому делу',0);
+insert into Information(id_edition, author, composition, popularity) values (19,'Богданов','Российский гуманитарный энциклопедический словарь',0);
