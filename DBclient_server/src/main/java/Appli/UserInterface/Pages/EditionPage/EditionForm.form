@@ -22,7 +22,7 @@
           <text value="ID издания:"/>
         </properties>
       </component>
-      <component id="65e28" class="javax.swing.JTextField" binding="IDeditionTextField">
+      <component id="65e28" class="javax.swing.JTextField" binding="IdEditionTextField">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <minimum-size width="200" height="30"/>
@@ -196,7 +196,7 @@
           <text value="Найти издания"/>
         </properties>
       </component>
-      <component id="4d295" class="javax.swing.JButton" binding="подробнаяИнформацияButton" default-binding="true">
+      <component id="4d295" class="javax.swing.JButton" binding="informationButton">
         <constraints>
           <grid row="4" column="4" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <minimum-size width="250" height="30"/>

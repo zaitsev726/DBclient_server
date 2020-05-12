@@ -21,9 +21,6 @@ public class Information implements Serializable {
     private String author;
 
     @Column
-    private String title;
-
-    @Column
     private String composition;
 
     @Column
@@ -41,10 +38,6 @@ public class Information implements Serializable {
 
     public void setAuthor(String author) { this.author = author; }
 
-    public String getTitle() { return title; }
-
-    public void setTitle(String title) { this.title = title; }
-
     public String getComposition() { return composition; }
 
     public void setComposition(String composition) { this.composition = composition; }
@@ -59,7 +52,6 @@ public class Information implements Serializable {
                 "id_record=" + id_record +
                 ", id_edition=" + id_edition +
                 ", author='" + author + '\'' +
-                ", title='" + title + '\'' +
                 ", composition='" + composition + '\'' +
                 ", popularity=" + popularity +
                 '}';

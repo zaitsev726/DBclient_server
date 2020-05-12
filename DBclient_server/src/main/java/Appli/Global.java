@@ -34,6 +34,6 @@ public class Global {
 
         //d.delete((long) 1);
         Characteristic characteristic = d.findById((long) 2);
-
+        System.out.println(characteristic.getInformation());
     }
 }
