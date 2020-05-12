@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Entity
-//@Table(name = "characteristic")
+@Entity
+@Table(name = "characteristic")
 public class Characteristic {
-   /* @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_edition;
 
@@ -20,7 +20,7 @@ public class Characteristic {
     @Column
     private String title;
 
-    @OneToOne(optional = false, mappedBy = "characteristic")
+  /*  @OneToOne(optional = false, mappedBy = "characteristic")
     private Edition edition;
 
     @ManyToMany(fetch = FetchType.LAZY,
@@ -29,7 +29,7 @@ public class Characteristic {
             CascadeType.MERGE
     })
     private List<Information> information = new ArrayList<>();
-
+*/
 
     public Long getId_edition() {
         return id_edition;
@@ -63,19 +63,11 @@ public class Characteristic {
         this.title = title;
     }
 
-    public Edition getEdition() {
-        return edition;
-    }
+    //public Edition getEdition() { return edition; }
 
-    public void setEdition(Edition edition) {
-        this.edition = edition;
-    }
+   // public void setEdition(Edition edition) { this.edition = edition; }
 
-    public List<Information> getInformation() {
-        return information;
-    }
+    //public List<Information> getInformation() { return information; }
 
-    public void setInformation(List<Information> information) {
-        this.information = information;
-    }*/
+    //public void setInformation(List<Information> information) { this.information = information; }
 }

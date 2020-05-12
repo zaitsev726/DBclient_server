@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Entity
-//@Table(name = "information")
+@Entity
+@Table(name = "information")
 public class Information {
-   /* @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long id_record;
 
@@ -43,5 +43,5 @@ public class Information {
     public Long getPopularity() { return popularity; }
 
     public void setPopularity(Long popularity) { this.popularity = popularity; }
-*/
+
 }
