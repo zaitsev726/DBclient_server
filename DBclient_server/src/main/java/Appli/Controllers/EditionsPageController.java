@@ -3,7 +3,9 @@ package Appli.Controllers;
 import Appli.Entities.Characteristic;
 import Appli.Entities.Edition;
 import Appli.Services.CharacteristicService;
+import Appli.Services.EditionService;
 import Appli.Services.Impl.CharacteristicServiceImpl;
+import Appli.Services.Impl.EditionServiceImpl;
 import Appli.UserInterface.Frames.Edition.libraryInformationEditionForm;
 import Appli.UserInterface.Pages.EditionPage.EditionForm;
 
@@ -12,6 +14,8 @@ import javax.swing.*;
 public class EditionsPageController {
     private EditionForm editionForm;
     private CharacteristicService charService;
+    private EditionService editionService;
+    
     private long cur_IdEdition;
     private String cur_type;
     private String cur_author;
@@ -22,7 +26,7 @@ public class EditionsPageController {
     public EditionsPageController(EditionForm editionForm){
         this.editionForm = editionForm;
         this.charService = new CharacteristicServiceImpl();
-
+        this.editionService = new EditionServiceImpl();
 
         initializationListeners();
         setStartValues();
@@ -109,7 +113,7 @@ public class EditionsPageController {
                 edition.setHall_num(libraryInformation.hallNum);
                 edition.setRack_num(libraryInformation.rackNum);
                 edition.setShelf_num(libraryInformation.shelfNum);
-
+                editionService.save(edition);
             }
         });
 
