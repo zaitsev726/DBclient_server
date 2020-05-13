@@ -38,7 +38,7 @@ public class Global {
         //System.out.println(b.getById((long) 3).getEditions());
 
        // edition.setId_edition(characteristic.getId_edition());
-
+/*
         Edition edition = new Edition();
         edition.setId_edition((long) 60);
         edition.setId_library((long) 2);
@@ -47,7 +47,7 @@ public class Global {
         edition.setShelf_num(2);
         edition.setDate_adding(new Date());
         edition.setDate_removing(null);
-        edition.setBook_library(b.getById((long) 2));
+       // edition.setBook_library(b.getById((long) 2));
         Characteristic characteristic = new Characteristic();
 
         characteristic.setType_edition("type");
@@ -64,17 +64,25 @@ public class Global {
        // em.merge(edition);
         characteristic = em.merge(characteristic);
         edition.setId_edition(characteristic.getId_edition());
-        em.merge(edition);
-        System.out.println(edition);
+        edition = em.merge(edition);
+        System.out.println(edition.getCharacteristic());
        // edition.setCharacteristic(characteristic);
       //  characteristic.setEdition(edition);
 
        // em.persist(edition);
-       // em.persist(characteristic);
+        // em.persist(characteristic);
         em.getTransaction().commit();
-       // System.out.println(edition);
+        // System.out.println(edition);
+        em.clear();
+        Edition edition1 = em.createQuery("select ed from Edition ed where ed.id_edition = :id", Edition.class)
+                .setParameter("id", characteristic.getId_edition())
+                .getSingleResult();
 
-        System.out.println(edition);
+        System.out.println(edition1.getCharacteristic());
+        */
+        System.out.println();
+
+
 
     }
 }

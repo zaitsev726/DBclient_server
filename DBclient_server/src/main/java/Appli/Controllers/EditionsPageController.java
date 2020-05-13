@@ -1,6 +1,7 @@
 package Appli.Controllers;
 
 import Appli.Entities.Characteristic;
+import Appli.Entities.Edition;
 import Appli.Services.CharacteristicService;
 import Appli.Services.Impl.CharacteristicServiceImpl;
 import Appli.UserInterface.Frames.Edition.libraryInformationEditionForm;
@@ -100,7 +101,16 @@ public class EditionsPageController {
         });
 
         libraryInformation.addButton.addActionListener(e -> {
+            if(libraryInformation.IdLib != 0 && libraryInformation.hallNum != 0 && libraryInformation.rackNum != 0
+                    && libraryInformation.shelfNum != 0 ) {
+                Edition edition = new Edition();
+                edition.setId_edition(cur_char.getId_edition());
+                edition.setId_library(libraryInformation.IdLib);
+                edition.setHall_num(libraryInformation.hallNum);
+                edition.setRack_num(libraryInformation.rackNum);
+                edition.setShelf_num(libraryInformation.shelfNum);
 
+            }
         });
 
     }
