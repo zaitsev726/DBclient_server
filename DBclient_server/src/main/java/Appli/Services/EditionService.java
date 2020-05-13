@@ -2,7 +2,6 @@ package Appli.Services;
 
 import Appli.Entities.Characteristic;
 import Appli.Entities.Edition;
-import sun.security.x509.EDIPartyName;
 
 import java.util.Date;
 import java.util.List;

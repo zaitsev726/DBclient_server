@@ -3,10 +3,7 @@ package Appli;
 
 import Appli.Entities.*;
 import Appli.Entities.Types.Pensioner;
-import Appli.Services.Impl.AllReaderServiceImpl;
-import Appli.Services.Impl.CharacteristicServiceImpl;
-import Appli.Services.Impl.LibrarianServiceImpl;
-import Appli.Services.Impl.LibraryServiceImpl;
+import Appli.Services.Impl.*;
 import Appli.UserInterface.Frames.Library.SearchReadersInLibraryForm;
 import Appli.UserInterface.Frames.SearchReadersForm;
 import Appli.UserInterface.InterfaceController;
@@ -28,7 +25,7 @@ public class Global {
 
 
         CharacteristicServiceImpl d = new CharacteristicServiceImpl();
-
+        EditionServiceImpl e = new EditionServiceImpl();
        // AllReader reader = a.findById((long) 1);
         //a.delete(reader);
         //d.delete((long) 1);
@@ -80,9 +77,12 @@ public class Global {
 
         System.out.println(edition1.getCharacteristic());
         */
-        System.out.println();
-
-
+        Date date = new Date();
+        date.setYear(103);
+        date.setMonth(10);
+        date.setDate(3);
+        System.out.println(date);
+        System.out.println(e.findByMoreDateAdding(date));
 
     }
 }
