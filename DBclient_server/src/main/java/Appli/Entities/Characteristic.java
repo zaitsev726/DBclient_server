@@ -22,12 +22,14 @@ public class Characteristic {
     @Column
     private String title;
 
-  /*  @OneToOne(optional = false, mappedBy = "characteristic")
-    private Edition edition;
-    */
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "edition")
     private Collection<Information> information;
+
+
+    @OneToOne(optional = false, mappedBy = "characteristic")
+    private Edition edition;
+
+
 
 
     public Long getId_edition() {

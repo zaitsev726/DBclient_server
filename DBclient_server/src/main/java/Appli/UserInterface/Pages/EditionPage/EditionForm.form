@@ -31,7 +31,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Fira Code Medium" size="26"/>
+          <font name="Fira Code Medium" size="20"/>
         </properties>
       </component>
       <component id="f6399" class="javax.swing.JLabel" binding="editionTypeLabel">
@@ -57,7 +57,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Fira Code Medium" size="26"/>
+          <font name="Fira Code Medium" size="20"/>
         </properties>
       </component>
       <component id="c419d" class="javax.swing.JLabel" binding="authorLabel">
@@ -83,7 +83,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Fira Code Medium" size="26"/>
+          <font name="Fira Code Medium" size="20"/>
         </properties>
       </component>
       <component id="1c0b3" class="javax.swing.JLabel" binding="titleLabel">
@@ -109,7 +109,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Fira Code Medium" size="26"/>
+          <font name="Fira Code Medium" size="20"/>
         </properties>
       </component>
       <component id="c2c41" class="javax.swing.JLabel">

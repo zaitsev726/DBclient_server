@@ -30,20 +30,20 @@ public class Edition {
     @Column(name = "date_removing")
     private Date date_removing;     //дата удаления
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_library", referencedColumnName = "id_library")
-    private Library book_library;
+  //  @ManyToOne(optional = false, cascade = CascadeType.ALL)
+   // @JoinColumn(name = "id_library", referencedColumnName = "id_library")
+   // private Library book_library;
 
  /*   @OneToMany(mappedBy = "edition", fetch = FetchType.LAZY)
     private Collection<IssuedBook> records;
 
     @OneToMany(mappedBy = "edition", fetch = FetchType.LAZY)
     private Collection<Rule> rules;
-
+*/
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_edition", referencedColumnName = "id_edition")
     private Characteristic characteristic;
-*/
+
     public Edition(){}
 
     public Long getId_edition() {

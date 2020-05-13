@@ -23,7 +23,7 @@ public class Global {
     private InterfaceController interfaceController;
 
     public Global(){
-        interfaceController = new InterfaceController();
+       // interfaceController = new InterfaceController();
         //AllReaderServiceImpl a = new AllReaderServiceImpl();
         //LibraryServiceImpl b = new LibraryServiceImpl();
        // LibrarianServiceImpl c = new LibrarianServiceImpl();
@@ -33,7 +33,11 @@ public class Global {
 
 
         //d.delete((long) 1);
-       // Characteristic characteristic = d.findById((long) 2);
+        //Characteristic characteristic = d.findById((long) 2);
+        Characteristic characteristic = new Characteristic();
+        characteristic.setType_edition("type");
+        characteristic.setTitle("title");
+        characteristic.setAuthor("author");
        // System.out.println(characteristic.getInformation());
     }
 }

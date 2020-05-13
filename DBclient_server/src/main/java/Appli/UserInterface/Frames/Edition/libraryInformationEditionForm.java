@@ -11,8 +11,8 @@ public class libraryInformationEditionForm extends JFrame {
     private JTextField rackNumTextField;
     private JTextField shelfNumTextField;
     private JCheckBox checkBox1;
-    private JButton button1;
-    private JButton button2;
+    private JButton addButton;
+    private JButton backButton;
     private JLabel IdLibraryLabel;
     private JLabel hallNumLabel;
     private JLabel rackNumLabel;
@@ -22,7 +22,7 @@ public class libraryInformationEditionForm extends JFrame {
     private EditionsPageController controller;
     public libraryInformationEditionForm(EditionsPageController controller){
         this.controller = controller;
-        setSize(400, 400);
+        setSize(600, 400);
         this.add(informationPanel);
         setVisible(true);
         setTitle("Информация о издании");

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Appli.UserInterface.Frames.Edition.libraryInformationEditionForm">
-  <grid id="27dc6" binding="informationPanel" layout-manager="GridLayoutManager" row-count="12" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="informationPanel" layout-manager="GridLayoutManager" row-count="12" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="932" height="749"/>
@@ -17,22 +17,22 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Fira Code Medium" size="26"/>
+          <font name="Fira Code Medium" size="20"/>
           <horizontalAlignment value="4"/>
           <text value="ID Библиотеки:"/>
         </properties>
       </component>
       <hspacer id="ec64">
         <constraints>
-          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="3" row-span="6" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
       <component id="877c" class="javax.swing.JTextField" binding="IdLibraryTextField">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <minimum-size width="200" height="30"/>
-            <preferred-size width="200" height="30"/>
-            <maximum-size width="200" height="30"/>
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="100" height="30"/>
           </grid>
         </constraints>
         <properties>
@@ -41,7 +41,7 @@
       </component>
       <hspacer id="e1ebd">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="6" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
       <component id="fc8ac" class="javax.swing.JLabel" binding="hallNumLabel">
@@ -53,22 +53,22 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Fira Code Medium" size="26"/>
+          <font name="Fira Code Medium" size="20"/>
           <horizontalAlignment value="4"/>
           <text value="Номер зала:"/>
         </properties>
       </component>
       <vspacer id="e9a1e">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <component id="f4b52" class="javax.swing.JTextField" binding="hallNumTextField">
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <minimum-size width="200" height="30"/>
-            <preferred-size width="200" height="30"/>
-            <maximum-size width="200" height="30"/>
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="100" height="30"/>
           </grid>
         </constraints>
         <properties>
@@ -84,7 +84,7 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Fira Code Medium" size="26"/>
+          <font name="Fira Code Medium" size="20"/>
           <horizontalAlignment value="4"/>
           <text value="Номер стеллажа:"/>
         </properties>
@@ -92,9 +92,9 @@
       <component id="a6439" class="javax.swing.JTextField" binding="rackNumTextField">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <minimum-size width="200" height="30"/>
-            <preferred-size width="200" height="30"/>
-            <maximum-size width="200" height="30"/>
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="100" height="30"/>
           </grid>
         </constraints>
         <properties>
@@ -110,16 +110,17 @@
           </grid>
         </constraints>
         <properties>
-          <font name="Fira Code Medium" size="26"/>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="4"/>
           <text value="Номер полки:"/>
         </properties>
       </component>
       <component id="5b0cd" class="javax.swing.JTextField" binding="shelfNumTextField">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <minimum-size width="200" height="30"/>
-            <preferred-size width="200" height="30"/>
-            <maximum-size width="200" height="30"/>
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="100" height="30"/>
           </grid>
         </constraints>
         <properties>
@@ -142,18 +143,18 @@
       </component>
       <component id="40366" class="javax.swing.JCheckBox" binding="checkBox1" default-binding="true">
         <constraints>
-          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="CheckBox"/>
+          <text value=""/>
         </properties>
       </component>
-      <component id="263c4" class="javax.swing.JButton" binding="button1" default-binding="true">
+      <component id="263c4" class="javax.swing.JButton" binding="addButton">
         <constraints>
-          <grid row="9" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="9" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="Добавить"/>
         </properties>
       </component>
       <vspacer id="3a819">
@@ -161,12 +162,12 @@
           <grid row="11" column="0" row-span="1" col-span="4" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="8f667" class="javax.swing.JButton" binding="button2" default-binding="true">
+      <component id="8f667" class="javax.swing.JButton" binding="backButton">
         <constraints>
-          <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="Отмена"/>
         </properties>
       </component>
       <vspacer id="9f8ed">
@@ -174,14 +175,16 @@
           <grid row="7" column="0" row-span="2" col-span="4" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="cb714" class="javax.swing.JLabel">
+      <hspacer id="d7dca">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="4" row-span="12" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties>
-          <text value="Label"/>
-        </properties>
-      </component>
+      </hspacer>
+      <hspacer id="9ed88">
+        <constraints>
+          <grid row="9" column="0" row-span="2" col-span="3" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
     </children>
   </grid>
 </form>

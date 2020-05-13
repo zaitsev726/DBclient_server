@@ -382,24 +382,76 @@ insert into Information(id_edition, author, composition, popularity) values (4,'
 insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Бородино', 0);
 insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Демон', 0);
 
-insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Валерик', 0);
-insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Беглец', 0);
-insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Сашка', 0);
+insert into Information(id_edition, author, composition, popularity) values (5,'Лермонтов', 'Валерик', 0);
+insert into Information(id_edition, author, composition, popularity) values (5,'Лермонтов', 'Беглец', 0);
+insert into Information(id_edition, author, composition, popularity) values (5,'Лермонтов', 'Сашка', 0);
 
-insert into Information(id_edition, author, composition, popularity) values (5,'Ковальских','Параллелошар мира',0);
-insert into Information(id_edition, author, composition, popularity) values (6,'Ковальских','Ленинградский андеграунд',0);
-insert into Information(id_edition, author, composition, popularity) values (7,'Воинов','Фабула предмета',0);
+insert into Information(id_edition, author, composition, popularity) values (6,'Ковальских','Параллелошар мира',0);
+insert into Information(id_edition, author, composition, popularity) values (7,'Ковальских','Ленинградский андеграунд',0);
+insert into Information(id_edition, author, composition, popularity) values (8,'Воинов','Фабула предмета',0);
 
-insert into Information(id_edition, author, composition, popularity) values (8,'Бабошина','Образовательные подходы и технологии в высшей школе',0);
-insert into Information(id_edition, author, composition, popularity) values (9,'Воронин','Актуальные проблемы аграрно-правовой науки в Российской Федерации',0);
-insert into Information(id_edition, author, composition, popularity) values (10,'Горожанин','Российская полиция на страже имперской государственности',0);
-insert into Information(id_edition, author, composition, popularity) values (11,'Ульянова','Межвузовский сборник научных статей докторантов и аспирантов',0);
-insert into Information(id_edition, author, composition, popularity) values (12,'Корнилов','Актуальные вопросы филологии',0);
-insert into Information(id_edition, author, composition, popularity) values (13,'Волкова','Гуманитарные аспекты профессионального образования',0);
-insert into Information(id_edition, author, composition, popularity) values (14,'Быков','Всероссийский конкурс на лучшие работы студентов по техническим наукам',0);
+insert into Information(id_edition, author, composition, popularity) values (9,'Бабошина','Образовательные подходы и технологии в высшей школе',0);
+insert into Information(id_edition, author, composition, popularity) values (10,'Воронин','Актуальные проблемы аграрно-правовой науки в Российской Федерации',0);
+insert into Information(id_edition, author, composition, popularity) values (11,'Горожанин','Российская полиция на страже имперской государственности',0);
+insert into Information(id_edition, author, composition, popularity) values (12,'Ульянова','Межвузовский сборник научных статей докторантов и аспирантов',0);
+insert into Information(id_edition, author, composition, popularity) values (13,'Корнилов','Актуальные вопросы филологии',0);
+insert into Information(id_edition, author, composition, popularity) values (14,'Волкова','Гуманитарные аспекты профессионального образования',0);
+insert into Information(id_edition, author, composition, popularity) values (15,'Быков','Всероссийский конкурс на лучшие работы студентов по техническим наукам',0);
 
-insert into Information(id_edition, author, composition, popularity) values (15,'Прохоров','Большая советская энциклопедия',0);
-insert into Information(id_edition, author, composition, popularity) values (16,'Мильчин','Издательский словарь-справочник',0);
-insert into Information(id_edition, author, composition, popularity) values (17,'Интент','Справочник технического переводчика',0);
-insert into Information(id_edition, author, composition, popularity) values (18,'Клубков','Словарь по информации, библиотечному и издательскому делу',0);
-insert into Information(id_edition, author, composition, popularity) values (19,'Богданов','Российский гуманитарный энциклопедический словарь',0);
+insert into Information(id_edition, author, composition, popularity) values (16,'Прохоров','Большая советская энциклопедия',0);
+insert into Information(id_edition, author, composition, popularity) values (17,'Мильчин','Издательский словарь-справочник',0);
+insert into Information(id_edition, author, composition, popularity) values (18,'Интент','Справочник технического переводчика',0);
+insert into Information(id_edition, author, composition, popularity) values (19,'Клубков','Словарь по информации, библиотечному и издательскому делу',0);
+insert into Information(id_edition, author, composition, popularity) values (20,'Богданов','Российский гуманитарный энциклопедический словарь',0);
+
+insert into Information(id_edition, author, composition, popularity) values (21,'Кинг','Лавка дурных снов',0);
+insert into Information(id_edition, author, composition, popularity) values (22,'Кинг','Оно',0);
+insert into Information(id_edition, author, composition, popularity) values (23,'Булгаков','Мастер и Маргарита',0);
+insert into Information(id_edition, author, composition, popularity) values (24,'Булгаков','Белая гвардия',0);
+insert into Information(id_edition, author, composition, popularity) values (25,'Достоевский','Преступление и наказание',0);
+insert into Information(id_edition, author, composition, popularity) values (26,'Достоевский','Братья Карамзовы',0);
+insert into Information(id_edition, author, composition, popularity) values (27,'Достоевский','Подросток',0);
+insert into Information(id_edition, author, composition, popularity) values (28,'Достоевский','Идиот',0);
+insert into Information(id_edition, author, composition, popularity) values (29,'Толстой','Война и мир',0);
+insert into Information(id_edition, author, composition, popularity) values (30,'Толстой','Анна Каренина',0);
+insert into Information(id_edition, author, composition, popularity) values (31,'Толстой','Воскресенье',0);
+insert into Information(id_edition, author, composition, popularity) values (32,'Твен','Приключения Тома Сойера',0);
+insert into Information(id_edition, author, composition, popularity) values (33,'Твен','Приключения Гекльберри Финна',0);
+
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (1,1,1,8,9,date '1999-01-16',date '2010-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (2,3,1,3,6,date '1999-05-23',date '2010-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (3,4,1,3,10,date '1999-11-14',date '2020-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (4,5,3,5,8,date '1999-03-26',date '2010-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (5,3,2,2,2,date '1999-09-03', NULL);
+
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (6,3,2,2,1,date '2000-03-16',date '2010-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (7,1,1,1,9,date '2001-12-21',date '2010-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (8,3,1,7,9,date '2002-09-30',date '2020-06-10');
+
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (9,2,1,1,9,date '2000-04-19', NULL);
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (10,2,3,1,2,date '2001-10-12',date '2020-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (11,2,2,9,3,date '2002-08-01',date '2020-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (12,3,1,10,7,date '2001-11-25',date '2020-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (13,4,2,10,8,date '2000-11-08',date '2010-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (14,1,1,9,3,date '2003-05-28', NULL);
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (15,5,1,10,9,date '2002-11-09',date '2010-06-10');
+
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (16,2,4,2,5,date '2009-10-25',date '2020-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (17,1,1,8,4,date '2000-12-07',date '2010-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (18,1,1,6,9,date '2002-11-22',date '2020-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (19,4,3,6,4,date '2007-05-24', NULL);
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (20,5,1,10,7,date '2009-03-23',date '2010-06-10');
+
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (21,3,1,6,1,date '2005-08-27',date '2020-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (22,4,3,8,8,date '2006-02-08', NULL);
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (23,2,4,2,4,date '1999-12-06',date '2010-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (24,5,2,6,6,date '2001-05-18',date '2010-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (25,1,1,8,3,date '2010-08-19',date '2020-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (26,1,1,7,2,date '2008-04-04', NULL);
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (27,2,1,5,9,date '2006-07-02',date '2020-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (28,5,3,7,2,date '2002-12-17',date '2010-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (29,1,1,10,1,date '2006-04-06', NULL);
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (30,3,2,3,2,date '2007-10-22',date '2020-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (31,4,4,6,3,date '2003-01-28',date '2010-06-10');
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (32,2,2,8,4,date '2010-02-18', NULL);
+insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (33,5,2,8,1,date '2004-03-06',date '2020-06-10');
