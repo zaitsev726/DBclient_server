@@ -1,10 +1,7 @@
 package Appli;
 
 
-import Appli.Entities.AllReader;
-import Appli.Entities.Characteristic;
-import Appli.Entities.Librarian;
-import Appli.Entities.Library;
+import Appli.Entities.*;
 import Appli.Entities.Types.Pensioner;
 import Appli.Services.Impl.AllReaderServiceImpl;
 import Appli.Services.Impl.CharacteristicServiceImpl;
@@ -17,6 +14,7 @@ import Appli.UserInterface.InterfaceController;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.Date;
 
 
 public class Global {
@@ -34,14 +32,49 @@ public class Global {
        // AllReader reader = a.findById((long) 1);
         //a.delete(reader);
         //d.delete((long) 1);
-        Characteristic characteristic = d.findById((long) 2);
-        System.out.println(characteristic.getEdition().getBook_library());
+       // Characteristic characteristic = d.findById((long) 2);
+       // System.out.println(characteristic.getEdition().getBook_library());
 
-        System.out.println(b.getById((long) 3).getEditions());
-      //  Characteristic characteristic = new Characteristic();
-       // characteristic.setType_edition("type");
-        //characteristic.setTitle("title");
-        //characteristic.setAuthor("author");
-       // System.out.println(characteristic.getInformation());
+        //System.out.println(b.getById((long) 3).getEditions());
+
+       // edition.setId_edition(characteristic.getId_edition());
+
+        Edition edition = new Edition();
+        edition.setId_edition((long) 60);
+        edition.setId_library((long) 2);
+        edition.setHall_num(1);
+        edition.setRack_num(1);
+        edition.setShelf_num(2);
+        edition.setDate_adding(new Date());
+        edition.setDate_removing(null);
+        edition.setBook_library(b.getById((long) 2));
+        Characteristic characteristic = new Characteristic();
+
+        characteristic.setType_edition("type");
+        characteristic.setTitle("title");
+        characteristic.setAuthor("author");
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("model");
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+       // Edition edition = em.createQuery("select ed from Edition ed where ed.id_edition = :id", Edition.class)
+       //         .setParameter("id", (long) 2)
+        //        .getSingleResult();
+       // em.merge(edition);
+        characteristic = em.merge(characteristic);
+        edition.setId_edition(characteristic.getId_edition());
+        em.merge(edition);
+        System.out.println(edition);
+       // edition.setCharacteristic(characteristic);
+      //  characteristic.setEdition(edition);
+
+       // em.persist(edition);
+       // em.persist(characteristic);
+        em.getTransaction().commit();
+       // System.out.println(edition);
+
+        System.out.println(edition);
+
     }
 }

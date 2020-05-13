@@ -22,12 +22,12 @@ public class Characteristic {
     @Column
     private String title;
 
-    @OneToOne(optional = false, mappedBy = "characteristic")
+
+    @OneToOne(optional = true, cascade = CascadeType.ALL)
+   // @JoinColumn(name = "id_edition", referencedColumnName = "id_edition", nullable = true)
+    @JoinColumn(name = "id_edition", nullable = true)
     private Edition edition;
 
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "edition")
-    private Collection<Information> information;
 
     public Edition getEdition() {
         return edition;
@@ -36,6 +36,14 @@ public class Characteristic {
     public void setEdition(Edition edition) {
         this.edition = edition;
     }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "edition")
+    private Collection<Information> information;
+    public Collection<Information> getInformation() { return information; }
+
+    public void setInformation(Collection<Information> information) { this.information = information; }
+
+
 
     public Long getId_edition() {
         return id_edition;
@@ -73,9 +81,6 @@ public class Characteristic {
 
    // public void setEdition(Edition edition) { this.edition = edition; }
 
-    public Collection<Information> getInformation() { return information; }
-
-    public void setInformation(Collection<Information> information) { this.information = information; }
 
 
     @Override

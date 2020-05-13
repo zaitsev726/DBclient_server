@@ -8,12 +8,11 @@ import java.util.Date;
 @Table (name = "editions")
 public class Edition {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_edition")
     private Long id_edition;         //номер книги в библиотеке (в сети библиотек)
 
-    @Column(name = "id_library", insertable = false, updatable = false)
-    private int id_library;         //номер библиотеки
+    @Column(name = "id_library")
+    private Long id_library;         //номер библиотеки
 
     @Column(name = "hall_num")
     private int hall_num;           //номер зала
@@ -30,13 +29,21 @@ public class Edition {
     @Column(name = "date_removing")
     private Date date_removing;     //дата удаления
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_edition", referencedColumnName = "id_edition")
+
+
+    @OneToOne(optional = true, mappedBy = "edition")
     private Characteristic characteristic;
 
+    public Characteristic getCharacteristic() {
+        return characteristic;
+    }
+
+    public void setCharacteristic(Characteristic characteristic) {
+        this.characteristic = characteristic;
+    }
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_library", referencedColumnName = "id_library")
+    @JoinColumn(name = "id_library", referencedColumnName = "id_library", updatable = false, insertable = false)
     private Library book_library;
 
     public Library getBook_library() {
@@ -65,11 +72,11 @@ public class Edition {
         this.id_edition = id_edition;
     }
 
-    public int getId_library() {
+    public Long getId_library() {
         return id_library;
     }
 
-    public void setId_library(int id_library) {
+    public void setId_library(Long id_library) {
         this.id_library = id_library;
     }
 

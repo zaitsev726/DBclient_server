@@ -16,6 +16,7 @@ public class EditionsPageController {
     private String cur_author;
     private String cur_title;
     private Characteristic cur_char;
+    private libraryInformationEditionForm libraryInformation;
 
     public EditionsPageController(EditionForm editionForm){
         this.editionForm = editionForm;
@@ -81,7 +82,7 @@ public class EditionsPageController {
                 characteristic.setTitle(cur_title);
                 cur_char = charService.save(characteristic);
                 if(cur_char.getId_edition() != null && cur_char.getId_edition()!= 0){
-                    libraryInformationEditionForm libraryInformation = new libraryInformationEditionForm(this);
+                    libraryInformation = new libraryInformationEditionForm(this);
                 }
             }
             else{
@@ -89,6 +90,19 @@ public class EditionsPageController {
             }
             setStartValues();
         });
+
+        libraryInformation.backButton.addActionListener(e -> {
+            charService.delete(cur_char.getId_edition());
+            cur_char = new Characteristic();
+            setStartValues();
+            libraryInformation.dispose();
+            libraryInformation = null;
+        });
+
+        libraryInformation.addButton.addActionListener(e -> {
+
+        });
+
     }
 
     public void queryForSaveEditionLibraryInfo(long id_library, int hall_num, int rack_num, int shelf_num, boolean cur_date){
