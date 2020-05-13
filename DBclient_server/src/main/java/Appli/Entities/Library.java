@@ -22,10 +22,19 @@ public class Library {
 
     @OneToMany(mappedBy = "work_library", fetch = FetchType.LAZY)
     private Collection<Librarian> librarians;
-/*
+
     @OneToMany(mappedBy = "book_library", fetch = FetchType.LAZY)
     private Collection<Edition> editions;
-*/
+
+    public Collection<Edition> getEditions() {
+        return editions;
+    }
+
+    public void setEditions(Collection<Edition> editions) {
+        this.editions = editions;
+    }
+
+
     public Library() {
     }
 

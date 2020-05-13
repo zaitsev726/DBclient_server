@@ -22,15 +22,20 @@ public class Characteristic {
     @Column
     private String title;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "edition")
-    private Collection<Information> information;
-
-
     @OneToOne(optional = false, mappedBy = "characteristic")
     private Edition edition;
 
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "edition")
+    private Collection<Information> information;
 
+    public Edition getEdition() {
+        return edition;
+    }
+
+    public void setEdition(Edition edition) {
+        this.edition = edition;
+    }
 
     public Long getId_edition() {
         return id_edition;
@@ -71,4 +76,15 @@ public class Characteristic {
     public Collection<Information> getInformation() { return information; }
 
     public void setInformation(Collection<Information> information) { this.information = information; }
+
+
+    @Override
+    public String toString() {
+        return "Characteristic{" +
+                "id_edition=" + id_edition +
+                ", type_edition='" + type_edition + '\'' +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }

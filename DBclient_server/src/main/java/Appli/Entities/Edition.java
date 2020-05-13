@@ -30,19 +30,30 @@ public class Edition {
     @Column(name = "date_removing")
     private Date date_removing;     //дата удаления
 
-  //  @ManyToOne(optional = false, cascade = CascadeType.ALL)
-   // @JoinColumn(name = "id_library", referencedColumnName = "id_library")
-   // private Library book_library;
-
- /*   @OneToMany(mappedBy = "edition", fetch = FetchType.LAZY)
-    private Collection<IssuedBook> records;
-
-    @OneToMany(mappedBy = "edition", fetch = FetchType.LAZY)
-    private Collection<Rule> rules;
-*/
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_edition", referencedColumnName = "id_edition")
     private Characteristic characteristic;
+
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_library", referencedColumnName = "id_library")
+    private Library book_library;
+
+    public Library getBook_library() {
+        return book_library;
+    }
+
+    public void setBook_library(Library book_library) {
+        this.book_library = book_library;
+    }
+
+
+    /*   @OneToMany(mappedBy = "edition", fetch = FetchType.LAZY)
+            private Collection<IssuedBook> records;
+
+            @OneToMany(mappedBy = "edition", fetch = FetchType.LAZY)
+            private Collection<Rule> rules;
+        */
 
     public Edition(){}
 
@@ -112,7 +123,6 @@ public class Edition {
                     "shelf_num = " + shelf_num + ' ' +
                     "date_adding = " + date_adding + ' '+
                     "date_removing = ";
-
              re += date_removing == null?"такой даты нет" + ' ' + '}':date_removing.toString() + ' ' + '}';
              return  re;
     }
