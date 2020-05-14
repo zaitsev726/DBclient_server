@@ -1,4 +1,4 @@
-package Appli.UserInterface.Frames.Edition;
+package Appli.UserInterface.Frames.Edition.InvertaryInfo;
 
 import Appli.Controllers.EditionsPageController;
 import Appli.Entities.AllReader;
@@ -21,12 +21,15 @@ public class libraryInformationEditionForm extends JFrame {
     private JTextField shelfNumTextField;
     private JCheckBox checkBox1;
     public JButton addButton;
+    public JButton searchButton;
     public JButton backButton;
     private JLabel IdLibraryLabel;
     private JLabel hallNumLabel;
     private JLabel rackNumLabel;
     private JLabel shelfNumLabel;
     private JLabel currentDateLabel;
+    private JTextField textField1;
+    private JTextField textField2;
 
     public long IdLib = 0;
     public int hallNum = 0;

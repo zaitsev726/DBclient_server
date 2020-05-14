@@ -1,7 +1,7 @@
-package Appli.UserInterface.Frames.Edition;
+package Appli.UserInterface.Frames.Edition.InvertaryInfo;
 
 import Appli.Controllers.EditionsPageController;
-import Appli.Controllers.LibraryPageController;
+import Appli.Entities.Information;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -9,7 +9,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-public class SearchInformationForm extends JFrame {
+public class SearchEditionForm extends JFrame{
     private JTable resultTable;
     private DefaultTableModel tableModel;
     private ArrayList<String[]> currentLibraries;
@@ -19,16 +19,16 @@ public class SearchInformationForm extends JFrame {
     private JButton backButton;
 
     // Заголовки столбцов
-    private final Object[] columnsHeader = new String[]{"ID записи", "ID издания", "Автор", "Произведение", "Популярность"};
+    private final Object[] columnsHeader = new String[]{"ID издания", "ID библиотеки", "Зал", "Стеллаж", "Полка"};
 
-    public SearchInformationForm(EditionsPageController controller) {
+    public SearchEditionForm(EditionsPageController controller) {
         currentLibraries = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
         backButton = new JButton("Очистить и выйти");
 
-        setTitle("Результаты поиска произведений");
-        setSize(500, 300);
+        setTitle("Результаты поиска изданий");
+        setSize(600, 300);
 
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(columnsHeader);
@@ -81,6 +81,7 @@ public class SearchInformationForm extends JFrame {
             controller.queryForDeleteInformation(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))));
             tableModel.removeRow(row);
         });
+
 
         backButton.addActionListener(e -> {
             tableModel.setRowCount(0);

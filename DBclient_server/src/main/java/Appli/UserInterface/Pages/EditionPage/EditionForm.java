@@ -14,12 +14,11 @@ public class EditionForm extends JPanel {
     public JButton addButton;
     public JButton searchButton;
     public JButton informationButton;
-    private JButton button5;
+    public JButton inventoryInformationButton;
     private JButton правилаButton;
     private JButton button7;
     private JButton button8;
     private JLabel editionLabel;
-    private JLabel idEditionLabel;
     private JLabel editionTypeLabel;
     private JLabel authorLabel;
     private JLabel titleLabel;
