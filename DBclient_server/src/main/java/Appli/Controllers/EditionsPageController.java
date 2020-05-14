@@ -3,6 +3,7 @@ package Appli.Controllers;
 import Appli.Entities.Characteristic;
 import Appli.Entities.Edition;
 import Appli.Entities.Information;
+import Appli.Entities.Rule;
 import Appli.Services.CharacteristicService;
 import Appli.Services.EditionService;
 import Appli.Services.Impl.CharacteristicServiceImpl;
@@ -12,6 +13,7 @@ import Appli.Services.InformationService;
 import Appli.UserInterface.Frames.Edition.Information.SearchInformationForm;
 import Appli.UserInterface.Frames.Edition.InvertaryInfo.SearchEditionForm;
 import Appli.UserInterface.Frames.Edition.InvertaryInfo.inventoryInformationForm;
+import Appli.UserInterface.Frames.Edition.Rules.SearchRulesForm;
 import Appli.UserInterface.Pages.EditionPage.EditionForm;
 
 import javax.swing.*;
@@ -35,12 +37,13 @@ public class EditionsPageController {
     private inventoryInformationForm libraryInformation;
     private SearchInformationForm informationForm;
     private SearchEditionForm searchEditionForm;
-
+    private SearchRulesForm searchRulesForm;
 
     public EditionsPageController(EditionForm editionForm) {
         this.editionForm = editionForm;
         this.informationForm = new SearchInformationForm(this);
         this.searchEditionForm = new SearchEditionForm(this);
+        this.searchRulesForm = new SearchRulesForm(this);
 
         this.charService = new CharacteristicServiceImpl();
         this.editionService = new EditionServiceImpl();
@@ -321,5 +324,17 @@ public class EditionsPageController {
 
     public void queryForDeleteEdition(long id_edition) {
         editionService.delete(id_edition);
+    }
+
+    public void queryForUpdateRule(long id_rule, long id_edition, String rule){
+
+    }
+
+    public void queryForDeleteRule(long id_rule){
+
+    }
+
+    public Rule queryForInsertRule(long id_edition, String rule){
+        return null;
     }
 }
