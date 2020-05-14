@@ -24,11 +24,15 @@ public class Information implements Serializable {
     private String composition;
 
     @Column
-    private Long popularity;
+    private int popularity;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_edition", referencedColumnName = "id_edition", updatable = false, insertable = false)
     private Characteristic edition;
+
+    public Characteristic getEdition() { return edition; }
+
+    public void setEdition(Characteristic edition) { this.edition = edition; }
 
     public Long getId_record() { return id_record; }
 
@@ -36,15 +40,20 @@ public class Information implements Serializable {
 
     public String getAuthor() { return author; }
 
+    public Long getId_edition() { return id_edition; }
+
+    public void setId_edition(Long id_edition) { this.id_edition = id_edition; }
+
+
     public void setAuthor(String author) { this.author = author; }
 
     public String getComposition() { return composition; }
 
     public void setComposition(String composition) { this.composition = composition; }
 
-    public Long getPopularity() { return popularity; }
+    public int getPopularity() { return popularity; }
 
-    public void setPopularity(Long popularity) { this.popularity = popularity; }
+    public void setPopularity(int popularity) { this.popularity = popularity; }
 
     @Override
     public String toString() {

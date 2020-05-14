@@ -18,7 +18,7 @@ public class Global {
     private InterfaceController interfaceController;
 
     public Global(){
-       // interfaceController = new InterfaceController();
+        interfaceController = new InterfaceController();
         AllReaderServiceImpl a = new AllReaderServiceImpl();
         LibraryServiceImpl b = new LibraryServiceImpl();
         LibrarianServiceImpl c = new LibrarianServiceImpl();
@@ -81,8 +81,8 @@ public class Global {
         date.setYear(103);
         date.setMonth(10);
         date.setDate(3);
-        System.out.println(date);
-        System.out.println(e.findByMoreDateAdding(date));
+       // System.out.println(date);
+       // System.out.println(e.findByMoreDateAdding(date));
 
     }
 }

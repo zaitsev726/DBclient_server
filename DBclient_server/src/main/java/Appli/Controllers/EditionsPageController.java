@@ -2,31 +2,45 @@ package Appli.Controllers;
 
 import Appli.Entities.Characteristic;
 import Appli.Entities.Edition;
+import Appli.Entities.Information;
 import Appli.Services.CharacteristicService;
 import Appli.Services.EditionService;
 import Appli.Services.Impl.CharacteristicServiceImpl;
 import Appli.Services.Impl.EditionServiceImpl;
+import Appli.Services.Impl.InformationServiceImpl;
+import Appli.Services.InformationService;
+import Appli.UserInterface.Frames.Edition.SearchInformationForm;
 import Appli.UserInterface.Frames.Edition.libraryInformationEditionForm;
 import Appli.UserInterface.Pages.EditionPage.EditionForm;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class EditionsPageController {
     private EditionForm editionForm;
+
     private CharacteristicService charService;
     private EditionService editionService;
-    
+    private InformationService informationService;
+
     private long cur_IdEdition;
     private String cur_type;
     private String cur_author;
     private String cur_title;
     private Characteristic cur_char;
+
     private libraryInformationEditionForm libraryInformation;
+    private SearchInformationForm informationForm;
 
     public EditionsPageController(EditionForm editionForm){
         this.editionForm = editionForm;
+        this.informationForm = new SearchInformationForm(this);
+
         this.charService = new CharacteristicServiceImpl();
         this.editionService = new EditionServiceImpl();
+        this.informationService = new InformationServiceImpl();
 
         initializationListeners();
         setStartValues();
@@ -88,6 +102,47 @@ public class EditionsPageController {
                 cur_char = charService.save(characteristic);
                 if(cur_char.getId_edition() != null && cur_char.getId_edition()!= 0){
                     libraryInformation = new libraryInformationEditionForm(this);
+
+                    libraryInformation.backButton.addActionListener(f -> {
+                        charService.delete(cur_char.getId_edition());
+                        cur_char = new Characteristic();
+                        setStartValues();
+                        libraryInformation.dispose();
+                        libraryInformation = null;
+                    });
+
+                    libraryInformation.addButton.addActionListener(f -> {
+                        if(libraryInformation.IdLib != 0 && libraryInformation.hallNum != 0 && libraryInformation.rackNum != 0
+                                && libraryInformation.shelfNum != 0 ) {
+                            Edition edition = new Edition();
+                            edition.setId_edition(cur_char.getId_edition());
+                            edition.setId_library(libraryInformation.IdLib);
+                            edition.setHall_num(libraryInformation.hallNum);
+                            edition.setRack_num(libraryInformation.rackNum);
+                            edition.setShelf_num(libraryInformation.shelfNum);
+                            edition.setDate_adding(new Date());
+                            editionService.save(edition);
+
+                            List<Information> informationList = new ArrayList<>();
+                            ArrayList<String[]> resultList = new ArrayList<>();
+                            for(int i = 0; i < 4; i++){
+                                Information inf = new Information();
+                                inf.setId_edition(cur_char.getId_edition());
+
+                                inf.setAuthor("Неизвестно");
+                                inf.setComposition("Неизвестно");
+                                inf.setPopularity(0);
+                                informationList.add(inf);
+                            }
+                            informationService.insertStartInformation(informationList);
+                            informationList = informationService.findByIdEdition(cur_char.getId_edition());
+                            for(Information inf : informationList){
+                                resultList.add(new String[]{String.valueOf(inf.getId_record()), String.valueOf(inf.getId_edition()), inf.getAuthor(),inf.getComposition(), String.valueOf(inf.getPopularity())});
+                            }
+                            informationForm.updateTable(resultList);
+                            informationForm.setVisible(true);
+                        }
+                    });
                 }
             }
             else{
@@ -96,7 +151,7 @@ public class EditionsPageController {
             setStartValues();
         });
 
-        libraryInformation.backButton.addActionListener(e -> {
+   /*     libraryInformation.backButton.addActionListener(e -> {
             charService.delete(cur_char.getId_edition());
             cur_char = new Characteristic();
             setStartValues();
@@ -114,12 +169,42 @@ public class EditionsPageController {
                 edition.setRack_num(libraryInformation.rackNum);
                 edition.setShelf_num(libraryInformation.shelfNum);
                 editionService.save(edition);
+
+                List<Information> informationList = new ArrayList<>();
+                ArrayList<String[]> resultList = new ArrayList<>();
+                for(int i = 0; i < 4; i++){
+                    Information inf = new Information();
+                    inf.setId_edition(cur_char.getId_edition());
+
+                    inf.setAuthor("Неизвестно");
+                    inf.setComposition("Неизвестно");
+                    inf.setPopularity(0);
+                    informationList.add(inf);
+                }
+                informationService.insertStartInformation(informationList);
+                informationList = informationService.findByIdEdition(cur_char.getId_edition());
+                for(Information inf : informationList){
+                    resultList.add(new String[]{String.valueOf(inf.getId_record()), String.valueOf(inf.getId_edition()), inf.getAuthor(),inf.getComposition(), String.valueOf(inf.getPopularity())});
+                }
+                informationForm.updateTable(resultList);
+                informationForm.setVisible(true);
             }
         });
-
+*/
     }
 
-    public void queryForSaveEditionLibraryInfo(long id_library, int hall_num, int rack_num, int shelf_num, boolean cur_date){
-
+    public void queryForUpdateInformation(long id_record, long id_edition, String author, String composition, int popularity){
+        Information information = new Information();
+        information.setId_record(id_record);
+        information.setId_edition(id_edition);
+        information.setAuthor(author);
+        information.setComposition(composition);
+        information.setPopularity(popularity);
+        informationService.update(information);
     }
+
+    public void queryForDeleteInformation(long id_record){
+        informationService.delete(id_record);
+    }
+
 }

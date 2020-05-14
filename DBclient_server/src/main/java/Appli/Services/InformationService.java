@@ -1,13 +1,22 @@
 package Appli.Services;
 
+import Appli.Entities.Characteristic;
 import Appli.Entities.Information;
 
 import java.util.List;
 
 public interface InformationService {
-    Information addInformation(Information information);
+    void save(Information information);
     void delete(Long id);
-    Information getById(Long id);
-    Information editInformation(Information information);
-    List<Information> getAll();
+    Information update(Information information);
+    Information findById(Long id);
+    List<Information> findAll();
+
+    List<Information> findByIdEdition(Long id);
+    List<Information> findByAuthor(String author);
+    List<Information> findByComposition(String composition);
+    List<Information> findByAuthorAndComposition(String author, String composition);
+
+    void insertStartInformation(List<Information> informationList);
+
 }
