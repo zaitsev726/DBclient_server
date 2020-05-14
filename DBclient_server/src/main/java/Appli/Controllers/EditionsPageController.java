@@ -41,6 +41,7 @@ public class EditionsPageController {
 
     public EditionsPageController(EditionForm editionForm) {
         this.editionForm = editionForm;
+
         this.informationForm = new SearchInformationForm(this);
         this.searchEditionForm = new SearchEditionForm(this);
         this.searchRulesForm = new SearchRulesForm(this);
