@@ -3,13 +3,16 @@ package Appli.UserInterface.Frames.Edition.InvertaryInfo;
 import Appli.Controllers.EditionsPageController;
 import Appli.Entities.Information;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class SearchEditionForm extends JFrame{
+public class SearchEditionForm extends JFrame {
     private JTable resultTable;
     private DefaultTableModel tableModel;
     private ArrayList<String[]> currentLibraries;
@@ -19,7 +22,7 @@ public class SearchEditionForm extends JFrame{
     private JButton backButton;
 
     // Заголовки столбцов
-    private final Object[] columnsHeader = new String[]{"ID издания", "ID библиотеки", "Зал", "Стеллаж", "Полка"};
+    private final Object[] columnsHeader = new String[]{"ID издания", "ID библиотеки", "Зал", "Стеллаж", "Полка", "Дата добавления", "Дата удаления"};
 
     public SearchEditionForm(EditionsPageController controller) {
         currentLibraries = new ArrayList<>();
@@ -28,7 +31,7 @@ public class SearchEditionForm extends JFrame{
         backButton = new JButton("Очистить и выйти");
 
         setTitle("Результаты поиска изданий");
-        setSize(600, 300);
+        setSize(800, 300);
 
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(columnsHeader);
@@ -60,14 +63,15 @@ public class SearchEditionForm extends JFrame{
                 int column = resultTable.getSelectedColumn();
                 if (column == 0) {
                     JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
-                }else if(column == 4){
-                    JOptionPane.showMessageDialog(resultTable, "Столбец с популярностью нельзя менять");
-                }
-                else if (row >= 0) {
+                } else if (row >= 0) {
                     try {
-                        controller.queryForUpdateInformation(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 1))),
-                                String.valueOf(tableModel.getValueAt(row, 2)), String.valueOf(tableModel.getValueAt(row, 3)), Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 4))));
+                        controller.queryForUpdateEdition(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 1))),
+                                Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 2))), Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 3))), Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 4))),
+                                        new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(tableModel.getValueAt(row,5))),
+                                        new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(tableModel.getValueAt(row,6))));
                     } catch (ArrayIndexOutOfBoundsException ignored) {
+                    } catch (ParseException parseException) {
+                        JOptionPane.showMessageDialog(resultTable, "Неправильный формат даты.Ожидается yyyy-MM-dd");
                     }
                 }
             }
@@ -78,7 +82,7 @@ public class SearchEditionForm extends JFrame{
             // Номер выделенной строки
             int row = resultTable.getSelectedRow();
             // Удаление выделенной строки
-            controller.queryForDeleteInformation(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))));
+            controller.queryForDeleteEdition(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))));
             tableModel.removeRow(row);
         });
 

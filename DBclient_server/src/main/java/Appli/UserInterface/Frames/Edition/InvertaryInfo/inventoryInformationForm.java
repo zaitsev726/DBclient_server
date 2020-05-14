@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class libraryInformationEditionForm extends JFrame {
+public class inventoryInformationForm extends JFrame {
     private JPanel informationPanel;
     private JTextField IdLibraryTextField;
     private JTextField hallNumTextField;
@@ -39,7 +39,7 @@ public class libraryInformationEditionForm extends JFrame {
     public Date preferDate = null;
 
     private EditionsPageController controller;
-    public libraryInformationEditionForm(EditionsPageController controller){
+    public inventoryInformationForm(EditionsPageController controller){
         this.controller = controller;
         setSize(600, 400);
         this.add(informationPanel);

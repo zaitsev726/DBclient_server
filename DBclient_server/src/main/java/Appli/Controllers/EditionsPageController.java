@@ -10,7 +10,8 @@ import Appli.Services.Impl.EditionServiceImpl;
 import Appli.Services.Impl.InformationServiceImpl;
 import Appli.Services.InformationService;
 import Appli.UserInterface.Frames.Edition.Information.SearchInformationForm;
-import Appli.UserInterface.Frames.Edition.InvertaryInfo.libraryInformationEditionForm;
+import Appli.UserInterface.Frames.Edition.InvertaryInfo.SearchEditionForm;
+import Appli.UserInterface.Frames.Edition.InvertaryInfo.inventoryInformationForm;
 import Appli.UserInterface.Pages.EditionPage.EditionForm;
 
 import javax.swing.*;
@@ -31,19 +32,22 @@ public class EditionsPageController {
     private String cur_title;
     private Characteristic cur_char;
 
-    private libraryInformationEditionForm libraryInformation;
+    private inventoryInformationForm libraryInformation;
     private SearchInformationForm informationForm;
+    private SearchEditionForm searchEditionForm;
+
 
     public EditionsPageController(EditionForm editionForm) {
         this.editionForm = editionForm;
         this.informationForm = new SearchInformationForm(this);
+        this.searchEditionForm = new SearchEditionForm(this);
 
         this.charService = new CharacteristicServiceImpl();
         this.editionService = new EditionServiceImpl();
         this.informationService = new InformationServiceImpl();
 
-        initializationListeners();
         setStartValues();
+        initializationListeners();
     }
 
     private void setStartValues() {
@@ -54,14 +58,14 @@ public class EditionsPageController {
     }
 
     private void initializationListeners() {
-        editionForm.IdEditionTextField.addActionListener(e -> {
+       /* editionForm.IdEditionTextField.addActionListener(e -> {
             try {
                 cur_IdEdition = Long.parseLong(editionForm.IdEditionTextField.getText());
             } catch (NumberFormatException exception) {
                 JOptionPane.showMessageDialog(editionForm, "Введите корректный номер библиотеки");
                 setStartValues();
             }
-        });
+        });*/
 
         editionForm.typeTextField.addActionListener(e -> {
             String str = editionForm.typeTextField.getText();
@@ -101,7 +105,7 @@ public class EditionsPageController {
                 characteristic.setTitle(cur_title);
                 cur_char = charService.save(characteristic);
                 if (cur_char.getId_edition() != null && cur_char.getId_edition() != 0) {
-                    libraryInformation = new libraryInformationEditionForm(this);
+                    libraryInformation = new inventoryInformationForm(this);
 
                     libraryInformation.backButton.addActionListener(f -> {
                         charService.delete(cur_char.getId_edition());
@@ -141,8 +145,9 @@ public class EditionsPageController {
                             }
                             informationForm.updateTable(resultList);
                             informationForm.setVisible(true);
-                            informationForm.dispose();
-                            informationForm = null;
+
+                            libraryInformation.dispose();
+                            libraryInformation = null;
 
                         }
                     });
@@ -159,7 +164,7 @@ public class EditionsPageController {
 
         editionForm.inventoryInformationButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(editionForm, "Информация на данной странице никак не учитывается!");
-            libraryInformation = new libraryInformationEditionForm(this);
+            libraryInformation = new inventoryInformationForm(this);
 
             libraryInformation.backButton.addActionListener(f -> {
                 charService.delete(cur_char.getId_edition());
@@ -207,12 +212,30 @@ public class EditionsPageController {
                 } else if (shelf_num != 0) {
                     editionList = editionService.findByShelfNum(shelf_num);
                 }
-
+                System.out.println(editionList);
                 if(editionList.size() > 0){
                     ArrayList<String[]> resultList = new ArrayList<>();
+                    for(Edition edition : editionList){
+                        String[] str = new String[7];
+                        str[0] = String.valueOf(edition.getId_edition());
+                        str[1] = String.valueOf(edition.getId_library());
+                        str[2] = String.valueOf(edition.getHall_num());
+                        str[3] = String.valueOf(edition.getRack_num());
+                        str[4] = String.valueOf(edition.getShelf_num());
+                        str[5] = String.valueOf(edition.getDate_adding());
+                        if(edition.getDate_removing() == null){
+                            str[6] = "<null>";
+                        }else
+                            str[6] = String.valueOf(edition.getDate_removing());
+                        resultList.add(str);
+                    }
+
+                    searchEditionForm.updateTable(resultList);
+                    searchEditionForm.setVisible(true);
 
                 }else
                     JOptionPane.showMessageDialog(libraryInformation, "Таких книг нету!");
+
             });
 
             libraryInformation.addButton.addActionListener(f -> {
@@ -282,5 +305,21 @@ public class EditionsPageController {
         information.setComposition(composition);
         information.setPopularity(popularity);
         return informationService.update(information);
+    }
+
+    public void queryForUpdateEdition(long id_edition, long id_library, int hall_num, int rack_num, int shelf_num, Date dateAdding, Date dateRemoving) {
+        Edition edition = new Edition();
+        edition.setId_edition(id_edition);
+        edition.setId_library(id_library);
+        edition.setHall_num(hall_num);
+        edition.setRack_num(rack_num);
+        edition.setShelf_num(shelf_num);
+        edition.setDate_adding(dateAdding);
+        edition.setDate_removing(dateRemoving);
+        editionService.update(edition);
+    }
+
+    public void queryForDeleteEdition(long id_edition) {
+        editionService.delete(id_edition);
     }
 }

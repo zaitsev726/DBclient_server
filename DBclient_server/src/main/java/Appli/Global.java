@@ -11,6 +11,8 @@ import Appli.UserInterface.InterfaceController;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -81,6 +83,9 @@ public class Global {
         date.setYear(103);
         date.setMonth(10);
         date.setDate(3);
+        //String str = "12.31.1999";
+
+       // System.out.println(date);
        // System.out.println(date);
        // System.out.println(e.findByMoreDateAdding(date));
 
