@@ -117,4 +117,13 @@ public class InformationServiceImpl implements InformationService {
         em.getTransaction().commit();
         em.close();
     }
+
+    @Override
+    public Information mostPopular() {
+        EntityManager em = emf.createEntityManager();
+        List<Information> information = em.createQuery("select i from Information i ORDER BY i.popularity DESC ", Information.class)
+                .getResultList();
+        em.close();
+        return information.get(0);
+    }
 }

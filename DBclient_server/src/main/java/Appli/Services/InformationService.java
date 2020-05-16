@@ -17,6 +17,7 @@ public interface InformationService {
     List<Information> findByComposition(String composition);
     List<Information> findByAuthorAndComposition(String author, String composition);
 
+    Information mostPopular();
     void insertStartInformation(List<Information> informationList);
 
 }

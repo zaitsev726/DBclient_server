@@ -270,49 +270,17 @@ public class EditionsPageController {
                 informationForm = null;
             });
 
+            informationForm.mostPopularButton.addActionListener(f -> {
+                Information information = informationService.mostPopular();
+                JOptionPane.showMessageDialog(informationForm,
+                        new String[]{"Самое популярное произведение",
+                                " Автор: " +information.getAuthor(),
+                                " Название: " + information.getComposition(),
+                                " Популярность: " + information.getPopularity()}, "Популярнсоть", JOptionPane.INFORMATION_MESSAGE);
+            });
 
         });
 
-   /*     libraryInformation.backButton.addActionListener(e -> {
-            charService.delete(cur_char.getId_edition());
-            cur_char = new Characteristic();
-            setStartValues();
-            libraryInformation.dispose();
-            libraryInformation = null;
-        });
-
-        libraryInformation.addButton.addActionListener(e -> {
-            if(libraryInformation.IdLib != 0 && libraryInformation.hallNum != 0 && libraryInformation.rackNum != 0
-                    && libraryInformation.shelfNum != 0 ) {
-                Edition edition = new Edition();
-                edition.setId_edition(cur_char.getId_edition());
-                edition.setId_library(libraryInformation.IdLib);
-                edition.setHall_num(libraryInformation.hallNum);
-                edition.setRack_num(libraryInformation.rackNum);
-                edition.setShelf_num(libraryInformation.shelfNum);
-                editionService.save(edition);
-
-                List<Information> informationList = new ArrayList<>();
-                ArrayList<String[]> resultList = new ArrayList<>();
-                for(int i = 0; i < 4; i++){
-                    Information inf = new Information();
-                    inf.setId_edition(cur_char.getId_edition());
-
-                    inf.setAuthor("Неизвестно");
-                    inf.setComposition("Неизвестно");
-                    inf.setPopularity(0);
-                    informationList.add(inf);
-                }
-                informationService.insertStartInformation(informationList);
-                informationList = informationService.findByIdEdition(cur_char.getId_edition());
-                for(Information inf : informationList){
-                    resultList.add(new String[]{String.valueOf(inf.getId_record()), String.valueOf(inf.getId_edition()), inf.getAuthor(),inf.getComposition(), String.valueOf(inf.getPopularity())});
-                }
-                informationForm.updateTable(resultList);
-                informationForm.setVisible(true);
-            }
-        });
-*/
     }
 
     public void queryForUpdateInformation(long id_record, long id_edition, String author, String composition, int popularity) {
