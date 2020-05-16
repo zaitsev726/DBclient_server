@@ -1,5 +1,6 @@
 package Appli.UserInterface.Frames.Edition.Information;
 
+import Appli.Controllers.Checker;
 import Appli.Controllers.EditionsPageController;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ public class informationForm extends JFrame{
     private JTextField authorTextField;
     private JTextField compositionTextField;
     private JButton найтиСамоеПопулярноеButton;
-    private JButton найтиButton;
+    private JButton searchButton;
     private JButton назадButton;
     private JTextField popularityTextField;
     private JCheckBox checkBox1;
@@ -18,6 +19,11 @@ public class informationForm extends JFrame{
     private JLabel authorLabel;
     private JLabel compositionLabel;
     private JLabel popularityLabel;
+
+    private long Id_edition;
+    private String author;
+    private String composition;
+    private int popularity;
 
     private EditionsPageController controller;
     public informationForm(EditionsPageController controller){
@@ -31,10 +37,41 @@ public class informationForm extends JFrame{
     }
 
     private void setDefault() {
-
+        Id_edition = 0L;
+        author = "";
+        composition = "";
+        popularity = 0;
     }
 
     private void initializationListeners() {
+        this.IDTextField.addActionListener(e -> {
+            try {
+                Id_edition = Long.parseLong(this.IDTextField.getText());
+            }catch (NumberFormatException exception){
+                JOptionPane.showMessageDialog(this, "Введите корректный номер библиотеки");
+            }
+        });
 
+        this.authorTextField.addActionListener(e -> {
+           if(Checker.getInstance().checkString(authorTextField.getText())){
+                author = authorTextField.getText();
+           }else
+               JOptionPane.showMessageDialog(this, "Введите корректное имя автора");
+        });
+
+        this.compositionTextField.addActionListener(e -> {
+            if(Checker.getInstance().checkString(compositionTextField.getText())){
+                composition = compositionTextField.getText();
+            }else
+                JOptionPane.showMessageDialog(this, "Введите корректное название произведение");
+        });
+
+        this.popularityTextField.addActionListener(e -> {
+            try {
+                popularity = Integer.parseInt(this.popularityTextField.getText());
+            }catch (NumberFormatException exception){
+                JOptionPane.showMessageDialog(this, "Введите корректный номер библиотеки");
+            }
+        });
     }
 }
