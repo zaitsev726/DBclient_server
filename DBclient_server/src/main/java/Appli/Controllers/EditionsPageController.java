@@ -11,6 +11,7 @@ import Appli.Services.Impl.EditionServiceImpl;
 import Appli.Services.Impl.InformationServiceImpl;
 import Appli.Services.InformationService;
 import Appli.UserInterface.Frames.Edition.Information.SearchInformationForm;
+import Appli.UserInterface.Frames.Edition.Information.informationForm;
 import Appli.UserInterface.Frames.Edition.InvertaryInfo.SearchEditionForm;
 import Appli.UserInterface.Frames.Edition.InvertaryInfo.inventoryInformationForm;
 import Appli.UserInterface.Frames.Edition.Rules.SearchRulesForm;
@@ -35,6 +36,8 @@ public class EditionsPageController {
     private Characteristic cur_char;
 
     private inventoryInformationForm libraryInformation;
+    private Appli.UserInterface.Frames.Edition.Information.informationForm informationForm;
+
     private SearchInformationForm searchInformationForm;
     private SearchEditionForm searchEditionForm;
     private SearchRulesForm searchRulesForm;
@@ -101,6 +104,14 @@ public class EditionsPageController {
             }
         });
 
+        /**
+         * Добавляем новое издание. Сначала происходит добавление издания в Characteristic (т.е. характериситики издания)
+         * Это его "физическая" часть, т.е. как оно выглядит в жизни. Например, книга "Сборник стихотворений А.С.Пушкина".
+         * В Characteristic будут его физические характеристики, т.е.данные о том, что это СБОРНИК, данные о том, кто его написал.
+         * НЕ БУДЕТ информации о его содержимом и информации про библиотеку
+         * Затем вводятся информация о БИБЛИОТЕКЕ, в которой лежит издание
+         * И затем вводятся 5 произведений "по умолчанию", которые можно менять
+         */
         editionForm.addButton.addActionListener(e -> {
             if (!cur_type.equals("") && !cur_author.equals("") && !cur_title.equals("")) {
                 Characteristic characteristic = new Characteristic();
@@ -166,13 +177,15 @@ public class EditionsPageController {
             setStartValues();
         });
 
+
+        /*
+          Поиск Инвентраной информации, т.е. библиотечной информации про издание ( полка, шкаф и т.д.)
+         */
         editionForm.inventoryInformationButton.addActionListener(e -> {
             JOptionPane.showMessageDialog(editionForm, "Информация на данной странице никак не учитывается!");
             libraryInformation = new inventoryInformationForm(this);
 
             libraryInformation.backButton.addActionListener(f -> {
-                charService.delete(cur_char.getId_edition());
-                cur_char = new Characteristic();
                 setStartValues();
                 libraryInformation.dispose();
                 libraryInformation = null;
@@ -202,11 +215,11 @@ public class EditionsPageController {
                 } else if (id_lib != 0 && shelf_num != 0) {
                     editionList = editionService.findByIdLibAndShelfNum(id_lib, shelf_num);
                 } else if (hall_num != 0 && rack_num != 0) {
-                    editionList = editionService.findByHallNumAndRackNum(hall_num,rack_num);
+                    editionList = editionService.findByHallNumAndRackNum(hall_num, rack_num);
                 } else if (hall_num != 0 && shelf_num != 0) {
-                    editionList = editionService.findByHallNumAndShelfNum(hall_num,shelf_num);
+                    editionList = editionService.findByHallNumAndShelfNum(hall_num, shelf_num);
                 } else if (rack_num != 0 && shelf_num != 0) {
-                    editionList = editionService.findByRackNumAndShelfNum(rack_num,shelf_num);
+                    editionList = editionService.findByRackNumAndShelfNum(rack_num, shelf_num);
                 } else if (id_lib != 0) {
                     editionList = editionService.findByIdLib(id_lib);
                 } else if (hall_num != 0) {
@@ -217,9 +230,9 @@ public class EditionsPageController {
                     editionList = editionService.findByShelfNum(shelf_num);
                 }
                 System.out.println(editionList);
-                if(editionList.size() > 0){
+                if (editionList.size() > 0) {
                     ArrayList<String[]> resultList = new ArrayList<>();
-                    for(Edition edition : editionList){
+                    for (Edition edition : editionList) {
                         String[] str = new String[7];
                         str[0] = String.valueOf(edition.getId_edition());
                         str[1] = String.valueOf(edition.getId_library());
@@ -227,9 +240,9 @@ public class EditionsPageController {
                         str[3] = String.valueOf(edition.getRack_num());
                         str[4] = String.valueOf(edition.getShelf_num());
                         str[5] = String.valueOf(edition.getDate_adding());
-                        if(edition.getDate_removing() == null){
+                        if (edition.getDate_removing() == null) {
                             str[6] = "<null>";
-                        }else
+                        } else
                             str[6] = String.valueOf(edition.getDate_removing());
                         resultList.add(str);
                     }
@@ -237,7 +250,7 @@ public class EditionsPageController {
                     searchEditionForm.updateTable(resultList);
                     searchEditionForm.setVisible(true);
 
-                }else
+                } else
                     JOptionPane.showMessageDialog(libraryInformation, "Таких книг нету!");
 
             });
@@ -246,6 +259,20 @@ public class EditionsPageController {
                 JOptionPane.showMessageDialog(editionForm, "Вы ищите Издание, а не добавляете!");
             });
         });
+
+        editionForm.informationButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(editionForm, "Информация на данной странице никак не учитывается!");
+            informationForm = new informationForm(this);
+
+            informationForm.backButton.addActionListener(f -> {
+                setStartValues();
+                informationForm.dispose();
+                informationForm = null;
+            });
+
+
+        });
+
    /*     libraryInformation.backButton.addActionListener(e -> {
             charService.delete(cur_char.getId_edition());
             cur_char = new Characteristic();
@@ -302,7 +329,7 @@ public class EditionsPageController {
         informationService.delete(id_record);
     }
 
-    public Information queryForInsertInformation(long id_edition, String author, String composition, int popularity){
+    public Information queryForInsertInformation(long id_edition, String author, String composition, int popularity) {
         Information information = new Information();
         information.setId_edition(id_edition);
         information.setAuthor(author);
@@ -327,15 +354,15 @@ public class EditionsPageController {
         editionService.delete(id_edition);
     }
 
-    public void queryForUpdateRule(long id_rule, long id_edition, String rule){
+    public void queryForUpdateRule(long id_rule, long id_edition, String rule) {
 
     }
 
-    public void queryForDeleteRule(long id_rule){
+    public void queryForDeleteRule(long id_rule) {
 
     }
 
-    public Rule queryForInsertRule(long id_edition, String rule){
+    public Rule queryForInsertRule(long id_edition, String rule) {
         return null;
     }
 }

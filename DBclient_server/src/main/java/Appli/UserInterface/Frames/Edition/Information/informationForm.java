@@ -10,9 +10,9 @@ public class informationForm extends JFrame{
     private JTextField IDTextField;
     private JTextField authorTextField;
     private JTextField compositionTextField;
-    private JButton найтиСамоеПопулярноеButton;
-    private JButton searchButton;
-    private JButton назадButton;
+    public JButton mostPopularButton;
+    public JButton searchButton;
+    public JButton backButton;
     private JTextField popularityTextField;
     private JCheckBox checkBox1;
     private JLabel IdLabel;
@@ -20,10 +20,10 @@ public class informationForm extends JFrame{
     private JLabel compositionLabel;
     private JLabel popularityLabel;
 
-    private long Id_edition;
-    private String author;
-    private String composition;
-    private int popularity;
+    public long Id_edition;
+    public String author;
+    public String composition;
+    public int popularity;
 
     private EditionsPageController controller;
     public informationForm(EditionsPageController controller){

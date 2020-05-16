@@ -92,9 +92,6 @@ public class inventoryInformationForm extends JFrame {
                 JOptionPane.showMessageDialog(this, "Введите корректный номер полки");
             }
         });
-
-
-
     }
 
 
