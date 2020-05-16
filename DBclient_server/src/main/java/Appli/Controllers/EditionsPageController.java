@@ -35,14 +35,14 @@ public class EditionsPageController {
     private Characteristic cur_char;
 
     private inventoryInformationForm libraryInformation;
-    private SearchInformationForm informationForm;
+    private SearchInformationForm searchInformationForm;
     private SearchEditionForm searchEditionForm;
     private SearchRulesForm searchRulesForm;
 
     public EditionsPageController(EditionForm editionForm) {
         this.editionForm = editionForm;
 
-        this.informationForm = new SearchInformationForm(this);
+        this.searchInformationForm = new SearchInformationForm(this);
         this.searchEditionForm = new SearchEditionForm(this);
         this.searchRulesForm = new SearchRulesForm(this);
 
@@ -147,8 +147,8 @@ public class EditionsPageController {
                             for (Information inf : informationList) {
                                 resultList.add(new String[]{String.valueOf(inf.getId_record()), String.valueOf(inf.getId_edition()), inf.getAuthor(), inf.getComposition(), String.valueOf(inf.getPopularity())});
                             }
-                            informationForm.updateTable(resultList);
-                            informationForm.setVisible(true);
+                            searchInformationForm.updateTable(resultList);
+                            searchInformationForm.setVisible(true);
 
                             libraryInformation.dispose();
                             libraryInformation = null;

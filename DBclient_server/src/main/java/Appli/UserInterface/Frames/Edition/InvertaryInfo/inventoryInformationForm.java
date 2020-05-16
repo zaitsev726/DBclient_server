@@ -30,6 +30,8 @@ public class inventoryInformationForm extends JFrame {
     private JLabel currentDateLabel;
     private JTextField textField1;
     private JTextField textField2;
+    private JCheckBox checkBox2;
+    private JCheckBox checkBox3;
 
     public long IdLib = 0;
     public int hallNum = 0;
