@@ -1,32 +1,26 @@
 package Appli.UserInterface.Frames.Edition.Rules;
 
 import Appli.Controllers.EditionsPageController;
-import Appli.Entities.Information;
 import Appli.Entities.Rule;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class SearchRulesForm extends JFrame {
-    private JTable resultTable;
-    private DefaultTableModel tableModel;
-    private ArrayList<String[]> currentLibraries;
+    private final JTable resultTable;
+    private final DefaultTableModel tableModel;
+    private ArrayList<String[]> currentRules;
 
-    private EditionsPageController controller;
-    private JButton removeRowButton;
-    private JButton addRowButton;
-    private JButton backButton;
-
-    // Заголовки столбцов
-    private final Object[] columnsHeader = new String[]{"ID правила", "ID издания", "Правило"};
+    private final EditionsPageController controller;
+    private final JButton removeRowButton;
+    private final JButton addRowButton;
+    private final JButton backButton;
 
     public SearchRulesForm(EditionsPageController controller) {
-        currentLibraries = new ArrayList<>();
+        currentRules = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
         addRowButton = new JButton("Добавить правило");
@@ -36,6 +30,8 @@ public class SearchRulesForm extends JFrame {
         setSize(800, 300);
 
         tableModel = new DefaultTableModel();
+        // Заголовки столбцов
+        Object[] columnsHeader = new String[]{"ID правила", "ID издания", "Правило"};
         tableModel.setColumnIdentifiers(columnsHeader);
 
 
@@ -53,7 +49,6 @@ public class SearchRulesForm extends JFrame {
         getContentPane().add(buttons, "South");
 
         initializationListeners();
-        //setVisible(true);
     }
 
     private void initializationListeners() {
@@ -96,15 +91,14 @@ public class SearchRulesForm extends JFrame {
             int id_edition = Integer.parseInt(String.valueOf(resultTable.getValueAt(idx, 1)));
             Rule information = controller.queryForInsertRule(id_edition, "Неизвестно");
             tableModel.insertRow(idx + 1, new String[]{
-                    // String.valueOf(information.getId_record()),
-                    //   String.valueOf(id_edition), "Неизвестно", "Неизвестно", "0"});
-            });
+                     String.valueOf(information.getId_edition()),
+                     String.valueOf(id_edition), "Неизвестно"});
         });
 
 
         backButton.addActionListener(e -> {
             tableModel.setRowCount(0);
-            currentLibraries = new ArrayList<>();
+            currentRules = new ArrayList<>();
             this.dispose();
         });
     }
@@ -112,7 +106,7 @@ public class SearchRulesForm extends JFrame {
     public void updateTable(ArrayList<String[]> array) {
         for (String[] row : array) {
             boolean adding = true;
-            for (String[] cur : currentLibraries) {
+            for (String[] cur : currentRules) {
                 if (cur[0].equals(row[0])) {
                     adding = false;
                     break;
@@ -120,7 +114,7 @@ public class SearchRulesForm extends JFrame {
             }
             if (adding) {
                 tableModel.addRow(row);
-                currentLibraries.add(row);
+                currentRules.add(row);
             }
         }
     }

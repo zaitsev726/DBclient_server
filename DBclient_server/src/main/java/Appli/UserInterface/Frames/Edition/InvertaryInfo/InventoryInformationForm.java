@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class inventoryInformationForm extends JFrame {
+public class InventoryInformationForm extends JFrame {
     private JPanel informationPanel;
     private JTextField IdLibraryTextField;
     private JTextField hallNumTextField;
@@ -48,7 +48,7 @@ public class inventoryInformationForm extends JFrame {
 
 
     private EditionsPageController controller;
-    public inventoryInformationForm(EditionsPageController controller){
+    public InventoryInformationForm(EditionsPageController controller){
         this.controller = controller;
         setSize(800, 600);
         this.add(informationPanel);

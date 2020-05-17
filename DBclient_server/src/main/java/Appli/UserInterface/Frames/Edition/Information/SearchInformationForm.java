@@ -1,9 +1,7 @@
 package Appli.UserInterface.Frames.Edition.Information;
 
 import Appli.Controllers.EditionsPageController;
-import Appli.Controllers.LibraryPageController;
 import Appli.Entities.Information;
-import Appli.Entities.Librarian;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -14,7 +12,7 @@ import java.util.ArrayList;
 public class SearchInformationForm extends JFrame {
     private JTable resultTable;
     private DefaultTableModel tableModel;
-    private ArrayList<String[]> currentLibraries;
+    private ArrayList<String[]> currentInformation;
 
     private EditionsPageController controller;
     private JButton removeRowButton;
@@ -25,7 +23,7 @@ public class SearchInformationForm extends JFrame {
     private final Object[] columnsHeader = new String[]{"ID записи", "ID издания", "Автор", "Произведение", "Популярность"};
 
     public SearchInformationForm(EditionsPageController controller) {
-        currentLibraries = new ArrayList<>();
+        currentInformation = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
         addRowButton = new JButton("Добавить произведение");
@@ -104,7 +102,7 @@ public class SearchInformationForm extends JFrame {
 
         backButton.addActionListener(e -> {
             tableModel.setRowCount(0);
-            currentLibraries = new ArrayList<>();
+            currentInformation = new ArrayList<>();
             this.dispose();
         });
     }
@@ -112,7 +110,7 @@ public class SearchInformationForm extends JFrame {
     public void updateTable(ArrayList<String[]> array) {
         for (String[] row : array) {
             boolean adding = true;
-            for (String[] cur : currentLibraries) {
+            for (String[] cur : currentInformation) {
                 if (cur[0].equals(row[0])) {
                     adding = false;
                     break;
@@ -120,7 +118,7 @@ public class SearchInformationForm extends JFrame {
             }
             if (adding) {
                 tableModel.addRow(row);
-                currentLibraries.add(row);
+                currentInformation.add(row);
             }
         }
     }

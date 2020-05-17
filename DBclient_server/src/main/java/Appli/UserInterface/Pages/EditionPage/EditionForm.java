@@ -15,7 +15,7 @@ public class EditionForm extends JPanel {
     public JButton searchButton;
     public JButton informationButton;
     public JButton inventoryInformationButton;
-    private JButton правилаButton;
+    public JButton rulesButton;
     private JButton button7;
     private JButton button8;
     private JLabel editionLabel;

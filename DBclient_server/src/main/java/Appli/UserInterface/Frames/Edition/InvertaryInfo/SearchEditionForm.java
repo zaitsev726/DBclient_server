@@ -1,9 +1,7 @@
 package Appli.UserInterface.Frames.Edition.InvertaryInfo;
 
 import Appli.Controllers.EditionsPageController;
-import Appli.Entities.Information;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 public class SearchEditionForm extends JFrame {
     private JTable resultTable;
     private DefaultTableModel tableModel;
-    private ArrayList<String[]> currentLibraries;
+    private ArrayList<String[]> currentEditions;
 
     private EditionsPageController controller;
 
@@ -28,7 +26,7 @@ public class SearchEditionForm extends JFrame {
     private final Object[] columnsHeader = new String[]{"ID издания", "ID библиотеки", "Зал", "Стеллаж", "Полка", "Дата добавления", "Дата удаления"};
 
     public SearchEditionForm(EditionsPageController controller) {
-        currentLibraries = new ArrayList<>();
+        currentEditions = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
         libraryButton = new JButton("Информация о библиотеке");
@@ -121,7 +119,7 @@ public class SearchEditionForm extends JFrame {
 
         backButton.addActionListener(e -> {
             tableModel.setRowCount(0);
-            currentLibraries = new ArrayList<>();
+            currentEditions = new ArrayList<>();
             this.dispose();
         });
     }
@@ -129,7 +127,7 @@ public class SearchEditionForm extends JFrame {
     public void updateTable(ArrayList<String[]> array) {
         for (String[] row : array) {
             boolean adding = true;
-            for (String[] cur : currentLibraries) {
+            for (String[] cur : currentEditions) {
                 if (cur[0].equals(row[0])) {
                     adding = false;
                     break;
@@ -137,7 +135,7 @@ public class SearchEditionForm extends JFrame {
             }
             if (adding) {
                 tableModel.addRow(row);
-                currentLibraries.add(row);
+                currentEditions.add(row);
             }
         }
     }

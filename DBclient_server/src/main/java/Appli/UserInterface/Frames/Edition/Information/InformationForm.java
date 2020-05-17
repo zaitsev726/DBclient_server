@@ -5,7 +5,7 @@ import Appli.Controllers.EditionsPageController;
 
 import javax.swing.*;
 
-public class informationForm extends JFrame{
+public class InformationForm extends JFrame{
     private JPanel informationPanel;
     private JTextField IDTextField;
     private JTextField authorTextField;
@@ -27,7 +27,7 @@ public class informationForm extends JFrame{
     public boolean morePopular;
 
     private EditionsPageController controller;
-    public informationForm(EditionsPageController controller){
+    public InformationForm(EditionsPageController controller){
         this.controller = controller;
         setSize(600, 400);
         this.add(informationPanel);
