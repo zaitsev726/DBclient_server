@@ -14,7 +14,7 @@ public class informationForm extends JFrame{
     public JButton searchButton;
     public JButton backButton;
     private JTextField popularityTextField;
-    private JCheckBox checkBox1;
+    private JCheckBox popularityCheckBox;
     private JLabel IdLabel;
     private JLabel authorLabel;
     private JLabel compositionLabel;
@@ -24,6 +24,7 @@ public class informationForm extends JFrame{
     public String author;
     public String composition;
     public int popularity;
+    public boolean morePopular;
 
     private EditionsPageController controller;
     public informationForm(EditionsPageController controller){
@@ -41,6 +42,8 @@ public class informationForm extends JFrame{
         author = "";
         composition = "";
         popularity = 0;
+        morePopular = false;
+
     }
 
     private void initializationListeners() {
@@ -72,6 +75,10 @@ public class informationForm extends JFrame{
             }catch (NumberFormatException exception){
                 JOptionPane.showMessageDialog(this, "Введите корректный номер библиотеки");
             }
+        });
+
+        this.popularityCheckBox.addActionListener(e -> {
+            morePopular = popularityCheckBox.isSelected();
         });
     }
 }

@@ -114,7 +114,7 @@ public class inventoryInformationForm extends JFrame {
         });
 
         this.curDateCheckBox.addActionListener(e -> {
-            curDate = true;
+            curDate = curDateCheckBox.isSelected();
         });
 
         this.dateAddingTextField.addActionListener(e ->{
@@ -138,11 +138,11 @@ public class inventoryInformationForm extends JFrame {
         });
 
         this.lessCheckBox.addActionListener(e -> {
-            lessThenAdding = true;
+            lessThenAdding = lessCheckBox.isSelected();
         });
 
         this.moreCheckBox.addActionListener(e -> {
-            moreThenRemoving = true;
+            moreThenRemoving = moreCheckBox.isSelected();
         });
     }
 

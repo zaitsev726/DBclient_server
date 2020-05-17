@@ -165,12 +165,12 @@
           <font name="Fira Code Medium" size="20"/>
         </properties>
       </component>
-      <component id="97107" class="javax.swing.JCheckBox" binding="checkBox1" default-binding="true">
+      <component id="97107" class="javax.swing.JCheckBox" binding="popularityCheckBox">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="CheckBox"/>
+          <text value="Более популярные?"/>
         </properties>
       </component>
       <vspacer id="6d57e">
