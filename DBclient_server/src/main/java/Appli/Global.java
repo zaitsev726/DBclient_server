@@ -39,7 +39,7 @@ public class Global {
         //System.out.println(b.getById((long) 3).getEditions());
 
        // edition.setId_edition(characteristic.getId_edition());
-/*
+
         Edition edition = new Edition();
         edition.setId_edition((long) 60);
         edition.setId_library((long) 2);
@@ -70,21 +70,23 @@ public class Global {
        // edition.setCharacteristic(characteristic);
       //  characteristic.setEdition(edition);
 
-       // em.persist(edition);
-        // em.persist(characteristic);
+        edition = em.createQuery("select  ed from Edition ed where ed.id_edition = :id", Edition.class)
+                .setParameter("id", (long) 33)
+                .getSingleResult();
+        System.out.println("***********************************" +  edition.getRules());
+
         em.getTransaction().commit();
         // System.out.println(edition);
         em.clear();
-        Edition edition1 = em.createQuery("select ed from Edition ed where ed.id_edition = :id", Edition.class)
+       /* Edition edition1 = em.createQuery("select ed from Edition ed where ed.id_edition = :id", Edition.class)
                 .setParameter("id", characteristic.getId_edition())
                 .getSingleResult();
+*/
+        System.out.println(edition.getRules());
 
-        System.out.println(edition1.getCharacteristic());
-        */
-        Date date = new Date();
-        date.setYear(103);
-        date.setMonth(10);
-        date.setDate(3);
+        RuleServiceImpl r = new RuleServiceImpl();
+        r.delete((long) 1);
+
         //String str = "12.31.1999";
 
        // System.out.println(date);

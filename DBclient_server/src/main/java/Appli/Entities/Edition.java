@@ -58,7 +58,7 @@ public class Edition {
     /*   @OneToMany(mappedBy = "edition", fetch = FetchType.LAZY)
             private Collection<IssuedBook> records;
       */
-    @OneToMany(mappedBy = "edition", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "edition", fetch = FetchType.LAZY)
     private Collection<Rule> rules;
 
     public Collection<Rule> getRules() { return rules; }

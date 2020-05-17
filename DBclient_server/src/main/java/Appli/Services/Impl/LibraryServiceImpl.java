@@ -25,7 +25,6 @@ public class LibraryServiceImpl implements LibraryService {
         em.persist(library);
         em.getTransaction().commit();
         em.close();
-        System.out.println(library);
     }
 
     @Override
