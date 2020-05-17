@@ -20,7 +20,7 @@ public class SearchLibrariansForm extends JFrame {
     private JButton addRowButton;
 
     // Заголовки столбцов
-    private final Object[] columnsHeader = new String[]{"ID работника", "ID библиотеки", "Норер зала"};
+    private final Object[] columnsHeader = new String[]{"ID работника", "ID библиотеки", "Номер зала"};
 
     public SearchLibrariansForm(LibraryPageController controller) {
         currentLibrarians = new ArrayList<>();

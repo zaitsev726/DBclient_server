@@ -1,18 +1,12 @@
 package Appli.Controllers;
 
-import Appli.Entities.Characteristic;
-import Appli.Entities.Edition;
-import Appli.Entities.Information;
-import Appli.Entities.Rule;
-import Appli.Services.CharacteristicService;
-import Appli.Services.EditionService;
-import Appli.Services.Impl.CharacteristicServiceImpl;
-import Appli.Services.Impl.EditionServiceImpl;
-import Appli.Services.Impl.InformationServiceImpl;
-import Appli.Services.InformationService;
+import Appli.Entities.*;
+import Appli.Services.*;
+import Appli.Services.Impl.*;
 import Appli.UserInterface.Frames.Edition.Information.SearchInformationForm;
 import Appli.UserInterface.Frames.Edition.Information.informationForm;
 import Appli.UserInterface.Frames.Edition.InvertaryInfo.SearchEditionForm;
+import Appli.UserInterface.Frames.Edition.InvertaryInfo.SearchRulesInEditionForm;
 import Appli.UserInterface.Frames.Edition.InvertaryInfo.inventoryInformationForm;
 import Appli.UserInterface.Frames.Edition.Rules.SearchRulesForm;
 import Appli.UserInterface.Pages.EditionPage.EditionForm;
@@ -28,6 +22,8 @@ public class EditionsPageController {
     private CharacteristicService charService;
     private EditionService editionService;
     private InformationService informationService;
+    private LibraryService libraryService;
+    private RuleService ruleService;
 
     private long cur_IdEdition;
     private String cur_type;
@@ -52,6 +48,8 @@ public class EditionsPageController {
         this.charService = new CharacteristicServiceImpl();
         this.editionService = new EditionServiceImpl();
         this.informationService = new InformationServiceImpl();
+        this.libraryService = new LibraryServiceImpl();
+        this.ruleService = new RuleServiceImpl();
 
         setStartValues();
         initializationListeners();
@@ -332,5 +330,21 @@ public class EditionsPageController {
 
     public Rule queryForInsertRule(long id_edition, String rule) {
         return null;
+    }
+
+    public void showCurrentLibrary(long id_library){
+        Library library = libraryService.getById(id_library);
+        JOptionPane.showMessageDialog(searchEditionForm,
+                new String[]{"Информация о библиотеке",
+                        " ID библиотеки: " +library.getId_library(),
+                        " Количество залов: " + library.getHalls_num(),
+                        " Количество книг: " + library.getEditions().size(),
+                        " Количество зарегистрированных читателей: " + library.getReaders().size()}, "Библиотека", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    public void showCurrentRules(long id_edition){
+        List<Rule> rules = ruleService.findByIdEdition(id_edition);
+        SearchRulesInEditionForm rulesInEditionForm = new SearchRulesInEditionForm(rules);
     }
 }

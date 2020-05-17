@@ -63,7 +63,8 @@ public class LibraryServiceImpl implements LibraryService {
         Library library = em.createQuery("select libraries from Library libraries where libraries.id_library = :id", Library.class)
                 .setParameter("id", id)
                 .getSingleResult();
-       // System.out.println(library.getLibrarians());
+        System.out.println(library.getLibrarians());
+        System.out.println(library.getEditions());
         em.close();
         return library;
     }

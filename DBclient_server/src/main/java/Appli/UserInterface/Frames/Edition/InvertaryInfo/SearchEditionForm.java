@@ -18,8 +18,11 @@ public class SearchEditionForm extends JFrame {
     private ArrayList<String[]> currentLibraries;
 
     private EditionsPageController controller;
+
     private JButton removeRowButton;
     private JButton backButton;
+    private JButton libraryButton;
+    private JButton rulesButton;
 
     // Заголовки столбцов
     private final Object[] columnsHeader = new String[]{"ID издания", "ID библиотеки", "Зал", "Стеллаж", "Полка", "Дата добавления", "Дата удаления"};
@@ -28,7 +31,10 @@ public class SearchEditionForm extends JFrame {
         currentLibraries = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
+        libraryButton = new JButton("Информация о библиотеке");
+        rulesButton = new JButton("Правила издания");
         backButton = new JButton("Очистить и выйти");
+
 
         setTitle("Результаты поиска изданий");
         setSize(800, 300);
@@ -46,6 +52,8 @@ public class SearchEditionForm extends JFrame {
 
         JPanel buttons = new JPanel();
         buttons.add(removeRowButton);
+        buttons.add(libraryButton);
+        buttons.add(rulesButton);
         buttons.add(backButton);
         getContentPane().add(buttons, "South");
 
@@ -81,10 +89,34 @@ public class SearchEditionForm extends JFrame {
         removeRowButton.addActionListener(e -> {
             // Номер выделенной строки
             int row = resultTable.getSelectedRow();
-            // Удаление выделенной строки
-            controller.queryForDeleteEdition(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))));
-            tableModel.removeRow(row);
+            if(row >= 0) {
+                // Удаление выделенной строки
+                controller.queryForDeleteEdition(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))));
+                tableModel.removeRow(row);
+            }else
+                JOptionPane.showMessageDialog(resultTable, "Выберите строку");
         });
+
+        libraryButton.addActionListener(e -> {
+            // Номер выделенной строки
+            int row = resultTable.getSelectedRow();
+            // Удаление выделенной строки
+            if(row >= 0) {
+                controller.showCurrentLibrary(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 1))));
+            }else
+                JOptionPane.showMessageDialog(resultTable, "Выберите строку");
+        });
+
+        rulesButton.addActionListener(e -> {
+            // Номер выделенной строки
+            int row = resultTable.getSelectedRow();
+            // Удаление выделенной строки
+            if(row >= 0) {
+                controller.showCurrentRules(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))));
+            }else
+                JOptionPane.showMessageDialog(resultTable, "Выберите строку");
+        });
+
 
 
         backButton.addActionListener(e -> {

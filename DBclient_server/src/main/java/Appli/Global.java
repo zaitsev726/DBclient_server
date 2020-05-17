@@ -22,7 +22,7 @@ public class Global {
     private InterfaceController interfaceController;
 
     public Global(){
-       // interfaceController = new InterfaceController();
+        interfaceController = new InterfaceController();
         AllReaderServiceImpl a = new AllReaderServiceImpl();
         LibraryServiceImpl b = new LibraryServiceImpl();
         LibrarianServiceImpl c = new LibrarianServiceImpl();
@@ -40,7 +40,7 @@ public class Global {
 
        // edition.setId_edition(characteristic.getId_edition());
 
-        Edition edition = new Edition();
+    /*    Edition edition = new Edition();
         edition.setId_edition((long) 60);
         edition.setId_library((long) 2);
         edition.setHall_num(1);
@@ -81,11 +81,11 @@ public class Global {
        /* Edition edition1 = em.createQuery("select ed from Edition ed where ed.id_edition = :id", Edition.class)
                 .setParameter("id", characteristic.getId_edition())
                 .getSingleResult();
-*/
-        System.out.println(edition.getRules());
 
-        RuleServiceImpl r = new RuleServiceImpl();
-        r.delete((long) 1);
+        System.out.println(edition.getRules());
+        */
+      //  RuleServiceImpl r = new RuleServiceImpl();
+      //  r.delete((long) 1);
 
         //String str = "12.31.1999";
 
