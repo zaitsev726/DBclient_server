@@ -195,6 +195,7 @@ public class EditionsPageController {
 
             inventoryLibraryInformation.searchButton.addActionListener(f -> {
                 List<Edition> editionList = new ArrayList<>();
+                long id_edition = inventoryLibraryInformation.IdEdition;
                 long id_lib = inventoryLibraryInformation.IdLib;
                 int hall_num = inventoryLibraryInformation.hallNum;
                 int rack_num = inventoryLibraryInformation.rackNum;
@@ -202,7 +203,10 @@ public class EditionsPageController {
                 Date adding = inventoryLibraryInformation.dateAdding;
                 Date removing = inventoryLibraryInformation.dateRemoving;
 
-                if (id_lib == 0 && hall_num == 0 && rack_num == 0 && shelf_num == 0 && adding == null && removing == null) {
+                if(id_edition != 0){
+                    editionList.add(editionService.findById(id_edition));
+                }
+                else if (id_lib == 0 && hall_num == 0 && rack_num == 0 && shelf_num == 0 && adding == null && removing == null) {
                     editionList = editionService.findAll();
                 } else if (id_lib == 0 && hall_num == 0 && rack_num == 0 && shelf_num == 0) {
                     if (adding != null && removing != null) {
@@ -290,11 +294,11 @@ public class EditionsPageController {
                         str[2] = String.valueOf(edition.getHall_num());
                         str[3] = String.valueOf(edition.getRack_num());
                         str[4] = String.valueOf(edition.getShelf_num());
-                        str[5] = String.valueOf(edition.getDate_adding());
+                        str[5] = (edition.getDate_adding().getYear() + 1900) + "-" + edition.getDate_adding().getMonth() + "-" + edition.getDate_adding().getDate();
                         if (edition.getDate_removing() == null) {
                             str[6] = "<null>";
                         } else
-                            str[6] = String.valueOf(edition.getDate_removing());
+                            str[6] = (edition.getDate_removing().getYear() + 1900) + "-" + edition.getDate_removing().getMonth() + "-" + edition.getDate_removing().getDate();
                         resultList.add(str);
                     }
 

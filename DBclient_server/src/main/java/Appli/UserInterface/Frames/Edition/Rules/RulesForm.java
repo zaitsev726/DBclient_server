@@ -17,7 +17,7 @@ public class RulesForm extends JFrame{
 
     public RulesForm(EditionsPageController controller){
         this.controller = controller;
-        setSize(800, 600);
+        setSize(400, 400);
         this.add(rulesPanel);
         setVisible(true);
         setTitle("Информация о правилах");

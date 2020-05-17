@@ -29,7 +29,7 @@ public class InformationForm extends JFrame{
     private EditionsPageController controller;
     public InformationForm(EditionsPageController controller){
         this.controller = controller;
-        setSize(600, 400);
+        setSize(800, 400);
         this.add(informationPanel);
         setVisible(true);
         setTitle("Информация о издании");

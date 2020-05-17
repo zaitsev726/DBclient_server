@@ -89,9 +89,9 @@ public class SearchRulesForm extends JFrame {
                 idx = 0;
 
             int id_edition = Integer.parseInt(String.valueOf(resultTable.getValueAt(idx, 1)));
-            Rule information = controller.queryForInsertRule(id_edition, "Неизвестно");
+            Rule rule = controller.queryForInsertRule(id_edition, "Неизвестно");
             tableModel.insertRow(idx + 1, new String[]{
-                     String.valueOf(information.getId_edition()),
+                     String.valueOf(rule.getId_rule()),
                      String.valueOf(id_edition), "Неизвестно"});
         });
 

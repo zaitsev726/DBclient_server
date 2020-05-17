@@ -1,19 +1,11 @@
 package Appli.UserInterface.Frames.Edition.InvertaryInfo;
 
 import Appli.Controllers.EditionsPageController;
-import Appli.Entities.AllReader;
-import Appli.Entities.Library;
-import Appli.UserInterface.Frames.Library.SearchReadersInLibraryForm;
 
-import javax.persistence.NoResultException;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class InventoryInformationForm extends JFrame {
     private JPanel informationPanel;
@@ -34,7 +26,10 @@ public class InventoryInformationForm extends JFrame {
     private JTextField dateRemovingTextField;
     private JCheckBox lessCheckBox;
     private JCheckBox moreCheckBox;
+    private JTextField IdEditionTextField;
+    private JLabel idEdition;
 
+    public long IdEdition = 0;
     public long IdLib = 0;
     public int hallNum = 0;
     public int rackNum = 0;
@@ -59,6 +54,7 @@ public class InventoryInformationForm extends JFrame {
     }
 
     private void setDefault() {
+        IdEdition = 0;
         IdLib = 0;
         hallNum = 0;
         rackNum = 0;
@@ -72,6 +68,16 @@ public class InventoryInformationForm extends JFrame {
     }
 
     private void initializationListeners() {
+
+        this.IdEditionTextField.addActionListener(e -> {
+            try {
+                IdEdition = Long.parseLong(this.IdEditionTextField.getText());
+            }catch (NumberFormatException exception){
+                JOptionPane.showMessageDialog(this, "Введите корректный номер библиотеки");
+                JOptionPane.showMessageDialog(this, "Ваши значения сброшены на пустые");
+                setDefault();
+            }
+        });
 
         this.IdLibraryTextField.addActionListener(e -> {
             try {
@@ -129,7 +135,7 @@ public class InventoryInformationForm extends JFrame {
 
         this.dateRemovingTextField.addActionListener(e ->{
             try {
-                dateRemoving = new SimpleDateFormat("yyyy-MM-dd").parse(dateAddingTextField.getText());
+                dateRemoving = new SimpleDateFormat("yyyy-MM-dd").parse(dateRemovingTextField.getText());
             } catch (ParseException ignored) {
                 JOptionPane.showMessageDialog(this, "Неправильный формат даты.Ожидается yyyy-MM-dd");
                 JOptionPane.showMessageDialog(this, "Ваши значения сброшены на пустые");
