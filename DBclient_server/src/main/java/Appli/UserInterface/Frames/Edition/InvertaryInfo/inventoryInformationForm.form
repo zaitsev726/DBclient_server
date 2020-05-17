@@ -188,23 +188,23 @@
           <text value="Поиск"/>
         </properties>
       </component>
-      <component id="43408" class="javax.swing.JCheckBox" binding="checkBox2" default-binding="true">
+      <component id="43408" class="javax.swing.JCheckBox" binding="lessCheckBox">
         <constraints>
-          <grid row="9" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="9" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="CheckBox"/>
+          <text value="Раньше даты добавления?"/>
         </properties>
       </component>
-      <component id="609f" class="javax.swing.JCheckBox" binding="checkBox3" default-binding="true">
+      <component id="609f" class="javax.swing.JCheckBox" binding="moreCheckBox">
         <constraints>
-          <grid row="9" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="9" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="CheckBox"/>
+          <text value="После даты удаления?"/>
         </properties>
       </component>
-      <component id="b884d" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="b884d" class="javax.swing.JTextField" binding="dateAddingTextField">
         <constraints>
           <grid row="8" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <minimum-size width="200" height="30"/>
@@ -231,7 +231,7 @@
           <text value="Дата добавления"/>
         </properties>
       </component>
-      <component id="f877b" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="f877b" class="javax.swing.JTextField" binding="dateRemovingTextField">
         <constraints>
           <grid row="8" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <minimum-size width="200" height="30"/>
