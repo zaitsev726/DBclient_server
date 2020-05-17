@@ -19,7 +19,7 @@ public class inventoryInformationForm extends JFrame {
     private JTextField hallNumTextField;
     private JTextField rackNumTextField;
     private JTextField shelfNumTextField;
-    private JCheckBox checkBox1;
+    private JCheckBox curDateCheckBox;
     public JButton addButton;
     public JButton searchButton;
     public JButton backButton;
@@ -43,7 +43,7 @@ public class inventoryInformationForm extends JFrame {
     private EditionsPageController controller;
     public inventoryInformationForm(EditionsPageController controller){
         this.controller = controller;
-        setSize(600, 400);
+        setSize(800, 600);
         this.add(informationPanel);
         setVisible(true);
         setTitle("Информация о издании");
@@ -92,6 +92,12 @@ public class inventoryInformationForm extends JFrame {
                 JOptionPane.showMessageDialog(this, "Введите корректный номер полки");
             }
         });
+
+        this.curDateCheckBox.addActionListener(e -> {
+            curDate = true;
+        });
+
+
     }
 
 
