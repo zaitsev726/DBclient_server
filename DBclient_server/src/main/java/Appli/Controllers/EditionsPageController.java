@@ -199,7 +199,9 @@ public class EditionsPageController {
                 Date adding = libraryInformation.dateAdding;
                 Date removing = libraryInformation.dateRemoving;
 
-                if (id_lib == 0 && hall_num == 0 && rack_num == 0 && shelf_num == 0) {
+                if (id_lib == 0 && hall_num == 0 && rack_num == 0 && shelf_num == 0 && adding == null && removing == null) {
+                    editionList = editionService.findAll();
+                } else if (id_lib == 0 && hall_num == 0 && rack_num == 0 && shelf_num == 0) {
                     if (adding != null && removing != null) {
                         editionList = editionService.findByDateAddingAndDateRemoving(adding, removing);
                     } else if (adding != null) {
@@ -250,10 +252,10 @@ public class EditionsPageController {
                     while (iterator.hasNext()) {
                         Edition edition = iterator.next();
                         if (!libraryInformation.lessThenAdding) {
-                            if(edition.getDate_adding().getTime() < adding.getTime())
+                            if (edition.getDate_adding().getTime() < adding.getTime())
                                 iterator.remove();
                         } else {
-                            if(edition.getDate_adding().getTime() >= adding.getTime())
+                            if (edition.getDate_adding().getTime() >= adding.getTime())
                                 iterator.remove();
                         }
                     }
@@ -263,7 +265,7 @@ public class EditionsPageController {
                     Iterator<Edition> iterator = editionList.iterator();
                     while (iterator.hasNext()) {
                         Edition edition = iterator.next();
-                        if(edition.getDate_removing() != null){
+                        if (edition.getDate_removing() != null) {
                             if (!libraryInformation.moreThenRemoving) {
                                 if (edition.getDate_removing().getTime() > removing.getTime())
                                     iterator.remove();
@@ -271,7 +273,7 @@ public class EditionsPageController {
                                 if (edition.getDate_removing().getTime() <= removing.getTime())
                                     iterator.remove();
                             }
-                        }else
+                        } else
                             iterator.remove();
                     }
                 }
@@ -318,6 +320,52 @@ public class EditionsPageController {
                 informationForm = null;
             });
 
+            informationForm.searchButton.addActionListener(f -> {
+                long id_edition = informationForm.Id_edition;
+                String author = informationForm.author;
+                String composition = informationForm.composition;
+                int popularity = informationForm.popularity;
+                List<Information> informationList = new ArrayList<>();
+
+                if (id_edition == 0 && author.equals("") && composition.equals("") && popularity == 0) {
+                    informationList = informationService.findAll();
+                } else if (!author.equals("") && !composition.equals("")) {
+                    informationList = informationService.findByAuthorAndComposition(author, composition);
+                } else if (id_edition != 0) {
+                    informationList = informationService.findByIdEdition(id_edition);
+                } else if (!author.equals("")){
+                    informationList = informationService.findByAuthor(author);
+                } else if (!composition.equals("")){
+                    informationList = informationService.findByComposition(composition);
+                }
+
+                if(popularity != 0){
+                    Iterator<Information> iterator = informationList.iterator();
+                    while(iterator.hasNext()) {
+                        Information information = iterator.next();
+                        if (informationForm.morePopular)
+                            if(information.getPopularity() <= popularity)
+                                iterator.remove();
+                        else
+                            if(information.getPopularity() > popularity)
+                                iterator.remove();
+                    }
+                }
+
+                if (informationList.size() > 0) {
+                    ArrayList<String[]> resultList = new ArrayList<>();
+                    for (Information information : informationList) {
+                        resultList.add(new String[]{String.valueOf(information.getId_record()), String.valueOf(information.getId_edition()),information.getAuthor(), information.getComposition(), String.valueOf(information.getPopularity())});
+                    }
+
+                    searchInformationForm.updateTable(resultList);
+                    searchInformationForm.setVisible(true);
+
+                } else
+                    JOptionPane.showMessageDialog(libraryInformation, "Таких произведений нету!");
+
+
+            });
             informationForm.mostPopularButton.addActionListener(f -> {
                 Information information = informationService.mostPopular();
                 JOptionPane.showMessageDialog(informationForm,
