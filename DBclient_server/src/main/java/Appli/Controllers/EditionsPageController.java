@@ -14,6 +14,7 @@ import Appli.UserInterface.Pages.EditionPage.EditionForm;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class EditionsPageController {
@@ -195,8 +196,24 @@ public class EditionsPageController {
                 int hall_num = libraryInformation.hallNum;
                 int rack_num = libraryInformation.rackNum;
                 int shelf_num = libraryInformation.shelfNum;
+                Date adding = libraryInformation.dateAdding;
+                Date removing = libraryInformation.dateRemoving;
 
-                if (id_lib != 0 && hall_num != 0 && rack_num != 0 && shelf_num != 0) {
+                if (id_lib == 0 && hall_num == 0 && rack_num == 0 && shelf_num == 0) {
+                    if (adding != null && removing != null) {
+                        editionList = editionService.findByDateAddingAndDateRemoving(adding, removing);
+                    } else if (adding != null) {
+                        if (!libraryInformation.lessThenAdding)
+                            editionList = editionService.findByMoreDateAdding(adding);
+                        else
+                            editionList = editionService.findByLessDateAdding(adding);
+                    } else if (removing != null) {
+                        if (!libraryInformation.moreThenRemoving)
+                            editionList = editionService.findByLessDateRemoving(removing);
+                        else
+                            editionList = editionService.findByMoreDateRemoving(removing);
+                    }
+                } else if (id_lib != 0 && hall_num != 0 && rack_num != 0 && shelf_num != 0) {
                     editionList = editionService.findByAll(id_lib, hall_num, rack_num, shelf_num);
                 } else if (id_lib != 0 && hall_num != 0 && rack_num != 0) {
                     editionList = editionService.findByIdLibAndHallNumAndRackNum(id_lib, hall_num, rack_num);
@@ -228,6 +245,37 @@ public class EditionsPageController {
                     editionList = editionService.findByShelfNum(shelf_num);
                 }
                 System.out.println(editionList);
+                if (adding != null && removing == null) {
+                    Iterator<Edition> iterator = editionList.iterator();
+                    while (iterator.hasNext()) {
+                        Edition edition = iterator.next();
+                        if (!libraryInformation.lessThenAdding) {
+                            if(edition.getDate_adding().getTime() < adding.getTime())
+                                iterator.remove();
+                        } else {
+                            if(edition.getDate_adding().getTime() >= adding.getTime())
+                                iterator.remove();
+                        }
+                    }
+                }
+
+                if (removing != null && adding == null) {
+                    Iterator<Edition> iterator = editionList.iterator();
+                    while (iterator.hasNext()) {
+                        Edition edition = iterator.next();
+                        if(edition.getDate_removing() != null){
+                            if (!libraryInformation.moreThenRemoving) {
+                                if (edition.getDate_removing().getTime() > removing.getTime())
+                                    iterator.remove();
+                            } else {
+                                if (edition.getDate_removing().getTime() <= removing.getTime())
+                                    iterator.remove();
+                            }
+                        }else
+                            iterator.remove();
+                    }
+                }
+
                 if (editionList.size() > 0) {
                     ArrayList<String[]> resultList = new ArrayList<>();
                     for (Edition edition : editionList) {
@@ -258,7 +306,9 @@ public class EditionsPageController {
             });
         });
 
-        editionForm.informationButton.addActionListener(e -> {
+        editionForm.informationButton.addActionListener(e ->
+
+        {
             JOptionPane.showMessageDialog(editionForm, "Информация на данной странице никак не учитывается!");
             informationForm = new informationForm(this);
 
@@ -272,7 +322,7 @@ public class EditionsPageController {
                 Information information = informationService.mostPopular();
                 JOptionPane.showMessageDialog(informationForm,
                         new String[]{"Самое популярное произведение",
-                                " Автор: " +information.getAuthor(),
+                                " Автор: " + information.getAuthor(),
                                 " Название: " + information.getComposition(),
                                 " Популярность: " + information.getPopularity()}, "Популярнсоть", JOptionPane.INFORMATION_MESSAGE);
             });
@@ -332,18 +382,18 @@ public class EditionsPageController {
         return null;
     }
 
-    public void showCurrentLibrary(long id_library){
+    public void showCurrentLibrary(long id_library) {
         Library library = libraryService.getById(id_library);
         JOptionPane.showMessageDialog(searchEditionForm,
                 new String[]{"Информация о библиотеке",
-                        " ID библиотеки: " +library.getId_library(),
+                        " ID библиотеки: " + library.getId_library(),
                         " Количество залов: " + library.getHalls_num(),
                         " Количество книг: " + library.getEditions().size(),
                         " Количество зарегистрированных читателей: " + library.getReaders().size()}, "Библиотека", JOptionPane.INFORMATION_MESSAGE);
 
     }
 
-    public void showCurrentRules(long id_edition){
+    public void showCurrentRules(long id_edition) {
         List<Rule> rules = ruleService.findByIdEdition(id_edition);
         SearchRulesInEditionForm rulesInEditionForm = new SearchRulesInEditionForm(rules);
     }
