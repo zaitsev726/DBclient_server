@@ -2,11 +2,11 @@ package Appli.Entities;
 
 import javax.persistence.*;
 
-//Entity
-//@Table(name = "rules")
+@Entity
+@Table(name = "rules")
 public class Rule {
 
-   /* @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_rule;
 
@@ -50,5 +50,5 @@ public class Rule {
 
     public void setEdition(Edition edition) {
         this.edition = edition;
-    }*/
+    }
 }

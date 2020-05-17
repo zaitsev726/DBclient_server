@@ -22,7 +22,7 @@ public class Global {
     private InterfaceController interfaceController;
 
     public Global(){
-        interfaceController = new InterfaceController();
+       // interfaceController = new InterfaceController();
         AllReaderServiceImpl a = new AllReaderServiceImpl();
         LibraryServiceImpl b = new LibraryServiceImpl();
         LibrarianServiceImpl c = new LibrarianServiceImpl();

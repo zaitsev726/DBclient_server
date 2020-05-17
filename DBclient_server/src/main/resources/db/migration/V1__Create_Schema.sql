@@ -17,6 +17,7 @@ DROP SEQUENCE IF EXISTS AllReaders_generator CASCADE;
 DROP SEQUENCE IF EXISTS Librarians_generator CASCADE;
 DROP SEQUENCE IF EXISTS Characteristics_generator CASCADE;
 DROP SEQUENCE IF EXISTS Information_generator CASCADE;
+DROP SEQUENCE IF EXISTS Rules_generator CASCADE;
 
 
 CREATE TABLE Libraries
@@ -35,6 +36,13 @@ create sequence Characteristics_generator
     as integer
     minvalue 1
     maxvalue 2147483647;
+
+
+create sequence Rules_generator
+    as integer
+    minvalue 1
+    maxvalue 2147483647;
+
 
 CREATE TABLE Characteristic
 (
@@ -170,7 +178,7 @@ CREATE TABLE IssuedBooks
 
 CREATE TABLE Rules
 (
-    id_rule    integer PRIMARY KEY,
+    id_rule integer not null PRIMARY KEY DEFAULT nextval('Rules_generator'),
     id_edition integer NOT NULL,
     rule       VARCHAR(1000)    NOT NULL,
     FOREIGN KEY (id_edition) REFERENCES Editions (id_edition) ON DELETE CASCADE
@@ -455,3 +463,40 @@ insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date
 insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (31,4,4,6,3,date '2003-01-28',date '2010-06-10');
 insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (32,2,2,8,4,date '2010-02-18', NULL);
 insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (33,5,2,8,1,date '2004-03-06',date '2020-06-10');
+
+insert into Rules(id_edition, rule) values (1, 'Не читай книгу во время еды');      --5, 3 , 7 , 5 ,13
+insert into Rules(id_edition, rule) values (2, 'Не клади в книгу карандашей');
+insert into Rules(id_edition, rule) values (3, 'Не пиши в книге, не делай пометок');
+insert into Rules(id_edition, rule) values (4, 'Не перегибай книгу: вырываются листы');
+insert into Rules(id_edition, rule) values (5, 'Не загибай углы страниц – сделай закладку');
+
+insert into Rules(id_edition, rule) values (6, 'Не пиши в книге, не делай пометок');
+insert into Rules(id_edition, rule) values (7, 'Не пиши в книге, не делай пометок');
+insert into Rules(id_edition, rule) values (8, 'Не перегибай книгу: вырываются листы');
+
+insert into Rules(id_edition, rule) values (9, 'Не клади в книгу карандашей');
+insert into Rules(id_edition, rule) values (10, 'Не читай книгу во время еды');
+insert into Rules(id_edition, rule) values (11, 'Не клади в книгу карандашей');
+insert into Rules(id_edition, rule) values (12, 'Не читай книгу во время еды');
+insert into Rules(id_edition, rule) values (13, 'Не клади в книгу карандашей');
+insert into Rules(id_edition, rule) values (14, 'Не читай книгу во время еды');
+insert into Rules(id_edition, rule) values (15, 'Не клади в книгу карандашей');
+
+insert into Rules(id_edition, rule) values (16, 'Не читай книгу во время еды');
+insert into Rules(id_edition, rule) values (17, 'Не перегибай книгу: вырываются листы');
+insert into Rules(id_edition, rule) values (18, 'Не читай книгу во время еды');
+insert into Rules(id_edition, rule) values (19, 'Не перегибай книгу: вырываются листы');
+insert into Rules(id_edition, rule) values (20, 'Не перегибай книгу: вырываются листы');
+
+
+insert into Rules(id_edition, rule) values (21, 'Не перегибай книгу: вырываются листы');
+insert into Rules(id_edition, rule) values (22, 'Оберни книгу в бумагу – не испортишь обложку');
+insert into Rules(id_edition, rule) values (23, 'Не загибай углы страниц – сделай закладку');
+insert into Rules(id_edition, rule) values (24, 'Оберни книгу в бумагу – не испортишь обложку');
+insert into Rules(id_edition, rule) values (25, 'Не загибай углы страниц – сделай закладку');
+insert into Rules(id_edition, rule) values (26, 'Оберни книгу в бумагу – не испортишь обложку');
+insert into Rules(id_edition, rule) values (27, 'Не загибай углы страниц – сделай закладку');
+insert into Rules(id_edition, rule) values (28, 'Оберни книгу в бумагу – не испортишь обложку');
+insert into Rules(id_edition, rule) values (29, 'Не загибай углы страниц – сделай закладку');
+insert into Rules(id_edition, rule) values (30, 'Не загибай углы страниц – сделай закладку');
+insert into Rules(id_edition, rule) values (31, 'Оберни книгу в бумагу – не испортишь обложку');
