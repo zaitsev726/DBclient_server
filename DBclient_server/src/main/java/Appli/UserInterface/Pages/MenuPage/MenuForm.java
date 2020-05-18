@@ -13,6 +13,7 @@ public class MenuForm extends JPanel {
     public JButton librariesButton;
     public JButton editionsButton;
     private JButton exitButton;
+    private JButton issuedButton;
 
     public MenuForm(int sizeWidth, int sizeHeight) {
         this.add(menuPanel);
