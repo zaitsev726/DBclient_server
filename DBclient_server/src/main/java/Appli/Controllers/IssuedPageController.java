@@ -1,10 +1,20 @@
 package Appli.Controllers;
 
+import Appli.Entities.Edition;
 import Appli.Entities.IssuedBook;
+import Appli.Entities.Librarian;
+import Appli.Entities.Types.Pensioner;
+import Appli.Services.EditionService;
+import Appli.Services.Impl.EditionServiceImpl;
 import Appli.Services.Impl.IssuedBookServiceImpl;
+import Appli.Services.Impl.LibrarianServiceImpl;
 import Appli.Services.IssuedBookService;
+import Appli.Services.LibrarianService;
+import Appli.UserInterface.Frames.IssuedBook.SearchIssuedBookForm;
 import Appli.UserInterface.Pages.IssuedPage.IssuedForm;
+import sun.rmi.runtime.Log;
 
+import javax.persistence.NoResultException;
 import javax.swing.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,22 +26,31 @@ public class IssuedPageController {
 
 
     private IssuedForm issuedForm;
-    private IssuedBookService issuedBookService;
 
-    private Long id_record;
-    private Long id_reader;
-    private Long id_edition;
-    private Long id_librarian;
+    private IssuedBookService issuedBookService;
+    private LibrarianService librarianService;
+    private EditionService editionService;
+
+    private long id_record;
+    private long id_reader;
+    private long id_edition;
+    private long id_librarian;
     private Boolean isReturned;
     private Date extraditionDate;
     private Date returnedDate;
     private boolean lessExtradition;
     private boolean moreReturned;
 
+    private SearchIssuedBookForm issuedBookForm;
 
     public IssuedPageController(IssuedForm issuedForm) {
         this.issuedForm = issuedForm;
+
         this.issuedBookService = new IssuedBookServiceImpl();
+        this.librarianService = new LibrarianServiceImpl();
+        this.editionService = new EditionServiceImpl();
+
+        issuedBookForm = new SearchIssuedBookForm(this);
 
         setStartValues();
         initializationListeners();
@@ -168,7 +187,128 @@ public class IssuedPageController {
                 }else
                     issuedBookList = issuedBookService.findByLessDateReturn(returnedDate);
             }
+
+            if( issuedBookList.size() > 0) {
+                ArrayList<String[]> resultList = new ArrayList<>();
+                for (IssuedBook book : issuedBookList) {
+                    String[] str = new String[7];
+                    str[0] = String.valueOf(book.getId_record());
+                    str[1] = String.valueOf(book.getId_reader());
+                    str[2] = String.valueOf(book.getId_edition());
+                    str[5] = String.valueOf(book.isIs_returned());
+                    str[6] = String.valueOf(book.getId_librarian());
+                    str[3] = (book.getDate_extradition().getYear() + 1900) + "-" + book.getDate_extradition().getMonth() + "-" + book.getDate_extradition().getDate();
+                    if (book.getDate_return() == null) {
+                        str[4] = "<null>";
+                    } else
+                        str[4] = (book.getDate_return().getYear() + 1900) + "-" + book.getDate_return().getMonth() + "-" + book.getDate_return().getDate();
+                    resultList.add(str);
+                }
+                issuedBookForm.updateTable(resultList);
+                issuedBookForm.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(issuedForm, "Таких записей нет");
+            }
         });
+
+    }
+
+    public void queryForUpdateIssuedBook(long id_record, long id_reader, long id_edition, Date extradition, Date returned, boolean isReturned, long id_librarian, int changedParam){
+        IssuedBook issuedBook = new IssuedBook();
+        issuedBook.setId_record(id_record);
+        issuedBook.setId_reader(id_reader);
+        issuedBook.setId_edition(id_edition);
+        issuedBook.setDate_extradition(extradition);
+        issuedBook.setDate_return(returned);
+        issuedBook.setIs_returned(isReturned);
+        issuedBook.setId_librarian(id_librarian);
+
+        List<IssuedBook> bookList = new ArrayList<>();
+        Librarian librarian;
+        Edition edition;
+        switch (changedParam) {
+            case (1):
+                issuedBookService.update(issuedBook);
+                break;
+            case (2):
+                librarian = librarianService.findById(id_librarian);
+                if (librarian != null) {
+                    edition = editionService.findById(id_edition);
+                    if (edition != null) {
+                        if (edition.getId_library().equals(librarian.getId_library())) {
+                            issuedBookService.update(issuedBook);
+                        } else {
+                            JOptionPane.showMessageDialog(issuedBookForm, "Такого издания нет у данного работника");
+                            return;
+                        }
+
+                    } else
+                        JOptionPane.showMessageDialog(issuedBookForm, "Такого издания нет");
+                } else {
+                    JOptionPane.showMessageDialog(issuedBookForm, "Такого работника нет");
+                }
+                break;
+            case (3):
+                if (returned != null)
+                    if (extradition.getTime() >= returned.getTime()) {
+                        JOptionPane.showMessageDialog(issuedBookForm, "Дата выдачи не может быть позже даты возврата");
+                        return;
+                    }
+
+                bookList = issuedBookService.findByIdEdition(id_edition);
+                for (IssuedBook book : bookList) {
+                    if (book.getDate_return() != null) {
+                        if (book.getDate_return().getTime() >= extradition.getTime()) {
+                            JOptionPane.showMessageDialog(issuedBookForm, "В это время книга была занята");
+                            return;
+                        }
+                    }
+                    if (book.getDate_extradition().getTime() <= extradition.getTime() && !book.isIs_returned()) {
+                        JOptionPane.showMessageDialog(issuedBookForm, "В это время книга была не возвращена");
+                        return;
+                    }
+                }
+                issuedBookService.update(issuedBook);
+                break;
+            case (4):
+                if (returned.getTime() < extradition.getTime()) {
+                    JOptionPane.showMessageDialog(issuedBookForm, "Дата возврата не может быть раньше даты выдачи");
+                    return;
+                }
+                bookList = issuedBookService.findByIdEdition(id_edition);
+                for (IssuedBook book : bookList) {
+                    if (!book.isIs_returned() && book.getDate_extradition().getTime() < returned.getTime()) {
+                        JOptionPane.showMessageDialog(issuedBookForm, "В это время книга еще не возвращена");
+                        return;
+                    }
+                    if (book.isIs_returned() && book.getDate_return().getTime() > returned.getTime()) {
+                        JOptionPane.showMessageDialog(issuedBookForm, "В это время книга была занята");
+                        return;
+                    }
+                }
+                issuedBookService.update(issuedBook);
+                break;
+            case (6):
+                librarian = librarianService.findById(id_librarian);
+                if (librarian != null) {
+                    edition = editionService.findById(id_edition);
+                    if (edition != null) {
+                        if (edition.getId_library().equals(librarian.getId_library())) {
+                            issuedBookService.update(issuedBook);
+                        } else {
+                            JOptionPane.showMessageDialog(issuedBookForm, "У работника нет такого издания в библиотеке");
+                            return;
+                        }
+
+                    } else
+                        JOptionPane.showMessageDialog(issuedBookForm, "Такого издания нет");
+                } else {
+                    JOptionPane.showMessageDialog(issuedBookForm, "Такого работника нет");
+                }
+
+                break;
+        }
+
 
     }
 }
