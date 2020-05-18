@@ -196,7 +196,7 @@ public class IssuedBookServiceImpl implements IssuedBookService {
     @Override
     public List<IssuedBook> findByMoreDateReturn(Date dateReturn) {
         EntityManager em = emf.createEntityManager();
-        List<IssuedBook> issuedBooks = em.createQuery("select i from IssuedBook i where i.date_extradition >= :date_return ", IssuedBook.class)
+        List<IssuedBook> issuedBooks = em.createQuery("select i from IssuedBook i where i.date_return >= :date_return ", IssuedBook.class)
                 .setParameter("date_return", dateReturn)
                 .getResultList();
         em.close();
@@ -206,7 +206,18 @@ public class IssuedBookServiceImpl implements IssuedBookService {
     @Override
     public List<IssuedBook> findByLessDateReturn(Date dateReturn) {
         EntityManager em = emf.createEntityManager();
-        List<IssuedBook> issuedBooks = em.createQuery("select i from IssuedBook i where i.date_extradition < :date_return ", IssuedBook.class)
+        List<IssuedBook> issuedBooks = em.createQuery("select i from IssuedBook i where i.date_return < :date_return ", IssuedBook.class)
+                .setParameter("date_return", dateReturn)
+                .getResultList();
+        em.close();
+        return issuedBooks;
+    }
+
+    @Override
+    public List<IssuedBook> findBetweenDates(Date dateExtradition, Date dateReturn) {
+        EntityManager em = emf.createEntityManager();
+        List<IssuedBook> issuedBooks = em.createQuery("select i from IssuedBook i where i.date_extradition >= :date_extradition and i.date_return <= :date_return ", IssuedBook.class)
+                .setParameter("date_extradition", dateExtradition)
                 .setParameter("date_return", dateReturn)
                 .getResultList();
         em.close();

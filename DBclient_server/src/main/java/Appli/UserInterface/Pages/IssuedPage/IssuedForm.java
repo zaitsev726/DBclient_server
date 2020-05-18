@@ -4,15 +4,15 @@ import javax.swing.*;
 
 public class IssuedForm extends JPanel{
     private JPanel issuedPanel;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JCheckBox returnedCheckBox;
-    private JTextField extraditionTextField;
-    private JTextField returnedTextField;
-    private JCheckBox checkBox2;
-    private JCheckBox checkBox3;
+    public JTextField idRecordTextField;
+    public JTextField idReaderTextField;
+    public JTextField idEditionTextField;
+    public JTextField idLibrarianTextField;
+    public JCheckBox returnedCheckBox;
+    public JTextField extraditionTextField;
+    public JTextField returnedTextField;
+    public JCheckBox lessCheckBox;
+    public JCheckBox moreCheckBox;
     public JButton searchButton;
     public JButton backButton;
     private JLabel IdRecordLabel;
@@ -22,8 +22,11 @@ public class IssuedForm extends JPanel{
     private JLabel extraditionLabel;
     private JLabel returnedLabel;
 
+
+
     public IssuedForm(){
         this.add(issuedPanel);
         setVisible(true);
     }
+
 }

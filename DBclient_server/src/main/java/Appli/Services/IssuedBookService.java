@@ -33,4 +33,5 @@ public interface IssuedBookService {
     List<IssuedBook> findByMoreDateReturn(Date dateReturn);
     List<IssuedBook> findByLessDateReturn(Date dateReturn);
 
+    List<IssuedBook> findBetweenDates(Date dateExtradition, Date dateReturn);
 }
