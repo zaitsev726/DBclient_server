@@ -28,7 +28,7 @@ public class LibraryPageController {
     private long cur_libID;
     private long cur_hallNum;
 
-    public LibraryPageController(LibraryForm form){
+    public LibraryPageController(LibraryForm form) {
         libraryForm = form;
         libraryService = new LibraryServiceImpl();
         librarianService = new LibrarianServiceImpl();
@@ -38,7 +38,7 @@ public class LibraryPageController {
         setStartValues();
     }
 
-    private void setStartValues(){
+    private void setStartValues() {
         cur_libID = 0;
         cur_hallNum = 0;
     }
@@ -47,7 +47,7 @@ public class LibraryPageController {
         libraryForm.IDTextField.addActionListener(e -> {
             try {
                 cur_libID = Long.parseLong(libraryForm.IDTextField.getText());
-            }catch (NumberFormatException exception){
+            } catch (NumberFormatException exception) {
                 JOptionPane.showMessageDialog(libraryForm, "Введите корректный номер библиотеки");
                 setStartValues();
             }
@@ -56,7 +56,7 @@ public class LibraryPageController {
         libraryForm.hallNumTextField.addActionListener(e -> {
             try {
                 cur_hallNum = Long.parseLong(libraryForm.hallNumTextField.getText());
-            }catch (NumberFormatException exception){
+            } catch (NumberFormatException exception) {
                 JOptionPane.showMessageDialog(libraryForm, "Введите корректное количество залов");
                 setStartValues();
             }
@@ -64,7 +64,7 @@ public class LibraryPageController {
 
         libraryForm.addButton.addActionListener(e -> {
             Library library = null;
-            if(cur_hallNum!= 0 && cur_libID!= 0) {
+            if (cur_hallNum != 0 && cur_libID != 0) {
                 try {
                     library = libraryService.getById(cur_libID);
                 } catch (NoResultException ignored) {
@@ -77,8 +77,7 @@ public class LibraryPageController {
                 } else {
                     JOptionPane.showMessageDialog(libraryForm, "Такая библиотека уже существует");
                 }
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(libraryForm, "Вы ввели не все параметры");
             }
             setStartValues();
@@ -107,73 +106,76 @@ public class LibraryPageController {
                 } else {
                     JOptionPane.showMessageDialog(libraryForm, "Таких библиотек не существует");
                 }
-            }catch (NoResultException ignored){
+            } catch (NoResultException ignored) {
                 JOptionPane.showMessageDialog(libraryForm, "Библиотек с таким ID не существует");
             }
             setStartValues();
         });
 
         libraryForm.readerSearchButton.addActionListener(e -> {
-           if(cur_libID != 0){
-               try {
-                   Library library = libraryService.getById(cur_libID);
-                   System.out.println(library.getReaders());
-                   SearchReadersInLibraryForm searchReadersInLibraryForm = new SearchReadersInLibraryForm((List<AllReader>) library.getReaders());
-               }catch (NoResultException ignored){
-                   JOptionPane.showMessageDialog(libraryForm, "Библиотек с таким ID не существует");
-               }
-           }else {
-               JOptionPane.showMessageDialog(libraryForm, "Введите ID библиотеки");
-           }
+            if (cur_libID != 0) {
+                try {
+                    Library library = libraryService.getById(cur_libID);
+                    System.out.println(library.getReaders());
+                    SearchReadersInLibraryForm searchReadersInLibraryForm = new SearchReadersInLibraryForm((List<AllReader>) library.getReaders());
+                } catch (NoResultException ignored) {
+                    JOptionPane.showMessageDialog(libraryForm, "Библиотек с таким ID не существует");
+                }
+            } else {
+                JOptionPane.showMessageDialog(libraryForm, "Введите ID библиотеки");
+            }
         });
 
         libraryForm.librariansButton.addActionListener(e -> {
-            if(cur_libID != 0){
-                try {
-                    Library library = libraryService.getLibrarians(cur_libID);
-                    System.out.println(library.getReaders());
-                    ArrayList<String[]> resultList = new ArrayList<>();
-                    if (library.getLibrarians().size() > 0) {
-                        for (Librarian librarian : library.getLibrarians()) {
-                            resultList.add(new String[]{String.valueOf(librarian.getId_librarian()), String.valueOf(librarian.getId_library()), String.valueOf(librarian.getHall_num())});
-                        }
-                        searchLibrariansForm.updateTable(resultList);
-                        searchLibrariansForm.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(libraryForm, "В такой библиотеке нет работников");
+
+            try {
+                List<Librarian> librarians = new ArrayList<>();
+                if (cur_libID != 0) {
+                    librarians = librarianService.findByIdLibrary(cur_libID);
+                } else
+                    librarians = librarianService.findAll();
+
+                ArrayList<String[]> resultList = new ArrayList<>();
+                if (librarians.size() > 0) {
+                    for (Librarian librarian : librarians) {
+                        resultList.add(new String[]{String.valueOf(librarian.getId_librarian()), String.valueOf(librarian.getId_library()), String.valueOf(librarian.getHall_num())});
                     }
-                }catch (NoResultException ignored){
-                    JOptionPane.showMessageDialog(libraryForm, "Библиотек с таким ID не существует");
+                    searchLibrariansForm.updateTable(resultList);
+                    searchLibrariansForm.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(libraryForm, "В такой библиотеке нет работников");
                 }
-            }else {
-                JOptionPane.showMessageDialog(libraryForm, "Введите ID библиотеки");
+            } catch (NoResultException ignored) {
+                JOptionPane.showMessageDialog(libraryForm, "Библиотек с таким ID не существует");
             }
         });
 
     }
 
-    public void queryForUpdateLibrary(long libID, long hallNum){
+    public void queryForUpdateLibrary(long libID, long hallNum) {
         Library library = new Library();
         library.setId_library(libID);
         library.setHalls_num(hallNum);
         libraryService.update(library);
     }
-    public void queryForDeleteLibrary(long libID){
+
+    public void queryForDeleteLibrary(long libID) {
         libraryService.delete(libID);
     }
 
-    public void queryForUpdateLibrarian(long librarianID,long libID, long hallNum){
+    public void queryForUpdateLibrarian(long librarianID, long libID, long hallNum) {
         Librarian librarian = new Librarian();
         librarian.setId_librarian(librarianID);
         librarian.setId_library(libID);
         librarian.setHall_num(hallNum);
         librarianService.update(librarian);
     }
-    public void queryForDeleteLibrarian(long librarianID){
+
+    public void queryForDeleteLibrarian(long librarianID) {
         librarianService.delete(librarianID);
     }
 
-    public Librarian queryForInsertLibrarian(long libID, long hallNum){
+    public Librarian queryForInsertLibrarian(long libID, long hallNum) {
         Librarian librarian = new Librarian();
         librarian.setId_library(libID);
         librarian.setHall_num(hallNum);

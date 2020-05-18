@@ -3,6 +3,7 @@ package Appli.Entities;
 import Appli.Entities.Types.AbstractReader;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "allreaders")
@@ -36,9 +37,9 @@ public class AllReader {
     @JoinColumn(name = "id_reader", nullable = true)
     private AbstractReader readerType;
 
-    /*  @OneToMany(mappedBy = "reader")
-      private Collection<IssuedBook> ourBooks;
-  */
+    @OneToMany(mappedBy = "reader")
+    private Collection<IssuedBook> ourBooks;
+
     public AllReader() {
     }
 

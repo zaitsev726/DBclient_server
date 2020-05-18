@@ -3,10 +3,10 @@ package Appli.Entities;
 import javax.persistence.*;
 import java.util.Date;
 
-//@Entity
-//@Table (name = "IssuedBooks")
+@Entity
+@Table (name = "IssuedBooks")
 public class IssuedBook {
-   /* @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_record;
 
@@ -104,19 +104,11 @@ public class IssuedBook {
         this.librarian = librarian;
     }
 
-    public AllReader getReader() {
-        return reader;
-    }
+  //  public AllReader getReader() { return reader; }
 
-    public void setReader(AllReader reader) {
-        this.reader = reader;
-    }
+  //  public void setReader(AllReader reader) { this.reader = reader; }
 
-    public Edition getEdition() {
-        return edition;
-    }
+   // public Edition getEdition() { return edition; }
 
-    public void setEdition(Edition edition) {
-        this.edition = edition;
-    }*/
+   // public void setEdition(Edition edition) { this.edition = edition; }
 }

@@ -18,6 +18,7 @@ DROP SEQUENCE IF EXISTS Librarians_generator CASCADE;
 DROP SEQUENCE IF EXISTS Characteristics_generator CASCADE;
 DROP SEQUENCE IF EXISTS Information_generator CASCADE;
 DROP SEQUENCE IF EXISTS Rules_generator CASCADE;
+DROP SEQUENCE IF EXISTS Issued_generator CASCADE;
 
 
 CREATE TABLE Libraries
@@ -39,6 +40,11 @@ create sequence Characteristics_generator
 
 
 create sequence Rules_generator
+    as integer
+    minvalue 1
+    maxvalue 2147483647;
+
+create sequence Issued_generator
     as integer
     minvalue 1
     maxvalue 2147483647;
@@ -164,7 +170,7 @@ CREATE TABLE Scientists
 
 CREATE TABLE IssuedBooks
 (
-    id_record        integer PRIMARY KEY,
+    id_record        integer not null PRIMARY KEY DEFAULT nextval('Issued_generator'),
     id_reader        integer NOT NULL,
     id_edition       integer NOT NULL,
     date_extradition date    NOT NULL,
@@ -500,3 +506,49 @@ insert into Rules(id_edition, rule) values (28, 'Оберни книгу в бу
 insert into Rules(id_edition, rule) values (29, 'Не загибай углы страниц – сделай закладку');
 insert into Rules(id_edition, rule) values (30, 'Не загибай углы страниц – сделай закладку');
 insert into Rules(id_edition, rule) values (31, 'Оберни книгу в бумагу – не испортишь обложку');
+
+
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (1,9,date '2003-03-12',date '2007-10-22',true,4);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (2,14,date '2007-05-27',NULL,false,3);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (3,5,date '2000-10-07',date '2002-01-19',true,8);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (4,31,date '2004-06-06',date '2005-10-02',true,10);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (5,19,date '2007-05-25',date '2008-05-24',true,13);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (6,13,date '2001-11-02',date '2002-10-03',true,10);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (7,21,date '2006-02-08',date '2015-03-29',true,8);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (8,3,date '2000-09-25',date '2002-05-13',true,11);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (9,27,date '2006-08-02',date '2010-01-22',true,5);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (10,1,date '1999-01-17',date '2003-07-17',true,3);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (11,22,date '2010-03-26',date '2011-08-01',false,12);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (12,6,date '2002-07-03',NULL,false,8);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (13,31,date '2006-12-28',date '2009-03-26',true,12);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (14,25,date '2011-04-12',date '2015-11-07',true,1);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (15,11,date '2004-06-13',date '2008-12-28',true,7);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (16,10,date '2002-10-15',date '2010-07-15',true,6);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (17,19,date '2009-02-18',date '2010-08-09',true,12);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (18,32,date '2011-05-13',NULL,false,6);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (19,27,date '2011-05-21',date '2016-04-18',true,5);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (20,4,date '2003-01-23',date '2006-02-07',true,14);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (21,15,date '2002-11-10',date '2009-11-03',true,14);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (22,9,date '2007-10-27', date '2010-02-16' ,true,5);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (23,30,date '2008-10-20',date '2010-09-28',true,9);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (24,18,date '2003-05-25',date '2006-03-18',true,2);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (25,22,date '2012-10-08',date '2014-02-28',true,10);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (26,28,date '2002-12-25',date '2009-12-25',true,14);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (27,7,date '2003-07-04',date '2007-08-02',true,6);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (28,33,date '2005-11-26',date '2015-03-11',true,15);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (29,12,date '2001-11-26',date '2020-02-16',true,8);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (30,9,date '2015-10-03',NULL,false,4);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (31,3,date '2006-06-18',date '2010-08-24',true,10);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (32,24,date '2002-08-27',date '2008-09-02',true,15);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (33,22,date '2018-04-15',NULL,false,13);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (34,27,date '2017-02-10',date '2020-01-28',true,7);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (35,17,date '2008-12-01',date '2009-03-19',true,1);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (36,26,date '2017-05-04',NULL,false,3);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (37,13,date '2005-11-04',date '2008-10-22',true,11);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (38,11,date '2016-03-23',date '2019-07-12',true,4);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (39,25,date '2012-06-12',date '2018-12-20',true,2);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (40,19,date '2019-04-20', NULL ,false,12);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (41,8,date '2006-11-14',date '2015-03-06',true,8);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (42,20,date '2009-03-24',date '2009-04-29',true,14);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (43,1,date '2005-11-09', date'2007-01-12' ,true,3);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (44,18,date '2010-05-17',date '2018-12-20',true,2);

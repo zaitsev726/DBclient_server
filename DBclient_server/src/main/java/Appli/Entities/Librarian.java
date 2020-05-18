@@ -21,9 +21,9 @@ public class Librarian {
     @JoinColumn(name = "id_library", referencedColumnName = "id_library", updatable = false, insertable = false)
     private Library work_library;
 
-    /*@OneToMany(mappedBy = "librarian", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "librarian", fetch = FetchType.LAZY)
     private Collection<IssuedBook> issuedBooks;
-*/
+
     public Librarian() { }
 
     public Long getId_librarian() { return id_librarian; }
