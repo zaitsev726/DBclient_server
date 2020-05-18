@@ -4,6 +4,7 @@ import Appli.Controllers.EditionsPageController;
 import Appli.Controllers.LibraryPageController;
 import Appli.Controllers.ReadersPageController;
 import Appli.UserInterface.Pages.EditionPage.EditionForm;
+import Appli.UserInterface.Pages.IssuedPage.IssuedForm;
 import Appli.UserInterface.Pages.LibraryPage.LibraryForm;
 import Appli.UserInterface.Pages.MenuPage.MenuForm;
 import Appli.UserInterface.Pages.MenuPage.MenuPanel;
@@ -30,6 +31,10 @@ public class InterfaceController {
     private EditionsPageController editionsPageController;
     private EditionForm editionForm;
 
+
+    private IssuedForm issuedForm;
+
+
     public InterfaceController(){
         window = new Appli.UserInterface.Frames.Window(sizeWidth,sizeHeight,locationX,locationY);
 
@@ -39,6 +44,7 @@ public class InterfaceController {
         readersForm = new ReadersForm();
         libraryForm = new LibraryForm();
         editionForm = new EditionForm();
+        issuedForm = new IssuedForm();
 
         readersPageController = new ReadersPageController(readersForm);
         libraryPageController = new LibraryPageController(libraryForm);
@@ -76,6 +82,13 @@ public class InterfaceController {
             window.repaint();
         });
 
+        menuForm.issuedButton.addActionListener(e -> {
+            window.remove(menuForm);
+            window.add(issuedForm);
+            window.revalidate();
+            window.repaint();
+        });
+
         readersForm.backButton.addActionListener(e -> {
             window.remove(readersForm);
             window.add(menuForm);
@@ -85,6 +98,13 @@ public class InterfaceController {
 
         libraryForm.backButton.addActionListener(e -> {
             window.remove(libraryForm);
+            window.add(menuForm);
+            window.revalidate();
+            window.repaint();
+        });
+
+        issuedForm.backButton.addActionListener(e -> {
+            window.remove(issuedForm);
             window.add(menuForm);
             window.revalidate();
             window.repaint();
