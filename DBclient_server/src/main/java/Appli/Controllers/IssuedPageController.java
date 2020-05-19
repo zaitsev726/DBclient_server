@@ -14,6 +14,7 @@ import Appli.Services.Impl.LibrarianServiceImpl;
 import Appli.Services.IssuedBookService;
 import Appli.Services.LibrarianService;
 import Appli.UserInterface.Frames.IssuedBook.SearchIssuedBookForm;
+import Appli.UserInterface.Pages.IssuedPage.EditionSearchForm;
 import Appli.UserInterface.Pages.IssuedPage.IssuedForm;
 
 
@@ -26,9 +27,8 @@ import java.util.Date;
 import java.util.List;
 
 public class IssuedPageController {
-
-
     private IssuedForm issuedForm;
+    private EditionSearchForm editionSearchForm;
 
     private IssuedBookService issuedBookService;
     private LibrarianService librarianService;
@@ -48,8 +48,9 @@ public class IssuedPageController {
 
     private SearchIssuedBookForm issuedBookForm;
 
-    public IssuedPageController(IssuedForm issuedForm) {
+    public IssuedPageController(IssuedForm issuedForm, EditionSearchForm editionSearchForm) {
         this.issuedForm = issuedForm;
+        this.editionSearchForm = editionSearchForm;
 
         this.issuedBookService = new IssuedBookServiceImpl();
         this.librarianService = new LibrarianServiceImpl();
@@ -218,6 +219,20 @@ public class IssuedPageController {
             setStartValues();           //????
         });
 
+        editionSearchForm.searchButton.addActionListener(e -> {
+            String title = editionSearchForm.getTitle();
+            String type = editionSearchForm.getType();
+
+            if (!title.equals("") && !type.equals("")) {
+                JOptionPane.showMessageDialog(editionSearchForm, "Просили ввести только ОДИН параметр. Поиск отменен");
+                editionSearchForm.setStartValues();
+            } else if (!title.equals("") && type.equals("")) {
+               // issuedBookService
+            } else if (title.equals("") && !type.equals("")) {
+
+            }
+        });
+
     }
 
     public void queryForUpdateIssuedBook(long id_record, long id_reader, long id_edition, Date extradition, Date returned, boolean isReturned, long id_librarian, int changedParam) {
@@ -236,9 +251,9 @@ public class IssuedPageController {
         AllReader reader;
         switch (changedParam) {
             case (1):
-                try{
+                try {
                     reader = readerService.findById(id_reader);
-                }catch (NoResultException ignored){
+                } catch (NoResultException ignored) {
                     JOptionPane.showMessageDialog(issuedBookForm, "Такого читателя нет");
                     return;
                 }

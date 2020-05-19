@@ -5,6 +5,7 @@ import Appli.Entities.*;
 import Appli.Entities.Types.Pensioner;
 import Appli.Services.Impl.*;
 import Appli.Services.InformationService;
+import Appli.Services.IssuedBookService;
 import Appli.UserInterface.Frames.Library.SearchReadersInLibraryForm;
 import Appli.UserInterface.Frames.SearchReadersForm;
 import Appli.UserInterface.InterfaceController;
@@ -22,7 +23,7 @@ public class Global {
     private InterfaceController interfaceController;
 
     public Global(){
-        interfaceController = new InterfaceController();
+       // interfaceController = new InterfaceController();
         AllReaderServiceImpl a = new AllReaderServiceImpl();
         LibraryServiceImpl b = new LibraryServiceImpl();
         LibrarianServiceImpl c = new LibrarianServiceImpl();
@@ -30,6 +31,7 @@ public class Global {
 
         CharacteristicServiceImpl d = new CharacteristicServiceImpl();
         EditionServiceImpl e = new EditionServiceImpl();
+        IssuedBookService i = new IssuedBookServiceImpl();
        // AllReader reader = a.findById((long) 1);
         //a.delete(reader);
         //d.delete((long) 1);
@@ -92,6 +94,6 @@ public class Global {
        // System.out.println(date);
        // System.out.println(date);
        // System.out.println(e.findByMoreDateAdding(date));
-
+        System.out.println(i.findReadersWithType("Роман"));
     }
 }

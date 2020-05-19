@@ -518,7 +518,7 @@ insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is
 insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (8,3,date '2000-09-25',date '2002-05-13',true,11);
 insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (9,27,date '2006-08-02',date '2010-01-22',true,5);
 insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (10,1,date '1999-01-17',date '2003-07-17',true,3);
-insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (11,22,date '2010-03-26',date '2011-08-01',false,12);
+insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (11,22,date '2010-03-26',date '2011-08-01',true,12);
 insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (12,6,date '2002-07-03',NULL,false,8);
 insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (13,31,date '2006-12-28',date '2009-03-26',true,12);
 insert into IssuedBooks(id_reader, id_edition, date_extradition, date_return, is_returned, id_librarian) values (14,25,date '2011-04-12',date '2015-11-07',true,1);

@@ -13,29 +13,31 @@ import java.util.ArrayList;
 public class SearchEditionForm extends JFrame {
     private JTable resultTable;
     private DefaultTableModel tableModel;
-    private ArrayList<String[]> currentEditions;
+    private ArrayList<String[]> currentInventoryInfo;
 
     private EditionsPageController controller;
 
     private JButton removeRowButton;
     private JButton backButton;
     private JButton libraryButton;
+    private JButton extraditionButton;
     private JButton rulesButton;
 
     // Заголовки столбцов
     private final Object[] columnsHeader = new String[]{"ID издания", "ID библиотеки", "Зал", "Стеллаж", "Полка", "Дата добавления", "Дата удаления"};
 
     public SearchEditionForm(EditionsPageController controller) {
-        currentEditions = new ArrayList<>();
+        currentInventoryInfo = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
         libraryButton = new JButton("Информация о библиотеке");
         rulesButton = new JButton("Правила издания");
+        extraditionButton = new JButton("Оставить выданные");
         backButton = new JButton("Очистить и выйти");
 
 
         setTitle("Результаты поиска изданий");
-        setSize(800, 300);
+        setSize(1000, 300);
 
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(columnsHeader);
@@ -52,6 +54,7 @@ public class SearchEditionForm extends JFrame {
         buttons.add(removeRowButton);
         buttons.add(libraryButton);
         buttons.add(rulesButton);
+        buttons.add(extraditionButton);
         buttons.add(backButton);
         getContentPane().add(buttons, "South");
 
@@ -115,11 +118,16 @@ public class SearchEditionForm extends JFrame {
                 JOptionPane.showMessageDialog(resultTable, "Выберите строку");
         });
 
-
+        extraditionButton.addActionListener(e -> {
+            tableModel.setRowCount(0);
+            ArrayList<String[]> a = currentInventoryInfo;
+            currentInventoryInfo = new ArrayList<>();
+            controller.queryForUpdateTable(a);
+        });
 
         backButton.addActionListener(e -> {
             tableModel.setRowCount(0);
-            currentEditions = new ArrayList<>();
+            currentInventoryInfo = new ArrayList<>();
             this.dispose();
         });
     }
@@ -127,7 +135,7 @@ public class SearchEditionForm extends JFrame {
     public void updateTable(ArrayList<String[]> array) {
         for (String[] row : array) {
             boolean adding = true;
-            for (String[] cur : currentEditions) {
+            for (String[] cur : currentInventoryInfo) {
                 if (cur[0].equals(row[0])) {
                     adding = false;
                     break;
@@ -135,7 +143,7 @@ public class SearchEditionForm extends JFrame {
             }
             if (adding) {
                 tableModel.addRow(row);
-                currentEditions.add(row);
+                currentInventoryInfo.add(row);
             }
         }
     }

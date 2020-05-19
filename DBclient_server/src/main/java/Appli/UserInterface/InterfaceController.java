@@ -5,6 +5,7 @@ import Appli.Controllers.IssuedPageController;
 import Appli.Controllers.LibraryPageController;
 import Appli.Controllers.ReadersPageController;
 import Appli.UserInterface.Pages.EditionPage.EditionForm;
+import Appli.UserInterface.Pages.IssuedPage.EditionSearchForm;
 import Appli.UserInterface.Pages.IssuedPage.IssuedForm;
 import Appli.UserInterface.Pages.LibraryPage.LibraryForm;
 import Appli.UserInterface.Pages.MenuPage.MenuForm;
@@ -35,6 +36,7 @@ public class InterfaceController {
 
     private IssuedPageController issuedPageController;
     private IssuedForm issuedForm;
+    private EditionSearchForm editionSearchForm;
 
 
     public InterfaceController(){
@@ -47,11 +49,12 @@ public class InterfaceController {
         libraryForm = new LibraryForm();
         editionForm = new EditionForm();
         issuedForm = new IssuedForm();
+        editionSearchForm = new EditionSearchForm();
 
         readersPageController = new ReadersPageController(readersForm);
         libraryPageController = new LibraryPageController(libraryForm);
         editionsPageController = new EditionsPageController(editionForm);
-        issuedPageController = new IssuedPageController(issuedForm);
+        issuedPageController = new IssuedPageController(issuedForm, editionSearchForm);
 
         initializationListeners();
 
@@ -106,12 +109,26 @@ public class InterfaceController {
             window.repaint();
         });
 
+        editionSearchForm.backButton.addActionListener(e -> {
+            window.remove(editionSearchForm);
+            window.add(menuForm);
+            window.repaint();
+            window.revalidate();
+        });
+
+        issuedForm.searchByEditionButton.addActionListener(e ->{
+            window.remove(issuedForm);
+            window.add(editionSearchForm);
+            window.revalidate();
+            window.repaint();
+        });
         issuedForm.backButton.addActionListener(e -> {
             window.remove(issuedForm);
             window.add(menuForm);
             window.revalidate();
             window.repaint();
         });
+
     }
 
 

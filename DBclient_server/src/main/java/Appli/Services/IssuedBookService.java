@@ -1,5 +1,6 @@
 package Appli.Services;
 
+import Appli.Entities.AllReader;
 import Appli.Entities.Edition;
 import Appli.Entities.IssuedBook;
 
@@ -34,4 +35,8 @@ public interface IssuedBookService {
     List<IssuedBook> findByLessDateReturn(Date dateReturn);
 
     List<IssuedBook> findBetweenDates(Date dateExtradition, Date dateReturn);
+
+    boolean isReturned(Long id_edition);
+    List<AllReader> findReadersWithTitle(String title);
+    List<AllReader> findReadersWithType(String type);
 }

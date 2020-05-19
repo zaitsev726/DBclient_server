@@ -26,6 +26,7 @@ public class EditionsPageController {
     private InformationService informationService;
     private LibraryService libraryService;
     private RuleService ruleService;
+    private IssuedBookService issuedBookService;
 
     private long cur_IdEdition;
     private String cur_type;
@@ -54,6 +55,7 @@ public class EditionsPageController {
         this.informationService = new InformationServiceImpl();
         this.libraryService = new LibraryServiceImpl();
         this.ruleService = new RuleServiceImpl();
+        this.issuedBookService = new IssuedBookServiceImpl();
 
         setStartValues();
         initializationListeners();
@@ -490,5 +492,11 @@ public class EditionsPageController {
     public void showCurrentRules(long id_edition) {
         List<Rule> rules = ruleService.findByIdEdition(id_edition);
         SearchRulesInEditionForm rulesInEditionForm = new SearchRulesInEditionForm(rules);
+    }
+
+    public void queryForUpdateTable(ArrayList<String[]> currentInventoryInfo) {
+        currentInventoryInfo.removeIf(next -> issuedBookService.isReturned(Long.valueOf(next[0])));
+        System.out.println("***************************************************" + currentInventoryInfo);
+        searchEditionForm.updateTable(currentInventoryInfo);
     }
 }

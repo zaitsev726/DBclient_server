@@ -14,6 +14,7 @@ public class IssuedForm extends JPanel{
     public JCheckBox lessCheckBox;
     public JCheckBox moreCheckBox;
     public JButton searchButton;
+    public JButton searchByEditionButton;
     public JButton backButton;
     private JLabel IdRecordLabel;
     private JLabel IdReaderLabel;
@@ -21,7 +22,6 @@ public class IssuedForm extends JPanel{
     private JLabel idLibrarianLabel;
     private JLabel extraditionLabel;
     private JLabel returnedLabel;
-
 
 
     public IssuedForm(){

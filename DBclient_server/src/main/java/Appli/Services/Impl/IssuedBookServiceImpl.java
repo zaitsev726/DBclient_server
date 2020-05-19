@@ -1,11 +1,10 @@
 package Appli.Services.Impl;
 
-import Appli.Entities.Edition;
-import Appli.Entities.Information;
-import Appli.Entities.IssuedBook;
+import Appli.Entities.*;
 import Appli.Services.IssuedBookService;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -222,5 +221,51 @@ public class IssuedBookServiceImpl implements IssuedBookService {
                 .getResultList();
         em.close();
         return issuedBooks;
+    }
+
+    @Override
+    public boolean isReturned(Long id_edition) {
+        EntityManager em = emf.createEntityManager();
+        List<IssuedBook> issuedBooks = em.createQuery("select i from IssuedBook i where i.id_edition = :id", IssuedBook.class)
+                .setParameter("id", id_edition)
+                .getResultList();
+        for(IssuedBook book: issuedBooks){
+            if(!book.isIs_returned())
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public List<AllReader> findReadersWithTitle(String title){
+        EntityManager em = emf.createEntityManager();
+        List<AllReader> readers = new ArrayList<>();
+        em.getTransaction().begin();
+        List<Characteristic> characteristics = em.createQuery("select c from Characteristic c where c.title = :title", Characteristic.class)
+                .setParameter("title", title)
+                .getResultList();
+
+        for(Characteristic c: characteristics){
+            readers.addAll(em.createQuery("select a from AllReader a join IssuedBook i on a.id_reader = i.id_reader where i.id_edition = :id and i.is_returned = false ", AllReader.class)
+            .setParameter("id",c.getId_edition())
+            .getResultList());
+        }
+        return readers;
+    }
+
+    public List<AllReader> findReadersWithType(String type){
+        EntityManager em = emf.createEntityManager();
+        List<AllReader> readers = new ArrayList<>();
+        em.getTransaction().begin();
+        List<Characteristic> characteristics = em.createQuery("select c from Characteristic c where c.type_edition = :type", Characteristic.class)
+                .setParameter("type", type)
+                .getResultList();
+
+        for(Characteristic c: characteristics){
+            readers.addAll(em.createQuery("select a from AllReader a join IssuedBook i on a.id_reader = i.id_reader where i.id_edition = :id and i.is_returned = false ", AllReader.class)
+            .setParameter("id",c.getId_edition())
+            .getResultList());
+        }
+        return readers;
     }
 }
