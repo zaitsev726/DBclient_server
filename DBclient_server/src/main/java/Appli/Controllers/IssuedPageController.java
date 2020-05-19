@@ -1,19 +1,11 @@
 package Appli.Controllers;
 
-import Appli.Entities.AllReader;
-import Appli.Entities.Edition;
-import Appli.Entities.IssuedBook;
-import Appli.Entities.Librarian;
+import Appli.Entities.*;
 import Appli.Entities.Types.Pensioner;
-import Appli.Services.AllReaderService;
-import Appli.Services.EditionService;
-import Appli.Services.Impl.AllReaderServiceImpl;
-import Appli.Services.Impl.EditionServiceImpl;
-import Appli.Services.Impl.IssuedBookServiceImpl;
-import Appli.Services.Impl.LibrarianServiceImpl;
-import Appli.Services.IssuedBookService;
-import Appli.Services.LibrarianService;
+import Appli.Services.*;
+import Appli.Services.Impl.*;
 import Appli.UserInterface.Frames.IssuedBook.SearchIssuedBookForm;
+import Appli.UserInterface.Frames.IssuedBook.SearchReadersInIssuedBooks;
 import Appli.UserInterface.Pages.IssuedPage.EditionSearchForm;
 import Appli.UserInterface.Pages.IssuedPage.IssuedForm;
 
@@ -34,7 +26,7 @@ public class IssuedPageController {
     private LibrarianService librarianService;
     private EditionService editionService;
     private AllReaderService readerService;
-
+    private InformationService informationService;
 
     private long id_record;
     private long id_reader;
@@ -56,6 +48,7 @@ public class IssuedPageController {
         this.librarianService = new LibrarianServiceImpl();
         this.editionService = new EditionServiceImpl();
         this.readerService = new AllReaderServiceImpl();
+        this.informationService = new InformationServiceImpl();
 
         issuedBookForm = new SearchIssuedBookForm(this);
 
@@ -222,14 +215,20 @@ public class IssuedPageController {
         editionSearchForm.searchButton.addActionListener(e -> {
             String title = editionSearchForm.getTitle();
             String type = editionSearchForm.getType();
-
+            List<AllReader> readers = new ArrayList<>();
             if (!title.equals("") && !type.equals("")) {
                 JOptionPane.showMessageDialog(editionSearchForm, "Просили ввести только ОДИН параметр. Поиск отменен");
                 editionSearchForm.setStartValues();
             } else if (!title.equals("") && type.equals("")) {
-               // issuedBookService
+                readers = issuedBookService.findReadersWithTitle(title);
             } else if (title.equals("") && !type.equals("")) {
+                readers = issuedBookService.findReadersWithType(type);
+            }
 
+            if(readers.size() > 0){
+                SearchReadersInIssuedBooks inIssuedBooks = new SearchReadersInIssuedBooks(readers);
+            }else{
+                JOptionPane.showMessageDialog(editionSearchForm, "Таких читателей нет");
             }
         });
 
@@ -352,5 +351,14 @@ public class IssuedPageController {
         }
 
 
+    }
+
+    public void showCurrentInformation(Long id_edition) {
+        Information information = informationService.findById(id_edition);
+        JOptionPane.showMessageDialog(issuedBookForm,
+                new String[]{"Информация о издании",
+                        " Автор: " +information.getAuthor(),
+                        " Название: " + information.getComposition(),
+                        " Популярность: " + information.getPopularity()}, "Издания", JOptionPane.INFORMATION_MESSAGE);
     }
 }

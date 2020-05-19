@@ -253,6 +253,7 @@ public class IssuedBookServiceImpl implements IssuedBookService {
         return readers;
     }
 
+    @Override
     public List<AllReader> findReadersWithType(String type){
         EntityManager em = emf.createEntityManager();
         List<AllReader> readers = new ArrayList<>();

@@ -23,7 +23,7 @@ public class Global {
     private InterfaceController interfaceController;
 
     public Global(){
-       // interfaceController = new InterfaceController();
+        interfaceController = new InterfaceController();
         AllReaderServiceImpl a = new AllReaderServiceImpl();
         LibraryServiceImpl b = new LibraryServiceImpl();
         LibrarianServiceImpl c = new LibrarianServiceImpl();
@@ -94,6 +94,6 @@ public class Global {
        // System.out.println(date);
        // System.out.println(date);
        // System.out.println(e.findByMoreDateAdding(date));
-        System.out.println(i.findReadersWithType("Роман"));
+       // System.out.println(i.findReadersWithType("Роман"));
     }
 }

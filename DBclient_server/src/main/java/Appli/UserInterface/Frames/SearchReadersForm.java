@@ -104,6 +104,8 @@ public class SearchReadersForm extends JFrame {
         removeRowButton.addActionListener(e -> {
             // Номер выделенной строки
             int row = resultTable.getSelectedRow();
+            if(row < 0)
+                row = 0;
             // Удаление выделенной строки
             controller.queryForDelete(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), String.valueOf(tableModel.getValueAt(row, 1)),
                     String.valueOf(tableModel.getValueAt(row, 2)), String.valueOf(tableModel.getValueAt(row, 3)),

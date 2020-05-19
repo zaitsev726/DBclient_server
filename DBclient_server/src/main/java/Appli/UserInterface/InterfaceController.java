@@ -111,7 +111,7 @@ public class InterfaceController {
 
         editionSearchForm.backButton.addActionListener(e -> {
             window.remove(editionSearchForm);
-            window.add(menuForm);
+            window.add(issuedForm);
             window.repaint();
             window.revalidate();
         });

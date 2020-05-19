@@ -19,6 +19,9 @@ public class SearchIssuedBookForm extends JFrame {
     private ArrayList<String[]> currentInformation;
 
     private IssuedPageController controller;
+
+    private JButton informationButton;
+
     private JButton backButton;
 
     // Заголовки столбцов
@@ -27,6 +30,7 @@ public class SearchIssuedBookForm extends JFrame {
     public SearchIssuedBookForm(IssuedPageController controller) {
         currentInformation = new ArrayList<>();
         this.controller = controller;
+        informationButton = new JButton("Подробнее");
         backButton = new JButton("Очистить и выйти");
 
         setTitle("Результаты поиска истории");
@@ -44,6 +48,7 @@ public class SearchIssuedBookForm extends JFrame {
 
 
         JPanel buttons = new JPanel();
+        buttons.add(informationButton);
         buttons.add(backButton);
         getContentPane().add(buttons, "South");
 
@@ -78,6 +83,15 @@ public class SearchIssuedBookForm extends JFrame {
                     }
                 }
             }
+        });
+
+        informationButton.addActionListener(e ->{
+
+            int row = resultTable.getSelectedRow();
+            if (row >= 0)
+                controller.showCurrentInformation(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 2))));
+            else
+                JOptionPane.showMessageDialog(resultTable, "Выберите строчку");
         });
 
         backButton.addActionListener(e -> {
