@@ -361,4 +361,22 @@ public class IssuedPageController {
                         " Название: " + information.getComposition(),
                         " Популярность: " + information.getPopularity()}, "Издания", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    public void queryForSelectRegistered(ArrayList<String[]> currentInformation) {
+        for(String[] str : currentInformation){
+            System.out.println("АААААААААА" + str[1] + " " + str[2]);
+        }
+        currentInformation.removeIf(next -> !issuedBookService.isRegistered(Long.valueOf(next[1]) , Long.valueOf(next[2])));
+        issuedBookForm.updateTable(currentInformation);
+       // System.out.println("****************************************** " +  currentInformation);
+
+    }
+
+
+    public void queryForSelectNotRegistered(ArrayList<String[]> currentInformation) {
+        currentInformation.removeIf(next -> issuedBookService.isRegistered(Long.valueOf(next[1]) , Long.valueOf(next[2])));
+        issuedBookForm.updateTable(currentInformation);
+
+    }
+
 }

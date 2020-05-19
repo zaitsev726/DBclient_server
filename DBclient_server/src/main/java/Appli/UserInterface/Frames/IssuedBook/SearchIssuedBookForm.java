@@ -1,9 +1,7 @@
 package Appli.UserInterface.Frames.IssuedBook;
 
 
-import Appli.Controllers.EditionsPageController;
 import Appli.Controllers.IssuedPageController;
-import Appli.Entities.Information;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -21,7 +19,8 @@ public class SearchIssuedBookForm extends JFrame {
     private IssuedPageController controller;
 
     private JButton informationButton;
-
+    private JButton registeredButton;
+    private JButton notRegisteredButton;
     private JButton backButton;
 
     // Заголовки столбцов
@@ -31,6 +30,8 @@ public class SearchIssuedBookForm extends JFrame {
         currentInformation = new ArrayList<>();
         this.controller = controller;
         informationButton = new JButton("Подробнее");
+        registeredButton = new JButton("Зарегистрированы");
+        notRegisteredButton = new JButton("Не зарегистрированы");
         backButton = new JButton("Очистить и выйти");
 
         setTitle("Результаты поиска истории");
@@ -49,6 +50,8 @@ public class SearchIssuedBookForm extends JFrame {
 
         JPanel buttons = new JPanel();
         buttons.add(informationButton);
+        buttons.add(registeredButton);
+        buttons.add(notRegisteredButton);
         buttons.add(backButton);
         getContentPane().add(buttons, "South");
 
@@ -93,6 +96,22 @@ public class SearchIssuedBookForm extends JFrame {
             else
                 JOptionPane.showMessageDialog(resultTable, "Выберите строчку");
         });
+
+        registeredButton.addActionListener(e ->{
+            tableModel.setRowCount(0);
+            ArrayList<String[]> a = currentInformation;
+            currentInformation = new ArrayList<>();
+            controller.queryForSelectRegistered(a);
+        });
+
+        notRegisteredButton.addActionListener(e ->{
+            tableModel.setRowCount(0);
+            ArrayList<String[]> a = currentInformation;
+            currentInformation = new ArrayList<>();
+            controller.queryForSelectNotRegistered(a);
+        });
+
+
 
         backButton.addActionListener(e -> {
             tableModel.setRowCount(0);

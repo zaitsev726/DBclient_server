@@ -111,4 +111,17 @@ public class IssuedBook {
    // public Edition getEdition() { return edition; }
 
    // public void setEdition(Edition edition) { this.edition = edition; }
+
+    @Override
+    public String toString() {
+        return "IssuedBook{" +
+                "id_record=" + id_record +
+                ", id_reader=" + id_reader +
+                ", id_edition=" + id_edition +
+                ", date_extradition=" + date_extradition +
+                ", date_return=" + date_return +
+                ", is_returned=" + is_returned +
+                ", id_librarian=" + id_librarian +
+                '}';
+    }
 }

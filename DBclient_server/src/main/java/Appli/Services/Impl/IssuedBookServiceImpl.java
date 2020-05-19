@@ -269,4 +269,18 @@ public class IssuedBookServiceImpl implements IssuedBookService {
         }
         return readers;
     }
+
+    @Override
+    public boolean isRegistered(Long id_reader, Long id_edition) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Edition edition = em.createQuery("select e from  Edition e where e.id_edition = :id_edition", Edition.class)
+                .setParameter("id_edition", id_edition)
+                .getSingleResult();
+        AllReader reader = em.createQuery("select a from AllReader a where a.id_reader = :id_reader", AllReader.class)
+                .setParameter("id_reader", id_reader)
+                .getSingleResult();
+        em.getTransaction().commit();
+        return edition.getId_library().equals(reader.getId_library());
+    }
 }

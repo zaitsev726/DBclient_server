@@ -496,7 +496,7 @@ public class EditionsPageController {
 
     public void queryForUpdateTable(ArrayList<String[]> currentInventoryInfo) {
         currentInventoryInfo.removeIf(next -> issuedBookService.isReturned(Long.valueOf(next[0])));
-        System.out.println("***************************************************" + currentInventoryInfo);
+        //System.out.println("***************************************************" + currentInventoryInfo);
         searchEditionForm.updateTable(currentInventoryInfo);
     }
 }

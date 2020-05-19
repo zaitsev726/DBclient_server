@@ -39,4 +39,6 @@ public interface IssuedBookService {
     boolean isReturned(Long id_edition);
     List<AllReader> findReadersWithTitle(String title);
     List<AllReader> findReadersWithType(String type);
+
+    boolean isRegistered(Long id_reader, Long id_edition);
 }
