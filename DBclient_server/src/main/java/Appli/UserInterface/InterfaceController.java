@@ -1,6 +1,7 @@
 package Appli.UserInterface;
 
 import Appli.Controllers.EditionsPageController;
+import Appli.Controllers.IssuedPageController;
 import Appli.Controllers.LibraryPageController;
 import Appli.Controllers.ReadersPageController;
 import Appli.UserInterface.Pages.EditionPage.EditionForm;
@@ -25,13 +26,14 @@ public class InterfaceController {
     private ReadersPageController readersPageController;
     private ReadersForm readersForm;
 
-    private LibraryForm libraryForm;
     private LibraryPageController libraryPageController;
+    private LibraryForm libraryForm;
 
     private EditionsPageController editionsPageController;
     private EditionForm editionForm;
 
 
+    private IssuedPageController issuedPageController;
     private IssuedForm issuedForm;
 
 
@@ -49,6 +51,7 @@ public class InterfaceController {
         readersPageController = new ReadersPageController(readersForm);
         libraryPageController = new LibraryPageController(libraryForm);
         editionsPageController = new EditionsPageController(editionForm);
+        issuedPageController = new IssuedPageController(issuedForm);
 
         initializationListeners();
 

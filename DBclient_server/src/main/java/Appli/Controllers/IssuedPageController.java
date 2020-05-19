@@ -1,10 +1,13 @@
 package Appli.Controllers;
 
+import Appli.Entities.AllReader;
 import Appli.Entities.Edition;
 import Appli.Entities.IssuedBook;
 import Appli.Entities.Librarian;
 import Appli.Entities.Types.Pensioner;
+import Appli.Services.AllReaderService;
 import Appli.Services.EditionService;
+import Appli.Services.Impl.AllReaderServiceImpl;
 import Appli.Services.Impl.EditionServiceImpl;
 import Appli.Services.Impl.IssuedBookServiceImpl;
 import Appli.Services.Impl.LibrarianServiceImpl;
@@ -12,7 +15,7 @@ import Appli.Services.IssuedBookService;
 import Appli.Services.LibrarianService;
 import Appli.UserInterface.Frames.IssuedBook.SearchIssuedBookForm;
 import Appli.UserInterface.Pages.IssuedPage.IssuedForm;
-import sun.rmi.runtime.Log;
+
 
 import javax.persistence.NoResultException;
 import javax.swing.*;
@@ -30,6 +33,8 @@ public class IssuedPageController {
     private IssuedBookService issuedBookService;
     private LibrarianService librarianService;
     private EditionService editionService;
+    private AllReaderService readerService;
+
 
     private long id_record;
     private long id_reader;
@@ -49,6 +54,7 @@ public class IssuedPageController {
         this.issuedBookService = new IssuedBookServiceImpl();
         this.librarianService = new LibrarianServiceImpl();
         this.editionService = new EditionServiceImpl();
+        this.readerService = new AllReaderServiceImpl();
 
         issuedBookForm = new SearchIssuedBookForm(this);
 
@@ -148,47 +154,47 @@ public class IssuedPageController {
         issuedForm.searchButton.addActionListener(e -> {
             List<IssuedBook> issuedBookList = new ArrayList<>();
             if (id_record == 0 && id_edition == 0 && id_reader == 0 && id_librarian == 0 && extraditionDate == null && returnedDate == null) {
-                if(isReturned == null){
+                if (isReturned == null) {
                     issuedBookList = issuedBookService.findAll();
-                }else if(isReturned){
+                } else if (isReturned) {
                     issuedBookList = issuedBookService.findReturned();
-                }else{
+                } else {
                     issuedBookList = issuedBookService.findNotReturned();
                 }
             } else if (id_edition != 0 && id_librarian != 0) {
                 issuedBookList = issuedBookService.findByIdEditionAndIdLibrarian(id_edition, id_librarian);
-            } else if (id_edition != 0){
+            } else if (id_edition != 0) {
                 issuedBookList = issuedBookService.findByIdEdition(id_edition);
-            } else if (id_reader != 0){
-                if(isReturned == null){
+            } else if (id_reader != 0) {
+                if (isReturned == null) {
                     issuedBookList = issuedBookService.findByIdReader(id_reader);
-                }else if(isReturned){
+                } else if (isReturned) {
                     issuedBookList = issuedBookService.findByIdReaderAndReturned(id_reader);
-                }else
+                } else
                     issuedBookList = issuedBookService.findByIdReaderAndNotReturned(id_reader);
             } else if (id_librarian != 0) {
-                if(isReturned == null){
+                if (isReturned == null) {
                     issuedBookList = issuedBookService.findByIdLibrarian(id_librarian);
-                }else if(isReturned){
+                } else if (isReturned) {
                     issuedBookList = issuedBookService.findByIdLibrarianAndReturned(id_librarian);
-                }else
+                } else
                     issuedBookList = issuedBookService.findByIdLibrarianAndNotReturned(id_librarian);
 
-            }else if(extraditionDate != null && returnedDate != null){
-                issuedBookList = issuedBookService.findBetweenDates(extraditionDate,returnedDate);
-            } else if (extraditionDate != null && returnedDate == null){
-                if(lessExtradition){
+            } else if (extraditionDate != null && returnedDate != null) {
+                issuedBookList = issuedBookService.findBetweenDates(extraditionDate, returnedDate);
+            } else if (extraditionDate != null && returnedDate == null) {
+                if (lessExtradition) {
                     issuedBookList = issuedBookService.findByLessDateExtradition(extraditionDate);
-                }else
+                } else
                     issuedBookList = issuedBookService.findByMoreDateExtradition(extraditionDate);
-            } else if (extraditionDate == null && returnedDate != null){
-                if(moreReturned){
+            } else if (extraditionDate == null && returnedDate != null) {
+                if (moreReturned) {
                     issuedBookList = issuedBookService.findByMoreDateReturn(returnedDate);
-                }else
+                } else
                     issuedBookList = issuedBookService.findByLessDateReturn(returnedDate);
             }
 
-            if( issuedBookList.size() > 0) {
+            if (issuedBookList.size() > 0) {
                 ArrayList<String[]> resultList = new ArrayList<>();
                 for (IssuedBook book : issuedBookList) {
                     String[] str = new String[7];
@@ -206,14 +212,15 @@ public class IssuedPageController {
                 }
                 issuedBookForm.updateTable(resultList);
                 issuedBookForm.setVisible(true);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(issuedForm, "Таких записей нет");
             }
+            setStartValues();           //????
         });
 
     }
 
-    public void queryForUpdateIssuedBook(long id_record, long id_reader, long id_edition, Date extradition, Date returned, boolean isReturned, long id_librarian, int changedParam){
+    public void queryForUpdateIssuedBook(long id_record, long id_reader, long id_edition, Date extradition, Date returned, boolean isReturned, long id_librarian, int changedParam) {
         IssuedBook issuedBook = new IssuedBook();
         issuedBook.setId_record(id_record);
         issuedBook.setId_reader(id_reader);
@@ -226,27 +233,38 @@ public class IssuedPageController {
         List<IssuedBook> bookList = new ArrayList<>();
         Librarian librarian;
         Edition edition;
+        AllReader reader;
         switch (changedParam) {
             case (1):
+                try{
+                    reader = readerService.findById(id_reader);
+                }catch (NoResultException ignored){
+                    JOptionPane.showMessageDialog(issuedBookForm, "Такого читателя нет");
+                    return;
+                }
                 issuedBookService.update(issuedBook);
                 break;
             case (2):
-                librarian = librarianService.findById(id_librarian);
-                if (librarian != null) {
-                    edition = editionService.findById(id_edition);
-                    if (edition != null) {
-                        if (edition.getId_library().equals(librarian.getId_library())) {
-                            issuedBookService.update(issuedBook);
-                        } else {
-                            JOptionPane.showMessageDialog(issuedBookForm, "Такого издания нет у данного работника");
-                            return;
-                        }
-
-                    } else
-                        JOptionPane.showMessageDialog(issuedBookForm, "Такого издания нет");
-                } else {
+                try {
+                    librarian = librarianService.findById(id_librarian);
+                } catch (NoResultException ignored) {
                     JOptionPane.showMessageDialog(issuedBookForm, "Такого работника нет");
+                    return;
                 }
+                try {
+                    edition = editionService.findById(id_edition);
+                } catch (NoResultException ignored) {
+                    JOptionPane.showMessageDialog(issuedBookForm, "Такого издания нет");
+                    return;
+                }
+
+                if (edition.getId_library().equals(librarian.getId_library())) {
+                    issuedBookService.update(issuedBook);
+                } else {
+                    JOptionPane.showMessageDialog(issuedBookForm, "Такого издания нет у данного работника");
+                    return;
+                }
+
                 break;
             case (3):
                 if (returned != null)
@@ -254,8 +272,11 @@ public class IssuedPageController {
                         JOptionPane.showMessageDialog(issuedBookForm, "Дата выдачи не может быть позже даты возврата");
                         return;
                     }
-
-                bookList = issuedBookService.findByIdEdition(id_edition);
+                try {
+                    bookList = issuedBookService.findByIdEdition(id_edition);
+                } catch (NoResultException ignored) {
+                    bookList = new ArrayList<>();
+                }
                 for (IssuedBook book : bookList) {
                     if (book.getDate_return() != null) {
                         if (book.getDate_return().getTime() >= extradition.getTime()) {
@@ -275,7 +296,12 @@ public class IssuedPageController {
                     JOptionPane.showMessageDialog(issuedBookForm, "Дата возврата не может быть раньше даты выдачи");
                     return;
                 }
-                bookList = issuedBookService.findByIdEdition(id_edition);
+                try {
+                    bookList = issuedBookService.findByIdEdition(id_edition);
+                } catch (NoResultException ignored) {
+                    bookList = new ArrayList<>();
+                }
+
                 for (IssuedBook book : bookList) {
                     if (!book.isIs_returned() && book.getDate_extradition().getTime() < returned.getTime()) {
                         JOptionPane.showMessageDialog(issuedBookForm, "В это время книга еще не возвращена");
@@ -289,23 +315,24 @@ public class IssuedPageController {
                 issuedBookService.update(issuedBook);
                 break;
             case (6):
-                librarian = librarianService.findById(id_librarian);
-                if (librarian != null) {
-                    edition = editionService.findById(id_edition);
-                    if (edition != null) {
-                        if (edition.getId_library().equals(librarian.getId_library())) {
-                            issuedBookService.update(issuedBook);
-                        } else {
-                            JOptionPane.showMessageDialog(issuedBookForm, "У работника нет такого издания в библиотеке");
-                            return;
-                        }
-
-                    } else
-                        JOptionPane.showMessageDialog(issuedBookForm, "Такого издания нет");
-                } else {
+                try {
+                    librarian = librarianService.findById(id_librarian);
+                } catch (NoResultException ignored) {
                     JOptionPane.showMessageDialog(issuedBookForm, "Такого работника нет");
+                    return;
                 }
-
+                try {
+                    edition = editionService.findById(id_edition);
+                } catch (NoResultException ignored) {
+                    JOptionPane.showMessageDialog(issuedBookForm, "Такого издания нет");
+                    return;
+                }
+                if (edition.getId_library().equals(librarian.getId_library())) {
+                    issuedBookService.update(issuedBook);
+                } else {
+                    JOptionPane.showMessageDialog(issuedBookForm, "У работника нет такого издания в библиотеке");
+                    return;
+                }
                 break;
         }
 
