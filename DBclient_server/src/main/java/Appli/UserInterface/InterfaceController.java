@@ -11,6 +11,8 @@ import Appli.UserInterface.Pages.LibraryPage.LibraryForm;
 import Appli.UserInterface.Pages.MenuPage.MenuForm;
 import Appli.UserInterface.Pages.MenuPage.MenuPanel;
 import Appli.UserInterface.Pages.ReadersPage.ReadersForm;
+import Appli.UserInterface.Pages.TakeBookPage.AuthorizationForm;
+import Appli.UserInterface.Pages.TakeBookPage.TakeBookForm;
 
 import java.awt.*;
 
@@ -21,7 +23,7 @@ public class InterfaceController {
     private int locationX = (1920 - sizeWidth) / 2;
     private int locationY = (1080 - sizeHeight) / 2 - 20;
     private Window window;
-  //  private MenuPanel menuPanel;
+    //  private MenuPanel menuPanel;
     private MenuForm menuForm;
 
     private ReadersPageController readersPageController;
@@ -38,18 +40,23 @@ public class InterfaceController {
     private IssuedForm issuedForm;
     private EditionSearchForm editionSearchForm;
 
+    private AuthorizationForm authorizationForm;
+    private TakeBookForm takeBookForm;
 
-    public InterfaceController(){
-        window = new Appli.UserInterface.Frames.Window(sizeWidth,sizeHeight,locationX,locationY);
+    public InterfaceController() {
+        window = new Appli.UserInterface.Frames.Window(sizeWidth, sizeHeight, locationX, locationY);
 
-    //    menuPanel = new MenuPanel(sizeWidth, sizeHeight);
-        menuForm = new MenuForm(sizeWidth,sizeHeight);
+        //    menuPanel = new MenuPanel(sizeWidth, sizeHeight);
+        menuForm = new MenuForm(sizeWidth, sizeHeight);
 
         readersForm = new ReadersForm();
         libraryForm = new LibraryForm();
         editionForm = new EditionForm();
         issuedForm = new IssuedForm();
         editionSearchForm = new EditionSearchForm();
+        authorizationForm = new AuthorizationForm();
+        takeBookForm = new TakeBookForm();
+
 
         readersPageController = new ReadersPageController(readersForm);
         libraryPageController = new LibraryPageController(libraryForm);
@@ -58,12 +65,14 @@ public class InterfaceController {
 
         initializationListeners();
 
-       // window.add(menuPanel);
+        // window.add(menuPanel);
         window.add(menuForm);
         window.setVisible(true);
     }
 
-    private void initializationListeners(){ initializationMenuListeners(); }
+    private void initializationListeners() {
+        initializationMenuListeners();
+    }
 
     private void initializationMenuListeners() {
 
@@ -95,6 +104,28 @@ public class InterfaceController {
             window.repaint();
         });
 
+        menuForm.myBooksButton.addActionListener(e -> {
+            window.remove(menuForm);
+            window.add(authorizationForm);
+            window.revalidate();
+            window.repaint();
+        });
+
+        authorizationForm.backButton.addActionListener(e -> {
+            window.remove(authorizationForm);
+            window.add(menuForm);
+            window.revalidate();
+            window.repaint();
+        });
+
+        authorizationForm.continueButton.addActionListener(e -> {
+            window.remove(authorizationForm);
+            window.add(takeBookForm);
+            window.revalidate();
+            window.repaint();
+        });
+
+
         readersForm.backButton.addActionListener(e -> {
             window.remove(readersForm);
             window.add(menuForm);
@@ -116,7 +147,7 @@ public class InterfaceController {
             window.revalidate();
         });
 
-        issuedForm.searchByEditionButton.addActionListener(e ->{
+        issuedForm.searchByEditionButton.addActionListener(e -> {
             window.remove(issuedForm);
             window.add(editionSearchForm);
             window.revalidate();

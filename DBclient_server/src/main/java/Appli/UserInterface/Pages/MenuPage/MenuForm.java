@@ -14,6 +14,7 @@ public class MenuForm extends JPanel {
     public JButton editionsButton;
     private JButton exitButton;
     public JButton issuedButton;
+    public JButton myBooksButton;
 
     public MenuForm(int sizeWidth, int sizeHeight) {
         this.add(menuPanel);
