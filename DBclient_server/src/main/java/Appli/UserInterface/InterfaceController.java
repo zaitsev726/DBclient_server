@@ -1,9 +1,6 @@
 package Appli.UserInterface;
 
-import Appli.Controllers.EditionsPageController;
-import Appli.Controllers.IssuedPageController;
-import Appli.Controllers.LibraryPageController;
-import Appli.Controllers.ReadersPageController;
+import Appli.Controllers.*;
 import Appli.UserInterface.Pages.EditionPage.EditionForm;
 import Appli.UserInterface.Pages.IssuedPage.EditionSearchForm;
 import Appli.UserInterface.Pages.IssuedPage.IssuedForm;
@@ -14,6 +11,8 @@ import Appli.UserInterface.Pages.ReadersPage.ReadersForm;
 import Appli.UserInterface.Pages.TakeBookPage.AuthorizationForm;
 import Appli.UserInterface.Pages.TakeBookPage.TakeBookForm;
 
+import javax.persistence.NoResultException;
+import javax.swing.*;
 import java.awt.*;
 
 public class InterfaceController {
@@ -40,6 +39,7 @@ public class InterfaceController {
     private IssuedForm issuedForm;
     private EditionSearchForm editionSearchForm;
 
+    private TakeBookPageController takeBookPageController;
     private AuthorizationForm authorizationForm;
     private TakeBookForm takeBookForm;
 
@@ -62,6 +62,7 @@ public class InterfaceController {
         libraryPageController = new LibraryPageController(libraryForm);
         editionsPageController = new EditionsPageController(editionForm);
         issuedPageController = new IssuedPageController(issuedForm, editionSearchForm);
+        takeBookPageController = new TakeBookPageController(authorizationForm,takeBookForm);
 
         initializationListeners();
 
@@ -119,12 +120,27 @@ public class InterfaceController {
         });
 
         authorizationForm.continueButton.addActionListener(e -> {
-            window.remove(authorizationForm);
-            window.add(takeBookForm);
+            if(authorizationForm.id_reader != 0) {
+                try {
+                    takeBookPageController.setReader(authorizationForm.id_reader);
+                    window.remove(authorizationForm);
+                    window.add(takeBookForm);
+                    window.revalidate();
+                    window.repaint();
+                }catch (NoResultException ignored){
+                    JOptionPane.showMessageDialog(window, "Такого читателя не существует");
+                }
+            }else{
+                JOptionPane.showMessageDialog(window, "Вы не ввели ID");
+            }
+        });
+
+        takeBookForm.backButton.addActionListener(e -> {
+            window.remove(takeBookForm);
+            window.add(menuForm);
             window.revalidate();
             window.repaint();
         });
-
 
         readersForm.backButton.addActionListener(e -> {
             window.remove(readersForm);

@@ -9,9 +9,10 @@ public class AuthorizationForm extends JPanel{
     public JButton backButton;
     private JLabel idLabel;
 
-    private long id_reader;
+    public long id_reader;
     public AuthorizationForm(){
         this.add(authorizationPanel);
+        initializationListener();
         setVisible(true);
     }
 

@@ -94,6 +94,17 @@ public class IssuedBookServiceImpl implements IssuedBookService {
     }
 
     @Override
+    public List<IssuedBook> findByIdReaderAndIdEdition(Long id_reader, Long id_edition) {
+        EntityManager em = emf.createEntityManager();
+        List<IssuedBook> issuedBooks = em.createQuery("select i from IssuedBook i where i.id_reader = :id_reader and i.id_edition = :id_edition", IssuedBook.class)
+                .setParameter("id_reader", id_reader)
+                .setParameter("id_edition", id_edition)
+                .getResultList();
+        em.close();
+        return issuedBooks;
+    }
+
+    @Override
     public List<IssuedBook> findReturned() {
         EntityManager em = emf.createEntityManager();
         List<IssuedBook> issuedBooks = em.createQuery("select i from IssuedBook i where i.is_returned = true", IssuedBook.class)
@@ -282,5 +293,16 @@ public class IssuedBookServiceImpl implements IssuedBookService {
                 .getSingleResult();
         em.getTransaction().commit();
         return edition.getId_library().equals(reader.getId_library());
+    }
+
+    @Override
+    public List<IssuedBook> findReadyBooks() {
+        Date date = new Date();
+        EntityManager em = emf.createEntityManager();
+        List<IssuedBook> issuedBooks = em.createQuery("select i from IssuedBook i join  Edition e on i.id_edition = e.id_edition where i.is_returned = true and e.date_removing < :date", IssuedBook.class)
+                .setParameter("date", date)
+                .getResultList();
+        em.close();
+        return issuedBooks;
     }
 }

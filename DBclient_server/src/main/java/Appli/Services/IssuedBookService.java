@@ -17,6 +17,8 @@ public interface IssuedBookService {
     List<IssuedBook> findByIdReader(Long id_reader);
     List<IssuedBook> findByIdEdition(Long id_edition);
 
+    List<IssuedBook> findByIdReaderAndIdEdition(Long id_reader, Long id_edition);
+
     List<IssuedBook> findReturned();
     List<IssuedBook> findNotReturned();
 
@@ -41,4 +43,6 @@ public interface IssuedBookService {
     List<AllReader> findReadersWithType(String type);
 
     boolean isRegistered(Long id_reader, Long id_edition);
+
+    List<IssuedBook> findReadyBooks();
 }
