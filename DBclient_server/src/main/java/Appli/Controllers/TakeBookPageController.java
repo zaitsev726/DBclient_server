@@ -56,6 +56,16 @@ public class TakeBookPageController {
         takeBookForm.takeNewButton.addActionListener(e -> {
             searchNewEdition();
         });
+
+        takeBookForm.myInfoButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(takeBookForm,
+                    new String[]{"Информация о читателе",
+                            " Имя: " + reader.getName(),
+                            " Фамилия: " + reader.getSurname(),
+                            " Отчество: " + reader.getPatronymic(),
+                            " Библиотека: " + reader.getId_library(),
+                            " Профессия: " + reader.getType(),}, "Читатель", JOptionPane.INFORMATION_MESSAGE);
+        });
     }
 
     public void setReader(long id_reader) throws NoResultException {
@@ -85,6 +95,8 @@ public class TakeBookPageController {
 
             issuedBookService.update(book);
             searchMyEdition();
+            if(searchNewBooksForm.isVisible())
+                searchNewEdition();
         }
     }
 
@@ -132,12 +144,18 @@ public class TakeBookPageController {
 
     private void searchNewEdition() {
         if (reader != null) {
-            List<IssuedBook> issuedBooks = issuedBookService.findReadyBooks();
+            List<IssuedBook> returnedBooks = issuedBookService.findReadyBooks();
             List<Long> IdEditions = new ArrayList<>();
-            System.out.println(issuedBooks);
-            if (issuedBooks.size() > 0) {
+            List<IssuedBook> issuedBooks = issuedBookService.findNotReturned();
+
+            for(IssuedBook book : issuedBooks){
+                IdEditions.add(book.getId_edition());
+            }
+
+            System.out.println(returnedBooks);
+            if (returnedBooks.size() > 0) {
                 ArrayList<String[]> resultList = new ArrayList<>();
-                for (IssuedBook book : issuedBooks) {
+                for (IssuedBook book : returnedBooks) {
                     if(!IdEditions.contains(book.getId_edition())) {
                         resultList.add(new String[]{String.valueOf(book.getId_record()), String.valueOf(book.getId_edition()), String.valueOf(book.getId_librarian())});
                         IdEditions.add(book.getId_edition());

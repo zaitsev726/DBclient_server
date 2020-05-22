@@ -299,7 +299,7 @@ public class IssuedBookServiceImpl implements IssuedBookService {
     public List<IssuedBook> findReadyBooks() {
         Date date = new Date();
         EntityManager em = emf.createEntityManager();
-        List<IssuedBook> issuedBooks = em.createQuery("select i from IssuedBook i join  Edition e on i.id_edition = e.id_edition where i.is_returned = true and e.date_removing < :date", IssuedBook.class)
+        List<IssuedBook> issuedBooks = em.createQuery("select  i from IssuedBook i left join  Edition e on i.id_edition = e.id_edition where i.is_returned = true and e.date_removing < :date", IssuedBook.class)
                 .setParameter("date", date)
                 .getResultList();
         em.close();

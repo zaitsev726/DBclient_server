@@ -10,7 +10,9 @@
           <factory-entry name="model" value="47d26d3f-7ef0-4292-a8e7-6ae6a0061f85" />
           <factory-entry name="zacet" value="47d26d3f-7ef0-4292-a8e7-6ae6a0061f85" />
         </datasource-mapping>
-        <naming-strategy-map />
+        <naming-strategy-map>
+          <unit-entry name="model" />
+        </naming-strategy-map>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
     </facet>
