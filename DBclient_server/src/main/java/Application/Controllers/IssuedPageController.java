@@ -7,6 +7,7 @@ import Application.UserInterface.Frames.IssuedBook.SearchIssuedBookForm;
 import Application.UserInterface.Frames.IssuedBook.SearchReadersInIssuedBooks;
 import Application.UserInterface.Pages.IssuedPage.EditionSearchForm;
 import Application.UserInterface.Pages.IssuedPage.IssuedForm;
+import Application.UserInterface.Pages.IssuedPage.LibrarianSearchForm;
 
 
 import javax.persistence.NoResultException;
@@ -15,11 +16,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class IssuedPageController {
     private IssuedForm issuedForm;
     private EditionSearchForm editionSearchForm;
+    private LibrarianSearchForm librarianSearchForm;
+
 
     private IssuedBookService issuedBookService;
     private LibrarianService librarianService;
@@ -39,9 +43,10 @@ public class IssuedPageController {
 
     private SearchIssuedBookForm issuedBookForm;
 
-    public IssuedPageController(IssuedForm issuedForm, EditionSearchForm editionSearchForm) {
+    public IssuedPageController(IssuedForm issuedForm, EditionSearchForm editionSearchForm, LibrarianSearchForm librarianSearchForm ) {
         this.issuedForm = issuedForm;
         this.editionSearchForm = editionSearchForm;
+        this.librarianSearchForm = librarianSearchForm;
 
         this.issuedBookService = new IssuedBookServiceImpl();
         this.librarianService = new LibrarianServiceImpl();
@@ -122,7 +127,7 @@ public class IssuedPageController {
                 JOptionPane.showMessageDialog(issuedForm, "Ваши значения сброшены на пустые");
                 setStartValues();
             }
-            ;
+
         });
 
         issuedForm.returnedTextField.addActionListener(e -> {
@@ -133,7 +138,23 @@ public class IssuedPageController {
                 JOptionPane.showMessageDialog(issuedForm, "Ваши значения сброшены на пустые");
                 setStartValues();
             }
-            ;
+
+        });
+
+        librarianSearchForm.searchButton.addActionListener(e -> {
+            if(librarianSearchForm.getStartDate() != null && librarianSearchForm.getEndDate() != null){
+                List<AllReader> readers = issuedBookService.findReadersByIdLibraryAndPeriod(librarianSearchForm.getIdLibrarian(),
+                                                            librarianSearchForm.getStartDate(),
+                                                            librarianSearchForm.getEndDate());
+                if(readers.size() > 0){
+                    SearchReadersInIssuedBooks inIssuedBooks = new SearchReadersInIssuedBooks(readers);
+                }else{
+                    JOptionPane.showMessageDialog(editionSearchForm, "Таких читателей нет");
+                }
+
+            }else{
+                JOptionPane.showMessageDialog(librarianSearchForm, "Вы ввели не все параметры");
+            }
         });
 
         issuedForm.lessCheckBox.addActionListener(e -> {
@@ -143,6 +164,7 @@ public class IssuedPageController {
         issuedForm.moreCheckBox.addActionListener(e -> {
             moreReturned = issuedForm.moreCheckBox.isSelected();
         });
+
 
         issuedForm.searchButton.addActionListener(e -> {
             List<IssuedBook> issuedBookList = new ArrayList<>();
@@ -185,6 +207,34 @@ public class IssuedPageController {
                     issuedBookList = issuedBookService.findByMoreDateReturn(returnedDate);
                 } else
                     issuedBookList = issuedBookService.findByLessDateReturn(returnedDate);
+            }
+
+            if (extraditionDate != null && returnedDate == null) {
+                Iterator<IssuedBook> iterator = issuedBookList.iterator();
+                while (iterator.hasNext()) {
+                    IssuedBook issuedBook = iterator.next();
+                    if (lessExtradition) {
+                        if (issuedBook.getDate_extradition().getTime() >= extraditionDate.getTime())
+                            iterator.remove();
+                    } else {
+                        if (issuedBook.getDate_extradition().getTime() < extraditionDate.getTime())
+                            iterator.remove();
+                    }
+                }
+            }
+
+            if (extraditionDate == null && returnedDate != null) {
+                Iterator<IssuedBook> iterator = issuedBookList.iterator();
+                while (iterator.hasNext()) {
+                    IssuedBook issuedBook = iterator.next();
+                    if (moreReturned) {
+                        if (issuedBook.getDate_return().getTime() < returnedDate.getTime())
+                            iterator.remove();
+                    } else {
+                        if (issuedBook.getDate_extradition().getTime() >= returnedDate.getTime())
+                            iterator.remove();
+                    }
+                }
             }
 
             if (issuedBookList.size() > 0) {
@@ -367,7 +417,6 @@ public class IssuedPageController {
         }
         currentInformation.removeIf(next -> !issuedBookService.isRegistered(Long.valueOf(next[1]) , Long.valueOf(next[2])));
         issuedBookForm.updateTable(currentInformation);
-       // System.out.println("****************************************** " +  currentInformation);
 
     }
 
@@ -378,4 +427,16 @@ public class IssuedPageController {
 
     }
 
+    public boolean checkLibrarian() throws NoResultException{
+        if(id_librarian != 0) {
+            Librarian librarian = librarianService.findById(id_librarian);
+            if(librarian!= null) {
+                librarianSearchForm.setLibrarian(librarian);
+                return true;
+            }
+            else
+                throw new NoResultException();
+        }
+        return false;
+    }
 }

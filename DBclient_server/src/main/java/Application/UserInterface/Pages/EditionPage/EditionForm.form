@@ -100,7 +100,7 @@
         </constraints>
         <properties>
           <enabled value="true"/>
-          <font size="18"/>
+          <font size="12"/>
           <text value="Инвентарная информация"/>
         </properties>
       </component>
@@ -153,7 +153,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="18"/>
+          <font size="12"/>
           <text value="Подробная информация"/>
         </properties>
       </component>

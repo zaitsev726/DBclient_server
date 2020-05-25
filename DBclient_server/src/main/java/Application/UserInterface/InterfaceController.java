@@ -4,6 +4,7 @@ import Application.Controllers.*;
 import Application.UserInterface.Pages.EditionPage.EditionForm;
 import Application.UserInterface.Pages.IssuedPage.EditionSearchForm;
 import Application.UserInterface.Pages.IssuedPage.IssuedForm;
+import Application.UserInterface.Pages.IssuedPage.LibrarianSearchForm;
 import Application.UserInterface.Pages.LibraryPage.LibraryForm;
 import Application.UserInterface.Pages.MenuPage.MenuForm;
 import Application.UserInterface.Pages.ReadersPage.ReadersForm;
@@ -41,6 +42,7 @@ public class InterfaceController {
     private TakeBookPageController takeBookPageController;
     private AuthorizationForm authorizationForm;
     private TakeBookForm takeBookForm;
+    private LibrarianSearchForm librarianSearchForm;
 
     public InterfaceController() {
         window = new Application.UserInterface.Frames.Window(sizeWidth, sizeHeight, locationX, locationY);
@@ -55,12 +57,13 @@ public class InterfaceController {
         editionSearchForm = new EditionSearchForm();
         authorizationForm = new AuthorizationForm();
         takeBookForm = new TakeBookForm();
+        librarianSearchForm = new LibrarianSearchForm();
 
 
         readersPageController = new ReadersPageController(readersForm);
         libraryPageController = new LibraryPageController(libraryForm);
         editionsPageController = new EditionsPageController(editionForm);
-        issuedPageController = new IssuedPageController(issuedForm, editionSearchForm);
+        issuedPageController = new IssuedPageController(issuedForm, editionSearchForm, librarianSearchForm);
         takeBookPageController = new TakeBookPageController(authorizationForm, takeBookForm);
 
         initializationListeners();
@@ -181,6 +184,29 @@ public class InterfaceController {
             window.repaint();
         });
 
+        issuedForm.librarianButton.addActionListener(e -> {
+            try {
+                if (issuedPageController.checkLibrarian()) {
+
+                    takeBookPageController.setReader(authorizationForm.id_reader);
+                    window.remove(issuedForm);
+                    window.add(librarianSearchForm);
+                    window.revalidate();
+                    window.repaint();
+                } else {
+                    JOptionPane.showMessageDialog(window, "Вы не ввели ID работника");
+                }
+            } catch (NoResultException ignored) {
+                JOptionPane.showMessageDialog(window, "Такого работника библиотеки не существует");
+            }
+        });
+
+        librarianSearchForm.backButton.addActionListener(e -> {
+            window.remove(librarianSearchForm);
+            window.add(issuedForm);
+            window.revalidate();
+            window.repaint();
+        });
     }
 
 

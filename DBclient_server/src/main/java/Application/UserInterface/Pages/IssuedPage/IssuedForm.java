@@ -16,12 +16,14 @@ public class IssuedForm extends JPanel{
     public JButton searchButton;
     public JButton searchByEditionButton;
     public JButton backButton;
+    public JButton librarianButton;
     private JLabel IdRecordLabel;
     private JLabel IdReaderLabel;
     private JLabel IdEditionLabel;
     private JLabel idLibrarianLabel;
     private JLabel extraditionLabel;
     private JLabel returnedLabel;
+    private JButton button;
 
 
     public IssuedForm(){

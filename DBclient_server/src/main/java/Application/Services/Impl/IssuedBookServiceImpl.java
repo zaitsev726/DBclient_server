@@ -305,4 +305,16 @@ public class IssuedBookServiceImpl implements IssuedBookService {
         em.close();
         return issuedBooks;
     }
+
+    @Override
+    public List<AllReader> findReadersByIdLibraryAndPeriod(long idLibrarian, Date startDate, Date endDate) {
+        EntityManager em = emf.createEntityManager();
+        List<AllReader> readers = em.createQuery("select distinct r from  AllReader r join IssuedBook i on i.id_reader = r.id_reader where i.id_librarian = :id and i.date_extradition between :startDate and :endDate", AllReader.class)
+                .setParameter("id", idLibrarian)
+                .setParameter("startDate", startDate)
+                .setParameter("endDate", endDate)
+                .getResultList();
+        em.close();
+        return readers;
+    }
 }

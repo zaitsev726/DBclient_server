@@ -44,4 +44,6 @@ public interface IssuedBookService {
     boolean isRegistered(Long id_reader, Long id_edition);
 
     List<IssuedBook> findReadyBooks();
+
+    List<AllReader> findReadersByIdLibraryAndPeriod(long idLibrarian, Date startDate, Date endDate);
 }
