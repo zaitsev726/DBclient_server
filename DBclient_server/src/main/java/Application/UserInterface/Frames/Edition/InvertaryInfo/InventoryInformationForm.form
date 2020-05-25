@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Application.UserInterface.Frames.Edition.InvertaryInfo.InventoryInformationForm">
+  <grid id="27dc6" binding="informationPanel" layout-manager="GridLayoutManager" row-count="15" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="932" height="749"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="3c130" class="javax.swing.JLabel" binding="IdLibraryLabel">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="4"/>
+          <text value="ID Библиотеки:"/>
+        </properties>
+      </component>
+      <hspacer id="ec64">
+        <constraints>
+          <grid row="1" column="7" row-span="7" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <component id="877c" class="javax.swing.JTextField" binding="IdLibraryTextField">
+        <constraints>
+          <grid row="3" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="100" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+        </properties>
+      </component>
+      <hspacer id="e1ebd">
+        <constraints>
+          <grid row="1" column="0" row-span="7" col-span="3" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <component id="fc8ac" class="javax.swing.JLabel" binding="hallNumLabel">
+        <constraints>
+          <grid row="4" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="4"/>
+          <text value="Номер зала:"/>
+        </properties>
+      </component>
+      <vspacer id="e9a1e">
+        <constraints>
+          <grid row="1" column="4" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="f4b52" class="javax.swing.JTextField" binding="hallNumTextField">
+        <constraints>
+          <grid row="4" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="100" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+        </properties>
+      </component>
+      <component id="ba4ff" class="javax.swing.JLabel" binding="rackNumLabel">
+        <constraints>
+          <grid row="5" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="4"/>
+          <text value="Номер стеллажа:"/>
+        </properties>
+      </component>
+      <component id="a6439" class="javax.swing.JTextField" binding="rackNumTextField">
+        <constraints>
+          <grid row="5" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="100" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+        </properties>
+      </component>
+      <component id="810b" class="javax.swing.JLabel" binding="shelfNumLabel">
+        <constraints>
+          <grid row="6" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="4"/>
+          <text value="Номер полки:"/>
+        </properties>
+      </component>
+      <component id="5b0cd" class="javax.swing.JTextField" binding="shelfNumTextField">
+        <constraints>
+          <grid row="6" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="100" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+        </properties>
+      </component>
+      <component id="6446f" class="javax.swing.JLabel" binding="currentDateLabel">
+        <constraints>
+          <grid row="7" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="12"/>
+          <horizontalAlignment value="4"/>
+          <text value="Использовать текущую дату?"/>
+        </properties>
+      </component>
+      <component id="40366" class="javax.swing.JCheckBox" binding="curDateCheckBox">
+        <constraints>
+          <grid row="7" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="263c4" class="javax.swing.JButton" binding="addButton">
+        <constraints>
+          <grid row="11" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Добавить"/>
+        </properties>
+      </component>
+      <vspacer id="3a819">
+        <constraints>
+          <grid row="14" column="0" row-span="1" col-span="8" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="8f667" class="javax.swing.JButton" binding="backButton">
+        <constraints>
+          <grid row="13" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Отмена"/>
+        </properties>
+      </component>
+      <hspacer id="d7dca">
+        <constraints>
+          <grid row="0" column="8" row-span="15" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="9ed88">
+        <constraints>
+          <grid row="11" column="0" row-span="3" col-span="7" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <component id="af7e0" class="javax.swing.JButton" binding="searchButton">
+        <constraints>
+          <grid row="12" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Поиск"/>
+        </properties>
+      </component>
+      <component id="43408" class="javax.swing.JCheckBox" binding="lessCheckBox">
+        <constraints>
+          <grid row="10" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Раньше даты добавления?"/>
+        </properties>
+      </component>
+      <component id="609f" class="javax.swing.JCheckBox" binding="moreCheckBox">
+        <constraints>
+          <grid row="10" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="После даты удаления?"/>
+        </properties>
+      </component>
+      <component id="b884d" class="javax.swing.JTextField" binding="dateAddingTextField">
+        <constraints>
+          <grid row="9" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="30"/>
+            <preferred-size width="200" height="30"/>
+            <maximum-size width="200" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font size="20"/>
+        </properties>
+      </component>
+      <component id="1edeb" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="8" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="0"/>
+          <text value="Дата добавления"/>
+        </properties>
+      </component>
+      <component id="f877b" class="javax.swing.JTextField" binding="dateRemovingTextField">
+        <constraints>
+          <grid row="9" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="30"/>
+            <preferred-size width="200" height="30"/>
+            <maximum-size width="200" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font size="20"/>
+        </properties>
+      </component>
+      <component id="3c4bc" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="8" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="0"/>
+          <text value="Дата удаления"/>
+        </properties>
+      </component>
+      <component id="19e4f" class="javax.swing.JTextField" binding="IdEditionTextField">
+        <constraints>
+          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="100" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+        </properties>
+      </component>
+      <component id="a9d8e" class="javax.swing.JLabel" binding="idEdition">
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="4"/>
+          <horizontalTextPosition value="4"/>
+          <text value="ID Издания:"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

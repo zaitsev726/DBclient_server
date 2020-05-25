@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Application.UserInterface.Frames.Edition.Information.InformationForm">
+  <grid id="27dc6" binding="informationPanel" layout-manager="GridLayoutManager" row-count="10" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="818" height="806"/>
+    </constraints>
+    <properties>
+      <font name="Fira Code Medium" size="20"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="5aea2" class="javax.swing.JLabel" binding="IdLabel">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="4"/>
+          <text value="ID издания:"/>
+        </properties>
+      </component>
+      <hspacer id="f785d">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <vspacer id="6f0d9">
+        <constraints>
+          <grid row="6" column="1" row-span="3" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="9aa99">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="d56a5" class="javax.swing.JTextField" binding="IDTextField">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="30"/>
+            <preferred-size width="200" height="30"/>
+            <maximum-size width="200" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+        </properties>
+      </component>
+      <hspacer id="30409">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <component id="d13ec" class="javax.swing.JLabel" binding="authorLabel">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="4"/>
+          <text value="Автор:"/>
+        </properties>
+      </component>
+      <component id="c07af" class="javax.swing.JTextField" binding="authorTextField">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="30"/>
+            <preferred-size width="200" height="30"/>
+            <maximum-size width="200" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="dc82f" class="javax.swing.JLabel" binding="compositionLabel">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="4"/>
+          <horizontalTextPosition value="11"/>
+          <text value="Произведение:"/>
+        </properties>
+      </component>
+      <component id="85365" class="javax.swing.JTextField" binding="compositionTextField">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="30"/>
+            <preferred-size width="200" height="30"/>
+            <maximum-size width="200" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+        </properties>
+      </component>
+      <component id="61dbf" class="javax.swing.JButton" binding="mostPopularButton">
+        <constraints>
+          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Найти самое популярное"/>
+        </properties>
+      </component>
+      <component id="c04fd" class="javax.swing.JButton" binding="searchButton">
+        <constraints>
+          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Найти"/>
+        </properties>
+      </component>
+      <component id="1649c" class="javax.swing.JButton" binding="backButton">
+        <constraints>
+          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Назад"/>
+        </properties>
+      </component>
+      <hspacer id="ec46c">
+        <constraints>
+          <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <component id="51ed3" class="javax.swing.JLabel" binding="popularityLabel">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="50"/>
+            <preferred-size width="200" height="50"/>
+            <maximum-size width="200" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+          <horizontalAlignment value="4"/>
+          <text value="Популярность"/>
+        </properties>
+      </component>
+      <component id="40915" class="javax.swing.JTextField" binding="popularityTextField">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="30"/>
+            <preferred-size width="200" height="30"/>
+            <maximum-size width="200" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Fira Code Medium" size="20"/>
+        </properties>
+      </component>
+      <component id="97107" class="javax.swing.JCheckBox" binding="popularityCheckBox">
+        <constraints>
+          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Более популярные?"/>
+        </properties>
+      </component>
+      <vspacer id="6d57e">
+        <constraints>
+          <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+    </children>
+  </grid>
+</form>
