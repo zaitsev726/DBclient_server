@@ -7,9 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class LibrarianSearchForm extends JPanel {
-    private Librarian librarian;
-    private JPanel librarianPanel;
+public class NotAttendingForm extends JPanel{
+    private JPanel notAttendingPanel;
     public JButton searchButton;
     public JButton backButton;
     private JTextField startTextField;
@@ -17,20 +16,21 @@ public class LibrarianSearchForm extends JPanel {
     private JLabel startLabel;
     private JLabel endLabel;
 
+
     private Date startDate;
     private Date endDate;
 
-    public LibrarianSearchForm(){
-        this.add(librarianPanel);
+
+    public NotAttendingForm(){
+        this.add(notAttendingPanel);
         setStartValues();
         initializationListeners();
-        setVisible(true);
+        this.setVisible(true);
     }
 
     private void setStartValues() {
         startDate = null;
         endDate = null;
-
     }
 
     private void initializationListeners() {
@@ -56,11 +56,6 @@ public class LibrarianSearchForm extends JPanel {
         });
     }
 
-    public void setLibrarian(Librarian librarian) {
-        this.librarian = librarian;
-    }
-
     public Date getStartDate(){return startDate;}
     public Date getEndDate(){return endDate;}
-    public long getIdLibrarian(){return librarian.getId_librarian();}
 }

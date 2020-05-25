@@ -8,6 +8,7 @@ import Application.UserInterface.Frames.IssuedBook.SearchReadersInIssuedBooks;
 import Application.UserInterface.Pages.IssuedPage.EditionSearchForm;
 import Application.UserInterface.Pages.IssuedPage.IssuedForm;
 import Application.UserInterface.Pages.IssuedPage.LibrarianSearchForm;
+import Application.UserInterface.Pages.IssuedPage.NotAttendingForm;
 
 
 import javax.persistence.NoResultException;
@@ -23,6 +24,7 @@ public class IssuedPageController {
     private IssuedForm issuedForm;
     private EditionSearchForm editionSearchForm;
     private LibrarianSearchForm librarianSearchForm;
+    private NotAttendingForm notAttendingForm;
 
 
     private IssuedBookService issuedBookService;
@@ -43,10 +45,11 @@ public class IssuedPageController {
 
     private SearchIssuedBookForm issuedBookForm;
 
-    public IssuedPageController(IssuedForm issuedForm, EditionSearchForm editionSearchForm, LibrarianSearchForm librarianSearchForm ) {
+    public IssuedPageController(IssuedForm issuedForm, EditionSearchForm editionSearchForm, LibrarianSearchForm librarianSearchForm,NotAttendingForm notAttendingForm) {
         this.issuedForm = issuedForm;
         this.editionSearchForm = editionSearchForm;
         this.librarianSearchForm = librarianSearchForm;
+        this.notAttendingForm = notAttendingForm;
 
         this.issuedBookService = new IssuedBookServiceImpl();
         this.librarianService = new LibrarianServiceImpl();
@@ -146,6 +149,21 @@ public class IssuedPageController {
                 List<AllReader> readers = issuedBookService.findReadersByIdLibraryAndPeriod(librarianSearchForm.getIdLibrarian(),
                                                             librarianSearchForm.getStartDate(),
                                                             librarianSearchForm.getEndDate());
+                if(readers.size() > 0){
+                    SearchReadersInIssuedBooks inIssuedBooks = new SearchReadersInIssuedBooks(readers);
+                }else{
+                    JOptionPane.showMessageDialog(editionSearchForm, "Таких читателей нет");
+                }
+
+            }else{
+                JOptionPane.showMessageDialog(librarianSearchForm, "Вы ввели не все параметры");
+            }
+        });
+
+        notAttendingForm.searchButton.addActionListener(e -> {
+            if(notAttendingForm.getStartDate() != null && notAttendingForm.getEndDate() != null){
+                List<AllReader> readers = issuedBookService.findReadersNotAttendingLibrary(notAttendingForm.getStartDate(),
+                        notAttendingForm.getEndDate());
                 if(readers.size() > 0){
                     SearchReadersInIssuedBooks inIssuedBooks = new SearchReadersInIssuedBooks(readers);
                 }else{

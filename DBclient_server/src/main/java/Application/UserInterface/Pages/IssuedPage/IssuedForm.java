@@ -17,13 +17,13 @@ public class IssuedForm extends JPanel{
     public JButton searchByEditionButton;
     public JButton backButton;
     public JButton librarianButton;
+    public JButton notAttendingButton;
     private JLabel IdRecordLabel;
     private JLabel IdReaderLabel;
     private JLabel IdEditionLabel;
     private JLabel idLibrarianLabel;
     private JLabel extraditionLabel;
     private JLabel returnedLabel;
-    private JButton button;
 
 
     public IssuedForm(){

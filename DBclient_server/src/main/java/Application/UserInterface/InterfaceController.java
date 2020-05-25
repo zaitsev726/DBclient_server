@@ -5,6 +5,7 @@ import Application.UserInterface.Pages.EditionPage.EditionForm;
 import Application.UserInterface.Pages.IssuedPage.EditionSearchForm;
 import Application.UserInterface.Pages.IssuedPage.IssuedForm;
 import Application.UserInterface.Pages.IssuedPage.LibrarianSearchForm;
+import Application.UserInterface.Pages.IssuedPage.NotAttendingForm;
 import Application.UserInterface.Pages.LibraryPage.LibraryForm;
 import Application.UserInterface.Pages.MenuPage.MenuForm;
 import Application.UserInterface.Pages.ReadersPage.ReadersForm;
@@ -43,6 +44,7 @@ public class InterfaceController {
     private AuthorizationForm authorizationForm;
     private TakeBookForm takeBookForm;
     private LibrarianSearchForm librarianSearchForm;
+    private NotAttendingForm notAttendingForm;
 
     public InterfaceController() {
         window = new Application.UserInterface.Frames.Window(sizeWidth, sizeHeight, locationX, locationY);
@@ -58,12 +60,13 @@ public class InterfaceController {
         authorizationForm = new AuthorizationForm();
         takeBookForm = new TakeBookForm();
         librarianSearchForm = new LibrarianSearchForm();
+        notAttendingForm = new NotAttendingForm();
 
 
         readersPageController = new ReadersPageController(readersForm);
         libraryPageController = new LibraryPageController(libraryForm);
         editionsPageController = new EditionsPageController(editionForm);
-        issuedPageController = new IssuedPageController(issuedForm, editionSearchForm, librarianSearchForm);
+        issuedPageController = new IssuedPageController(issuedForm, editionSearchForm, librarianSearchForm, notAttendingForm);
         takeBookPageController = new TakeBookPageController(authorizationForm, takeBookForm);
 
         initializationListeners();
@@ -203,6 +206,20 @@ public class InterfaceController {
 
         librarianSearchForm.backButton.addActionListener(e -> {
             window.remove(librarianSearchForm);
+            window.add(issuedForm);
+            window.revalidate();
+            window.repaint();
+        });
+
+        issuedForm.notAttendingButton.addActionListener(e -> {
+            window.remove(issuedForm);
+            window.add(notAttendingForm);
+            window.revalidate();
+            window.repaint();
+        });
+
+        notAttendingForm.backButton.addActionListener(e -> {
+            window.remove(notAttendingForm);
             window.add(issuedForm);
             window.revalidate();
             window.repaint();

@@ -317,4 +317,15 @@ public class IssuedBookServiceImpl implements IssuedBookService {
         em.close();
         return readers;
     }
+
+    @Override
+    public List<AllReader> findReadersNotAttendingLibrary(Date startDate, Date endDate) {
+        EntityManager em = emf.createEntityManager();
+        List<AllReader> readers = em.createQuery("select distinct r from  AllReader r join IssuedBook i on i.id_reader = r.id_reader where (i.date_extradition not between :startDate and :endDate) and (i.date_return not between :startDate and :endDate)", AllReader.class)
+                .setParameter("startDate", startDate)
+                .setParameter("endDate", endDate)
+                .getResultList();
+        em.close();
+        return readers;
+    }
 }

@@ -46,4 +46,6 @@ public interface IssuedBookService {
     List<IssuedBook> findReadyBooks();
 
     List<AllReader> findReadersByIdLibraryAndPeriod(long idLibrarian, Date startDate, Date endDate);
+
+    List<AllReader> findReadersNotAttendingLibrary(Date startDate, Date endDate);
 }

@@ -35,7 +35,7 @@
           <font name="Fira Code Medium" size="20"/>
         </properties>
       </component>
-      <component id="23457" class="javax.swing.JLabel">
+      <component id="23457" class="javax.swing.JLabel" binding="startLabel">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <minimum-size width="200" height="50"/>
@@ -48,7 +48,7 @@
           <text value="Начало периода"/>
         </properties>
       </component>
-      <component id="2d07a" class="javax.swing.JLabel">
+      <component id="2d07a" class="javax.swing.JLabel" binding="endLabel">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <minimum-size width="200" height="50"/>
