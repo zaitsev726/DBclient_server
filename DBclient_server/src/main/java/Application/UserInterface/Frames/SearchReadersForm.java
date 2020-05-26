@@ -3,25 +3,30 @@ package Application.UserInterface.Frames;
 import Application.Controllers.ReadersPageController;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
+import java.util.regex.PatternSyntaxException;
 
+/*
+    Форма вывода поиска читателей
+ */
 public class SearchReadersForm extends JFrame {
 
-    private JTable resultTable;
-    private DefaultTableModel tableModel;
+    private final JTable resultTable;
+    private final DefaultTableModel tableModel;
     private ArrayList<String[]> currentReaders;
 
-    private ReadersPageController controller;
-    private JButton removeRowButton;
-    private JButton backButton;
-    private JButton libraryButton;
-    private JButton proffesionButton;
+    private final ReadersPageController controller;
+    private final JButton removeRowButton;
+    private final JButton backButton;
+    private final JButton libraryButton;
+    private final JButton professionButton;
+    private final JButton filterButton;
+    private final JTextField filterTextField;
 
-    // Заголовки столбцов
-    private final Object[] columnsHeader = new String[]{"ID читателя", "Тип читателя", "Имя", "Фамилия", "Отчество", "ID библиотеки"};
+    private final TableRowSorter<TableModel> sorter;
 
     public SearchReadersForm(ReadersPageController controller) {
         currentReaders = new ArrayList<>();
@@ -29,19 +34,38 @@ public class SearchReadersForm extends JFrame {
         removeRowButton = new JButton("Удалить выбранную строку");
         backButton = new JButton("Очистить и выйти");
         libraryButton = new JButton("Библиотека");
-        proffesionButton = new JButton("Инфо о профессии");
+        professionButton = new JButton("Инфо о профессии");
+        filterButton = new JButton("Фильтровать");
 
         setTitle("Результаты поиска");
         setSize(800, 400);
 
-        tableModel = new DefaultTableModel();
+
+        tableModel = new DefaultTableModel() {
+            public Class getColumnClass(int column) {
+                Class returnValue;
+                if ((column >= 0) && (column < getColumnCount())) {
+                    returnValue = getValueAt(0, column).getClass();
+                } else {
+                    returnValue = Object.class;
+                }
+                return returnValue;
+            }
+        };
+
+        // Заголовки столбцов
+        Object[] columnsHeader = new String[]{"ID читателя", "Тип читателя", "Имя", "Фамилия", "Отчество", "ID библиотеки"};
         tableModel.setColumnIdentifiers(columnsHeader);
 
+        sorter = new TableRowSorter<>(
+                tableModel);
 
         resultTable = new JTable(tableModel);
+        //resultTable.setAutoCreateRowSorter(true);
+        resultTable.setRowSorter(sorter);
 
         // Раскрывающийся список
-        JComboBox<String> combo = new JComboBox<String>(new String[]{"pensioner", "schoolkid", "scientist", "student", "teacher", "worker"});
+        JComboBox<String> combo = new JComboBox<>(new String[]{"pensioner", "schoolkid", "scientist", "student", "teacher", "worker"});
         // Редактор ячейки с раскрывающимся списком
         DefaultCellEditor editor = new DefaultCellEditor(combo);
         // Определение редактора ячеек для колонки
@@ -57,43 +81,44 @@ public class SearchReadersForm extends JFrame {
         buttons.add(removeRowButton);
         buttons.add(backButton);
         buttons.add(libraryButton);
-        buttons.add(proffesionButton);
+        buttons.add(professionButton);
+        buttons.add(filterButton);
+
+        filterTextField = new JTextField();
+
+        getContentPane().add(filterTextField, "North");
         getContentPane().add(buttons, "South");
 
         initializationListeners();
-        //setVisible(true);
     }
 
     private void initializationListeners() {
 
-        resultTable.getModel().addTableModelListener(new TableModelListener() {
+        resultTable.getModel().addTableModelListener(e -> {
+            System.out.println("поменяли данные");
+            System.out.println(resultTable.getSelectedRow());
+            int row = resultTable.getSelectedRow();
+            int column = resultTable.getSelectedColumn();
+            if (column == 0) {
+                JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
+            } else if (row >= 0) {
+                try {
+                    System.out.println(tableModel.getValueAt(row, 0));
+                    System.out.println(tableModel.getValueAt(row, 1));
+                    System.out.println(tableModel.getValueAt(row, 2));
+                    System.out.println(tableModel.getValueAt(row, 3));
+                    System.out.println(tableModel.getValueAt(row, 4));
+                    System.out.println(tableModel.getValueAt(row, 5));
+                    String type;
+                    if (column == 1)
+                        type = "type";
+                    else
+                        type = "notType";
+                    controller.queryForUpdate(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), String.valueOf(tableModel.getValueAt(row, 1)),
+                            String.valueOf(tableModel.getValueAt(row, 2)), String.valueOf(tableModel.getValueAt(row, 3)),
+                            String.valueOf(tableModel.getValueAt(row, 4)), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 5))), type);
+                } catch (ArrayIndexOutOfBoundsException ignored) {
 
-            public void tableChanged(TableModelEvent e) {
-                System.out.println("поменяли данные");
-                System.out.println(resultTable.getSelectedRow());
-                int row = resultTable.getSelectedRow();
-                int column = resultTable.getSelectedColumn();
-                if (column == 0) {
-                    JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
-                } else if (row >= 0) {
-                    try {
-                        System.out.println(tableModel.getValueAt(row, 0));
-                        System.out.println(tableModel.getValueAt(row, 1));
-                        System.out.println(tableModel.getValueAt(row, 2));
-                        System.out.println(tableModel.getValueAt(row, 3));
-                        System.out.println(tableModel.getValueAt(row, 4));
-                        System.out.println(tableModel.getValueAt(row, 5));
-                        String type = "";
-                        if (column == 1)
-                            type = "type";
-                        else
-                            type = "notType";
-                        controller.queryForUpdate(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), String.valueOf(tableModel.getValueAt(row, 1)),
-                                String.valueOf(tableModel.getValueAt(row, 2)), String.valueOf(tableModel.getValueAt(row, 3)),
-                                String.valueOf(tableModel.getValueAt(row, 4)), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 5))), type);
-                    } catch (ArrayIndexOutOfBoundsException ignored) {
-
-                    }
                 }
             }
         });
@@ -102,7 +127,7 @@ public class SearchReadersForm extends JFrame {
         removeRowButton.addActionListener(e -> {
             // Номер выделенной строки
             int row = resultTable.getSelectedRow();
-            if(row < 0)
+            if (row < 0)
                 row = 0;
             // Удаление выделенной строки
             controller.queryForDelete(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), String.valueOf(tableModel.getValueAt(row, 1)),
@@ -123,10 +148,23 @@ public class SearchReadersForm extends JFrame {
                 controller.showCurrentLibrary(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 5))));
         });
 
-        proffesionButton.addActionListener(e -> {
+        professionButton.addActionListener(e -> {
             int row = resultTable.getSelectedRow();
             if (row >= 0)
                 controller.showCurrentProfession(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))));
+        });
+
+        filterButton.addActionListener(e -> {
+            String text = filterTextField.getText();
+            if (text.length() == 0) {
+                sorter.setRowFilter(null);
+            } else {
+                try {
+                    sorter.setRowFilter(RowFilter.regexFilter(text));
+                } catch (PatternSyntaxException pse) {
+                    System.err.println("Bad regex pattern");
+                }
+            }
         });
     }
 
@@ -140,7 +178,9 @@ public class SearchReadersForm extends JFrame {
                 }
             }
             if (adding) {
-                tableModel.addRow(row);
+                Object[] rows = {Integer.parseInt(row[0]), row[1], row[2], row[3], row[4], Integer.parseInt(row[5])};
+                //tableModel.addRow(row);
+                tableModel.addRow(rows);
                 currentReaders.add(row);
             }
         }

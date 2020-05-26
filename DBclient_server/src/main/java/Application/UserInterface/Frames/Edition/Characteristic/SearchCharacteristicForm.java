@@ -1,0 +1,103 @@
+package Application.UserInterface.Frames.Edition.Characteristic;
+
+import Application.Controllers.EditionsPageController;
+import Application.Entities.Information;
+
+import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+
+public class SearchCharacteristicForm extends JFrame {
+    private JTable resultTable;
+    private DefaultTableModel tableModel;
+    private ArrayList<String[]> currentCharacteristic;
+
+    private EditionsPageController controller;
+    private JButton removeRowButton;
+    private JButton backButton;
+
+    // Заголовки столбцов
+    private final Object[] columnsHeader = new String[]{"ID издания", "Тип издния", "Автор", "Название"};
+
+    public SearchCharacteristicForm(EditionsPageController controller) {
+        currentCharacteristic = new ArrayList<>();
+        this.controller = controller;
+        removeRowButton = new JButton("Удалить выбранную строку");
+        backButton = new JButton("Очистить и выйти");
+
+        setTitle("Результаты поиска изданий");
+        setSize(600, 300);
+
+        tableModel = new DefaultTableModel();
+        tableModel.setColumnIdentifiers(columnsHeader);
+
+
+        resultTable = new JTable(tableModel);
+
+        Box contents = new Box(BoxLayout.Y_AXIS);
+        contents.add(new JScrollPane(resultTable));
+        getContentPane().add(contents);
+
+
+        JPanel buttons = new JPanel();
+        buttons.add(removeRowButton);
+        buttons.add(backButton);
+        getContentPane().add(buttons, "South");
+
+        initializationListeners();
+    }
+
+    private void initializationListeners() {
+
+        resultTable.getModel().addTableModelListener(new TableModelListener() {
+
+            public void tableChanged(TableModelEvent e) {
+                System.out.println(resultTable.getSelectedRow());
+                int row = resultTable.getSelectedRow();
+                int column = resultTable.getSelectedColumn();
+                if (column == 0) {
+                    JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
+                } else if (row >= 0) {
+                    try {
+                        controller.queryForUpdateCharacteristic(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))),String.valueOf(tableModel.getValueAt(row, 1)),
+                                String.valueOf(tableModel.getValueAt(row, 2)), String.valueOf(tableModel.getValueAt(row, 3)));
+                    } catch (ArrayIndexOutOfBoundsException ignored) {
+                    }
+                }
+            }
+        });
+
+
+        removeRowButton.addActionListener(e -> {
+            // Номер выделенной строки
+            int row = resultTable.getSelectedRow();
+            // Удаление выделенной строки
+            controller.queryForDeleteCharacteristic(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))));
+            tableModel.removeRow(row);
+        });
+
+        backButton.addActionListener(e -> {
+            tableModel.setRowCount(0);
+            currentCharacteristic = new ArrayList<>();
+            this.dispose();
+        });
+    }
+
+    public void updateTable(ArrayList<String[]> array) {
+        for (String[] row : array) {
+            boolean adding = true;
+            for (String[] cur : currentCharacteristic) {
+                if (cur[0].equals(row[0])) {
+                    adding = false;
+                    break;
+                }
+            }
+            if (adding) {
+                tableModel.addRow(row);
+                currentCharacteristic.add(row);
+            }
+        }
+    }
+}

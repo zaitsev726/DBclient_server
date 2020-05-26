@@ -54,11 +54,16 @@ public class ReadersPageController {
     }
     private void setStartValues(){
         cur_name = "";
+        form.nameTextField.setText("");
         cur_surname = "";
+        form.surnameTextField.setText("");
         cur_patronymic = "";
+        form.patronymicTextField.setText("");
       //  cur_type = "pensioner";
         cur_lib_id = 0;
+        form.idTextField.setText("");
         cur_Library = null;
+        form.typeComboBox.setSelectedItem("<none>");
     }
     /**
      * Функия иницилизирующая листенеры Readers Form
@@ -111,6 +116,7 @@ public class ReadersPageController {
                     cur_Library = libraryService.getById(id_library);
                 }catch (NoResultException exp){
                     JOptionPane.showMessageDialog(form, "Такой библиотеки не существует");
+                    form.idTextField.setText("");
                     id_library = 0;
                 }
                 cur_lib_id = id_library;
@@ -132,24 +138,27 @@ public class ReadersPageController {
             if (cur_type.equals("<none>")) {
                 JOptionPane.showMessageDialog(form, "Невозможно добавить читателя без профессии");
             } else {
-          /*  if(!(cur_name.equals("") ||
-                    cur_surname.equals("") ||
-                    cur_patronymic.equals("") ||
-                    cur_lib_id == 0 ||
-                    cur_type.equals(""))){
-*/
-                saved = new AllReader();
-                saved.setName(cur_name);
-                saved.setSurname(cur_surname);
-                saved.setPatronymic(cur_patronymic);
-                saved.setId_library(cur_lib_id);
-                saved.setType(cur_type);
-                saved.setLibrary(cur_Library);
+                if (!(cur_name.equals("") ||
+                        cur_surname.equals("") ||
+                        cur_patronymic.equals("") ||
+                        cur_lib_id == 0 ||
+                        cur_type.equals(""))) {
 
-                profissionForm.changePanel(cur_type);
-                profissionForm.setVisible(true);
-                System.out.println("saved");
-                setStartValues();
+                    saved = new AllReader();
+                    saved.setName(cur_name);
+                    saved.setSurname(cur_surname);
+                    saved.setPatronymic(cur_patronymic);
+                    saved.setId_library(cur_lib_id);
+                    saved.setType(cur_type);
+                    saved.setLibrary(cur_Library);
+
+                    profissionForm.changePanel(cur_type);
+                    profissionForm.setVisible(true);
+                    System.out.println("saved");
+                  //  setStartValues();
+                }else{
+                    JOptionPane.showMessageDialog(form, "Вы ввели не все данные");
+                }
             }
         });
 
@@ -243,8 +252,6 @@ public class ReadersPageController {
 
         if(typeOfSetting.equals("update")){
             reader = update;
-           // as.delete(reader.getReaderType());
-            System.out.println("******************************************************" + reader.getReaderType());
             type = readerService.findById(update.getId_reader()).getReaderType();
         }
         System.out.println(reader);

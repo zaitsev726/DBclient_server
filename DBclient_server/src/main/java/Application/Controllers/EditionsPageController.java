@@ -3,6 +3,7 @@ package Application.Controllers;
 import Application.Entities.*;
 import Application.Services.*;
 import Application.Services.Impl.*;
+import Application.UserInterface.Frames.Edition.Characteristic.SearchCharacteristicForm;
 import Application.UserInterface.Frames.Edition.Information.SearchInformationForm;
 import Application.UserInterface.Frames.Edition.Information.InformationForm;
 import Application.UserInterface.Frames.Edition.InvertaryInfo.SearchEditionForm;
@@ -41,6 +42,7 @@ public class EditionsPageController {
     private SearchInformationForm searchInformationForm;
     private SearchEditionForm searchEditionForm;
     private SearchRulesForm searchRulesForm;
+    private SearchCharacteristicForm searchCharacteristicForm;
 
 
     public EditionsPageController(EditionForm editionForm) {
@@ -49,6 +51,7 @@ public class EditionsPageController {
         this.searchInformationForm = new SearchInformationForm(this);
         this.searchEditionForm = new SearchEditionForm(this);
         this.searchRulesForm = new SearchRulesForm(this);
+        this.searchCharacteristicForm = new SearchCharacteristicForm(this);
 
         this.charService = new CharacteristicServiceImpl();
         this.editionService = new EditionServiceImpl();
@@ -181,7 +184,39 @@ public class EditionsPageController {
             setStartValues();
         });
 
+        editionForm.searchButton.addActionListener(e -> {
+            List<Characteristic> characteristicList = new ArrayList<>();
+            if (cur_type.equals("") && cur_author.equals("") && cur_title.equals("")) {
+                characteristicList = charService.findAll();
+            } else if (!cur_type.equals("") && !cur_author.equals("") && !cur_title.equals("")) {
+                characteristicList = charService.findByTypeAndAuthorAndTitle(cur_type, cur_author, cur_title);
+            } else if (!cur_type.equals("") && !cur_author.equals("")) {
+                characteristicList = charService.findByTypeAndAuthor(cur_type, cur_author);
+            } else if (!cur_type.equals("") && !cur_title.equals("")) {
+                characteristicList = charService.findByTypeAndTitle(cur_type, cur_title);
+            } else if (!cur_author.equals("") && !cur_title.equals("")) {
+                characteristicList = charService.findByAuthorAndTitle(cur_author, cur_title);
+            } else if (!cur_type.equals("")) {
+                characteristicList = charService.findByType(cur_type);
+            } else if (!cur_author.equals("")) {
+                characteristicList = charService.findByAuthor(cur_author);
+            } else if (!cur_title.equals("")) {
+                characteristicList = charService.findByTitle(cur_title);
+            }
 
+            if (characteristicList.size() > 0) {
+                ArrayList<String[]> resultList = new ArrayList<>();
+                for (Characteristic characteristic : characteristicList) {
+
+                    resultList.add(new String[]{String.valueOf(characteristic.getId_edition()), characteristic.getType_edition(),
+                            characteristic.getAuthor(), characteristic.getTitle()});
+                }
+                searchCharacteristicForm.updateTable(resultList);
+                searchCharacteristicForm.setVisible(true);
+
+            } else
+                JOptionPane.showMessageDialog(editionForm, "Таких изданий нету!");
+        });
         /*
           Поиск Инвентраной информации, т.е. библиотечной информации про издание ( полка, шкаф и т.д.)
          */
@@ -205,10 +240,9 @@ public class EditionsPageController {
                 Date adding = inventoryLibraryInformation.dateAdding;
                 Date removing = inventoryLibraryInformation.dateRemoving;
 
-                if(id_edition != 0){
+                if (id_edition != 0) {
                     editionList.add(editionService.findById(id_edition));
-                }
-                else if (id_lib == 0 && hall_num == 0 && rack_num == 0 && shelf_num == 0 && adding == null && removing == null) {
+                } else if (id_lib == 0 && hall_num == 0 && rack_num == 0 && shelf_num == 0 && adding == null && removing == null) {
                     editionList = editionService.findAll();
                 } else if (id_lib == 0 && hall_num == 0 && rack_num == 0 && shelf_num == 0) {
                     if (adding != null && removing != null) {
@@ -341,21 +375,20 @@ public class EditionsPageController {
                     informationList = informationService.findByAuthorAndComposition(author, composition);
                 } else if (id_edition != 0) {
                     informationList = informationService.findByIdEdition(id_edition);
-                } else if (!author.equals("")){
+                } else if (!author.equals("")) {
                     informationList = informationService.findByAuthor(author);
-                } else if (!composition.equals("")){
+                } else if (!composition.equals("")) {
                     informationList = informationService.findByComposition(composition);
                 }
 
-                if(popularity != 0){
+                if (popularity != 0) {
                     Iterator<Information> iterator = informationList.iterator();
-                    while(iterator.hasNext()) {
+                    while (iterator.hasNext()) {
                         Information information = iterator.next();
                         if (informationForm.morePopular)
-                            if(information.getPopularity() <= popularity)
+                            if (information.getPopularity() <= popularity)
                                 iterator.remove();
-                        else
-                            if(information.getPopularity() > popularity)
+                            else if (information.getPopularity() > popularity)
                                 iterator.remove();
                     }
                 }
@@ -363,7 +396,8 @@ public class EditionsPageController {
                 if (informationList.size() > 0) {
                     ArrayList<String[]> resultList = new ArrayList<>();
                     for (Information information : informationList) {
-                        resultList.add(new String[]{String.valueOf(information.getId_record()), String.valueOf(information.getId_edition()),information.getAuthor(), information.getComposition(), String.valueOf(information.getPopularity())});
+                        resultList.add(new String[]{String.valueOf(information.getId_record()), String.valueOf(information.getId_edition()), information.getAuthor(),
+                                information.getComposition(), String.valueOf(information.getPopularity())});
                     }
 
                     searchInformationForm.updateTable(resultList);
@@ -398,15 +432,15 @@ public class EditionsPageController {
             rulesForm.searchButton.addActionListener(f -> {
                 long id_edition = rulesForm.id_edition;
                 List<Rule> rulesList = new ArrayList<>();
-                if(id_edition == 0){
+                if (id_edition == 0) {
                     rulesList = ruleService.findAll();
-                }else
+                } else
                     rulesList = ruleService.findByIdEdition(id_edition);
 
                 if (rulesList.size() > 0) {
                     ArrayList<String[]> resultList = new ArrayList<>();
                     for (Rule rule : rulesList) {
-                        resultList.add(new String[]{String.valueOf(rule.getId_rule()), String.valueOf(rule.getId_edition()),rule.getRule()});
+                        resultList.add(new String[]{String.valueOf(rule.getId_rule()), String.valueOf(rule.getId_edition()), rule.getRule()});
                     }
 
                     searchRulesForm.updateTable(resultList);
@@ -496,7 +530,20 @@ public class EditionsPageController {
 
     public void queryForUpdateTable(ArrayList<String[]> currentInventoryInfo) {
         currentInventoryInfo.removeIf(next -> issuedBookService.isReturned(Long.valueOf(next[0])));
-        //System.out.println("***************************************************" + currentInventoryInfo);
         searchEditionForm.updateTable(currentInventoryInfo);
     }
+
+    public void queryForUpdateCharacteristic(long id_edition, String type, String author, String title) {
+        Characteristic characteristic = new Characteristic();
+        characteristic.setId_edition(id_edition);
+        characteristic.setType_edition(type);
+        characteristic.setAuthor(author);
+        characteristic.setTitle(title);
+        charService.update(characteristic);
+    }
+
+    public void queryForDeleteCharacteristic(long id_edition) {
+        charService.delete(id_edition);
+    }
+
 }
