@@ -30,7 +30,8 @@ public class LibrarianSearchForm extends JPanel {
     private void setStartValues() {
         startDate = null;
         endDate = null;
-
+        this.startTextField.setText("");
+        this.endTextField.setText("");
     }
 
     private void initializationListeners() {
@@ -48,6 +49,12 @@ public class LibrarianSearchForm extends JPanel {
         this.endTextField.addActionListener(e -> {
             try {
                 endDate = new SimpleDateFormat("yyyy-MM-dd").parse(this.endTextField.getText());
+                if(endDate.getTime() < startDate.getTime()){
+                    JOptionPane.showMessageDialog(this, "Конец не может быть раньше начала");
+                    JOptionPane.showMessageDialog(this, "Значение конца периода сброшено на пустое");
+                    endDate = null;
+                    this.endTextField.setText("");
+                }
             } catch (ParseException ignored) {
                 JOptionPane.showMessageDialog(this, "Неправильный формат даты.Ожидается yyyy-MM-dd");
                 JOptionPane.showMessageDialog(this, "Ваши значения сброшены на пустые");
