@@ -1,11 +1,25 @@
 package Application.Entities.Types;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "pensioners")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "insertTouristWithRandomIdPensioners",
+                procedureName = "insert_pensioner",
+                parameters = {
+                        @StoredProcedureParameter(
+                                name = "id",
+                                type = Integer.class
+                        ),
+                        @StoredProcedureParameter(
+                                name = "type",
+                                type = String.class
+                        )
+                }
+        )
+})
 public class Pensioner extends AbstractReader {
     @Column
     private Long id_pensioners;                     //номер пенсионного удостоверения

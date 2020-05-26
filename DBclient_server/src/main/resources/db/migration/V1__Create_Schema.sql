@@ -191,6 +191,41 @@ CREATE TABLE Rules
 );
 
 
+create or replace function inventory_validator()
+    returns trigger as $$
+begin
+    if new.hall_num < 1 or new.hall_num > 1000 then
+        raise exception 'Номер зала не может выходить за пределы (1, 1000)';
+    end if;
+
+    if new.rack_num < 1 or new.rack_num > 100 then
+        raise exception 'Номер полки не может выходить за пределы (1, 100)';
+    end if;
+
+    if new.shelf_num < 1 or new.shelf_num > 100 then
+        raise exception 'Номер стеллажа не может выходить за пределы (1, 100)';
+    end if;
+    return new;
+end;
+$$ language plpgsql;
+
+create trigger inventory_checking
+    before insert or update on Editions
+    for each row
+execute procedure inventory_validator();
+
+create or replace function insert_pensioner(id integer, t text)
+    returns int as $$
+    DECLARE
+        number int;
+begin
+    number = floor(random() * 10000 + 1) ::int;
+    insert into pensioners (id_reader, type, id_pensioners) values (id, t, number);
+    return 0;
+end;
+$$ language plpgsql;
+
+
 insert into Libraries values (1, 3);
 insert into Libraries values (2, 4);
 insert into Libraries values (3, 2);
@@ -286,7 +321,7 @@ insert into workers values (8, 'worker', 'г. Вишневый, ул. Осенн
 insert into workers values (9, 'worker', 'г. Лунино, ул. Бурлинский Переезд пер', 'Стандарт');
 insert into workers values (10, 'worker', 'г. Ключи, ул. Текстильщиков 8-я', 'Прогресс');
 
-insert into pensioners values (0, 'pensioner',123456);
+--insert into pensioners values (0, 'pensioner',123456);
 insert into pensioners values (11, 'pensioner',61752);
 insert into pensioners values (12, 'pensioner',70169);
 insert into pensioners values (13, 'pensioner',52297);

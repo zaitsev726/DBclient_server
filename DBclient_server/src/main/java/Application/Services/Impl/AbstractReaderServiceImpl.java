@@ -1,17 +1,25 @@
 package Application.Services.Impl;
 
+import Application.Entities.AllReader;
 import Application.Entities.Types.AbstractReader;
 import Application.Services.AbstractReaderService;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 
 public class AbstractReaderServiceImpl implements AbstractReaderService {
     EntityManagerFactory emf;
     public AbstractReaderServiceImpl(){
         emf = Persistence.createEntityManagerFactory("model");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        if(em.createQuery("select p from Pensioner p where p.id_reader = 0").getResultList().size() == 0) {
+            StoredProcedureQuery query = em.createNamedStoredProcedureQuery("insertTouristWithRandomIdPensioners");
+            query.setParameter("id", 0);
+            query.setParameter("type", "pensioner");
+            query.execute();
+            em.getTransaction().commit();
+        }
+        em.close();
     }
     @Override
     public void save(AbstractReader reader) {
@@ -19,6 +27,7 @@ public class AbstractReaderServiceImpl implements AbstractReaderService {
         em.getTransaction().begin();
         em.merge(reader);
         em.getTransaction().commit();
+        em.close();
     }
 
     @Override
