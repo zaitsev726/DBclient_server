@@ -6,7 +6,6 @@ import Application.Entities.Information;
 import Application.Entities.IssuedBook;
 import Application.Services.AllReaderService;
 import Application.Services.CharacteristicService;
-import Application.Services.Impl.AllReaderServiceImpl;
 import Application.Services.Impl.CharacteristicServiceImpl;
 import Application.Services.Impl.InformationServiceImpl;
 import Application.Services.Impl.IssuedBookServiceImpl;
@@ -29,7 +28,7 @@ public class TakeBookPageController {
     private TakeBookForm takeBookForm;
 
 
-    private AllReaderService allReaderService;
+    private AllReaderService readerService;
     private InformationService informationService;
     private IssuedBookService issuedBookService;
     private CharacteristicService characteristicService;
@@ -39,14 +38,16 @@ public class TakeBookPageController {
     private MyBooks myBooks;
     private NewBooks newBooks;
 
-    public TakeBookPageController(AuthorizationForm authorizationForm, TakeBookForm takeBookForm) {
+    public TakeBookPageController(AuthorizationForm authorizationForm, TakeBookForm takeBookForm, AllReaderService readerService,
+                                  InformationService informationService, IssuedBookService issuedBookService, CharacteristicService characteristicService) {
+
         this.authorizationForm = authorizationForm;
         this.takeBookForm = takeBookForm;
 
-        this.allReaderService = new AllReaderServiceImpl();
-        this.informationService = new InformationServiceImpl();
-        this.issuedBookService = new IssuedBookServiceImpl();
-        this.characteristicService = new CharacteristicServiceImpl();
+        this.readerService = readerService;
+        this.informationService = informationService;
+        this.issuedBookService = issuedBookService;
+        this.characteristicService = characteristicService;
 
         this.myBooks = new MyBooks(this);
         this.newBooks = new NewBooks(this);
@@ -68,7 +69,7 @@ public class TakeBookPageController {
     }
 
     public void setReader(long id_reader) throws NoResultException {
-        this.reader = allReaderService.findById(id_reader);
+        this.reader = readerService.findById(id_reader);
     }
 
     public void showCurrentInformation(long id_edition) {

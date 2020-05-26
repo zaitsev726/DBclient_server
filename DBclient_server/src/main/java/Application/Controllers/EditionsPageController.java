@@ -45,7 +45,8 @@ public class EditionsPageController {
     private CharacteristicTable characteristicTable;
 
 
-    public EditionsPageController(EditionForm editionForm) {
+    public EditionsPageController(EditionForm editionForm, CharacteristicService characteristicService, EditionService editionService, InformationService informationService,
+                                  LibraryService libraryService, RuleService ruleService, IssuedBookService issuedBookService) {
         this.editionForm = editionForm;
 
         this.informationTable = new InformationTable(this);
@@ -53,12 +54,12 @@ public class EditionsPageController {
         this.rulesTable = new RulesTable(this);
         this.characteristicTable = new CharacteristicTable(this);
 
-        this.charService = new CharacteristicServiceImpl();
-        this.editionService = new EditionServiceImpl();
-        this.informationService = new InformationServiceImpl();
-        this.libraryService = new LibraryServiceImpl();
-        this.ruleService = new RuleServiceImpl();
-        this.issuedBookService = new IssuedBookServiceImpl();
+        this.charService = characteristicService;
+        this.editionService = editionService;
+        this.informationService = informationService;
+        this.libraryService = libraryService;
+        this.ruleService = ruleService;
+        this.issuedBookService = issuedBookService;
 
         setStartValues();
         initializationListeners();
@@ -72,14 +73,6 @@ public class EditionsPageController {
     }
 
     private void initializationListeners() {
-       /* editionForm.IdEditionTextField.addActionListener(e -> {
-            try {
-                cur_IdEdition = Long.parseLong(editionForm.IdEditionTextField.getText());
-            } catch (NumberFormatException exception) {
-                JOptionPane.showMessageDialog(editionForm, "Введите корректный номер библиотеки");
-                setStartValues();
-            }
-        });*/
 
         editionForm.typeTextField.addActionListener(e -> {
             String str = editionForm.typeTextField.getText();

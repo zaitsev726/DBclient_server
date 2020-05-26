@@ -1,6 +1,7 @@
-package Application.UserInterface;
+package Application.Controllers;
 
-import Application.Controllers.*;
+import Application.Services.*;
+import Application.Services.Impl.*;
 import Application.UserInterface.Pages.EditionPage.EditionForm;
 import Application.UserInterface.Pages.IssuedPage.EditionSearchForm;
 import Application.UserInterface.Pages.IssuedPage.IssuedForm;
@@ -12,9 +13,12 @@ import Application.UserInterface.Pages.ReadersPage.ReadersForm;
 import Application.UserInterface.Pages.TakeBookPage.AuthorizationForm;
 import Application.UserInterface.Pages.TakeBookPage.TakeBookForm;
 
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 import javax.swing.*;
 import java.awt.*;
+import java.io.Reader;
 
 public class InterfaceController {
     private final int sizeWidth = 800;
@@ -24,51 +28,54 @@ public class InterfaceController {
     private final Window window;
     private final MenuForm menuForm;
 
+
     private final ReadersPageController readersPageController;
-    private final ReadersForm readersForm;
+    private final ReadersForm readersForm = new ReadersForm();
 
     private final LibraryPageController libraryPageController;
-    private final LibraryForm libraryForm;
+    private final LibraryForm libraryForm = new LibraryForm();
 
     private final EditionsPageController editionsPageController;
-    private final EditionForm editionForm;
+    private final EditionForm editionForm = new EditionForm();
 
 
     private final IssuedPageController issuedPageController;
-    private final IssuedForm issuedForm;
-    private final EditionSearchForm editionSearchForm;
+    private final IssuedForm issuedForm = new IssuedForm();
+    private final EditionSearchForm editionSearchForm = new EditionSearchForm();
 
     private final TakeBookPageController takeBookPageController;
-    private final AuthorizationForm authorizationForm;
-    private final TakeBookForm takeBookForm;
-    private final LibrarianSearchForm librarianSearchForm;
-    private final NotAttendingForm notAttendingForm;
+    private final AuthorizationForm authorizationForm = new AuthorizationForm();
+    private final TakeBookForm takeBookForm = new TakeBookForm();
+    private final LibrarianSearchForm librarianSearchForm = new LibrarianSearchForm();
+    private final NotAttendingForm notAttendingForm = new NotAttendingForm();
+
+    //Все сервисы
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("model");
+    private final AbstractReaderService abstractReaderService = new AbstractReaderServiceImpl(emf);
+    private final AllReaderService readerService = new AllReaderServiceImpl(emf);
+    private final CharacteristicService characteristicService = new CharacteristicServiceImpl(emf);
+    private final EditionService editionService = new EditionServiceImpl(emf);
+    private final InformationService informationService = new InformationServiceImpl(emf);
+    private final IssuedBookService issuedBookService = new IssuedBookServiceImpl(emf);
+    private final LibrarianService librarianService = new LibrarianServiceImpl(emf);
+    private final LibraryService libraryService = new LibraryServiceImpl(emf);
+    private final RuleService ruleService = new RuleServiceImpl(emf);
 
     public InterfaceController() {
         window = new Application.UserInterface.Frames.Window(sizeWidth, sizeHeight, locationX, locationY);
 
         menuForm = new MenuForm();
 
-        readersForm = new ReadersForm();
-        libraryForm = new LibraryForm();
-        editionForm = new EditionForm();
-        issuedForm = new IssuedForm();
-        editionSearchForm = new EditionSearchForm();
-        authorizationForm = new AuthorizationForm();
-        takeBookForm = new TakeBookForm();
-        librarianSearchForm = new LibrarianSearchForm();
-        notAttendingForm = new NotAttendingForm();
-
-
-        readersPageController = new ReadersPageController(readersForm);
-        libraryPageController = new LibraryPageController(libraryForm);
-        editionsPageController = new EditionsPageController(editionForm);
-        issuedPageController = new IssuedPageController(issuedForm, editionSearchForm, librarianSearchForm, notAttendingForm);
-        takeBookPageController = new TakeBookPageController(authorizationForm, takeBookForm);
+        readersPageController = new ReadersPageController(readersForm, abstractReaderService, readerService, libraryService);
+        libraryPageController = new LibraryPageController(libraryForm, libraryService, librarianService);
+        editionsPageController = new EditionsPageController(editionForm, characteristicService, editionService, informationService,
+                libraryService, ruleService, issuedBookService);
+        issuedPageController = new IssuedPageController(issuedForm, editionSearchForm, librarianSearchForm, notAttendingForm,
+                issuedBookService, librarianService, editionService, readerService, informationService);
+        takeBookPageController = new TakeBookPageController(authorizationForm, takeBookForm, readerService, informationService,
+                issuedBookService, characteristicService);
 
         initializationListeners();
-
-        // window.add(menuPanel);
         window.add(menuForm);
         window.setVisible(true);
     }

@@ -1,9 +1,7 @@
 package Application;
 
 
-import Application.Services.Impl.*;
-import Application.Services.IssuedBookService;
-import Application.UserInterface.InterfaceController;
+import Application.Controllers.InterfaceController;
 
 
 public class Global {

@@ -10,7 +10,7 @@ import java.util.List;
 public class EditionServiceImpl implements EditionService {
     EntityManagerFactory emf;
 
-    public EditionServiceImpl(){ emf = Persistence.createEntityManagerFactory("model"); }
+    public EditionServiceImpl(EntityManagerFactory emf){ this.emf =emf; }
 
     @Override
     public Edition save(Edition edition) {

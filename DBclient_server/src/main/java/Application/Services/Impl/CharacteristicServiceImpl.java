@@ -9,7 +9,9 @@ import java.util.List;
 public class CharacteristicServiceImpl implements CharacteristicService {
     EntityManagerFactory emf;
 
-    public CharacteristicServiceImpl(){ emf = Persistence.createEntityManagerFactory("model"); }
+    public CharacteristicServiceImpl(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     @Override
     public Characteristic save(Characteristic characteristic) {
@@ -24,14 +26,14 @@ public class CharacteristicServiceImpl implements CharacteristicService {
     @Override
     public void delete(Long id) {
         EntityManager em = emf.createEntityManager();
-        try{
+        try {
             em.getTransaction().begin();
             Query query = em.createQuery("delete from Characteristic c where c.id_edition= :id_edition");
             query.setParameter("id_edition", id);
             query.executeUpdate();
             em.getTransaction().commit();
             em.close();
-        }catch (RollbackException e){
+        } catch (RollbackException e) {
             e.printStackTrace();
             em.getTransaction().rollback();
         }

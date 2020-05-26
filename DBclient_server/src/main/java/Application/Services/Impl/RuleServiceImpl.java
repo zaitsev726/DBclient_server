@@ -9,8 +9,8 @@ import java.util.List;
 public class RuleServiceImpl implements RuleService {
 
     EntityManagerFactory emf;
-    public RuleServiceImpl(){
-        emf = Persistence.createEntityManagerFactory("model");
+    public RuleServiceImpl(EntityManagerFactory emf){
+        this.emf = emf;
     }
 
     @Override

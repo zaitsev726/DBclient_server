@@ -4,6 +4,7 @@ import Application.Entities.AllReader;
 
 import Application.Entities.Library;
 import Application.Entities.Types.*;
+import Application.Services.AbstractReaderService;
 import Application.Services.AllReaderService;
 import Application.Services.Impl.AbstractReaderServiceImpl;
 import Application.Services.Impl.AllReaderServiceImpl;
@@ -23,8 +24,8 @@ public class ReadersPageController {
     private ReadersForm form;
     private ProfessionForm profissionForm;
     private ReadersTable readersTable;
-    private ProfessionForm updateProffesionForm;
-    private AbstractReaderServiceImpl abstractReaderService;
+    private ProfessionForm updateProfessionForm;
+    private AbstractReaderService abstractReaderService;
     private String cur_name;
     private String cur_surname;
     private String cur_patronymic;
@@ -37,47 +38,48 @@ public class ReadersPageController {
     private AllReader saved;
     private AllReader update;
 
-    public ReadersPageController(ReadersForm form){
+    public ReadersPageController(ReadersForm form, AbstractReaderService abstractReaderService, AllReaderService readerService, LibraryService libraryService) {
         //cur_type = "pensioner";
         cur_type = "<none>";
         this.form = form;
         this.profissionForm = new ProfessionForm(this, "save");
         this.readersTable = new ReadersTable(this);
-        this.updateProffesionForm = new ProfessionForm(this, "update");
-        this.abstractReaderService = new AbstractReaderServiceImpl();
+        this.updateProfessionForm = new ProfessionForm(this, "update");
+        this.abstractReaderService = abstractReaderService;
 
-        readerService = new AllReaderServiceImpl();
-        libraryService = new LibraryServiceImpl();
+        this.readerService = readerService;
+        this.libraryService =  libraryService;
         setStartValues();
         initializationListeners();
 
     }
-    private void setStartValues(){
+
+    private void setStartValues() {
         cur_name = "";
         form.nameTextField.setText("");
         cur_surname = "";
         form.surnameTextField.setText("");
         cur_patronymic = "";
         form.patronymicTextField.setText("");
-      //  cur_type = "pensioner";
+        //  cur_type = "pensioner";
         cur_lib_id = 0;
         form.idTextField.setText("");
         cur_Library = null;
         form.typeComboBox.setSelectedItem("<none>");
     }
+
     /**
      * Функия иницилизирующая листенеры Readers Form
      */
-    private void initializationListeners(){
+    private void initializationListeners() {
 
         form.nameTextField.addActionListener(e -> {
             // Отображение введенного текста
             String name = form.nameTextField.getText();
-            if(!name.equals(cur_name)){
-                if(Checker.getInstance().checkString(name)){
+            if (!name.equals(cur_name)) {
+                if (Checker.getInstance().checkString(name)) {
                     cur_name = name;
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(form, "Введите корректное имя");
                 }
             }
@@ -86,11 +88,10 @@ public class ReadersPageController {
         form.surnameTextField.addActionListener(e -> {
             // Отображение введенного текста
             String surname = form.surnameTextField.getText();
-            if(!surname.equals(cur_surname)){
-                if(Checker.getInstance().checkString(surname)){
+            if (!surname.equals(cur_surname)) {
+                if (Checker.getInstance().checkString(surname)) {
                     cur_surname = surname;
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(form, "Введите корректную фамилию");
                 }
             }
@@ -98,12 +99,11 @@ public class ReadersPageController {
 
         form.patronymicTextField.addActionListener(e -> {
             String patronymic = form.patronymicTextField.getText();
-            if(!patronymic.equals(cur_patronymic)){
-                if(Checker.getInstance().checkString(patronymic)){
+            if (!patronymic.equals(cur_patronymic)) {
+                if (Checker.getInstance().checkString(patronymic)) {
                     cur_patronymic = patronymic;
 
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(form, "Введите корректное отчество");
                 }
             }
@@ -112,15 +112,15 @@ public class ReadersPageController {
         form.idTextField.addActionListener(e -> {
             try {
                 long id_library = Long.parseLong(form.idTextField.getText());
-                try{
+                try {
                     cur_Library = libraryService.getById(id_library);
-                }catch (NoResultException exp){
+                } catch (NoResultException exp) {
                     JOptionPane.showMessageDialog(form, "Такой библиотеки не существует");
                     form.idTextField.setText("");
                     id_library = 0;
                 }
                 cur_lib_id = id_library;
-            }catch (NumberFormatException exception){
+            } catch (NumberFormatException exception) {
                 JOptionPane.showMessageDialog(form, "Введите корректный номер библиотеки");
                 cur_Library = null;
                 cur_lib_id = 0;
@@ -155,8 +155,8 @@ public class ReadersPageController {
                     profissionForm.changePanel(cur_type);
                     profissionForm.setVisible(true);
                     System.out.println("saved");
-                  //  setStartValues();
-                }else{
+                    //  setStartValues();
+                } else {
                     JOptionPane.showMessageDialog(form, "Вы ввели не все данные");
                 }
             }
@@ -168,10 +168,10 @@ public class ReadersPageController {
             System.out.println("нажато удаление");
             readers = searchReaders();
             if (readers.size() > 0) {
-                for(AllReader reader: readers) {
+                for (AllReader reader : readers) {
                     readerService.delete(reader);
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(form, "Таких читателей не существует");
             }
         });
@@ -183,12 +183,12 @@ public class ReadersPageController {
             ArrayList<String[]> resultList = new ArrayList<>();
             System.out.println(readers);
             if (readers.size() > 0) {
-                for(AllReader reader: readers) {
+                for (AllReader reader : readers) {
                     resultList.add(new String[]{String.valueOf(reader.getId_reader()), reader.getType(), reader.getName(), reader.getSurname(), reader.getPatronymic(), String.valueOf(reader.getId_library())});
                 }
                 readersTable.updateTable(resultList);
                 readersTable.setVisible(true);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(form, "Таких читателей не существует");
             }
 
@@ -197,38 +197,38 @@ public class ReadersPageController {
         });
     }
 
-    private List<AllReader> searchReaders(){
+    private List<AllReader> searchReaders() {
         List<AllReader> readers = null;
-        if(cur_name.equals("") && cur_surname.equals("") && cur_patronymic.equals(""))
+        if (cur_name.equals("") && cur_surname.equals("") && cur_patronymic.equals(""))
             readers = readerService.findAll();
-        else if(!cur_name.equals("") && !cur_surname.equals("") && !cur_patronymic.equals("")){
-            readers = readerService.findByNameAndSurnameAndPatronymic(cur_name,cur_surname,cur_patronymic);
+        else if (!cur_name.equals("") && !cur_surname.equals("") && !cur_patronymic.equals("")) {
+            readers = readerService.findByNameAndSurnameAndPatronymic(cur_name, cur_surname, cur_patronymic);
             System.out.println(cur_name);
             System.out.println(cur_surname);
             System.out.println(cur_patronymic);
-        }else if(!cur_name.equals("") && !cur_surname.equals("")){
-            readers = readerService.findByNameAndSurname(cur_name,cur_surname);
-        }else if(!cur_name.equals("") && !cur_patronymic.equals("")){
-            readers = readerService.findByNameAndPatronymic(cur_name,cur_patronymic);
-        }else if(!cur_surname.equals("") && !cur_patronymic.equals("")){
-            readers = readerService.findBySurnameAndPatronymic(cur_surname,cur_patronymic);
-        }else if(!cur_name.equals("")){
+        } else if (!cur_name.equals("") && !cur_surname.equals("")) {
+            readers = readerService.findByNameAndSurname(cur_name, cur_surname);
+        } else if (!cur_name.equals("") && !cur_patronymic.equals("")) {
+            readers = readerService.findByNameAndPatronymic(cur_name, cur_patronymic);
+        } else if (!cur_surname.equals("") && !cur_patronymic.equals("")) {
+            readers = readerService.findBySurnameAndPatronymic(cur_surname, cur_patronymic);
+        } else if (!cur_name.equals("")) {
             readers = readerService.findByName(cur_name);
-        }else if(!cur_surname.equals("")){
+        } else if (!cur_surname.equals("")) {
             readers = readerService.findBySurname(cur_surname);
-        }else if(!cur_patronymic.equals("")){
+        } else if (!cur_patronymic.equals("")) {
             readers = readerService.findByPatronymic(cur_patronymic);
         }
         System.out.println(readers);
-        if(cur_lib_id != 0){
+        if (cur_lib_id != 0) {
             if (readers != null) {
                 readers.removeIf(reader -> reader.getId_library() != cur_lib_id);
             }
         }
         System.out.println(readers);
-        if(!cur_type.equals("<none>")){
+        if (!cur_type.equals("<none>")) {
             if (readers != null) {
-                readers.removeIf(reader -> !reader.getType().equals(cur_type) );
+                readers.removeIf(reader -> !reader.getType().equals(cur_type));
             }
         }
         return readers;
@@ -237,11 +237,12 @@ public class ReadersPageController {
 
     /**
      * Функция, получающая на вход параметры, введеные из формы профессиий.
-     * @param param Массив параметров, для каждой профессии свой.
-     * @param readerType тип читателя, который необходимо сохранить
+     *
+     * @param param         Массив параметров, для каждой профессии свой.
+     * @param readerType    тип читателя, который необходимо сохранить
      * @param typeOfSetting тип функции, сохранение или обновление читатетял
      */
-    public synchronized void setParam(ArrayList<String> param, String readerType, String typeOfSetting){
+    public synchronized void setParam(ArrayList<String> param, String readerType, String typeOfSetting) {
         System.out.println(param);
         System.out.println(readerType);
         System.out.println("***** SAVING *****");
@@ -250,7 +251,7 @@ public class ReadersPageController {
         AllReader reader = saved;
 
 
-        if(typeOfSetting.equals("update")){
+        if (typeOfSetting.equals("update")) {
             reader = update;
             type = readerService.findById(update.getId_reader()).getReaderType();
         }
@@ -313,7 +314,7 @@ public class ReadersPageController {
 
         }
 
-        if(typeOfSetting.equals("update") && !(type.getType().equals(reader.getType()))){
+        if (typeOfSetting.equals("update") && !(type.getType().equals(reader.getType()))) {
             abstractReaderService.delete(type);
         }
         System.out.println("***** END OF SAVING *****");
@@ -323,10 +324,11 @@ public class ReadersPageController {
     /**
      * Выполняет роль посредника между сохранением в базу данных и интерфейсом поиска
      * На вход получает данные, которые изменились в таблице поиска
-     * @param id_reader данные читателя, которые необходимо поменть
+     *
+     * @param id_reader     данные читателя, которые необходимо поменть
      * @param changed_param параметр, который изменился в интерфейсе поиска.
      */
-    public void queryForUpdate(long id_reader, String type, String name, String surname, String patronymic, long id_library, String changed_param){
+    public void queryForUpdate(long id_reader, String type, String name, String surname, String patronymic, long id_library, String changed_param) {
 
         update = new AllReader();
         update.setName(name);
@@ -336,17 +338,18 @@ public class ReadersPageController {
         update.setType(type);
         update.setId_reader(id_reader);
         System.out.println(type);
-        if(changed_param.equals("type") ) {
+        if (changed_param.equals("type")) {
             //убрано для редактирования типа читатетля
-           // if(!readerService.findById(id_reader).getType().equals(type)) {
-                updateProffesionForm.changePanel(type);
-                updateProffesionForm.setVisible(true);
-           // }
-        }else{
+            // if(!readerService.findById(id_reader).getType().equals(type)) {
+            updateProfessionForm.changePanel(type);
+            updateProfessionForm.setVisible(true);
+            // }
+        } else {
             readerService.update(update);
         }
     }
-    public void queryForDelete(long id_reader, String type, String name, String surname, String patronymic, long id_library){
+
+    public void queryForDelete(long id_reader, String type, String name, String surname, String patronymic, long id_library) {
         AllReader reader = new AllReader();
         reader.setName(name);
         reader.setSurname(surname);
@@ -356,19 +359,20 @@ public class ReadersPageController {
         reader.setId_reader(id_reader);
         readerService.delete(reader);
     }
-    public void showCurrentLibrary(long id_library){
+
+    public void showCurrentLibrary(long id_library) {
         Library library = libraryService.getById(id_library);
-        JOptionPane.showMessageDialog(updateProffesionForm,
+        JOptionPane.showMessageDialog(updateProfessionForm,
                 new String[]{"Информация о библиотеке",
-                            " ID библиотеки: " +library.getId_library(),
-                            " Количество залов: " + library.getHalls_num(),
-                            " Количество зарегистрированных читателей: " + library.getReaders().size()}, "Библиотека", JOptionPane.INFORMATION_MESSAGE);
+                        " ID библиотеки: " + library.getId_library(),
+                        " Количество залов: " + library.getHalls_num(),
+                        " Количество зарегистрированных читателей: " + library.getReaders().size()}, "Библиотека", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public void showCurrentProfession(long id_reader){
+    public void showCurrentProfession(long id_reader) {
         AbstractReader reader = readerService.findById(id_reader).getReaderType();
-        JOptionPane.showMessageDialog(updateProffesionForm,
+        JOptionPane.showMessageDialog(updateProfessionForm,
                 new String[]{"Информация о профессии",
-                            reader.toString()}, "Профессия", JOptionPane.INFORMATION_MESSAGE);
+                        reader.toString()}, "Профессия", JOptionPane.INFORMATION_MESSAGE);
     }
 }

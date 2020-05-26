@@ -10,8 +10,8 @@ public class LibraryServiceImpl implements LibraryService {
 
     EntityManagerFactory emf;
 
-    public LibraryServiceImpl(){
-        emf = Persistence.createEntityManagerFactory("model");
+    public LibraryServiceImpl(EntityManagerFactory emf){
+        this.emf = emf;
     }
 
     @Override

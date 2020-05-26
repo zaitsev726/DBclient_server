@@ -28,10 +28,11 @@ public class LibraryPageController {
     private long cur_libID;
     private long cur_hallNum;
 
-    public LibraryPageController(LibraryForm form) {
+    public LibraryPageController(LibraryForm form, LibraryService libraryService, LibrarianService librarianService) {
+
         libraryForm = form;
-        libraryService = new LibraryServiceImpl();
-        librarianService = new LibrarianServiceImpl();
+        this.libraryService = libraryService;
+        this.librarianService = librarianService;
         libraryTable = new LibraryTable(this);
         librariansTable = new LibrariansTable(this);
         initializationListeners();
@@ -117,7 +118,7 @@ public class LibraryPageController {
                 try {
                     Library library = libraryService.getById(cur_libID);
                     System.out.println(library.getReaders());
-                    ReadersInLibrary readersInLibrary = new ReadersInLibrary((List<AllReader>) library.getReaders());
+                    new ReadersInLibrary((List<AllReader>) library.getReaders());
                 } catch (NoResultException ignored) {
                     JOptionPane.showMessageDialog(libraryForm, "Библиотек с таким ID не существует");
                 }
@@ -129,7 +130,7 @@ public class LibraryPageController {
         libraryForm.librariansButton.addActionListener(e -> {
 
             try {
-                List<Librarian> librarians = new ArrayList<>();
+                List<Librarian> librarians;
                 if (cur_libID != 0) {
                     librarians = librarianService.findByIdLibrary(cur_libID);
                 } else

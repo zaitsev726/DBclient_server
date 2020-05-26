@@ -9,7 +9,7 @@ import java.util.List;
 public class InformationServiceImpl implements InformationService {
     EntityManagerFactory emf;
 
-    public InformationServiceImpl(){ emf = Persistence.createEntityManagerFactory("model"); }
+    public InformationServiceImpl(EntityManagerFactory emf){ this.emf = emf; }
 
     @Override
     public void save(Information information) {

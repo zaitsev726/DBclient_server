@@ -13,8 +13,8 @@ import java.util.List;
 public class AllReaderServiceImpl implements AllReaderService {
     EntityManagerFactory emf;
 
-    public AllReaderServiceImpl(){
-        emf = Persistence.createEntityManagerFactory("model");
+    public AllReaderServiceImpl(EntityManagerFactory emf){
+        this.emf = emf;
     }
 
     @Override

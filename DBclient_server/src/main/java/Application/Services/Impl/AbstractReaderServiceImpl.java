@@ -7,8 +7,8 @@ import javax.persistence.*;
 
 public class AbstractReaderServiceImpl implements AbstractReaderService {
     EntityManagerFactory emf;
-    public AbstractReaderServiceImpl(){
-        emf = Persistence.createEntityManagerFactory("model");
+    public AbstractReaderServiceImpl(EntityManagerFactory emf){
+        this.emf = emf;
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         if(em.createQuery("select p from Pensioner p where p.id_reader = 0").getResultList().size() == 0) {

@@ -45,17 +45,19 @@ public class IssuedPageController {
 
     private IssuedBookTable issuedBookForm;
 
-    public IssuedPageController(IssuedForm issuedForm, EditionSearchForm editionSearchForm, LibrarianSearchForm librarianSearchForm,NotAttendingForm notAttendingForm) {
+    public IssuedPageController(IssuedForm issuedForm, EditionSearchForm editionSearchForm, LibrarianSearchForm librarianSearchForm,NotAttendingForm notAttendingForm,
+                                IssuedBookService issuedBookService, LibrarianService librarianService, EditionService editionService,
+                                AllReaderService allReaderService, InformationService informationService) {
         this.issuedForm = issuedForm;
         this.editionSearchForm = editionSearchForm;
         this.librarianSearchForm = librarianSearchForm;
         this.notAttendingForm = notAttendingForm;
 
-        this.issuedBookService = new IssuedBookServiceImpl();
-        this.librarianService = new LibrarianServiceImpl();
-        this.editionService = new EditionServiceImpl();
-        this.readerService = new AllReaderServiceImpl();
-        this.informationService = new InformationServiceImpl();
+        this.issuedBookService = issuedBookService;
+        this.librarianService = librarianService;
+        this.editionService = editionService;
+        this.readerService = allReaderService;
+        this.informationService = informationService;
 
         issuedBookForm = new IssuedBookTable(this);
 

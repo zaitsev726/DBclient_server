@@ -10,8 +10,8 @@ import java.util.List;
 
 public class IssuedBookServiceImpl implements IssuedBookService {
     EntityManagerFactory emf;
-    public IssuedBookServiceImpl(){
-        emf = Persistence.createEntityManagerFactory("model");
+    public IssuedBookServiceImpl(EntityManagerFactory emf){
+        this.emf = emf;
     }
 
     @Override

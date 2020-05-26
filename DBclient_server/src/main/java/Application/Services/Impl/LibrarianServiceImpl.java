@@ -8,8 +8,8 @@ import java.util.List;
 
 public class LibrarianServiceImpl implements LibrarianService {
     EntityManagerFactory emf;
-    public LibrarianServiceImpl(){
-        emf = Persistence.createEntityManagerFactory("model");
+    public LibrarianServiceImpl(EntityManagerFactory emf){
+        this.emf = emf;
     }
 
     @Override
