@@ -1,4 +1,4 @@
-package Application.UserInterface.Frames;
+package Application.UserInterface.Frames.Readers;
 
 import Application.Controllers.ReadersPageController;
 
@@ -12,7 +12,7 @@ import java.util.regex.PatternSyntaxException;
 /*
     Форма вывода поиска читателей
  */
-public class SearchReadersForm extends JFrame {
+public class ReadersTable extends JFrame {
 
     private final JTable resultTable;
     private final DefaultTableModel tableModel;
@@ -28,7 +28,7 @@ public class SearchReadersForm extends JFrame {
 
     private final TableRowSorter<TableModel> sorter;
 
-    public SearchReadersForm(ReadersPageController controller) {
+    public ReadersTable(ReadersPageController controller) {
         currentReaders = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");

@@ -32,11 +32,11 @@ public class IssuedBookServiceImpl implements IssuedBookService {
             query.setParameter("id_rec", id_record);
             query.executeUpdate();
             em.getTransaction().commit();
-            em.close();
         }catch (RollbackException e){
             e.printStackTrace();
             em.getTransaction().rollback();
         }
+        em.close();
     }
 
     @Override
@@ -46,11 +46,11 @@ public class IssuedBookServiceImpl implements IssuedBookService {
             em.getTransaction().begin();
             issuedBook = em.merge(issuedBook);
             em.getTransaction().commit();
-            em.close();
         }catch (RollbackException e){
             e.printStackTrace();
             em.getTransaction().rollback();
         }
+        em.close();
         return issuedBook;
     }
 

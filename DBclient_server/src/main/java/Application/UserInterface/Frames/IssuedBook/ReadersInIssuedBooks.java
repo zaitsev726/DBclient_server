@@ -5,14 +5,15 @@ import Application.Entities.AllReader;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+/*
+    Поиск читателей, при запросе о выработке библиотекаря
+ */
+public class ReadersInIssuedBooks extends JFrame {
 
-public class SearchReadersInIssuedBooks extends JFrame {
-    private JScrollPane scrollPane;
-    private JPanel panel = new JPanel();
-    public SearchReadersInIssuedBooks(List<AllReader> readers){
+    public ReadersInIssuedBooks(List<AllReader> readers){
         setTitle("Читатели");
         setSize(600, 300);
-        panel = new JPanel();
+        JPanel panel = new JPanel();
         Container container = getContentPane();
 
 
@@ -21,7 +22,7 @@ public class SearchReadersInIssuedBooks extends JFrame {
             String str = "ID читателя: " + reader.getId_reader() + " Тип читателя: " + reader.getType() + " ФИО " + reader.getSurname() + " " + reader.getName() + " " + reader.getPatronymic() + " ID библиотеки: " + reader.getId_library();
             panel.add(new JLabel(str));
         }
-        scrollPane = new JScrollPane(panel);
+        JScrollPane scrollPane = new JScrollPane(panel);
         add(scrollPane, BorderLayout.CENTER);
         setVisible(true);
     }

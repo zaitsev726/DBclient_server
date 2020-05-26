@@ -9,8 +9,8 @@ import Application.Services.Impl.AbstractReaderServiceImpl;
 import Application.Services.Impl.AllReaderServiceImpl;
 import Application.Services.Impl.LibraryServiceImpl;
 import Application.Services.LibraryService;
-import Application.UserInterface.Frames.ProfessionForm;
-import Application.UserInterface.Frames.SearchReadersForm;
+import Application.UserInterface.Frames.Readers.ProfessionForm;
+import Application.UserInterface.Frames.Readers.ReadersTable;
 import Application.UserInterface.Pages.ReadersPage.ReadersForm;
 
 import javax.persistence.NoResultException;
@@ -22,7 +22,7 @@ import java.util.List;
 public class ReadersPageController {
     private ReadersForm form;
     private ProfessionForm profissionForm;
-    private SearchReadersForm searchReadersForm;
+    private ReadersTable readersTable;
     private ProfessionForm updateProffesionForm;
     private AbstractReaderServiceImpl abstractReaderService;
     private String cur_name;
@@ -42,7 +42,7 @@ public class ReadersPageController {
         cur_type = "<none>";
         this.form = form;
         this.profissionForm = new ProfessionForm(this, "save");
-        this.searchReadersForm = new SearchReadersForm(this);
+        this.readersTable = new ReadersTable(this);
         this.updateProffesionForm = new ProfessionForm(this, "update");
         this.abstractReaderService = new AbstractReaderServiceImpl();
 
@@ -186,8 +186,8 @@ public class ReadersPageController {
                 for(AllReader reader: readers) {
                     resultList.add(new String[]{String.valueOf(reader.getId_reader()), reader.getType(), reader.getName(), reader.getSurname(), reader.getPatronymic(), String.valueOf(reader.getId_library())});
                 }
-                searchReadersForm.updateTable(resultList);
-                searchReadersForm.setVisible(true);
+                readersTable.updateTable(resultList);
+                readersTable.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(form, "Таких читателей не существует");
             }

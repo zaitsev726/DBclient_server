@@ -1,27 +1,23 @@
 package Application.UserInterface.Frames.Edition.Characteristic;
 
 import Application.Controllers.EditionsPageController;
-import Application.Entities.Information;
-
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-public class SearchCharacteristicForm extends JFrame {
-    private JTable resultTable;
-    private DefaultTableModel tableModel;
+/*
+    Таблица поиска Характеристик издания
+ */
+public class CharacteristicTable extends JFrame {
+    private final JTable resultTable;
+    private final DefaultTableModel tableModel;
     private ArrayList<String[]> currentCharacteristic;
 
-    private EditionsPageController controller;
-    private JButton removeRowButton;
-    private JButton backButton;
+    private final EditionsPageController controller;
+    private final JButton removeRowButton;
+    private final JButton backButton;
 
-    // Заголовки столбцов
-    private final Object[] columnsHeader = new String[]{"ID издания", "Тип издния", "Автор", "Название"};
-
-    public SearchCharacteristicForm(EditionsPageController controller) {
+    public CharacteristicTable(EditionsPageController controller) {
         currentCharacteristic = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
@@ -31,6 +27,8 @@ public class SearchCharacteristicForm extends JFrame {
         setSize(600, 300);
 
         tableModel = new DefaultTableModel();
+        // Заголовки столбцов
+        Object[] columnsHeader = new String[]{"ID издания", "Тип издния", "Автор", "Название"};
         tableModel.setColumnIdentifiers(columnsHeader);
 
 
@@ -51,20 +49,17 @@ public class SearchCharacteristicForm extends JFrame {
 
     private void initializationListeners() {
 
-        resultTable.getModel().addTableModelListener(new TableModelListener() {
-
-            public void tableChanged(TableModelEvent e) {
-                System.out.println(resultTable.getSelectedRow());
-                int row = resultTable.getSelectedRow();
-                int column = resultTable.getSelectedColumn();
-                if (column == 0) {
-                    JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
-                } else if (row >= 0) {
-                    try {
-                        controller.queryForUpdateCharacteristic(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))),String.valueOf(tableModel.getValueAt(row, 1)),
-                                String.valueOf(tableModel.getValueAt(row, 2)), String.valueOf(tableModel.getValueAt(row, 3)));
-                    } catch (ArrayIndexOutOfBoundsException ignored) {
-                    }
+        resultTable.getModel().addTableModelListener(e -> {
+            System.out.println(resultTable.getSelectedRow());
+            int row = resultTable.getSelectedRow();
+            int column = resultTable.getSelectedColumn();
+            if (column == 0) {
+                JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
+            } else if (row >= 0) {
+                try {
+                    controller.queryForUpdateCharacteristic(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))),String.valueOf(tableModel.getValueAt(row, 1)),
+                            String.valueOf(tableModel.getValueAt(row, 2)), String.valueOf(tableModel.getValueAt(row, 3)));
+                } catch (ArrayIndexOutOfBoundsException ignored) {
                 }
             }
         });

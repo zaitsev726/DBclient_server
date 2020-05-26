@@ -4,25 +4,23 @@ import Application.Controllers.LibraryPageController;
 import Application.Entities.Librarian;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-public class SearchLibrariansForm extends JFrame {
-    private JTable resultTable;
-    private DefaultTableModel tableModel;
+/*
+    Таблица поиска работников библиотеки
+ */
+public class LibrariansTable extends JFrame {
+    private final JTable resultTable;
+    private final DefaultTableModel tableModel;
     private ArrayList<String[]> currentLibrarians;
 
-    private LibraryPageController controller;
-    private JButton removeRowButton;
-    private JButton backButton;
-    private JButton addRowButton;
+    private final LibraryPageController controller;
+    private final JButton removeRowButton;
+    private final JButton backButton;
+    private final JButton addRowButton;
 
-    // Заголовки столбцов
-    private final Object[] columnsHeader = new String[]{"ID работника", "ID библиотеки", "Номер зала"};
-
-    public SearchLibrariansForm(LibraryPageController controller) {
+    public LibrariansTable(LibraryPageController controller) {
         currentLibrarians = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
@@ -33,6 +31,8 @@ public class SearchLibrariansForm extends JFrame {
         setSize(400, 300);
 
         tableModel = new DefaultTableModel();
+        // Заголовки столбцов
+        Object[] columnsHeader = new String[]{"ID работника", "ID библиотеки", "Номер зала"};
         tableModel.setColumnIdentifiers(columnsHeader);
 
 
@@ -50,24 +50,20 @@ public class SearchLibrariansForm extends JFrame {
         getContentPane().add(buttons, "South");
 
         initializationListeners();
-        //setVisible(true);
     }
 
     private void initializationListeners() {
 
-        resultTable.getModel().addTableModelListener(new TableModelListener() {
-
-            public void tableChanged(TableModelEvent e) {
-                System.out.println(resultTable.getSelectedRow());
-                int row = resultTable.getSelectedRow();
-                int column = resultTable.getSelectedColumn();
-                if (column == 0) {
-                    JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
-                } else if (row >= 0) {
-                    try {
-                        controller.queryForUpdateLibrarian(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 1))),Long.parseLong(String.valueOf(tableModel.getValueAt(row, 2))));
-                    } catch (ArrayIndexOutOfBoundsException ignored) {
-                    }
+        resultTable.getModel().addTableModelListener(e -> {
+            System.out.println(resultTable.getSelectedRow());
+            int row = resultTable.getSelectedRow();
+            int column = resultTable.getSelectedColumn();
+            if (column == 0) {
+                JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
+            } else if (row >= 0) {
+                try {
+                    controller.queryForUpdateLibrarian(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 1))),Long.parseLong(String.valueOf(tableModel.getValueAt(row, 2))));
+                } catch (ArrayIndexOutOfBoundsException ignored) {
                 }
             }
         });

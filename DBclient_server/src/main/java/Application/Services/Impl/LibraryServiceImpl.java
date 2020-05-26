@@ -32,11 +32,11 @@ public class LibraryServiceImpl implements LibraryService {
             query.setParameter("id_lib", id);
             query.executeUpdate();
             em.getTransaction().commit();
-            em.close();
         }catch (RollbackException e){
             e.printStackTrace();
             em.getTransaction().rollback();
         }
+        em.close();
     }
 
     @Override
@@ -46,11 +46,11 @@ public class LibraryServiceImpl implements LibraryService {
             em.getTransaction().begin();
             em.merge(library);
             em.getTransaction().commit();
-            em.close();
         }catch (RollbackException e){
             e.printStackTrace();
             em.getTransaction().rollback();
         }
+        em.close();
     }
 
     @Override

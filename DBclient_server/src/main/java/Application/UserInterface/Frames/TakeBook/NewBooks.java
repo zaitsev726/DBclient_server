@@ -6,21 +6,21 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-public class SearchNewBooksForm extends JFrame {
-    private JTable resultTable;
-    private DefaultTableModel tableModel;
+/*
+    Таблица поиска изданий, которые можно взять сейчас
+ */
+public class NewBooks extends JFrame {
+    private final JTable resultTable;
+    private final DefaultTableModel tableModel;
     private ArrayList<String[]> currentNewEditions;
 
-    private TakeBookPageController controller;
+    private final TakeBookPageController controller;
 
-    private JButton informationButton;
-    private JButton takeButton;
-    private JButton backButton;
+    private final JButton informationButton;
+    private final JButton takeButton;
+    private final JButton backButton;
 
-    // Заголовки столбцов
-    private final Object[] columnsHeader = new String[]{"ID записи", "ID издания", "ID библиотекаря"};
-
-    public SearchNewBooksForm(TakeBookPageController controller) {
+    public NewBooks(TakeBookPageController controller) {
         currentNewEditions = new ArrayList<>();
         this.controller = controller;
         informationButton = new JButton("Подробнее");
@@ -31,6 +31,8 @@ public class SearchNewBooksForm extends JFrame {
         setSize(500, 300);
 
         tableModel = new DefaultTableModel();
+        // Заголовки столбцов
+        Object[] columnsHeader = new String[]{"ID записи", "ID издания", "ID библиотекаря"};
         tableModel.setColumnIdentifiers(columnsHeader);
 
 
@@ -48,7 +50,6 @@ public class SearchNewBooksForm extends JFrame {
         getContentPane().add(buttons, "South");
 
         initializationListeners();
-        //setVisible(true);
     }
 
     private void initializationListeners() {

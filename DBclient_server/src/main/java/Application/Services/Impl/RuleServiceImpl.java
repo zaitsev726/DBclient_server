@@ -31,11 +31,11 @@ public class RuleServiceImpl implements RuleService {
             query.setParameter("id", id);
             query.executeUpdate();
             em.getTransaction().commit();
-            em.close();
         }catch (RollbackException e){
             e.printStackTrace();
             em.getTransaction().rollback();
         }
+        em.close();
     }
 
     @Override
@@ -45,11 +45,11 @@ public class RuleServiceImpl implements RuleService {
             em.getTransaction().begin();
             rule = em.merge(rule);
             em.getTransaction().commit();
-            em.close();
         }catch (RollbackException e){
             e.printStackTrace();
             em.getTransaction().rollback();
         }
+        em.close();
         return rule;
     }
 

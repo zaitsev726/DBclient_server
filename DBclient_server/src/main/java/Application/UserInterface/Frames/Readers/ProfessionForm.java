@@ -1,4 +1,4 @@
-package Application.UserInterface.Frames;
+package Application.UserInterface.Frames.Readers;
 
 import Application.Controllers.Checker;
 import Application.Controllers.ReadersPageController;
@@ -18,18 +18,18 @@ public class ProfessionForm extends JFrame {
     private JLabel numberPensionerLabel;
     private JTextField schoolTextField;
     private JTextField gradeTextField;
-    private JLabel schoolnumberLabel;
+    private JLabel schoolNumberLabel;
     private JLabel gradeLabel;
     private JButton pContinueButton;
     private JButton pBackButton;
-    private JButton scContinueutton;
+    private JButton scContinueButton;
     private JButton scBackButton;
     private JTextField sUniversityTextField;
     private JTextField sFacultyTextField;
     private JTextField sGroupTextField;
     private JButton sContinueButton;
     private JButton sBackButton;
-    private JTextField sciAddresTextField;
+    private JTextField sciAddressTextField;
     private JTextField sciUniversityTextField;
     private JButton sciContinueButton;
     private JButton sciBackButton;
@@ -44,7 +44,7 @@ public class ProfessionForm extends JFrame {
     private JButton tBackButton;
     private JLabel tUniversityLabel;
     private JLabel tFacultyLabel;
-    private JTextField wAddresTextField;
+    private JTextField wAddressTextField;
     private JTextField wFirmTextField;
     private JButton wContinueButton;
     private JButton wBackButton;
@@ -53,17 +53,15 @@ public class ProfessionForm extends JFrame {
     private JPanel currentPanel;
 
     private ArrayList<String> currentParam;
-    private ReadersPageController controller;
-    private String typeOfForm;
+    private final ReadersPageController controller;
+    private final String typeOfForm;
 
 
     public ProfessionForm(ReadersPageController controller, String typeOfForm) {
         this.typeOfForm = typeOfForm;
         this.controller = controller;
-       // this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setTitle("Информация о профессии");
         setSize(400, 400);
-        //  setVisible(true);
         currentParam = new ArrayList<>();
         initializationListeners();
         this.add(professionPanel);
@@ -167,7 +165,7 @@ public class ProfessionForm extends JFrame {
             }
         });
 
-        scContinueutton.addActionListener(e -> {
+        scContinueButton.addActionListener(e -> {
             if(currentParam.size() == 2)
                 controller.setParam( currentParam, "schoolkid", typeOfForm);
             else
@@ -183,8 +181,8 @@ public class ProfessionForm extends JFrame {
 
         /**ученый*/
 
-        sciAddresTextField.addActionListener(e -> {
-                String address = sciAddresTextField.getText();
+        sciAddressTextField.addActionListener(e -> {
+                String address = sciAddressTextField.getText();
                 if(Checker.getInstance().checkString(address))
                     currentParam.add(address);
                 else
@@ -303,8 +301,8 @@ public class ProfessionForm extends JFrame {
             currentParam = new ArrayList<>();
         });
         /**рабочий*/
-        wAddresTextField.addActionListener(e -> {
-            String address = wAddresTextField.getText();
+        wAddressTextField.addActionListener(e -> {
+            String address = wAddressTextField.getText();
             if(Checker.getInstance().checkString(address))
                 currentParam.add(address);
             else

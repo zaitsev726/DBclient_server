@@ -39,17 +39,11 @@ public class AllReaderServiceImpl implements AllReaderService {
     public AllReader save(AllReader reader) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-
-
         Pensioner pensioner = em.find(Pensioner.class, (long)0);
         reader.setReaderType(pensioner);
-
-
-        //em.persist(reader);
         reader = em.merge(reader);
         em.getTransaction().commit();
         em.close();
-        System.out.println(reader);
         return reader;
     }
 
@@ -87,6 +81,7 @@ public class AllReaderServiceImpl implements AllReaderService {
                 .setParameter("r_surname", cur_surname)
                 .setParameter("r_patronymic", cur_patronymic)
                 .getResultList();
+        em.close();
         return readers;
 
     }
@@ -98,6 +93,7 @@ public class AllReaderServiceImpl implements AllReaderService {
                 .setParameter("r_name", cur_name)
                 .setParameter("r_patronymic", cur_patronymic)
                 .getResultList();
+        em.close();
         return readers;
     }
 
@@ -108,6 +104,7 @@ public class AllReaderServiceImpl implements AllReaderService {
                 .setParameter("r_name", cur_name)
                 .setParameter("r_surname", cur_surname)
                 .getResultList();
+        em.close();
         return readers;
     }
 
@@ -118,6 +115,7 @@ public class AllReaderServiceImpl implements AllReaderService {
                 .setParameter("r_surname", cur_surname)
                 .setParameter("r_patronymic", cur_patronymic)
                 .getResultList();
+        em.close();
         return readers;
     }
 
@@ -127,6 +125,7 @@ public class AllReaderServiceImpl implements AllReaderService {
         List<AllReader> readers = em.createQuery("select readers from AllReader readers where readers.name = :r_name", AllReader.class)
                 .setParameter("r_name", cur_name)
                 .getResultList();
+        em.close();
         return readers;
     }
 
@@ -136,6 +135,7 @@ public class AllReaderServiceImpl implements AllReaderService {
         List<AllReader> readers = em.createQuery("select readers from AllReader readers where readers.surname = :r_surname ", AllReader.class)
                 .setParameter("r_surname", cur_surname)
                 .getResultList();
+        em.close();
         return readers;
     }
 
@@ -145,6 +145,7 @@ public class AllReaderServiceImpl implements AllReaderService {
         List<AllReader> readers = em.createQuery("select readers from AllReader readers where readers.patronymic = :r_patronymic", AllReader.class)
                 .setParameter("r_patronymic", cur_patronymic)
                 .getResultList();
+        em.close();
         return readers;
     }
 }

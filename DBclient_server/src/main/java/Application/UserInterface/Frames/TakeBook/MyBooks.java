@@ -5,22 +5,21 @@ import Application.Controllers.TakeBookPageController;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-
-public class SearchMyBooksForm extends JFrame {
-    private JTable resultTable;
-    private DefaultTableModel tableModel;
+/*
+    Таблица поиска изданий, которые были выданы конкретному читателю
+ */
+public class MyBooks extends JFrame {
+    private final JTable resultTable;
+    private final DefaultTableModel tableModel;
     private ArrayList<String[]> currentEditions;
 
-    private TakeBookPageController controller;
+    private final TakeBookPageController controller;
 
-    private JButton informationButton;
-    private JButton returnButton;
-    private JButton backButton;
+    private final JButton informationButton;
+    private final JButton returnButton;
+    private final JButton backButton;
 
-    // Заголовки столбцов
-    private final Object[] columnsHeader = new String[]{"ID записи", "ID издания", "Дата взятия", "Дата возвращения", "Возвращена?", "ID библиотекаря"};
-
-    public SearchMyBooksForm(TakeBookPageController controller) {
+    public MyBooks(TakeBookPageController controller) {
         currentEditions = new ArrayList<>();
         this.controller = controller;
         informationButton = new JButton("Подробнее");
@@ -31,6 +30,8 @@ public class SearchMyBooksForm extends JFrame {
         setSize(800, 300);
 
         tableModel = new DefaultTableModel();
+        // Заголовки столбцов
+        Object[] columnsHeader = new String[]{"ID записи", "ID издания", "Дата взятия", "Дата возвращения", "Возвращена?", "ID библиотекаря"};
         tableModel.setColumnIdentifiers(columnsHeader);
 
 

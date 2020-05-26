@@ -3,8 +3,8 @@ package Application.Controllers;
 import Application.Entities.*;
 import Application.Services.*;
 import Application.Services.Impl.*;
-import Application.UserInterface.Frames.IssuedBook.SearchIssuedBookForm;
-import Application.UserInterface.Frames.IssuedBook.SearchReadersInIssuedBooks;
+import Application.UserInterface.Frames.IssuedBook.IssuedBookTable;
+import Application.UserInterface.Frames.IssuedBook.ReadersInIssuedBooks;
 import Application.UserInterface.Pages.IssuedPage.EditionSearchForm;
 import Application.UserInterface.Pages.IssuedPage.IssuedForm;
 import Application.UserInterface.Pages.IssuedPage.LibrarianSearchForm;
@@ -43,7 +43,7 @@ public class IssuedPageController {
     private boolean lessExtradition;
     private boolean moreReturned;
 
-    private SearchIssuedBookForm issuedBookForm;
+    private IssuedBookTable issuedBookForm;
 
     public IssuedPageController(IssuedForm issuedForm, EditionSearchForm editionSearchForm, LibrarianSearchForm librarianSearchForm,NotAttendingForm notAttendingForm) {
         this.issuedForm = issuedForm;
@@ -57,7 +57,7 @@ public class IssuedPageController {
         this.readerService = new AllReaderServiceImpl();
         this.informationService = new InformationServiceImpl();
 
-        issuedBookForm = new SearchIssuedBookForm(this);
+        issuedBookForm = new IssuedBookTable(this);
 
         setStartValues();
         initializationListeners();
@@ -150,7 +150,7 @@ public class IssuedPageController {
                                                             librarianSearchForm.getStartDate(),
                                                             librarianSearchForm.getEndDate());
                 if(readers.size() > 0){
-                    SearchReadersInIssuedBooks inIssuedBooks = new SearchReadersInIssuedBooks(readers);
+                    ReadersInIssuedBooks inIssuedBooks = new ReadersInIssuedBooks(readers);
                 }else{
                     JOptionPane.showMessageDialog(editionSearchForm, "Таких читателей нет");
                 }
@@ -165,7 +165,7 @@ public class IssuedPageController {
                 List<AllReader> readers = issuedBookService.findReadersNotAttendingLibrary(notAttendingForm.getStartDate(),
                         notAttendingForm.getEndDate());
                 if(readers.size() > 0){
-                    SearchReadersInIssuedBooks inIssuedBooks = new SearchReadersInIssuedBooks(readers);
+                    ReadersInIssuedBooks inIssuedBooks = new ReadersInIssuedBooks(readers);
                 }else{
                     JOptionPane.showMessageDialog(editionSearchForm, "Таких читателей нет");
                 }
@@ -293,7 +293,7 @@ public class IssuedPageController {
             }
 
             if(readers.size() > 0){
-                SearchReadersInIssuedBooks inIssuedBooks = new SearchReadersInIssuedBooks(readers);
+                ReadersInIssuedBooks inIssuedBooks = new ReadersInIssuedBooks(readers);
             }else{
                 JOptionPane.showMessageDialog(editionSearchForm, "Таких читателей нет");
             }

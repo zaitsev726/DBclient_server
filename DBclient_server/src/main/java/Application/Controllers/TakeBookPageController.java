@@ -12,8 +12,8 @@ import Application.Services.Impl.InformationServiceImpl;
 import Application.Services.Impl.IssuedBookServiceImpl;
 import Application.Services.InformationService;
 import Application.Services.IssuedBookService;
-import Application.UserInterface.Frames.TakeBook.SearchMyBooksForm;
-import Application.UserInterface.Frames.TakeBook.SearchNewBooksForm;
+import Application.UserInterface.Frames.TakeBook.MyBooks;
+import Application.UserInterface.Frames.TakeBook.NewBooks;
 import Application.UserInterface.Pages.TakeBookPage.AuthorizationForm;
 import Application.UserInterface.Pages.TakeBookPage.TakeBookForm;
 
@@ -36,8 +36,8 @@ public class TakeBookPageController {
     private AllReader reader;
 
 
-    private SearchMyBooksForm searchMyBooksForm;
-    private SearchNewBooksForm searchNewBooksForm;
+    private MyBooks myBooks;
+    private NewBooks newBooks;
 
     public TakeBookPageController(AuthorizationForm authorizationForm, TakeBookForm takeBookForm) {
         this.authorizationForm = authorizationForm;
@@ -48,29 +48,23 @@ public class TakeBookPageController {
         this.issuedBookService = new IssuedBookServiceImpl();
         this.characteristicService = new CharacteristicServiceImpl();
 
-        this.searchMyBooksForm = new SearchMyBooksForm(this);
-        this.searchNewBooksForm = new SearchNewBooksForm(this);
+        this.myBooks = new MyBooks(this);
+        this.newBooks = new NewBooks(this);
         initializationListeners();
     }
 
     private void initializationListeners() {
-        takeBookForm.myEditionsButton.addActionListener(e -> {
-            searchMyEdition();
-        });
+        takeBookForm.myEditionsButton.addActionListener(e -> searchMyEdition());
 
-        takeBookForm.takeNewButton.addActionListener(e -> {
-            searchNewEdition();
-        });
+        takeBookForm.takeNewButton.addActionListener(e -> searchNewEdition());
 
-        takeBookForm.myInfoButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(takeBookForm,
-                    new String[]{"Информация о читателе",
-                            " Имя: " + reader.getName(),
-                            " Фамилия: " + reader.getSurname(),
-                            " Отчество: " + reader.getPatronymic(),
-                            " Библиотека: " + reader.getId_library(),
-                            " Профессия: " + reader.getType(),}, "Читатель", JOptionPane.INFORMATION_MESSAGE);
-        });
+        takeBookForm.myInfoButton.addActionListener(e -> JOptionPane.showMessageDialog(takeBookForm,
+                new String[]{"Информация о читателе",
+                        " Имя: " + reader.getName(),
+                        " Фамилия: " + reader.getSurname(),
+                        " Отчество: " + reader.getPatronymic(),
+                        " Библиотека: " + reader.getId_library(),
+                        " Профессия: " + reader.getType(),}, "Читатель", JOptionPane.INFORMATION_MESSAGE));
     }
 
     public void setReader(long id_reader) throws NoResultException {
@@ -100,7 +94,7 @@ public class TakeBookPageController {
 
             issuedBookService.update(book);
             searchMyEdition();
-            if(searchNewBooksForm.isVisible())
+            if(newBooks.isVisible())
                 searchNewEdition();
         }
     }
@@ -123,8 +117,8 @@ public class TakeBookPageController {
                         str[3] = (book.getDate_return().getYear() + 1900) + "-" + book.getDate_return().getMonth() + "-" + book.getDate_return().getDate();
                     resultList.add(str);
                 }
-                searchMyBooksForm.updateTable(resultList);
-                searchMyBooksForm.setVisible(true);
+                myBooks.updateTable(resultList);
+                myBooks.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(takeBookForm, "Таких записей нет");
             }
@@ -171,8 +165,8 @@ public class TakeBookPageController {
                         IdEditions.add(book.getId_edition());
                     }
                 }
-                searchNewBooksForm.updateTable(resultList);
-                searchNewBooksForm.setVisible(true);
+                newBooks.updateTable(resultList);
+                newBooks.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(takeBookForm, "Таких записей нет");
             }

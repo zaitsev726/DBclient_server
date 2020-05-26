@@ -1,6 +1,5 @@
 package Application.Services.Impl;
 
-import Application.Entities.AllReader;
 import Application.Entities.Types.AbstractReader;
 import Application.Services.AbstractReaderService;
 

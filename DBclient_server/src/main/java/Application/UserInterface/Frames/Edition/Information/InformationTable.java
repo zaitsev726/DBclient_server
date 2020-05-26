@@ -9,20 +9,20 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-public class SearchInformationForm extends JFrame {
-    private JTable resultTable;
-    private DefaultTableModel tableModel;
+/*
+    Таблица поиска Информации издания, т.е. произведений, которые в нем находяться
+ */
+public class InformationTable extends JFrame {
+    private final JTable resultTable;
+    private final DefaultTableModel tableModel;
     private ArrayList<String[]> currentInformation;
 
-    private EditionsPageController controller;
-    private JButton removeRowButton;
-    private JButton addRowButton;
-    private JButton backButton;
+    private final EditionsPageController controller;
+    private final JButton removeRowButton;
+    private final JButton addRowButton;
+    private final JButton backButton;
 
-    // Заголовки столбцов
-    private final Object[] columnsHeader = new String[]{"ID записи", "ID издания", "Автор", "Произведение", "Популярность"};
-
-    public SearchInformationForm(EditionsPageController controller) {
+    public InformationTable(EditionsPageController controller) {
         currentInformation = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
@@ -33,6 +33,8 @@ public class SearchInformationForm extends JFrame {
         setSize(600, 300);
 
         tableModel = new DefaultTableModel();
+        // Заголовки столбцов
+        Object[] columnsHeader = new String[]{"ID записи", "ID издания", "Автор", "Произведение", "Популярность"};
         tableModel.setColumnIdentifiers(columnsHeader);
 
 
@@ -55,23 +57,20 @@ public class SearchInformationForm extends JFrame {
 
     private void initializationListeners() {
 
-        resultTable.getModel().addTableModelListener(new TableModelListener() {
-
-            public void tableChanged(TableModelEvent e) {
-                System.out.println(resultTable.getSelectedRow());
-                int row = resultTable.getSelectedRow();
-                int column = resultTable.getSelectedColumn();
-                if (column == 0) {
-                    JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
-                }else if(column == 4){
-                    JOptionPane.showMessageDialog(resultTable, "Столбец с популярностью нельзя менять");
-                }
-                else if (row >= 0) {
-                    try {
-                        controller.queryForUpdateInformation(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 1))),
-                                String.valueOf(tableModel.getValueAt(row, 2)), String.valueOf(tableModel.getValueAt(row, 3)), Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 4))));
-                    } catch (ArrayIndexOutOfBoundsException ignored) {
-                    }
+        resultTable.getModel().addTableModelListener(e -> {
+            System.out.println(resultTable.getSelectedRow());
+            int row = resultTable.getSelectedRow();
+            int column = resultTable.getSelectedColumn();
+            if (column == 0) {
+                JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
+            }else if(column == 4){
+                JOptionPane.showMessageDialog(resultTable, "Столбец с популярностью нельзя менять");
+            }
+            else if (row >= 0) {
+                try {
+                    controller.queryForUpdateInformation(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 1))),
+                            String.valueOf(tableModel.getValueAt(row, 2)), String.valueOf(tableModel.getValueAt(row, 3)), Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 4))));
+                } catch (ArrayIndexOutOfBoundsException ignored) {
                 }
             }
         });

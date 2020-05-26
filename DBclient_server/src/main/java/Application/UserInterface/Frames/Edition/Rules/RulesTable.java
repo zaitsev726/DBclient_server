@@ -9,7 +9,10 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-public class SearchRulesForm extends JFrame {
+/*
+    Таблица поиска правил
+ */
+public class RulesTable extends JFrame {
     private final JTable resultTable;
     private final DefaultTableModel tableModel;
     private ArrayList<String[]> currentRules;
@@ -19,7 +22,7 @@ public class SearchRulesForm extends JFrame {
     private final JButton addRowButton;
     private final JButton backButton;
 
-    public SearchRulesForm(EditionsPageController controller) {
+    public RulesTable(EditionsPageController controller) {
         currentRules = new ArrayList<>();
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
@@ -53,22 +56,19 @@ public class SearchRulesForm extends JFrame {
 
     private void initializationListeners() {
 
-        resultTable.getModel().addTableModelListener(new TableModelListener() {
+        resultTable.getModel().addTableModelListener(e -> {
+            System.out.println(resultTable.getSelectedRow());
+            int row = resultTable.getSelectedRow();
+            int column = resultTable.getSelectedColumn();
+            if (column == 0) {
+                JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
+            } else if (row >= 0) {
+                try {
+                    controller.queryForUpdateRule(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 1))),
+                            String.valueOf(tableModel.getValueAt(row,2)));
 
-            public void tableChanged(TableModelEvent e) {
-                System.out.println(resultTable.getSelectedRow());
-                int row = resultTable.getSelectedRow();
-                int column = resultTable.getSelectedColumn();
-                if (column == 0) {
-                    JOptionPane.showMessageDialog(resultTable, "Столбец с ID нельзя менять");
-                } else if (row >= 0) {
-                    try {
-                        controller.queryForUpdateRule(Long.parseLong(String.valueOf(tableModel.getValueAt(row, 0))), Long.parseLong(String.valueOf(tableModel.getValueAt(row, 1))),
-                                String.valueOf(tableModel.getValueAt(row,2)));
+                } catch (ArrayIndexOutOfBoundsException ignored) {}
 
-                    } catch (ArrayIndexOutOfBoundsException ignored) {}
-
-                }
             }
         });
 

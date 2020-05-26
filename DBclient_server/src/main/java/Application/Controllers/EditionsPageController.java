@@ -3,14 +3,14 @@ package Application.Controllers;
 import Application.Entities.*;
 import Application.Services.*;
 import Application.Services.Impl.*;
-import Application.UserInterface.Frames.Edition.Characteristic.SearchCharacteristicForm;
-import Application.UserInterface.Frames.Edition.Information.SearchInformationForm;
+import Application.UserInterface.Frames.Edition.Characteristic.CharacteristicTable;
+import Application.UserInterface.Frames.Edition.Information.InformationTable;
 import Application.UserInterface.Frames.Edition.Information.InformationForm;
-import Application.UserInterface.Frames.Edition.InvertaryInfo.SearchEditionForm;
-import Application.UserInterface.Frames.Edition.InvertaryInfo.SearchRulesInEditionForm;
+import Application.UserInterface.Frames.Edition.InvertaryInfo.EditionTable;
+import Application.UserInterface.Frames.Edition.InvertaryInfo.RulesInEdition;
 import Application.UserInterface.Frames.Edition.InvertaryInfo.InventoryInformationForm;
 import Application.UserInterface.Frames.Edition.Rules.RulesForm;
-import Application.UserInterface.Frames.Edition.Rules.SearchRulesForm;
+import Application.UserInterface.Frames.Edition.Rules.RulesTable;
 import Application.UserInterface.Pages.EditionPage.EditionForm;
 
 import javax.swing.*;
@@ -39,19 +39,19 @@ public class EditionsPageController {
     private InformationForm informationForm;
     private RulesForm rulesForm;
 
-    private SearchInformationForm searchInformationForm;
-    private SearchEditionForm searchEditionForm;
-    private SearchRulesForm searchRulesForm;
-    private SearchCharacteristicForm searchCharacteristicForm;
+    private InformationTable informationTable;
+    private EditionTable editionTable;
+    private RulesTable rulesTable;
+    private CharacteristicTable characteristicTable;
 
 
     public EditionsPageController(EditionForm editionForm) {
         this.editionForm = editionForm;
 
-        this.searchInformationForm = new SearchInformationForm(this);
-        this.searchEditionForm = new SearchEditionForm(this);
-        this.searchRulesForm = new SearchRulesForm(this);
-        this.searchCharacteristicForm = new SearchCharacteristicForm(this);
+        this.informationTable = new InformationTable(this);
+        this.editionTable = new EditionTable(this);
+        this.rulesTable = new RulesTable(this);
+        this.characteristicTable = new CharacteristicTable(this);
 
         this.charService = new CharacteristicServiceImpl();
         this.editionService = new EditionServiceImpl();
@@ -165,8 +165,8 @@ public class EditionsPageController {
                             for (Information inf : informationList) {
                                 resultList.add(new String[]{String.valueOf(inf.getId_record()), String.valueOf(inf.getId_edition()), inf.getAuthor(), inf.getComposition(), String.valueOf(inf.getPopularity())});
                             }
-                            searchInformationForm.updateTable(resultList);
-                            searchInformationForm.setVisible(true);
+                            informationTable.updateTable(resultList);
+                            informationTable.setVisible(true);
 
                             inventoryLibraryInformation.dispose();
                             inventoryLibraryInformation = null;
@@ -211,8 +211,8 @@ public class EditionsPageController {
                     resultList.add(new String[]{String.valueOf(characteristic.getId_edition()), characteristic.getType_edition(),
                             characteristic.getAuthor(), characteristic.getTitle()});
                 }
-                searchCharacteristicForm.updateTable(resultList);
-                searchCharacteristicForm.setVisible(true);
+                characteristicTable.updateTable(resultList);
+                characteristicTable.setVisible(true);
 
             } else
                 JOptionPane.showMessageDialog(editionForm, "Таких изданий нету!");
@@ -338,8 +338,8 @@ public class EditionsPageController {
                         resultList.add(str);
                     }
 
-                    searchEditionForm.updateTable(resultList);
-                    searchEditionForm.setVisible(true);
+                    editionTable.updateTable(resultList);
+                    editionTable.setVisible(true);
 
                 } else
                     JOptionPane.showMessageDialog(inventoryLibraryInformation, "Таких книг нету!");
@@ -400,8 +400,8 @@ public class EditionsPageController {
                                 information.getComposition(), String.valueOf(information.getPopularity())});
                     }
 
-                    searchInformationForm.updateTable(resultList);
-                    searchInformationForm.setVisible(true);
+                    informationTable.updateTable(resultList);
+                    informationTable.setVisible(true);
 
                 } else
                     JOptionPane.showMessageDialog(inventoryLibraryInformation, "Таких произведений нету!");
@@ -443,8 +443,8 @@ public class EditionsPageController {
                         resultList.add(new String[]{String.valueOf(rule.getId_rule()), String.valueOf(rule.getId_edition()), rule.getRule()});
                     }
 
-                    searchRulesForm.updateTable(resultList);
-                    searchRulesForm.setVisible(true);
+                    rulesTable.updateTable(resultList);
+                    rulesTable.setVisible(true);
 
                 } else
                     JOptionPane.showMessageDialog(inventoryLibraryInformation, "У этого издания нет правил!");
@@ -514,7 +514,7 @@ public class EditionsPageController {
 
     public void showCurrentLibrary(long id_library) {
         Library library = libraryService.getById(id_library);
-        JOptionPane.showMessageDialog(searchEditionForm,
+        JOptionPane.showMessageDialog(editionTable,
                 new String[]{"Информация о библиотеке",
                         " ID библиотеки: " + library.getId_library(),
                         " Количество залов: " + library.getHalls_num(),
@@ -525,12 +525,12 @@ public class EditionsPageController {
 
     public void showCurrentRules(long id_edition) {
         List<Rule> rules = ruleService.findByIdEdition(id_edition);
-        SearchRulesInEditionForm rulesInEditionForm = new SearchRulesInEditionForm(rules);
+        RulesInEdition rulesInEditionForm = new RulesInEdition(rules);
     }
 
     public void queryForUpdateTable(ArrayList<String[]> currentInventoryInfo) {
         currentInventoryInfo.removeIf(next -> issuedBookService.isReturned(Long.valueOf(next[0])));
-        searchEditionForm.updateTable(currentInventoryInfo);
+        editionTable.updateTable(currentInventoryInfo);
     }
 
     public void queryForUpdateCharacteristic(long id_edition, String type, String author, String title) {

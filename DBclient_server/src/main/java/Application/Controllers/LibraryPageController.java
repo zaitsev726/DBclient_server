@@ -7,9 +7,9 @@ import Application.Services.Impl.LibrarianServiceImpl;
 import Application.Services.Impl.LibraryServiceImpl;
 import Application.Services.LibrarianService;
 import Application.Services.LibraryService;
-import Application.UserInterface.Frames.Library.SearchLibrariansForm;
-import Application.UserInterface.Frames.Library.SearchLibrariesForm;
-import Application.UserInterface.Frames.Library.SearchReadersInLibraryForm;
+import Application.UserInterface.Frames.Library.LibrariansTable;
+import Application.UserInterface.Frames.Library.LibraryTable;
+import Application.UserInterface.Frames.Library.ReadersInLibrary;
 import Application.UserInterface.Pages.LibraryPage.LibraryForm;
 
 import javax.persistence.NoResultException;
@@ -22,8 +22,8 @@ public class LibraryPageController {
     private LibraryForm libraryForm;
     private LibraryService libraryService;
     private LibrarianService librarianService;
-    private SearchLibrariesForm searchLibrariesForm;
-    private SearchLibrariansForm searchLibrariansForm;
+    private LibraryTable libraryTable;
+    private LibrariansTable librariansTable;
 
     private long cur_libID;
     private long cur_hallNum;
@@ -32,8 +32,8 @@ public class LibraryPageController {
         libraryForm = form;
         libraryService = new LibraryServiceImpl();
         librarianService = new LibrarianServiceImpl();
-        searchLibrariesForm = new SearchLibrariesForm(this);
-        searchLibrariansForm = new SearchLibrariansForm(this);
+        libraryTable = new LibraryTable(this);
+        librariansTable = new LibrariansTable(this);
         initializationListeners();
         setStartValues();
     }
@@ -101,8 +101,8 @@ public class LibraryPageController {
                     for (Library library : libraries) {
                         resultList.add(new String[]{String.valueOf(library.getId_library()), String.valueOf(library.getHalls_num())});
                     }
-                    searchLibrariesForm.updateTable(resultList);
-                    searchLibrariesForm.setVisible(true);
+                    libraryTable.updateTable(resultList);
+                    libraryTable.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(libraryForm, "Таких библиотек не существует");
                 }
@@ -117,7 +117,7 @@ public class LibraryPageController {
                 try {
                     Library library = libraryService.getById(cur_libID);
                     System.out.println(library.getReaders());
-                    SearchReadersInLibraryForm searchReadersInLibraryForm = new SearchReadersInLibraryForm((List<AllReader>) library.getReaders());
+                    ReadersInLibrary readersInLibrary = new ReadersInLibrary((List<AllReader>) library.getReaders());
                 } catch (NoResultException ignored) {
                     JOptionPane.showMessageDialog(libraryForm, "Библиотек с таким ID не существует");
                 }
@@ -140,8 +140,8 @@ public class LibraryPageController {
                     for (Librarian librarian : librarians) {
                         resultList.add(new String[]{String.valueOf(librarian.getId_librarian()), String.valueOf(librarian.getId_library()), String.valueOf(librarian.getHall_num())});
                     }
-                    searchLibrariansForm.updateTable(resultList);
-                    searchLibrariansForm.setVisible(true);
+                    librariansTable.updateTable(resultList);
+                    librariansTable.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(libraryForm, "В такой библиотеке нет работников");
                 }

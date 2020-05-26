@@ -17,40 +17,37 @@ import javax.swing.*;
 import java.awt.*;
 
 public class InterfaceController {
-    //private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private int sizeWidth = 800;
-    private int sizeHeight = 600;
-    private int locationX = (1920 - sizeWidth) / 2;
-    private int locationY = (1080 - sizeHeight) / 2 - 20;
-    private Window window;
-    //  private MenuPanel menuPanel;
-    private MenuForm menuForm;
+    private final int sizeWidth = 800;
+    private final int sizeHeight = 600;
+    private final int locationX = (1920 - sizeWidth) / 2;
+    private final int locationY = (1080 - sizeHeight) / 2 - 20;
+    private final Window window;
+    private final MenuForm menuForm;
 
-    private ReadersPageController readersPageController;
-    private ReadersForm readersForm;
+    private final ReadersPageController readersPageController;
+    private final ReadersForm readersForm;
 
-    private LibraryPageController libraryPageController;
-    private LibraryForm libraryForm;
+    private final LibraryPageController libraryPageController;
+    private final LibraryForm libraryForm;
 
-    private EditionsPageController editionsPageController;
-    private EditionForm editionForm;
+    private final EditionsPageController editionsPageController;
+    private final EditionForm editionForm;
 
 
-    private IssuedPageController issuedPageController;
-    private IssuedForm issuedForm;
-    private EditionSearchForm editionSearchForm;
+    private final IssuedPageController issuedPageController;
+    private final IssuedForm issuedForm;
+    private final EditionSearchForm editionSearchForm;
 
-    private TakeBookPageController takeBookPageController;
-    private AuthorizationForm authorizationForm;
-    private TakeBookForm takeBookForm;
-    private LibrarianSearchForm librarianSearchForm;
-    private NotAttendingForm notAttendingForm;
+    private final TakeBookPageController takeBookPageController;
+    private final AuthorizationForm authorizationForm;
+    private final TakeBookForm takeBookForm;
+    private final LibrarianSearchForm librarianSearchForm;
+    private final NotAttendingForm notAttendingForm;
 
     public InterfaceController() {
         window = new Application.UserInterface.Frames.Window(sizeWidth, sizeHeight, locationX, locationY);
 
-        //    menuPanel = new MenuPanel(sizeWidth, sizeHeight);
-        menuForm = new MenuForm(sizeWidth, sizeHeight);
+        menuForm = new MenuForm();
 
         readersForm = new ReadersForm();
         libraryForm = new LibraryForm();
