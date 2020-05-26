@@ -10,7 +10,7 @@ public class Teacher extends AbstractReader {
     @Column
     private Long id_university;                  //id университета/школы
     @Column
-    private String faculty;                     //название факультета
+    private String faculty;                      //название факультета
 
     public Teacher(){super("teacher");}
 

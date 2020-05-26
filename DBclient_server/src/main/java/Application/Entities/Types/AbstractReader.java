@@ -1,21 +1,17 @@
 package Application.Entities.Types;
 
-//import javax.persistence.*;
 
 import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-//@MappedSuperclass
 public abstract class AbstractReader{
 
     @Id
     @Column
-    //@OneToOne(mappedBy = "readerType", fetch = FetchType.EAGER)
- //   @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_reader;                  //id читателя
     @Column
-    private String type;                    //тип читателя
+    private String type;                     //тип читателя
 
     public AbstractReader(){}
     public AbstractReader(String type){this.type = type;}

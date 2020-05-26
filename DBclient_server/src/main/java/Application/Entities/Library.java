@@ -7,11 +7,10 @@ import java.util.Collection;
 @Table( name = "libraries")
 public class Library {
     @Id
-  //  @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_library;
+    private Long id_library;                //ID библиотеки
 
     @Column(name = "quantity")
-    private Long halls_num;
+    private Long halls_num;                 //Количество залов
 
 
     @OneToMany(mappedBy = "library", fetch = FetchType.EAGER)

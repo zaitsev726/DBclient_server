@@ -9,20 +9,19 @@ public class Characteristic {
     @Id
     @GeneratedValue(generator = "characteristic_generator", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "characteristic_generator", sequenceName = "Characteristics_generator", allocationSize = 1)
-    private Long id_edition;
+    private Long id_edition;                    //ID издания
 
     @Column
-    private String type_edition;
+    private String type_edition;                //Тип издания (книга, журнал и т.д.)
 
     @Column
-    private String author;
+    private String author;                      //Автор издания
 
     @Column
-    private String title;
+    private String title;                       //Название издания
 
 
     @OneToOne(optional = true, cascade = CascadeType.ALL)
-   // @JoinColumn(name = "id_edition", referencedColumnName = "id_edition", nullable = true)
     @JoinColumn(name = "id_edition", nullable = true)
     private Edition edition;
 
@@ -37,11 +36,10 @@ public class Characteristic {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "edition")
     private Collection<Information> information;
+
     public Collection<Information> getInformation() { return information; }
 
     public void setInformation(Collection<Information> information) { this.information = information; }
-
-
 
     public Long getId_edition() {
         return id_edition;
@@ -74,11 +72,6 @@ public class Characteristic {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    //public Edition getEdition() { return edition; }
-
-   // public void setEdition(Edition edition) { this.edition = edition; }
-
 
 
     @Override

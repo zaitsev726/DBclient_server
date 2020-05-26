@@ -10,7 +10,7 @@ public class Student extends AbstractReader {
     @Column
     private Long id_university;                      //id университета
     @Column
-    private String faculty;                         //название факультета
+    private String faculty;                          //название факультета
     @Column
     private Long id_group;                           //номер группы
 

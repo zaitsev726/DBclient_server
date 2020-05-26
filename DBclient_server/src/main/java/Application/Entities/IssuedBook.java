@@ -9,25 +9,25 @@ public class IssuedBook {
     @Id
     @GeneratedValue(generator = "issued_generator", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "issued_generator", sequenceName = "Issued_generator", allocationSize = 1)
-    private Long id_record;
+    private Long id_record;                 //ID записи
 
     @Column
-    private Long id_reader;
+    private Long id_reader;                 //ID читателя, который взял книгу
 
     @Column
-    private Long id_edition;
+    private Long id_edition;                //ID издания, которое взял читатель
 
     @Column
-    private Date date_extradition;
+    private Date date_extradition;          //Дата взятия
 
     @Column
-    private Date date_return;
+    private Date date_return;               //Дата возврата, если вернул
 
     @Column
-    private boolean is_returned;
+    private boolean is_returned;            //Возвращено ли издание?
 
     @Column
-    private Long id_librarian;
+    private Long id_librarian;              //ID библиотекаря, который выдал издание
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_librarian", referencedColumnName = "id_librarian", updatable = false, insertable = false)
@@ -105,13 +105,13 @@ public class IssuedBook {
         this.librarian = librarian;
     }
 
-  //  public AllReader getReader() { return reader; }
+    public AllReader getReader() { return reader; }
 
-  //  public void setReader(AllReader reader) { this.reader = reader; }
+    public void setReader(AllReader reader) { this.reader = reader; }
 
-   // public Edition getEdition() { return edition; }
+    public Edition getEdition() { return edition; }
 
-   // public void setEdition(Edition edition) { this.edition = edition; }
+    public void setEdition(Edition edition) { this.edition = edition; }
 
     @Override
     public String toString() {

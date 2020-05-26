@@ -9,13 +9,13 @@ public class Rule {
     @Id
     @GeneratedValue(generator = "rules_generator", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "rules_generator", sequenceName = "Rules_generator", allocationSize = 1)
-    private Long id_rule;
+    private Long id_rule;               //ID правила
 
     @Column
-    private Long id_edition;
+    private Long id_edition;            //ID издания, к которому относится правило
 
     @Column
-    private String rule;
+    private String rule;                //Само правило
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_edition", referencedColumnName = "id_edition", updatable = false, insertable = false)

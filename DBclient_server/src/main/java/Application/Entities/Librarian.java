@@ -9,13 +9,13 @@ public class Librarian {
     @Id
     @GeneratedValue(generator = "librarian_generator", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "librarian_generator", sequenceName = "Librarians_generator", allocationSize = 1)
-    private Long id_librarian;
+    private Long id_librarian;              //ID библиотекаря
 
     @Column
-    private Long id_library;
+    private Long id_library;                //ID библиотеки в которой работает
 
     @Column
-    private Long hall_num;
+    private Long hall_num;                  //Номер зала, в котором работает
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_library", referencedColumnName = "id_library", updatable = false, insertable = false)

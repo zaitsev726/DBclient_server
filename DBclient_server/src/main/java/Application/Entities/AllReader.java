@@ -15,16 +15,16 @@ public class AllReader {
     private Long id_reader;                      //Id читателя
 
     @Column(name = "type", nullable = true)
-    private String type;                        //Тип читателя
+    private String type;                         //Тип читателя
 
     @Column(name = "surname")
-    private String surname;                     //Фамилия
+    private String surname;                      //Фамилия
 
     @Column(name = "name")
-    private String name;                        //Имя
+    private String name;                         //Имя
 
     @Column(name = "patronymic")
-    private String patronymic;                  //Отчество
+    private String patronymic;                   //Отчество
 
     @Column(name = "id_library")
     private Long id_library;
@@ -33,12 +33,12 @@ public class AllReader {
     @JoinColumn(name = "id_library", referencedColumnName = "id_library", updatable = false, insertable = false)
     private Library library;                     //Id библиотеки в которой зарегистрирован
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)      //??????
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_reader", nullable = true)
-    private AbstractReader readerType;
+    private AbstractReader readerType;           //Тип читателя в виде класса
 
     @OneToMany(mappedBy = "reader")
-    private Collection<IssuedBook> ourBooks;
+    private Collection<IssuedBook> ourBooks;     //Книги, которые взяты читателем
 
     public AllReader() {
     }
@@ -107,9 +107,9 @@ public class AllReader {
         this.readerType = readerType;
     }
 
-    // public Collection<IssuedBook> getOurBooks() { return ourBooks; }
-//
-    // public void setOurBooks(Collection<IssuedBook> ourBooks) { this.ourBooks = ourBooks; }
+    public Collection<IssuedBook> getOurBooks() { return ourBooks; }
+
+    public void setOurBooks(Collection<IssuedBook> ourBooks) { this.ourBooks = ourBooks; }
 
     @Override
     public String toString() {
@@ -120,10 +120,7 @@ public class AllReader {
                 ", name='" + name + '\'' +
                 ", patronymic='" + patronymic + '\'' +
                 ", id_library=" + id_library +
-                //              ", library=" + library +
-                //              ", readerType=" + readerType +
                 '}';
-        // return "@asda"
     }
 
 

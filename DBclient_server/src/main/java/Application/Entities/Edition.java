@@ -15,21 +15,19 @@ public class Edition {
     private Long id_library;         //номер библиотеки
 
     @Column(name = "hall_num")
-    private int hall_num;           //номер зала
+    private int hall_num;            //номер зала
 
     @Column(name = "rack_num")
-    private int rack_num;           //номер стеллажа
+    private int rack_num;            //номер стеллажа
 
     @Column(name = "shelf_num")
-    private int shelf_num;          //номер полки
+    private int shelf_num;           //номер полки
 
     @Column(name = "date_adding")
-    private Date date_adding;       //дата добавления
+    private Date date_adding;        //дата добавления
 
     @Column(name = "date_removing")
-    private Date date_removing;     //дата удаления
-
-
+    private Date date_removing;      //дата удаления
 
     @OneToOne(optional = true, mappedBy = "edition")
     private Characteristic characteristic;

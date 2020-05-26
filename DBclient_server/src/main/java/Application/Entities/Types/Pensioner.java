@@ -25,6 +25,7 @@ public class Pensioner extends AbstractReader {
     private Long id_pensioners;                     //номер пенсионного удостоверения
 
     public Pensioner(){super("pensioner");}
+
     public Long getId_pensioners() { return id_pensioners; }
 
     public void setId_pensioners(Long id_pensioners) { this.id_pensioners = id_pensioners; }

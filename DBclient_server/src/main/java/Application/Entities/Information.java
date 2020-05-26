@@ -9,19 +9,19 @@ public class Information implements Serializable {
     @Id
     @GeneratedValue(generator = "information_generator", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "information_generator", sequenceName = "Information_generator", allocationSize = 1)
-    private  Long id_record;
+    private  Long id_record;                //ID записи информации
 
     @Id
-    private Long id_edition;
+    private Long id_edition;                //ID издания, к которому относится запись
 
     @Column
-    private String author;
+    private String author;                  //Автор произведения
 
     @Column
-    private String composition;
+    private String composition;             //Название произведения
 
     @Column
-    private int popularity;
+    private int popularity;                 //Популярность
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_edition", referencedColumnName = "id_edition", updatable = false, insertable = false)
