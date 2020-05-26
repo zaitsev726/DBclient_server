@@ -1,10 +1,13 @@
 package Application.Controllers;
 
 import Application.Entities.AllReader;
+import Application.Entities.Characteristic;
 import Application.Entities.Information;
 import Application.Entities.IssuedBook;
 import Application.Services.AllReaderService;
+import Application.Services.CharacteristicService;
 import Application.Services.Impl.AllReaderServiceImpl;
+import Application.Services.Impl.CharacteristicServiceImpl;
 import Application.Services.Impl.InformationServiceImpl;
 import Application.Services.Impl.IssuedBookServiceImpl;
 import Application.Services.InformationService;
@@ -29,6 +32,7 @@ public class TakeBookPageController {
     private AllReaderService allReaderService;
     private InformationService informationService;
     private IssuedBookService issuedBookService;
+    private CharacteristicService characteristicService;
     private AllReader reader;
 
 
@@ -42,6 +46,7 @@ public class TakeBookPageController {
         this.allReaderService = new AllReaderServiceImpl();
         this.informationService = new InformationServiceImpl();
         this.issuedBookService = new IssuedBookServiceImpl();
+        this.characteristicService = new CharacteristicServiceImpl();
 
         this.searchMyBooksForm = new SearchMyBooksForm(this);
         this.searchNewBooksForm = new SearchNewBooksForm(this);
@@ -73,12 +78,12 @@ public class TakeBookPageController {
     }
 
     public void showCurrentInformation(long id_edition) {
-        Information information = informationService.findById(id_edition);
+        Characteristic characteristic = characteristicService.findById(id_edition);
         JOptionPane.showMessageDialog(takeBookForm,
                 new String[]{"Информация о издании",
-                        " Автор: " + information.getAuthor(),
-                        " Название: " + information.getComposition(),
-                        " Популярность: " + information.getPopularity()}, "Издания", JOptionPane.INFORMATION_MESSAGE);
+                        " Автор: " + characteristic.getAuthor(),
+                        " Название: " + characteristic.getTitle(),
+                        " Тип: " + characteristic.getType_edition()}, "Издания", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void queryForReturn(long id_edition) {
@@ -135,6 +140,11 @@ public class TakeBookPageController {
         issuedBook.setDate_extradition(new Date());
         issuedBook.setDate_return(null);
         issuedBook.setId_librarian(id_librarian);
+
+        for(Information information : informationService.findByIdEdition(id_edition)){
+            information.setPopularity(information.getPopularity() + 1);
+            informationService.update(information);
+        }
         issuedBookService.save(issuedBook);
 
         searchNewEdition();

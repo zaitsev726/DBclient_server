@@ -415,57 +415,57 @@ insert into Characteristic(type_edition,author,title) values ('Роман','То
 insert into Characteristic(type_edition,author,title) values ('Роман','Твен','Приключения Тома Сойера');
 insert into Characteristic(type_edition,author,title) values ('Роман','Твен','Приключения Гекльберри Финна');
 
-insert into Information(id_edition, author, composition, popularity) values (1,'Пушкин', 'Евгений Онегин', 0);
-insert into Information(id_edition, author, composition, popularity) values (1,'Пушкин', 'Руслан и Людмила', 0);
-insert into Information(id_edition, author, composition, popularity) values (1,'Пушкин', 'Сказка о рыбаке и рыбке', 0);
+insert into Information(id_edition, author, composition, popularity) values (1,'Пушкин', 'Евгений Онегин', 2);
+insert into Information(id_edition, author, composition, popularity) values (1,'Пушкин', 'Руслан и Людмила', 2);
+insert into Information(id_edition, author, composition, popularity) values (1,'Пушкин', 'Сказка о рыбаке и рыбке', 2);
 
 insert into Information(id_edition, author, composition, popularity) values (2,'Пушкин', 'Сказка о царе Салтане', 0);
 insert into Information(id_edition, author, composition, popularity) values (2,'Пушкин', 'Медный всадник', 0);
 insert into Information(id_edition, author, composition, popularity) values (2,'Пушкин', 'Полтава', 0);
 
-insert into Information(id_edition, author, composition, popularity) values (3,'Пушкин', 'Сказка о золтом петушке', 0);
-insert into Information(id_edition, author, composition, popularity) values (3,'Пушкин', 'Анчар', 0);
-insert into Information(id_edition, author, composition, popularity) values (3,'Пушкин', 'Кавказский пленник', 0);
+insert into Information(id_edition, author, composition, popularity) values (3,'Пушкин', 'Сказка о золтом петушке', 2);
+insert into Information(id_edition, author, composition, popularity) values (3,'Пушкин', 'Анчар', 2);
+insert into Information(id_edition, author, composition, popularity) values (3,'Пушкин', 'Кавказский пленник', 2);
 
-insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Мцыри', 0);
-insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Бородино', 0);
-insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Демон', 0);
+insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Мцыри', 1);
+insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Бородино', 1);
+insert into Information(id_edition, author, composition, popularity) values (4,'Лермонтов', 'Демон', 1);
 
-insert into Information(id_edition, author, composition, popularity) values (5,'Лермонтов', 'Валерик', 0);
-insert into Information(id_edition, author, composition, popularity) values (5,'Лермонтов', 'Беглец', 0);
-insert into Information(id_edition, author, composition, popularity) values (5,'Лермонтов', 'Сашка', 0);
+insert into Information(id_edition, author, composition, popularity) values (5,'Лермонтов', 'Валерик', 1);
+insert into Information(id_edition, author, composition, popularity) values (5,'Лермонтов', 'Беглец', 1);
+insert into Information(id_edition, author, composition, popularity) values (5,'Лермонтов', 'Сашка', 1);
 
-insert into Information(id_edition, author, composition, popularity) values (6,'Ковальских','Параллелошар мира',0);
-insert into Information(id_edition, author, composition, popularity) values (7,'Ковальских','Ленинградский андеграунд',0);
-insert into Information(id_edition, author, composition, popularity) values (8,'Воинов','Фабула предмета',0);
+insert into Information(id_edition, author, composition, popularity) values (6,'Ковальских','Параллелошар мира',1);
+insert into Information(id_edition, author, composition, popularity) values (7,'Ковальских','Ленинградский андеграунд',1);
+insert into Information(id_edition, author, composition, popularity) values (8,'Воинов','Фабула предмета',1);
 
-insert into Information(id_edition, author, composition, popularity) values (9,'Бабошина','Образовательные подходы и технологии в высшей школе',0);
-insert into Information(id_edition, author, composition, popularity) values (10,'Воронин','Актуальные проблемы аграрно-правовой науки в Российской Федерации',0);
-insert into Information(id_edition, author, composition, popularity) values (11,'Горожанин','Российская полиция на страже имперской государственности',0);
-insert into Information(id_edition, author, composition, popularity) values (12,'Ульянова','Межвузовский сборник научных статей докторантов и аспирантов',0);
-insert into Information(id_edition, author, composition, popularity) values (13,'Корнилов','Актуальные вопросы филологии',0);
-insert into Information(id_edition, author, composition, popularity) values (14,'Волкова','Гуманитарные аспекты профессионального образования',0);
+insert into Information(id_edition, author, composition, popularity) values (9,'Бабошина','Образовательные подходы и технологии в высшей школе',3);
+insert into Information(id_edition, author, composition, popularity) values (10,'Воронин','Актуальные проблемы аграрно-правовой науки в Российской Федерации',1);
+insert into Information(id_edition, author, composition, popularity) values (11,'Горожанин','Российская полиция на страже имперской государственности',2);
+insert into Information(id_edition, author, composition, popularity) values (12,'Ульянова','Межвузовский сборник научных статей докторантов и аспирантов',1);
+insert into Information(id_edition, author, composition, popularity) values (13,'Корнилов','Актуальные вопросы филологии',2);
+insert into Information(id_edition, author, composition, popularity) values (14,'Волкова','Гуманитарные аспекты профессионального образования',1);
 insert into Information(id_edition, author, composition, popularity) values (15,'Быков','Всероссийский конкурс на лучшие работы студентов по техническим наукам',0);
 
 insert into Information(id_edition, author, composition, popularity) values (16,'Прохоров','Большая советская энциклопедия',0);
-insert into Information(id_edition, author, composition, popularity) values (17,'Мильчин','Издательский словарь-справочник',0);
-insert into Information(id_edition, author, composition, popularity) values (18,'Интент','Справочник технического переводчика',0);
-insert into Information(id_edition, author, composition, popularity) values (19,'Клубков','Словарь по информации, библиотечному и издательскому делу',0);
-insert into Information(id_edition, author, composition, popularity) values (20,'Богданов','Российский гуманитарный энциклопедический словарь',0);
+insert into Information(id_edition, author, composition, popularity) values (17,'Мильчин','Издательский словарь-справочник',1);
+insert into Information(id_edition, author, composition, popularity) values (18,'Интент','Справочник технического переводчика',2);
+insert into Information(id_edition, author, composition, popularity) values (19,'Клубков','Словарь по информации, библиотечному и издательскому делу',3);
+insert into Information(id_edition, author, composition, popularity) values (20,'Богданов','Российский гуманитарный энциклопедический словарь',1);
 
-insert into Information(id_edition, author, composition, popularity) values (21,'Кинг','Лавка дурных снов',0);
-insert into Information(id_edition, author, composition, popularity) values (22,'Кинг','Оно',0);
+insert into Information(id_edition, author, composition, popularity) values (21,'Кинг','Лавка дурных снов',1);
+insert into Information(id_edition, author, composition, popularity) values (22,'Кинг','Оно',3);
 insert into Information(id_edition, author, composition, popularity) values (23,'Булгаков','Мастер и Маргарита',0);
-insert into Information(id_edition, author, composition, popularity) values (24,'Булгаков','Белая гвардия',0);
-insert into Information(id_edition, author, composition, popularity) values (25,'Достоевский','Преступление и наказание',0);
-insert into Information(id_edition, author, composition, popularity) values (26,'Достоевский','Братья Карамзовы',0);
-insert into Information(id_edition, author, composition, popularity) values (27,'Достоевский','Подросток',0);
-insert into Information(id_edition, author, composition, popularity) values (28,'Достоевский','Идиот',0);
+insert into Information(id_edition, author, composition, popularity) values (24,'Булгаков','Белая гвардия',1);
+insert into Information(id_edition, author, composition, popularity) values (25,'Достоевский','Преступление и наказание',2);
+insert into Information(id_edition, author, composition, popularity) values (26,'Достоевский','Братья Карамзовы',1);
+insert into Information(id_edition, author, composition, popularity) values (27,'Достоевский','Подросток',3);
+insert into Information(id_edition, author, composition, popularity) values (28,'Достоевский','Идиот',1);
 insert into Information(id_edition, author, composition, popularity) values (29,'Толстой','Война и мир',0);
-insert into Information(id_edition, author, composition, popularity) values (30,'Толстой','Анна Каренина',0);
-insert into Information(id_edition, author, composition, popularity) values (31,'Толстой','Воскресенье',0);
-insert into Information(id_edition, author, composition, popularity) values (32,'Твен','Приключения Тома Сойера',0);
-insert into Information(id_edition, author, composition, popularity) values (33,'Твен','Приключения Гекльберри Финна',0);
+insert into Information(id_edition, author, composition, popularity) values (30,'Толстой','Анна Каренина',1);
+insert into Information(id_edition, author, composition, popularity) values (31,'Толстой','Воскресенье',1);
+insert into Information(id_edition, author, composition, popularity) values (32,'Твен','Приключения Тома Сойера',1);
+insert into Information(id_edition, author, composition, popularity) values (33,'Твен','Приключения Гекльберри Финна',1);
 
 insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (1,1,1,8,9,date '1999-01-16',date '2010-06-10');
 insert into Editions(id_edition, id_library, hall_num, rack_num, shelf_num, date_adding, date_removing) values (2,3,1,3,6,date '1999-05-23',date '2010-06-10');
