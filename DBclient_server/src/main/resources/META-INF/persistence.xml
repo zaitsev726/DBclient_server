@@ -8,9 +8,9 @@
     <persistence-unit name="model">
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/Library_DB"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:54325/postgres"/>
             <property name="hibernate.connection.username" value="postgres"/>
-            <property name="hibernate.connection.password" value="123456"/>
+            <property name="hibernate.connection.password" value="mysecretpassword"/>
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL81Dialect"/>
         </properties>
