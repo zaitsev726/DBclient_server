@@ -27,6 +27,8 @@ public class EditionSearchForm extends JPanel {
     public void setStartValues(){
         title = "";
         type = "";
+        this.titleTextField.setText("");
+        this.typeTextField.setText("");
 
     }
     private void initializationListeners() {

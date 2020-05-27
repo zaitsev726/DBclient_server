@@ -539,4 +539,14 @@ public class EditionsPageController {
         charService.delete(id_edition);
     }
 
+    public void queryForShowEdition(long id_edition) {
+        Characteristic characteristic = charService.findById(id_edition);
+        JOptionPane.showMessageDialog(editionTable,
+                new String[]{"Информация о издании",
+                        " ID издания: " + characteristic.getId_edition(),
+                        " Тип издания: " + characteristic.getType_edition(),
+                        " Автор издания: " + characteristic.getAuthor(),
+                        " Название издания: " + characteristic.getTitle()}, "Библиотека", JOptionPane.INFORMATION_MESSAGE);
+
+    }
 }

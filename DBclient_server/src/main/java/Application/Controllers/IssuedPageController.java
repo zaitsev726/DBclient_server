@@ -2,13 +2,10 @@ package Application.Controllers;
 
 import Application.Entities.*;
 import Application.Services.*;
-import Application.Services.Impl.*;
 import Application.UserInterface.Frames.IssuedBook.IssuedBookTable;
 import Application.UserInterface.Frames.IssuedBook.ReadersInIssuedBooks;
-import Application.UserInterface.Pages.IssuedPage.EditionSearchForm;
-import Application.UserInterface.Pages.IssuedPage.IssuedForm;
-import Application.UserInterface.Pages.IssuedPage.LibrarianSearchForm;
-import Application.UserInterface.Pages.IssuedPage.NotAttendingForm;
+import Application.UserInterface.Frames.IssuedBook.ReadersInComposition;
+import Application.UserInterface.Pages.IssuedPage.*;
 
 
 import javax.persistence.NoResultException;
@@ -25,6 +22,8 @@ public class IssuedPageController {
     private EditionSearchForm editionSearchForm;
     private LibrarianSearchForm librarianSearchForm;
     private NotAttendingForm notAttendingForm;
+    private InformationSearchForm informationSearchForm;
+
 
 
     private IssuedBookService issuedBookService;
@@ -47,11 +46,12 @@ public class IssuedPageController {
 
     public IssuedPageController(IssuedForm issuedForm, EditionSearchForm editionSearchForm, LibrarianSearchForm librarianSearchForm,NotAttendingForm notAttendingForm,
                                 IssuedBookService issuedBookService, LibrarianService librarianService, EditionService editionService,
-                                AllReaderService allReaderService, InformationService informationService) {
+                                AllReaderService allReaderService, InformationService informationService, InformationSearchForm informationSearchForm) {
         this.issuedForm = issuedForm;
         this.editionSearchForm = editionSearchForm;
         this.librarianSearchForm = librarianSearchForm;
         this.notAttendingForm = notAttendingForm;
+        this.informationSearchForm = informationSearchForm;
 
         this.issuedBookService = issuedBookService;
         this.librarianService = librarianService;
@@ -60,6 +60,7 @@ public class IssuedPageController {
         this.informationService = informationService;
 
         issuedBookForm = new IssuedBookTable(this);
+
 
         setStartValues();
         initializationListeners();
@@ -154,7 +155,7 @@ public class IssuedPageController {
                 if(readers.size() > 0){
                     ReadersInIssuedBooks inIssuedBooks = new ReadersInIssuedBooks(readers);
                 }else{
-                    JOptionPane.showMessageDialog(editionSearchForm, "Таких читателей нет");
+                    JOptionPane.showMessageDialog(librarianSearchForm, "Таких читателей нет");
                 }
 
             }else{
@@ -169,7 +170,7 @@ public class IssuedPageController {
                 if(readers.size() > 0){
                     ReadersInIssuedBooks inIssuedBooks = new ReadersInIssuedBooks(readers);
                 }else{
-                    JOptionPane.showMessageDialog(editionSearchForm, "Таких читателей нет");
+                    JOptionPane.showMessageDialog(librarianSearchForm, "Таких читателей нет");
                 }
 
             }else{
@@ -196,6 +197,8 @@ public class IssuedPageController {
                 } else {
                     issuedBookList = issuedBookService.findNotReturned();
                 }
+            }else if (id_record != 0){
+                issuedBookList.add(issuedBookService.findById(id_record));
             } else if (id_edition != 0 && id_librarian != 0) {
                 issuedBookList = issuedBookService.findByIdEditionAndIdLibrarian(id_edition, id_librarian);
             } else if (id_edition != 0) {
@@ -298,6 +301,16 @@ public class IssuedPageController {
                 ReadersInIssuedBooks inIssuedBooks = new ReadersInIssuedBooks(readers);
             }else{
                 JOptionPane.showMessageDialog(editionSearchForm, "Таких читателей нет");
+            }
+        });
+
+        informationSearchForm.searchButton.addActionListener(e -> {
+            if(!informationSearchForm.getTitle().equals("") && informationSearchForm.getStartDate() != null && informationSearchForm.getEndDate() != null){
+               ReadersInComposition readersInComposition = new ReadersInComposition(issuedBookService.findReadersWithTitle(
+                       informationSearchForm.getTitle(), informationSearchForm.getStartDate(), informationSearchForm.getEndDate()
+               ));
+            }else {
+                JOptionPane.showMessageDialog(editionSearchForm, "Вы ввели не все параметры");
             }
         });
 

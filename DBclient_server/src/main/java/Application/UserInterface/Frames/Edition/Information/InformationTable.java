@@ -20,6 +20,7 @@ public class InformationTable extends JFrame {
     private final EditionsPageController controller;
     private final JButton removeRowButton;
     private final JButton addRowButton;
+    private final JButton editionButton;
     private final JButton backButton;
 
     public InformationTable(EditionsPageController controller) {
@@ -27,10 +28,11 @@ public class InformationTable extends JFrame {
         this.controller = controller;
         removeRowButton = new JButton("Удалить выбранную строку");
         addRowButton = new JButton("Добавить произведение");
+        editionButton = new JButton("Инвентарная информация");
         backButton = new JButton("Очистить и выйти");
 
         setTitle("Результаты поиска произведений");
-        setSize(600, 300);
+        setSize(900, 300);
 
         tableModel = new DefaultTableModel();
         // Заголовки столбцов
@@ -48,6 +50,7 @@ public class InformationTable extends JFrame {
         JPanel buttons = new JPanel();
         buttons.add(removeRowButton);
         buttons.add(addRowButton);
+        buttons.add(editionButton);
         buttons.add(backButton);
         getContentPane().add(buttons, "South");
 
@@ -98,7 +101,14 @@ public class InformationTable extends JFrame {
                     String.valueOf(id_edition), "Неизвестно", "Неизвестно", "0"});
         });
 
+        editionButton.addActionListener(e ->  {
+            int idx = resultTable.getSelectedRow();
+            // Вставка новой строки после выделенной
+            if(idx < 0)
+                idx = 0;
+            controller.queryForShowEdition(Long.parseLong(String.valueOf(tableModel.getValueAt(idx, 1))));
 
+        });
         backButton.addActionListener(e -> {
             tableModel.setRowCount(0);
             currentInformation = new ArrayList<>();

@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class IssuedBookServiceImpl implements IssuedBookService {
     EntityManagerFactory emf;
@@ -244,6 +246,7 @@ public class IssuedBookServiceImpl implements IssuedBookService {
             if(!book.isIs_returned())
                 return false;
         }
+        em.close();
         return true;
     }
 
@@ -261,6 +264,7 @@ public class IssuedBookServiceImpl implements IssuedBookService {
             .setParameter("id",c.getId_edition())
             .getResultList());
         }
+        em.close();
         return readers;
     }
 
@@ -278,6 +282,7 @@ public class IssuedBookServiceImpl implements IssuedBookService {
             .setParameter("id",c.getId_edition())
             .getResultList());
         }
+        em.close();
         return readers;
     }
 
@@ -292,6 +297,7 @@ public class IssuedBookServiceImpl implements IssuedBookService {
                 .setParameter("id_reader", id_reader)
                 .getSingleResult();
         em.getTransaction().commit();
+        em.close();
         return edition.getId_library().equals(reader.getId_library());
     }
 
@@ -327,5 +333,24 @@ public class IssuedBookServiceImpl implements IssuedBookService {
                 .getResultList();
         em.close();
         return readers;
+    }
+
+    @Override
+    public Map<AllReader, String> findReadersWithTitle(String composition, Date startDate, Date endDate) {
+        EntityManager em = emf.createEntityManager();
+        Map<AllReader, String> readers = em.createQuery("select distinct a as reader, c.title as title from AllReader a join IssuedBook i on i.id_reader = a.id_reader " +
+                "join Information inf on i.id_edition = inf.id_edition join Characteristic c on c.id_edition = i.id_edition " +
+                "where (inf.composition = :comp and i.date_extradition between :start and :end)", Tuple.class)
+                .setParameter("comp", composition)
+                .setParameter("start", startDate)
+                .setParameter("end", endDate)
+                .getResultStream()
+                .collect(Collectors.toMap(
+                        tuple -> ((AllReader) tuple.get("reader")),
+                        tuple -> ((String) tuple.get("title"))
+                ));
+        em.close();
+        return readers;
+
     }
 }

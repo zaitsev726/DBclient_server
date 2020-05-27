@@ -239,14 +239,6 @@
           <text value="Дата выдачи"/>
         </properties>
       </component>
-      <component id="2069d" class="javax.swing.JButton" binding="searchByEditionButton">
-        <constraints>
-          <grid row="10" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Поиск по изданию"/>
-        </properties>
-      </component>
       <component id="b1378" class="javax.swing.JButton" binding="librarianButton">
         <constraints>
           <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -261,6 +253,22 @@
         </constraints>
         <properties>
           <text value="Не посещавшие"/>
+        </properties>
+      </component>
+      <component id="2069d" class="javax.swing.JButton" binding="searchByEditionButton">
+        <constraints>
+          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Поиск по изданию"/>
+        </properties>
+      </component>
+      <component id="61656" class="javax.swing.JButton" binding="titleSearchButton">
+        <constraints>
+          <grid row="10" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Поиск по произведению"/>
         </properties>
       </component>
     </children>

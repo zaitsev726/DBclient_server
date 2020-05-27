@@ -1,10 +1,12 @@
 package Application.Services;
 
 import Application.Entities.AllReader;
+import Application.Entities.Information;
 import Application.Entities.IssuedBook;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface IssuedBookService {
     void save(IssuedBook issuedBook);
@@ -48,4 +50,5 @@ public interface IssuedBookService {
     List<AllReader> findReadersByIdLibraryAndPeriod(long idLibrarian, Date startDate, Date endDate);
 
     List<AllReader> findReadersNotAttendingLibrary(Date startDate, Date endDate);
+    Map<AllReader, String> findReadersWithTitle(String composition, Date startDate, Date endDate);
 }

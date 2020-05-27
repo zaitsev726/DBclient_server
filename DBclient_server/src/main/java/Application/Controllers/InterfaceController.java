@@ -3,10 +3,7 @@ package Application.Controllers;
 import Application.Services.*;
 import Application.Services.Impl.*;
 import Application.UserInterface.Pages.EditionPage.EditionForm;
-import Application.UserInterface.Pages.IssuedPage.EditionSearchForm;
-import Application.UserInterface.Pages.IssuedPage.IssuedForm;
-import Application.UserInterface.Pages.IssuedPage.LibrarianSearchForm;
-import Application.UserInterface.Pages.IssuedPage.NotAttendingForm;
+import Application.UserInterface.Pages.IssuedPage.*;
 import Application.UserInterface.Pages.LibraryPage.LibraryForm;
 import Application.UserInterface.Pages.MenuPage.MenuForm;
 import Application.UserInterface.Pages.ReadersPage.ReadersForm;
@@ -48,6 +45,7 @@ public class InterfaceController {
     private final TakeBookForm takeBookForm = new TakeBookForm();
     private final LibrarianSearchForm librarianSearchForm = new LibrarianSearchForm();
     private final NotAttendingForm notAttendingForm = new NotAttendingForm();
+    private final InformationSearchForm informationSearchForm = new InformationSearchForm();
 
     //Все сервисы
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("model");
@@ -71,7 +69,7 @@ public class InterfaceController {
         editionsPageController = new EditionsPageController(editionForm, characteristicService, editionService, informationService,
                 libraryService, ruleService, issuedBookService);
         issuedPageController = new IssuedPageController(issuedForm, editionSearchForm, librarianSearchForm, notAttendingForm,
-                issuedBookService, librarianService, editionService, readerService, informationService);
+                issuedBookService, librarianService, editionService, readerService, informationService, informationSearchForm);
         takeBookPageController = new TakeBookPageController(authorizationForm, takeBookForm, readerService, informationService,
                 issuedBookService, characteristicService);
 
@@ -225,6 +223,20 @@ public class InterfaceController {
         notAttendingForm.backButton.addActionListener(e -> {
             window.remove(notAttendingForm);
             window.add(issuedForm);
+            window.revalidate();
+            window.repaint();
+        });
+
+        informationSearchForm.backButton.addActionListener(e -> {
+            window.remove(informationSearchForm);
+            window.add(issuedForm);
+            window.revalidate();
+            window.repaint();
+        });
+
+        issuedForm.titleSearchButton.addActionListener(e -> {
+            window.remove(issuedForm);
+            window.add(informationSearchForm);
             window.revalidate();
             window.repaint();
         });

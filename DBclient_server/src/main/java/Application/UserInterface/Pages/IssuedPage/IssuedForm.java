@@ -24,6 +24,7 @@ public class IssuedForm extends JPanel{
     private JLabel idLibrarianLabel;
     private JLabel extraditionLabel;
     private JLabel returnedLabel;
+    public JButton titleSearchButton;
 
 
     public IssuedForm(){
