@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "pensioners")
 @NamedStoredProcedureQueries({
         @NamedStoredProcedureQuery(
-                name = "insertTouristWithRandomIdPensioners",
+                name = "insertPensionersWithRandomId",
                 procedureName = "insert_pensioner",
                 parameters = {
                         @StoredProcedureParameter(
