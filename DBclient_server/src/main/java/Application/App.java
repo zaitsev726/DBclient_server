@@ -1,7 +1,7 @@
 package Application;
 
 public class App {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args){
 
         Global global = new Global();
       
