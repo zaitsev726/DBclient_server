@@ -126,7 +126,7 @@
         <properties>
           <font name="Fira Code Medium" size="20"/>
           <horizontalAlignment value="4"/>
-          <text value="Библиотека:"/>
+          <text value="ID библиотеки:"/>
         </properties>
       </component>
       <component id="7f4a5" class="javax.swing.JTextField" binding="idTextField">

@@ -41,7 +41,9 @@ public class LibraryPageController {
 
     private void setStartValues() {
         cur_libID = 0;
+        libraryForm.IDTextField.setText("");
         cur_hallNum = 0;
+        libraryForm.hallNumTextField.setText("");
     }
 
     private void initializationListeners() {

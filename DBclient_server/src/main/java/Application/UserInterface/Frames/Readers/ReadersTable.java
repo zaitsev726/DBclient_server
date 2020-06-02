@@ -15,7 +15,7 @@ import java.util.regex.PatternSyntaxException;
 public class ReadersTable extends JFrame {
 
     private final JTable resultTable;
-    private final DefaultTableModel tableModel;
+    private DefaultTableModel tableModel;
     private ArrayList<String[]> currentReaders;
 
     private final ReadersPageController controller;
@@ -45,7 +45,11 @@ public class ReadersTable extends JFrame {
             public Class getColumnClass(int column) {
                 Class returnValue;
                 if ((column >= 0) && (column < getColumnCount())) {
-                    returnValue = getValueAt(0, column).getClass();
+                    if (this.getRowCount() > 0)
+                        returnValue = getValueAt(0, column).getClass();
+                    else {
+                        returnValue = Object.class;
+                    }
                 } else {
                     returnValue = Object.class;
                 }
@@ -139,6 +143,8 @@ public class ReadersTable extends JFrame {
         backButton.addActionListener(e -> {
             tableModel.setRowCount(0);
             currentReaders = new ArrayList<>();
+            sorter.setRowFilter(null);
+            filterTextField.setText("");
             this.dispose();
         });
 
@@ -183,6 +189,7 @@ public class ReadersTable extends JFrame {
                 tableModel.addRow(rows);
                 currentReaders.add(row);
             }
+
         }
     }
 

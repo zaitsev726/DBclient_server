@@ -12,7 +12,7 @@ public class AbstractReaderServiceImpl implements AbstractReaderService {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         if(em.createQuery("select p from Pensioner p where p.id_reader = 0").getResultList().size() == 0) {
-            StoredProcedureQuery query = em.createNamedStoredProcedureQuery("insertTouristWithRandomIdPensioners");
+            StoredProcedureQuery query = em.createNamedStoredProcedureQuery("insertPensionersWithRandomId");
             query.setParameter("id", 0);
             query.setParameter("type", "pensioner");
             query.execute();

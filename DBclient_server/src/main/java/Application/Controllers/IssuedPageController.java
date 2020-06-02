@@ -68,9 +68,13 @@ public class IssuedPageController {
 
     private void setStartValues() {
         id_record = 0L;
+        issuedForm.idRecordTextField.setText("");
         id_reader = 0L;
+        issuedForm.idReaderTextField.setText("");
         id_edition = 0L;
+        issuedForm.idEditionTextField.setText("");
         id_librarian = 0L;
+        issuedForm.idLibrarianTextField.setText("");
         isReturned = null;
         extraditionDate = null;
         returnedDate = null;

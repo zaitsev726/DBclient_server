@@ -29,7 +29,7 @@ public class EditionsPageController {
     private RuleService ruleService;
     private IssuedBookService issuedBookService;
 
-    private long cur_IdEdition;
+
     private String cur_type;
     private String cur_author;
     private String cur_title;
@@ -66,10 +66,13 @@ public class EditionsPageController {
     }
 
     private void setStartValues() {
-        cur_IdEdition = 0;
         cur_type = "";
         cur_author = "";
         cur_title = "";
+        editionForm.typeTextField.setText("");
+        editionForm.authorTextField.setText("");
+        editionForm.titleTextField.setText("");
+
     }
 
     private void initializationListeners() {
